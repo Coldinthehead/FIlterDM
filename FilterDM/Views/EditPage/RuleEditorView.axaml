@@ -24,7 +24,7 @@
             <TextBlock
                 Padding="4,2"
                 Classes="headline4"
-                Text="{Binding Rule.Title}" />
+                Text="{Binding Rule.Properties.Title}" />
             <Button
                 Padding="0"
                 HorizontalAlignment="Right"
@@ -64,12 +64,12 @@
                             Padding="8,4"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Background="{Binding Rule.BackColor, Converter={StaticResource rgbToB}}"
-                            BorderBrush="{Binding Rule.BorderColor, Converter={StaticResource rgbToB}}"
+                            Background="{Binding Rule.Colors.BackColor, Converter={StaticResource rgbToB}}"
+                            BorderBrush="{Binding Rule.Colors.BorderColor, Converter={StaticResource rgbToB}}"
                             BorderThickness="3">
                             <TextBlock
-                                FontSize="{Binding Rule.FontSize}"
-                                Foreground="{Binding Rule.TextColor, Converter={StaticResource rgbToB}}"
+                                FontSize="{Binding Rule.TextSize.FontSize}"
+                                Foreground="{Binding Rule.Colors.TextColor, Converter={StaticResource rgbToB}}"
                                 Text="Item preview" />
 
                         </Border>
@@ -103,14 +103,14 @@
                                             Command="{Binding AddModifierCommand}"
                                             CommandParameter="FontSize"
                                             Content="Text Size"
-                                            IsVisible="{Binding Rule.UseFontSize, Converter={StaticResource negBool}}"
+                                            IsVisible="{Binding Rule.TextSize.UseFontSize, Converter={StaticResource negBool}}"
                                             Theme="{StaticResource MaterialOutlineButton}" />
                                         <Button
                                             Classes="accent"
                                             Command="{Binding AddModifierCommand}"
                                             CommandParameter="Colors"
                                             Content="Colors"
-                                            IsVisible="{Binding Rule.UseAnyColor, Converter={StaticResource negBool}}"
+                                            IsVisible="{Binding Rule.Colors.UseAnyColor, Converter={StaticResource negBool}}"
                                             Theme="{StaticResource MaterialOutlineButton}" />
 
                                         <Button

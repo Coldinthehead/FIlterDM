@@ -16,7 +16,6 @@ public partial class RarityDecoratorViewModel : ModifierViewModelBase
     private bool _useNormal;
     partial void OnUseNormalChanged(bool value)
     {
-        _model.UseNormal = value;
         GenerateDescription();
     }
 
@@ -24,7 +23,6 @@ public partial class RarityDecoratorViewModel : ModifierViewModelBase
     private bool _useMagic;
     partial void OnUseMagicChanged(bool value)
     {
-        _model.UseMagic = value;
         GenerateDescription();
     }
 
@@ -32,7 +30,6 @@ public partial class RarityDecoratorViewModel : ModifierViewModelBase
     private bool _useRare;
     partial void OnUseRareChanged(bool oldValue, bool newValue)
     {
-        _model.UseRare = newValue;
         GenerateDescription();
     }
 
@@ -40,7 +37,6 @@ public partial class RarityDecoratorViewModel : ModifierViewModelBase
     private bool _useUnique;
     partial void OnUseUniqueChanged(bool value)
     {
-        _model.UseUnique = value;
         GenerateDescription();
     }
 
@@ -74,16 +70,18 @@ public partial class RarityDecoratorViewModel : ModifierViewModelBase
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
 
-    public RarityConditionModel Model => _model;
-    private RarityConditionModel _model;
 
-    public RarityDecoratorViewModel(RuleDetailsViewModel rule, RarityConditionModel rarityModel, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public RarityDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
-        _model = rarityModel;
-        UseNormal = _model.UseNormal;
-        UseMagic = _model.UseMagic;
-        UseRare = _model.UseRare;
-        UseUnique = _model.UseUnique;
         GenerateDescription();
     }
+
+    public void SetModel(RarityConditionModel model)
+    {
+        UseNormal = model.UseNormal;
+        UseMagic = model.UseMagic;
+        UseRare = model.UseRare;
+        UseUnique = model.UseUnique;
+    }
+
 }

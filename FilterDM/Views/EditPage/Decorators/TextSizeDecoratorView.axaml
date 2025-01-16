@@ -20,7 +20,7 @@
             Grid.Column="1"
             VerticalAlignment="Center"
             Classes="headline6"
-            Text="{Binding Rule.FontSize}" />
+            Text="{Binding FontSize}" />
 
         <Button
             Grid.Column="2"

@@ -31,13 +31,13 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Classes="body2"
-                IsVisible="{Binding Rule.Show, Converter={StaticResource negBool}}"
+                IsVisible="{Binding Show, Converter={StaticResource negBool}}"
                 Text="Hide" />
 
             <TextBlock
                 VerticalAlignment="Center"
                 Classes="body2"
-                Text="{Binding Rule.Priority}" />
+                Text="{Binding Priority}" />
 
         </StackPanel>
     </Grid>

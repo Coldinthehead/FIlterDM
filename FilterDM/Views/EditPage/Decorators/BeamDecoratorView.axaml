@@ -37,7 +37,7 @@
                 Width="24"
                 Height="24"
                 HorizontalAlignment=""
-                Fill="{Binding Rule.SelectedBeamRGB, Converter={StaticResource rbgToB}}" />
+                Fill="{Binding SelectedBeamRGB, Converter={StaticResource rbgToB}}" />
         </Border>
         <Button
             Grid.Column="2"

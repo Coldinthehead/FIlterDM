@@ -43,7 +43,7 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Classes="LeftHeader"
-                        IsChecked="{Binding Rule.IsBeamPermanent}">
+                        IsChecked="{Binding Decorator.IsBeamPermanent}">
                         <ToggleSwitch.Content />
                     </ToggleSwitch>
                 </StackPanel>
@@ -59,8 +59,8 @@
                             x:Name="ColorBox"
                             Width="150"
                             p1:ComboBoxAssist.Label="Color"
-                            ItemsSource="{Binding Rule.BeamColors}"
-                            SelectedItem="{Binding Rule.SelectedBeamColor}"
+                            ItemsSource="{Binding Decorator.BeamColors}"
+                            SelectedItem="{Binding Decorator.SelectedBeamColor}"
                             Theme="{StaticResource MaterialOutlineComboBox}" />
 
                     </Border>
@@ -74,7 +74,7 @@
                         <Rectangle
                             Width="35"
                             Height="35"
-                            Fill="{Binding Rule.SelectedBeamRGB, Converter={StaticResource rbgToB}}" />
+                            Fill="{Binding Decorator.SelectedBeamRGB, Converter={StaticResource rbgToB}}" />
                     </Border>
 
                 </StackPanel>

@@ -44,7 +44,7 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Classes="LeftHeader"
-                        IsChecked="{Binding Rule.UseFontColor}">
+                        IsChecked="{Binding Rule.Colors.UseFontColor}">
                         <ToggleSwitch.Content />
                     </ToggleSwitch>
                 </StackPanel>
@@ -52,11 +52,11 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Classes="DecoratorItem"
-                    IsVisible="{Binding Rule.UseFontColor}">
+                    IsVisible="{Binding Rule.Colors.UseFontColor}">
                     <colorPicker:PortableColorPicker
                         Width="52"
                         Height="52"
-                        SelectedColor="{Binding Rule.TextColor, Mode=TwoWay}" />
+                        SelectedColor="{Binding Rule.Colors.TextColor, Mode=TwoWay}" />
                 </Border>
 
 
@@ -70,16 +70,16 @@
 
 
                     <TextBlock Classes="headline5" Text="Background" />
-                    <ToggleSwitch IsChecked="{Binding Rule.UseBackColor}" />
+                    <ToggleSwitch IsChecked="{Binding Rule.Colors.UseBackColor}" />
                 </StackPanel>
                 <Border
                     Grid.Row="1"
                     Grid.Column="1"
-                    IsVisible="{Binding Rule.UseBackColor}">
+                    IsVisible="{Binding Rule.Colors.UseBackColor}">
                     <colorPicker:PortableColorPicker
                         Width="52"
                         Height="52"
-                        SelectedColor="{Binding Rule.BackColor, Mode=TwoWay}" />
+                        SelectedColor="{Binding Rule.Colors.BackColor, Mode=TwoWay}" />
                 </Border>
 
 
@@ -94,18 +94,18 @@
                     <ToggleSwitch
                         Grid.Row="2"
                         Grid.Column="0"
-                        IsChecked="{Binding Rule.UseBorderColor}">
+                        IsChecked="{Binding Rule.Colors.UseBorderColor}">
                         <ToggleSwitch.Content />
                     </ToggleSwitch>
                 </StackPanel>
                 <Border
                     Grid.Row="2"
                     Grid.Column="1"
-                    IsVisible="{Binding Rule.UseBorderColor}">
+                    IsVisible="{Binding Rule.Colors.UseBorderColor}">
                     <colorPicker:PortableColorPicker
                         Width="52"
                         Height="52"
-                        SelectedColor="{Binding Rule.BorderColor, Mode=TwoWay}" />
+                        SelectedColor="{Binding Rule.Colors.BorderColor, Mode=TwoWay}" />
                 </Border>
             </Grid>
         </Grid>

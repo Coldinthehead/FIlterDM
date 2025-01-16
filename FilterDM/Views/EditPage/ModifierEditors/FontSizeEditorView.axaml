@@ -30,13 +30,13 @@
                         SmallChange="1"
                         TickFrequency="1"
                         TickPlacement="TopLeft"
-                        Value="{Binding Rule.FontSize, Mode=TwoWay}" />
+                        Value="{Binding Decorator.FontSize, Mode=TwoWay}" />
 
                     <TextBlock
                         Grid.Column="1"
                         Margin="24,0,0,0"
                         Classes="headline5"
-                        Text="{Binding Rule.FontSize}" />
+                        Text="{Binding Decorator.FontSize}" />
                 </Grid>
             </Border>
         </Grid>

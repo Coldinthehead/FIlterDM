@@ -129,8 +129,8 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         if (Rules.Contains(rule))
         {
-            var model = rule.Model;
-            Model.DeleteRule(model);
+           /* var model = rule.Model;
+            Model.DeleteRule(model);*/
             Rules.Remove(rule);
             return true;
         }

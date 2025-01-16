@@ -22,8 +22,8 @@
                     <ComboBox
                         Width="150"
                         p1:ComboBoxAssist.Label="Size"
-                        ItemsSource="{Binding Rule.IconSizes}"
-                        SelectedItem="{Binding Rule.SelectedIconSize}"
+                        ItemsSource="{Binding Decorator.IconSizes}"
+                        SelectedItem="{Binding Decorator.SelectedIconSize}"
                         Theme="{StaticResource MaterialOutlineComboBox}" />
 
                 </Border>
@@ -31,8 +31,8 @@
                     <ComboBox
                         Width="150"
                         p1:ComboBoxAssist.Label="Color"
-                        ItemsSource="{Binding Rule.BeamColors}"
-                        SelectedItem="{Binding Rule.SelectedIconColor}"
+                        ItemsSource="{Binding Decorator.Colors}"
+                        SelectedItem="{Binding Decorator.SelectedIconColor}"
                         Theme="{StaticResource MaterialOutlineComboBox}" />
 
                 </Border>
@@ -40,8 +40,8 @@
                     <ComboBox
                         Width="150"
                         p1:ComboBoxAssist.Label="Shape"
-                        ItemsSource="{Binding Rule.IconShapes}"
-                        SelectedItem="{Binding Rule.SelectedShape}"
+                        ItemsSource="{Binding Decorator.IconShapes}"
+                        SelectedItem="{Binding Decorator.SelectedShape}"
                         Theme="{StaticResource MaterialOutlineComboBox}" />
 
                 </Border>

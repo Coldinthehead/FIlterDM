@@ -29,7 +29,7 @@ public partial class ClassItemViewModel : ViewModelBase
     }
 }
 
-[ObservableRecipientAttribute]
+
 public partial class ClassDecoratorViewModel : ModifierViewModelBase
 {
     [ObservableProperty]
@@ -43,41 +43,37 @@ public partial class ClassDecoratorViewModel : ModifierViewModelBase
     {
         if (!item.IsSelected)
         {
-            Condition.Remove(item.Name);
             SelectedCount--;
         }
         else
         {
-            Condition.Add(item.Name);
             SelectedCount++;
         }
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
 
-    public ClassConditionModel Condition => _condition;
-    private ClassConditionModel _condition;
     public ClassDecoratorViewModel(RuleDetailsViewModel rule
-        , ClassConditionModel condition
         , Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
-        _condition = condition;
-
         IEnumerable<ItemClassDetails> details = App.Current!.Services!.GetRequiredService<ItemClassesService>().GetItemClasses();
         List<ClassItemViewModel> checkList
             = details
                 .Select(x => new ClassItemViewModel(x))
                 .ToList();
-        SelectList = new();
-        foreach (var item in checkList)
+        SelectList = new(checkList);
+        
+        WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
+    }
+
+    public void SetModel(ClassConditionModel model)
+    {
+        foreach (var item in _selectList)
         {
-            SelectList.Add(item);
-            if (condition.HasClass(item.Name))
+            if (model.HasClass(item.Name))
             {
                 item.IsSelected = true;
                 SelectedCount++;
-                
             }
         }
-        WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
 }

@@ -1,9 +1,15 @@
-﻿namespace FilterDM.ViewModels.EditPage.ModifierEditors;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FilterDM.ViewModels.EditPage.Decorators;
+
+namespace FilterDM.ViewModels.EditPage.ModifierEditors;
 
 public partial class ColorEditorViewModel : ModifierEditorViewModel
 {
-    public ColorEditorViewModel(RuleDetailsViewModel rule) : base(rule)
+    [ObservableProperty]
+    private ColorDecoratorViewModel _decorator;
+    public ColorEditorViewModel(RuleDetailsViewModel rule, ColorDecoratorViewModel decorator) : base(rule)
     {
+        _decorator = decorator;
     }
 }
      

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Styling;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterCore.PoeData;
@@ -68,12 +69,10 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         if (viewModel.IsSelected)
         {
             SelectedTypes.Add(viewModel);
-            _model.Add(viewModel.Name);
         }
         else
         {
             SelectedTypes.Remove(viewModel);
-            _model.Remove(viewModel.Name);
         }
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
@@ -83,7 +82,6 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
     {
         foreach (var item in SelectedTypes)
         {
-            Model.Remove(item.Name);
             item.IsSelected = false;
         }
         SelectedTypes.Clear();
@@ -104,12 +102,8 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
             DeleteAction.Invoke(this);
         }
     }
-
-    public TypeConditionModel Model => _model;
-    private TypeConditionModel _model;
-    public TypeDecoratorViewModel(RuleDetailsViewModel rule, TypeConditionModel model,  Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public TypeDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
-        _model = model;
 
         Dictionary<string, List<ItemTypeDetails>> types = App.Current!.Services!.GetRequiredService<ItemTypeService>().GetItemTypes();
         List<TypeListViewModel> typeModels = [];
@@ -128,16 +122,6 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
                 };
                 typeItemList.Add(typeModel);
             }
-
-            foreach (TypeViewModel tvm in typeItemList)
-            {
-                tvm.IsSelected = model.HasType(tvm.Name);
-                if (tvm.IsSelected)
-                {
-                    selected.Add(tvm);
-                }
-            }
-
             vm.Types = new(typeItemList);
             typeModels.Add(vm);
         }
@@ -145,5 +129,21 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         SelectedTypes = new(selected);
 
         CurrentTypeList = TypeList.First();
+    }
+
+    public void SetModel(TypeConditionModel model)
+    {
+        foreach (TypeListViewModel category in TypeList)
+        {
+            foreach (var item in category.Types)
+            {
+                if (model.HasType(item.Name))
+                {
+                    item.IsSelected = true;
+                    SelectedTypes.Add(item);
+                }
+            }
+        }
+
     }
 }

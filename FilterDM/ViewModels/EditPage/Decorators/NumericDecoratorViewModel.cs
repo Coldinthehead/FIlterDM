@@ -24,7 +24,6 @@ public partial class NumericDecoratorViewModel : ModifierViewModelBase
     private NumericConditionSign _sign;
     partial void OnSignChanged(NumericConditionSign value)
     {
-        _model.UseEquals = value;
         RecalculateRepr();
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
@@ -34,7 +33,6 @@ public partial class NumericDecoratorViewModel : ModifierViewModelBase
     private int _value;
     partial void OnValueChanged(int value)
     {
-        _model.Number = value;
         RecalculateRepr();
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
@@ -55,26 +53,22 @@ public partial class NumericDecoratorViewModel : ModifierViewModelBase
         }
     }
 
-    public NumericCondition Model => _model;
-    public NumericCondition _model;
 
     public NumericFilterType FilterType => _type;
     private NumericFilterType _type;
-
-    private NumericFilterHelper _helper;
     public NumericDecoratorViewModel(RuleDetailsViewModel rule
-        , NumericCondition model
-        , NumericFilterType type
         , NumericFilterHelper helper
         , Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
-        _helper = helper;
-        _type = type;
-        _model = model;
+        _type = helper.Type;
         ShortTitle = helper.ShortName;
         LongTitle = helper.Name;
-        Value = _model.Number;
         MaxValue = helper.MaxValue;
+    }
+
+    public void SetModel(NumericCondition model)
+    {
+        Value = model.Number;
         Sign = model.UseEquals;
         RecalculateRepr();
     }

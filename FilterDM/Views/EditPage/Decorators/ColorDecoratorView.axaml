@@ -28,15 +28,15 @@
             Spacing="14">
             <TextBlock
                 Classes="body1"
-                IsVisible="{Binding Rule.UseFontColor}"
+                IsVisible="{Binding Rule.Colors.UseFontColor}"
                 Text="FT" />
             <TextBlock
                 Classes="body1"
-                IsVisible="{Binding Rule.UseBorderColor}"
+                IsVisible="{Binding Rule.Colors.UseBorderColor}"
                 Text="BD" />
             <TextBlock
                 Classes="body1"
-                IsVisible="{Binding Rule.UseBackColor}"
+                IsVisible="{Binding Rule.Colors.UseBackColor}"
                 Text="BG" />
         </StackPanel>
 

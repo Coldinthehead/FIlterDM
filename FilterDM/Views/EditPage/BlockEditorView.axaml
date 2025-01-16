@@ -176,18 +176,18 @@
                                                 MaxWidth="120"
                                                 Padding="2,2"
                                                 Classes="headline6"
-                                                Text="{Binding Title}" />
+                                                Text="{Binding Properties.Title}" />
 
                                             <Border
                                                 Padding="8,4"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Background="{Binding BackColor, Converter={StaticResource rgbToB}}"
-                                                BorderBrush="{Binding BorderColor, Converter={StaticResource rgbToB}}"
+                                                Background="{Binding Colors.BackColor, Converter={StaticResource rgbToB}}"
+                                                BorderBrush="{Binding Colors.BorderColor, Converter={StaticResource rgbToB}}"
                                                 BorderThickness="3">
                                                 <TextBlock
-                                                    FontSize="{Binding FontSize, Converter={StaticResource halfSize}}"
-                                                    Foreground="{Binding TextColor, Converter={StaticResource rgbToB}}"
+                                                    FontSize="{Binding TextSize.FontSize, Converter={StaticResource halfSize}}"
+                                                    Foreground="{Binding Colors.TextColor, Converter={StaticResource rgbToB}}"
                                                     Text="Item preview" />
 
                                             </Border>

@@ -24,16 +24,16 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Classes="body2"
-                Text="{Binding Rule.SelectedIconSize}" />
+                Text="{Binding SelectedIconSize}" />
             <TextBlock
                 VerticalAlignment="Center"
                 Classes="body2"
-                Text="{Binding Rule.SelectedIconColor}" />
+                Text="{Binding SelectedIconColor}" />
 
             <TextBlock
                 VerticalAlignment="Center"
                 Classes="body2"
-                Text="{Binding Rule.SelectedShape}" />
+                Text="{Binding SelectedShape}" />
 
         </StackPanel>
 

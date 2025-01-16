@@ -18,8 +18,8 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     private RuleDetailsViewModel _rule;
 
     [ObservableProperty]
-    private ViewModelBase _selectedModifier;
-    partial void OnSelectedModifierChanged(ViewModelBase? oldValue, ViewModelBase newValue)
+    private ModifierViewModelBase _selectedModifier;
+    partial void OnSelectedModifierChanged(ModifierViewModelBase? oldValue, ModifierViewModelBase newValue)
     {
         if (newValue != null && !newValue.Equals(oldValue))
         {
@@ -115,7 +115,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     {
         Rule = rule;
         Content = this;
-        Title = rule.Title;
+        Title = rule.Properties.Title;
         SelectedModifier = Rule.Modifiers[0];
         Messenger.Register<RuleModifierDeleteEvent>(this);
         Messenger.Register<RuleTitleApplyEvent, RuleDetailsViewModel>(this, Rule);
@@ -167,28 +167,28 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         SelectedModifier = Rule.AddTypeFilter();
     }
 
-    public ViewModelBase GetEditorModelByType(ViewModelBase vm)
+    public ViewModelBase GetEditorModelByType(ModifierViewModelBase vm)
     {
         Type t = vm.GetType();
-        if (t == typeof(TextSizeDecoratorViewModel))
+        if (vm is TextSizeDecoratorViewModel text)
         {
-            return new FontSizeEditorViewModel(Rule);
+            return new FontSizeEditorViewModel(Rule, text);
         }
-        else if (t == typeof(ColorDecoratorViewModel))
+        else if (vm is ColorDecoratorViewModel color)
         {
-            return new ColorEditorViewModel(Rule);
+            return new ColorEditorViewModel(Rule, color);
         }
-        else if (t == typeof(BeamDecoratorViewModel))
+        else if (vm is BeamDecoratorViewModel beam)
         {
-            return new BeamEditorViewModel(Rule);
+            return new BeamEditorViewModel(Rule, beam);
         }
-        else if (t == typeof(MapIconDecoratorViewModel))
+        else if (vm is MapIconDecoratorViewModel minimapIcon)
         {
-            return new MinimapIconEditorViewModel(Rule);
+            return new MinimapIconEditorViewModel(Rule, minimapIcon);
         }
-        else if (t == typeof(SoundDecoratorViewModel))
+        else if (vm is SoundDecoratorViewModel sound)
         {
-            return new SoundEditorViewModel(Rule);
+            return new SoundEditorViewModel(Rule, sound);
         }
         else if (vm is RarityDecoratorViewModel rarity)
         {
@@ -198,9 +198,9 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         {
             return new NumericEditorViewModel(Rule, numeric);
         }
-        else if (t == typeof(RulePropertiesDecoratorViewModel))
+        else if (vm is RulePropertiesDecoratorViewModel properties)
         {
-            return new RulePropertiesEditorViewModel(Rule);
+            return new RulePropertiesEditorViewModel(Rule, properties);
         }
         else if (vm is ClassDecoratorViewModel classDec)
         {
@@ -250,6 +250,6 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
 
     public void Receive(RuleTitleApplyEvent message)
     {
-        this.Title = message.Value.Title;
+        this.Title = message.Value.Properties.Title;
     }
 }

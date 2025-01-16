@@ -4,7 +4,7 @@ using System;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
 
-public abstract partial class ModifierViewModelBase : ViewModelBase
+public abstract partial class ModifierViewModelBase : ObservableRecipient
 {
     public Action<ModifierViewModelBase> DeleteAction;
 

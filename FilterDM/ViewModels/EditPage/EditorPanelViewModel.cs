@@ -45,7 +45,7 @@ public partial class EditorPanelViewModel : ObservableRecipient
     {
         if (newValue is RuleEditorViewModel r)
         {
-            r.Title = r.Rule.Title;
+            r.Title = r.Rule.Properties.Title;
             Messenger.Send(new RuleSelectedRequestEvent(r.Rule));
         }
         else if (newValue is BlockEditorViewModel b)

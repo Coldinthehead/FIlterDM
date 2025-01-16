@@ -30,7 +30,7 @@
                     Width="225"
                     Margin="8"
                     Classes="outline"
-                    Text="{Binding Rule.Title, Mode=TwoWay}"
+                    Text="{Binding Decorator.Title, Mode=TwoWay}"
                     Theme="{StaticResource OutlineTextBox}"
                     UseFloatingWatermark="False"
                     Watermark="Title" />
@@ -53,7 +53,7 @@
                         Increment="100"
                         Minimum="0"
                         Theme="{StaticResource OutlineNumericUpDown}"
-                        Value="{Binding Rule.Priority, Mode=TwoWay}" />
+                        Value="{Binding Decorator.Priority, Mode=TwoWay}" />
                 </StackPanel>
 
                 <StackPanel
@@ -66,7 +66,7 @@
                         Orientation="Horizontal"
                         Spacing="4">
                         <TextBlock Classes="headline6" Text="Show" />
-                        <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Rule.Show, Mode=TwoWay}">
+                        <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Decorator.Show, Mode=TwoWay}">
                             <ToggleSwitch.Content />
                         </ToggleSwitch>
                     </StackPanel>
@@ -75,7 +75,7 @@
                         Orientation="Horizontal"
                         Spacing="4">
                         <TextBlock Classes="headline6" Text="Enabled" />
-                        <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Rule.Enabled, Mode=TwoWay}">
+                        <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Decorator.Enabled, Mode=TwoWay}">
                             <ToggleSwitch.Content />
                         </ToggleSwitch>
                     </StackPanel>

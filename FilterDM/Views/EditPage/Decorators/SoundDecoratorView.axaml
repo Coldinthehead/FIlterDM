@@ -29,7 +29,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Classes="body2"
-                Text="{Binding Rule.SelectedSound}" />
+                Text="{Binding SelectedSound}" />
             <TextBlock
                 Margin="4,0,0,0"
                 VerticalAlignment="Center"
@@ -38,7 +38,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Classes="body2"
-                Text="{Binding Rule.SoundVolume}" />
+                Text="{Binding SoundVolume}" />
         </StackPanel>
 
         <Button

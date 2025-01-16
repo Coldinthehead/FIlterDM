@@ -129,6 +129,11 @@ public class RuleModel : IEquatable<RuleModel>
     public void RemoveTextColor()
         => Colors.Remove("TextColor");
 
+    public bool HasAnyColor()
+    {
+        return Colors.Count > 0;
+    }
+
     public bool TryGetTextColor(out Color color)
     {
         if (Colors.TryGetValue("TextColor", out var item))
