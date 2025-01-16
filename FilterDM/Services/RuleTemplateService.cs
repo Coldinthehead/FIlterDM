@@ -102,7 +102,6 @@ public class RuleTemplateService : IInit
             if (items != null)
             {
                 _templates = items;
-               
             }
           
         }
@@ -123,6 +122,7 @@ public class RuleTemplateService : IInit
                 Enabled = true,
                 Show = true,
                 TemplateName = "Empty",
+                Priority = 2000,
 
             };
             _templates["Empty"] = _empty;

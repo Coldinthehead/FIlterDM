@@ -62,8 +62,6 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
                     return;
                 }
             }
-
-
             var service = App.Current.Services.GetService<BlockTemplateService>();
             BlockModel? nextTeplate = service.GetTemplate(SelectedTempalte);
             if (nextTeplate != null)

@@ -77,14 +77,13 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (SelectedTemplate != null)
         {
-            RuleTemplateService? service = App.Current.Services.GetService<RuleTemplateService>();
+            RuleTemplateService? service = App.Current.Services.GetService<0>();
             RuleModel? nextTempate = service.GetTemplate(SelectedTemplate);
             if (nextTempate != null)
             {
-                /*nextTempate.Title = _model.Title;
-                RealParent.Model.DeleteRule(_model);
+                var title = Properties.Title;
                 SetModel(nextTempate);
-                RealParent.Model.AddRule(nextTempate);*/
+                Properties.Title = title;
             }
         }
     }
