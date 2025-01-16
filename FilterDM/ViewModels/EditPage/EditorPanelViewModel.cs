@@ -93,11 +93,10 @@ public partial class EditorPanelViewModel : ObservableRecipient
         Items.Add(editor);
        
     }
-    public void AddBlock(BlockDetailsViewModel vm, FilterModel _filterModel)
+    public void AddBlock(BlockDetailsViewModel vm)
     {
-        BlockEditorViewModel editor = new(vm, _filterModel);
+        BlockEditorViewModel editor = new(vm);
         editor.CloseAction = CloseTab;
-
         this.AddEditor(editor);  
     }
 

@@ -69,9 +69,7 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
             if (nextTeplate != null)
             {
                 nextTeplate.Title = this.Block.Title;
-                _filterModel.DeleteBlock(Block.Model);
-                Block.SetBlocks(nextTeplate);
-                _filterModel.AddBlock(nextTeplate);
+                Block.SetModel(nextTeplate);
 
             }
         }
@@ -79,9 +77,7 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
         Messenger.Send(new BlockPriorityChangedRequest(this));
     }
 
-    private readonly FilterModel _filterModel;
-
-    public BlockEditorViewModel(BlockDetailsViewModel block, FilterModel filterModel) : base()
+    public BlockEditorViewModel(BlockDetailsViewModel block) : base()
     {
         if (_templates == null)
         {
@@ -91,16 +87,8 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
         Block = block;
         Content = this;
         Title = block.Title;
-        if (block.Model.TemplateName != null && _templates.Contains(block.Model.TemplateName))
-        {
-            SelectedTempalte = block.Model.TemplateName;
-        }
-        else
-        {
-            SelectedTempalte = "Empty";
-        }
+        SelectedTempalte = "Empty";
         Messenger.Register<RuleCloseRequestEvent>(this);
-        _filterModel = filterModel;
     }
 
     public override bool IsPartOf(BlockDetailsViewModel vm)

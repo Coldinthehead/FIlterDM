@@ -5,6 +5,7 @@ using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,17 +23,14 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     partial void OnTitleChanged(string? oldValue, string newValue)
     {
-        _model.Title = newValue;
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
     [ObservableProperty]
     private bool _enabled;
     partial void OnEnabledChanged(bool oldValue, bool newValue)
     {
-        _model.Enabled = newValue;
         if (oldValue != newValue)
         {
-            Messenger.Send(new BlockEnabledChangedEvent(_model));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -41,7 +39,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     private float _priority;
     partial void OnPriorityChanged(float oldValue, float newValue)
     {
-        _model.Priority = newValue;
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
@@ -74,63 +71,72 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [RelayCommand]
     public void NewRule()
     {
-        var templateService = App.Current.Services.GetService<RuleTemplateService>();
-        RuleModel rule = templateService.BuildEmpty();
-        rule.Title = _model.GetGenericRuleTitle();
-        _model.AddRule(rule);
-        var newvm = new RuleDetailsViewModel(rule, _allBlocks, this);
-        Rules.Add(newvm);
-        Messenger.Send(new RuleCreateRequestEvent(newvm));
 
+        var teplateSerivice = App.Current.Services.GetService<RuleTemplateService>();
+        var model = teplateSerivice.BuildEmpty();
+       var vm =  AddRule(model);
+        Messenger.Send(new RuleCreateRequestEvent(vm));
     }
 
-    public float CalculatedPriority => (_model.Enabled ? -1 : 1) * _model.Priority;
-    public BlockModel Model => _model;
+    private string GetNextTitle(string title)
+    {
+        int i = 0;
+        string res = title;
+        List<string> titles = Rules.Select(x => x.Properties.Title).ToList();
+        while (true)
+        {
 
+            if (titles.Contains(res))
+            {
+                res = $"{title}({i++})";
+            }
+            else
+            {
+                return res;
 
-    private BlockModel _model;
+            }
+        }
+    }
+
+    public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
     private readonly ObservableCollection<BlockDetailsViewModel> _allBlocks;
-    public BlockDetailsViewModel(BlockModel model, ObservableCollection<BlockDetailsViewModel> allBlocks)
+    public BlockDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks)
     {
         _allBlocks = allBlocks;
-        SetBlocks(model);
         Messenger.Register<RuleDeleteRequestEvent>(this);
     }
 
-    public void SetBlocks(BlockModel model)
+    public void SetModel(BlockModel model)
     {
-        if (_model != null && _model != model)
+        foreach (var rule in Rules)
         {
-            var old = Rules.ToArray();
-            Rules = new ObservableCollection<RuleDetailsViewModel>();
-            foreach (var r in old)
-            {
-                r.DeleteMeCommand.Execute(null);
-            }
+            rule.DeleteMeCommand.Execute(null);
         }
-        _model = model;
+
+        Rules.Clear();
+        foreach (var  rule in model.Rules)
+        {
+            AddRule(rule);
+        }
         Title = model.Title;
         Enabled = model.Enabled;
         Priority = model.Priority;
-        Rules = new ObservableCollection<RuleDetailsViewModel>();
-        foreach (var r in _model.Rules)
-        {
-            var vm = new RuleDetailsViewModel(r, _allBlocks, this);
-            AddRule(vm);
-        }
-        
-       
-        Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
+    public RuleDetailsViewModel AddRule(RuleModel model)
+    {
+        var ruleVm = new RuleDetailsViewModel(_allBlocks, this);
+        model.Title = GetNextTitle(model.Title);
+        ruleVm.SetModel(model);
+        Rules.Add(ruleVm);
+        return ruleVm;
+    }
 
     public bool DeleteRule(RuleDetailsViewModel rule)
     {
         if (Rules.Contains(rule))
         {
-           /* var model = rule.Model;
-            Model.DeleteRule(model);*/
             Rules.Remove(rule);
             return true;
         }
@@ -139,6 +145,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public void AddRule(RuleDetailsViewModel rule)
     {
+        rule.Properties.Title = GetNextTitle(rule.Properties.Title);
         Rules.Add(rule);
         SortRules();
     }
@@ -148,8 +155,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         List<RuleDetailsViewModel> sorted = [.. Rules.OrderBy(x => x.CalculatedPriority)];
         Rules = new ObservableCollection<RuleDetailsViewModel>(sorted);
     }
-
-
 
     public void Receive(RuleDeleteRequestEvent message)
     {

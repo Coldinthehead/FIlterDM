@@ -119,6 +119,7 @@ public class RuleTemplateService : IInit
         {
             _empty = new()
             {
+                Title = "Empty",
                 Enabled = true,
                 Show = true,
                 TemplateName = "Empty",

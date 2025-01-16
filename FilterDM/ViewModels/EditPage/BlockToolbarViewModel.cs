@@ -37,7 +37,8 @@ public partial class BlockToolbarViewModel : ObservableRecipient
         var model = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
         model.Title = _model.GetGenericBlockTitle();
         _model.AddBlock(model);
-        var vm = new BlockDetailsViewModel(model, Blocks);
+        var vm = new BlockDetailsViewModel(Blocks);
+        vm.SetModel(model);
         Blocks.Add(vm);
     }
 

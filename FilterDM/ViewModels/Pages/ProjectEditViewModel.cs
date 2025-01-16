@@ -222,6 +222,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
         Name = model.Name;
         FilterTree = new(_model);
         EditorPanel = new();
+        FilterTree.BindBlocks();
         Changes = false;
         SaveCurrentCommand.NotifyCanExecuteChanged();
     }
@@ -243,9 +244,8 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void Receive(BlockSelectedRequestEvent message)
     {
-        EditorPanel.AddBlock(message.Value, _model);
+        EditorPanel.AddBlock(message.Value);
         FilterTree.SelectedNode = message.Value;
-
     }
 
     public void Receive(BlockCloseRequestEvent message)
@@ -255,7 +255,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void Receive(BlockDeleteRequestEvent message)
     {
-        _model.DeleteBlock(message.Value.Model);
         FilterTree.RemoveBlock(message.Value);
         EditorPanel.CloseRulesFromBlock(message.Value);
     }

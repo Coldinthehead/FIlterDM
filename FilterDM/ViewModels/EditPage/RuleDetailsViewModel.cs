@@ -391,7 +391,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private ObservableCollection<string> _templates;
     
 
-    public RuleDetailsViewModel(RuleModel rule, ObservableCollection<BlockDetailsViewModel> allBlocks, BlockDetailsViewModel parentBlock)
+    public RuleDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks, BlockDetailsViewModel parentBlock)
     {
         if (_templates == null)
         {
@@ -420,14 +420,12 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
 
-        SetModel(rule);
-
         AllBlocks = allBlocks;
         SelectedParent = parentBlock;
         _realParent = parentBlock;
     }
 
-    public RuleModel GetMovel()
+    public RuleModel GetModel()
     {
         return null;
     }
