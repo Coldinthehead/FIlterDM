@@ -1,0 +1,4292 @@
+{
+  "Claws": [
+    {
+      "Name": "Crude Claw",
+      "Tip": "Physical Damage: 4-10\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nWeapon Range: 1.1"
+    },
+    {
+      "Name": "Pict Claw",
+      "Tip": "Physical Damage: 4-16\nCritical Hit Chance: 5%\nAttacks per Second: 1.7\nWeapon Range: 1.1\nRequires: Level 6, 16 Dex"
+    },
+    {
+      "Name": "Wolfbone Claw",
+      "Tip": "Physical Damage: 7-23\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.1\nRequires: Level 12, 29 Dex\nGrants 8 Life per Enemy Hit"
+    },
+    {
+      "Name": "Forked Claw",
+      "Tip": "Physical Damage: 10-26\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 16, 38 Dex"
+    },
+    {
+      "Name": "Plated Claw",
+      "Tip": "Physical Damage: 13-31\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.1\nRequires: Level 22, 52 Dex"
+    },
+    {
+      "Name": "Edged Claw",
+      "Tip": "Physical Damage: 11-38\nCritical Hit Chance: 5%\nAttacks per Second: 1.7\nWeapon Range: 1.1\nRequires: Level 28, 65 Dex\n(15\u201325)% chance to Blind Enemies on hit"
+    },
+    {
+      "Name": "Arced Claw",
+      "Tip": "Physical Damage: 12-46\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nWeapon Range: 1.1\nRequires: Level 33, 76 Dex"
+    },
+    {
+      "Name": "Hooked Claw",
+      "Tip": "Physical Damage: 16-49\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 36, 83 Dex"
+    },
+    {
+      "Name": "Razorglass Claw",
+      "Tip": "Physical Damage: 23-54\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.1\nRequires: Level 45, 104 Dex"
+    },
+    {
+      "Name": "Sharktooth Claw",
+      "Tip": "Physical Damage: 25-52\nCritical Hit Chance: 5%\nAttacks per Second: 1.7\nWeapon Range: 1.1\nRequires: Level 49, 112 Dex"
+    },
+    {
+      "Name": "Armoured Claw",
+      "Tip": "Physical Damage: 27-63\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 52, 119 Dex"
+    },
+    {
+      "Name": "Piercing Claw",
+      "Tip": "Physical Damage: 23-68\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.1\nRequires: Level 55, 126 Dex"
+    },
+    {
+      "Name": "Talon Claw",
+      "Tip": "Physical Damage: 23-79\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nWeapon Range: 1.1\nRequires: Level 65, 148 Dex"
+    }
+  ],
+  "Daggers": [
+    {
+      "Name": "Ethereal Blade",
+      "Tip": "Physical Damage: 5-10\nCritical Hit Chance: 6%\nAttacks per Second: 1.5\nWeapon Range: 1"
+    },
+    {
+      "Name": "Glass Shank",
+      "Tip": "Physical Damage: 3-10\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1"
+    },
+    {
+      "Name": "Crone Knife",
+      "Tip": "Physical Damage: 4-15\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 6, 10 Dex, 10 Int\nLeeches 4% of Physical Damage as Mana"
+    },
+    {
+      "Name": "Simple Dagger",
+      "Tip": "Physical Damage: 8-19\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 12, 18 Dex, 18 Int"
+    },
+    {
+      "Name": "Skinning Knife",
+      "Tip": "Physical Damage: 8-22\nCritical Hit Chance: 13.5%\nAttacks per Second: 1.65\nWeapon Range: 1\nRequires: Level 16, 22 Dex, 22 Int"
+    },
+    {
+      "Name": "Moon Dagger",
+      "Tip": "Cold Damage: 11-26\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 20, 27 Dex, 27 Int\nlocal weapon implicit hidden % base damage is cold [100]"
+    },
+    {
+      "Name": "Engraved Knife",
+      "Tip": "Physical Damage: 11-34\nCritical Hit Chance: 13.5%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 27, 36 Dex, 36 Int"
+    },
+    {
+      "Name": "Obsidian Dagger",
+      "Tip": "Physical Damage: 13-39\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 33, 43 Dex, 43 Int"
+    },
+    {
+      "Name": "Bloodletting Dagger",
+      "Tip": "Physical Damage: 18-42\nCritical Hit Chance: 15%\nAttacks per Second: 1.5\nWeapon Range: 1\nRequires: Level 39, 50 Dex, 50 Int\n25% of Spell Mana Cost Converted to Life Cost"
+    },
+    {
+      "Name": "Mail Breaker",
+      "Tip": "Physical Damage: 19-44\nCritical Hit Chance: 15%\nAttacks per Second: 1.5\nWeapon Range: 1\nRequires: Level 45, 57 Dex, 57 Int\nBreaks (400\u2013500) Armour on Critical Hit"
+    },
+    {
+      "Name": "Kris Knife",
+      "Tip": "Physical Damage: 16-48\nCritical Hit Chance: 15%\nAttacks per Second: 1.65\nWeapon Range: 1\nRequires: Level 49, 62 Dex, 62 Int"
+    },
+    {
+      "Name": "Parrying Dagger",
+      "Tip": "Physical Damage: 16-55\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 52, 66 Dex, 66 Int"
+    },
+    {
+      "Name": "Arcane Dirk",
+      "Tip": "Physical Damage: 22-52\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 56, 71 Dex, 71 Int"
+    },
+    {
+      "Name": "Cinquedea",
+      "Tip": "Physical Damage: 21-62\nCritical Hit Chance: 15%\nAttacks per Second: 1.55\nWeapon Range: 1\nRequires: Level 65, 81 Dex, 81 Int"
+    }
+  ],
+  "Wands": [
+    {
+      "Name": "Withered Wand",
+      "Tip": " Grants Skill: Chaos Bolt"
+    },
+    {
+      "Name": "Bone Wand",
+      "Tip": "Requires: Level 2\n Grants Skill: Bone Blast"
+    },
+    {
+      "Name": "Attuned Wand",
+      "Tip": "Requires: Level 2\n Grants Skill: Mana Drain"
+    },
+    {
+      "Name": "Siphoning Wand",
+      "Tip": "Requires: Level 11\n Grants Skill: Power Siphon"
+    },
+    {
+      "Name": "Volatile Wand",
+      "Tip": "Requires: Level 16\n Grants Skill: Volatile Dead"
+    },
+    {
+      "Name": "Galvanic Wand",
+      "Tip": "Requires: Level 25\n Grants Skill: Galvanic Field"
+    },
+    {
+      "Name": "Acrid Wand",
+      "Tip": "Requires: Level 33\n Grants Skill: Decompose"
+    },
+    {
+      "Name": "Offering Wand",
+      "Tip": "Requires: Level 38\n Grants Skill: Exsanguinate"
+    },
+    {
+      "Name": "Frigid Wand",
+      "Tip": "Requires: Level 45\n Grants Skill: Chaos Bolt"
+    },
+    {
+      "Name": "Torture Wand",
+      "Tip": "Requires: Level 49\n Grants Skill: Chaos Bolt"
+    },
+    {
+      "Name": "Critical Wand",
+      "Tip": "Requires: Level 52\n Grants Skill: Chaos Bolt"
+    },
+    {
+      "Name": "Primordial Wand",
+      "Tip": "Requires: Level 56\n Grants Skill: Wither"
+    },
+    {
+      "Name": "Dueling Wand",
+      "Tip": "Requires: Level 65\n Grants Skill: Chaos Bolt"
+    }
+  ],
+  "Swords": [
+    {
+      "Name": "Golden Blade",
+      "Tip": "Physical Damage: 3-28\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.1\n+(16\u201324) to all Attributes"
+    },
+    {
+      "Name": "Energy Blade",
+      "Tip": "Critical Hit Chance: 7%\nAttacks per Second: 1.7\nWeapon Range: 1.1\nAdds to Lightning Damage"
+    },
+    {
+      "Name": "Shortsword",
+      "Tip": "Physical Damage: 6-9\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1"
+    },
+    {
+      "Name": "Broadsword",
+      "Tip": "Physical Damage: 8-13\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.1\nRequires: Level 6, 10 Str, 10 Dex"
+    },
+    {
+      "Name": "Vampiric Blade",
+      "Tip": "Physical Damage: 11-20\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 11, 16 Str, 16 Dex"
+    },
+    {
+      "Name": "Scimitar",
+      "Tip": "Physical Damage: 14-23\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 16, 22 Str, 22 Dex"
+    },
+    {
+      "Name": "Charred Shortsword",
+      "Tip": "Physical Damage: 19-34\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.1\nRequires: Level 21, 28 Str, 28 Dex"
+    },
+    {
+      "Name": "Sickle Sword",
+      "Tip": "Physical Damage: 18-38\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 28, 37 Str, 37 Dex"
+    },
+    {
+      "Name": "Falchion",
+      "Tip": "Physical Damage: 27-37\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 33, 43 Str, 43 Dex"
+    },
+    {
+      "Name": "Treasured Blade",
+      "Tip": "Physical Damage: 27-45\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 40, 51 Str, 51 Dex"
+    },
+    {
+      "Name": "Cutlass",
+      "Tip": "Physical Damage: 33-49\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 45, 57 Str, 57 Dex"
+    },
+    {
+      "Name": "Runic Shortsword",
+      "Tip": "Physical Damage: 26-55\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nWeapon Range: 1.1\nRequires: Level 50, 63 Str, 63 Dex"
+    },
+    {
+      "Name": "Messer",
+      "Tip": "Physical Damage: 30-56\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.1\nRequires: Level 52, 66 Str, 66 Dex"
+    },
+    {
+      "Name": "Commander Sword",
+      "Tip": "Physical Damage: 36-60\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 54, 68 Str, 68 Dex"
+    },
+    {
+      "Name": "Dark Blade",
+      "Tip": "Physical Damage: 43-65\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 65, 81 Str, 81 Dex"
+    }
+  ],
+  "OneHandAxes": [
+    {
+      "Name": "Dull Hatchet",
+      "Tip": "Physical Damage: 4-10\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1"
+    },
+    {
+      "Name": "Hook Axe",
+      "Tip": "Physical Damage: 5-14\nCritical Hit Chance: 5%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: Level 4, 10 Str\nGain 1 Rage on Hit"
+    },
+    {
+      "Name": "Bearded Axe",
+      "Tip": "Physical Damage: 8-21\nCritical Hit Chance: 5%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: Level 10, 20 Str, 10 Dex"
+    },
+    {
+      "Name": "Extended Cleaver",
+      "Tip": "Physical Damage: 8-25\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 16, 30 Str, 14 Dex\nHas no Accuracy Penalty from Range"
+    },
+    {
+      "Name": "Bandit Hatchet",
+      "Tip": "Physical Damage: 13-31\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 20, 37 Str, 16 Dex"
+    },
+    {
+      "Name": "Crescent Axe",
+      "Tip": "Physical Damage: 18-37\nCritical Hit Chance: 6.5%\nAttacks per Second: 1.4\nWeapon Range: 1.1\nRequires: Level 26, 48 Str, 20 Dex"
+    },
+    {
+      "Name": "Carving Hatchet",
+      "Tip": "Physical Damage: 19-44\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 33, 60 Str, 25 Dex"
+    },
+    {
+      "Name": "Sacrificial Axe",
+      "Tip": "Physical Damage: 20-42\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 37, 67 Str, 27 Dex\nGain (28\u201335) Mana per Enemy Killed"
+    },
+    {
+      "Name": "Boarding Hatchet",
+      "Tip": "Physical Damage: 24-55\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 45, 81 Str, 33 Dex"
+    },
+    {
+      "Name": "Fury Cleaver",
+      "Tip": "Physical Damage: 30-62\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.1\nRequires: Level 48, 86 Str, 35 Dex\n10% increased Damage taken"
+    },
+    {
+      "Name": "Battle Axe",
+      "Tip": "Physical Damage: 28-65\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 52, 93 Str, 37 Dex"
+    },
+    {
+      "Name": "Profane Cleaver",
+      "Tip": "Physical Damage: 26-69\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 54, 96 Str, 38 Dex"
+    },
+    {
+      "Name": "Dread Hatchet",
+      "Tip": "Physical Damage: 34-79\nCritical Hit Chance: 5%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: Level 65, 116 Str, 45 Dex"
+    }
+  ],
+  "TwoHandMaces": [
+    {
+      "Name": "Felled Greatclub",
+      "Tip": "Physical Damage: 13-18\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3"
+    },
+    {
+      "Name": "Oak Greathammer",
+      "Tip": "Physical Damage: 14-26\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 4, 11 Str\nCauses (30\u201350)% increased Stun Buildup"
+    },
+    {
+      "Name": "Forge Maul",
+      "Tip": "Physical Damage: 29-39\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 11, 27 Str"
+    },
+    {
+      "Name": "Studded Greatclub",
+      "Tip": "Physical Damage: 32-48\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 16, 38 Str"
+    },
+    {
+      "Name": "Cultist Greathammer",
+      "Tip": "Physical Damage: 32-43\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 22, 52 Str\nStrikes deal Splash damage to targets within 1.8 metres"
+    },
+    {
+      "Name": "Temple Maul",
+      "Tip": "Physical Damage: 35-72\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 28, 65 Str"
+    },
+    {
+      "Name": "Leaden Greathammer",
+      "Tip": "Physical Damage: 58-78\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 33, 76 Str"
+    },
+    {
+      "Name": "Crumbling Maul",
+      "Tip": "Physical Damage: 62-75\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 38, 88 Str\nCauses Enemies to Explode on Critical kill, for 10% of their Life as Physical Damage"
+    },
+    {
+      "Name": "Pointed Maul",
+      "Tip": "Physical Damage: 68-102\nCritical Hit Chance: 6.5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 45, 104 Str"
+    },
+    {
+      "Name": "Totemic Greatclub",
+      "Tip": "Physical Damage: 73-99\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 50, 115 Str\nCrushes Enemies on Hit"
+    },
+    {
+      "Name": "Greatmace",
+      "Tip": "Physical Damage: 74-124\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 52, 119 Str"
+    },
+    {
+      "Name": "Precise Greathammer",
+      "Tip": "Physical Damage: 87-118\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 54, 124 Str"
+    },
+    {
+      "Name": "Giant Maul",
+      "Tip": "Physical Damage: 96-144\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 65, 148 Str"
+    },
+    {
+      "Name": "Advanced Oak Greathammer",
+      "Tip": "Physical Damage: 59-109\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 45, 104 Str\nCauses (30\u201350)% increased Stun Buildup"
+    },
+    {
+      "Name": "Advanced Forge Maul",
+      "Tip": "Physical Damage: 84-113\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 48, 110 Str"
+    },
+    {
+      "Name": "Advanced Cultist Greathammer",
+      "Tip": "Physical Damage: 62-83\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 51, 117 Str\nStrikes deal Splash damage to targets within 1.8 metres"
+    },
+    {
+      "Name": "Advanced Temple Maul",
+      "Tip": "Physical Damage: 60-125\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 55, 126 Str"
+    },
+    {
+      "Name": "Advanced Leaden Greathammer",
+      "Tip": "Physical Damage: 94-127\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 59, 135 Str"
+    },
+    {
+      "Name": "Advanced Crumbling Maul",
+      "Tip": "Physical Damage: 93-114\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 62, 142 Str\nCauses Enemies to Explode on Critical kill, for 10% of their Life as Physical Damage"
+    },
+    {
+      "Name": "Expert Forge Maul",
+      "Tip": "Physical Damage: 112-151\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 67, 174 Str"
+    },
+    {
+      "Name": "Expert Temple Maul",
+      "Tip": "Physical Damage: 76-158\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 72, 193 Str"
+    },
+    {
+      "Name": "Expert Oak Greathammer",
+      "Tip": "Physical Damage: 94-174\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 77, 212 Str\nCauses (30\u201350)% increased Stun Buildup"
+    },
+    {
+      "Name": "Expert Cultist Greathammer",
+      "Tip": "Physical Damage: 89-120\nCritical Hit Chance: 5%\nAttacks per Second: 1.05\nWeapon Range: 1.3\nRequires: Level 78, 212 Str\nStrikes deal Splash damage to targets within 1.8 metres"
+    },
+    {
+      "Name": "Expert Crumbling Maul",
+      "Tip": "Physical Damage: 113-138\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 79, 212 Str\nCauses Enemies to Explode on Critical kill, for 10% of their Life as Physical Damage"
+    },
+    {
+      "Name": "Expert Leaden Greathammer",
+      "Tip": "Physical Damage: 119-161\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nWeapon Range: 1.3\nRequires: Level 77, 212 Str"
+    }
+  ],
+  "Quarterstaves": [
+    {
+      "Name": "Wrapped Quarterstaff",
+      "Tip": "Physical Damage: 7-12\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3"
+    },
+    {
+      "Name": "Long Quarterstaff",
+      "Tip": "Physical Damage: 9-18\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 4, 10 Dex\n16% increased Range"
+    },
+    {
+      "Name": "Gothic Quarterstaff",
+      "Tip": "Physical Damage: 16-26\nCritical Hit Chance: 11.5%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 11, 22 Dex, 11 Int"
+    },
+    {
+      "Name": "Crackling Quarterstaff",
+      "Tip": "Lightning Damage: 13-54\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 16, 30 Dex, 14 Int\nlocal weapon implicit hidden % base damage is lightning [100]"
+    },
+    {
+      "Name": "Crescent Quarterstaff",
+      "Tip": "Physical Damage: 19-39\nCritical Hit Chance: 10%\nAttacks per Second: 1.5\nWeapon Range: 1.3\nRequires: Level 20, 37 Dex, 16 Int"
+    },
+    {
+      "Name": "Steelpoint Quarterstaff",
+      "Tip": "Physical Damage: 28-51\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 28, 51 Dex, 22 Int"
+    },
+    {
+      "Name": "Slicing Quarterstaff",
+      "Tip": "Physical Damage: 29-60\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 33, 60 Dex, 25 Int"
+    },
+    {
+      "Name": "Barrier Quarterstaff",
+      "Tip": "Physical Damage: 33-55\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 37, 67 Dex, 27 Int\n+(10\u201315)% to Block chance"
+    },
+    {
+      "Name": "Hefty Quarterstaff",
+      "Tip": "Physical Damage: 39-80\nCritical Hit Chance: 10%\nAttacks per Second: 1.35\nWeapon Range: 1.3\nRequires: Level 45, 81 Dex, 33 Int"
+    },
+    {
+      "Name": "Smooth Quarterstaff",
+      "Tip": "Physical Damage: 62-84\nCritical Hit Chance: 0%\nAttacks per Second: 1.5\nWeapon Range: 1.3\nRequires: Level 47, 84 Dex, 34 Int"
+    },
+    {
+      "Name": "Anima Quarterstaff",
+      "Tip": "Physical Damage: 47-79\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 52, 93 Dex, 37 Int"
+    },
+    {
+      "Name": "Graceful Quarterstaff",
+      "Tip": "Physical Damage: 47-87\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 56, 100 Dex, 40 Int"
+    },
+    {
+      "Name": "Wyrm Quarterstaff",
+      "Tip": "Physical Damage: 57-94\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 65, 116 Dex, 45 Int"
+    },
+    {
+      "Name": "Advanced Long Quarterstaff",
+      "Tip": "Physical Damage: 35-72\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 45, 81 Dex, 33 Int\n16% increased Range"
+    },
+    {
+      "Name": "Advanced Gothic Quarterstaff",
+      "Tip": "Physical Damage: 43-72\nCritical Hit Chance: 11.5%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 48, 86 Dex, 35 Int"
+    },
+    {
+      "Name": "Advanced Crackling Quarterstaff",
+      "Tip": "Lightning Damage: 30-57\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 51, 91 Dex, 36 Int\nlocal weapon implicit hidden % base damage is lightning [100]"
+    },
+    {
+      "Name": "Advanced Crescent Quarterstaff",
+      "Tip": "Physical Damage: 40-83\nCritical Hit Chance: 10%\nAttacks per Second: 1.5\nWeapon Range: 1.3\nRequires: Level 55, 98 Dex, 39 Int"
+    },
+    {
+      "Name": "Advanced Slicing Quarterstaff",
+      "Tip": "Physical Damage: 45-94\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 59, 105 Dex, 42 Int"
+    },
+    {
+      "Name": "Advanced Barrier Quarterstaff",
+      "Tip": "Physical Damage: 49-82\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 62, 110 Dex, 44 Int\n+(10\u201315)% to Block chance"
+    },
+    {
+      "Name": "Expert Gothic Quarterstaff",
+      "Tip": "Physical Damage: 55-92\nCritical Hit Chance: 11.5%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 67, 135 Dex, 53 Int"
+    },
+    {
+      "Name": "Expert Crescent Quarterstaff",
+      "Tip": "Physical Damage: 50-103\nCritical Hit Chance: 10%\nAttacks per Second: 1.5\nWeapon Range: 1.3\nRequires: Level 72, 150 Dex, 59 Int"
+    },
+    {
+      "Name": "Expert Long Quarterstaff",
+      "Tip": "Physical Damage: 53-111\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 77, 165 Dex, 64 Int\n16% increased Range"
+    },
+    {
+      "Name": "Expert Crackling Quarterstaff",
+      "Tip": "Lightning Damage: 43-172\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 78, 165 Dex, 64 Int\nlocal weapon implicit hidden % base damage is lightning [100]"
+    },
+    {
+      "Name": "Expert Barrier Quarterstaff",
+      "Tip": "Physical Damage: 58-97\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 79, 165 Dex, 64 Int\n+(10\u201315)% to Block chance"
+    },
+    {
+      "Name": "Expert Slicing Quarterstaff",
+      "Tip": "Physical Damage: 65-108\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.3\nRequires: Level 77, 165 Dex, 64 Int"
+    }
+  ],
+  "Crossbows": [
+    {
+      "Name": "Makeshift Crossbow",
+      "Tip": "Physical Damage: 6-10\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8"
+    },
+    {
+      "Name": "Tense Crossbow",
+      "Tip": "Physical Damage: 7-13\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.85\nRequires: Level 4, 8 Str, 8 Dex\n(20\u201330)% increased Bolt Speed"
+    },
+    {
+      "Name": "Sturdy Crossbow",
+      "Tip": "Physical Damage: 9-22\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nReload Time: 0.75\nRequires: Level 10, 15 Str, 15 Dex"
+    },
+    {
+      "Name": "Varnished Crossbow",
+      "Tip": "Physical Damage: 10-30\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8\nRequires: Level 16, 22 Str, 22 Dex"
+    },
+    {
+      "Name": "Dyad Crossbow",
+      "Tip": "Physical Damage: 7-30\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 1.1\nRequires: Level 20, 27 Str, 27 Dex\nLoads an additional bolt"
+    },
+    {
+      "Name": "Alloy Crossbow",
+      "Tip": "Physical Damage: 11-42\nCritical Hit Chance: 5%\nAttacks per Second: 1.7\nReload Time: 0.7\nRequires: Level 26, 34 Str, 34 Dex"
+    },
+    {
+      "Name": "Bombard Crossbow",
+      "Tip": "Physical Damage: 12-47\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nReload Time: 0.75\nRequires: Level 33, 43 Str, 43 Dex\nGrenade Skills Fire an additional Projectile"
+    },
+    {
+      "Name": "Construct Crossbow",
+      "Tip": "Physical Damage: 15-61\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8\nRequires: Level 38, 49 Str, 49 Dex"
+    },
+    {
+      "Name": "Blackfire Crossbow",
+      "Tip": "Physical Damage: 17-67\nCritical Hit Chance: 7%\nAttacks per Second: 1.6\nReload Time: 0.85\nRequires: Level 45, 57 Str, 57 Dex"
+    },
+    {
+      "Name": "Piercing Crossbow",
+      "Tip": "Physical Damage: 17-68\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nReload Time: 0.85\nRequires: Level 48, 61 Str, 61 Dex\n(20\u201330)% chance to Pierce an Enemy"
+    },
+    {
+      "Name": "Cumbrous Crossbow",
+      "Tip": "Physical Damage: 16-63\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.9\nRequires: Level 52, 66 Str, 66 Dex\n+1 to maximum number of Summoned Ballista Totems"
+    },
+    {
+      "Name": "Dedalian Crossbow",
+      "Tip": "Physical Damage: 21-83\nCritical Hit Chance: 7%\nAttacks per Second: 1.55\nReload Time: 0.85\nRequires: Level 56, 71 Str, 71 Dex"
+    },
+    {
+      "Name": "Esoteric Crossbow",
+      "Tip": "Physical Damage: 24-96\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8\nRequires: Level 65, 81 Str, 81 Dex"
+    },
+    {
+      "Name": "Advanced Tense Crossbow",
+      "Tip": "Physical Damage: 17-66\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.85\nRequires: Level 45, 57 Str, 57 Dex\n(20\u201330)% increased Bolt Speed"
+    },
+    {
+      "Name": "Advanced Sturdy Crossbow",
+      "Tip": "Physical Damage: 19-76\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nReload Time: 0.75\nRequires: Level 48, 61 Str, 61 Dex"
+    },
+    {
+      "Name": "Advanced Varnished Crossbow",
+      "Tip": "Physical Damage: 19-78\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8\nRequires: Level 51, 65 Str, 65 Dex"
+    },
+    {
+      "Name": "Advanced Dyad Crossbow",
+      "Tip": "Physical Damage: 17-66\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 1.1\nRequires: Level 55, 69 Str, 69 Dex\nLoads an additional bolt"
+    },
+    {
+      "Name": "Advanced Bombard Crossbow",
+      "Tip": "Physical Damage: 19-77\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nReload Time: 0.75\nRequires: Level 59, 74 Str, 74 Dex\nGrenade Skills Fire an additional Projectile"
+    },
+    {
+      "Name": "Advanced Forlorn Crossbow",
+      "Tip": "Physical Damage: 23-92\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8\nRequires: Level 62, 78 Str, 78 Dex"
+    },
+    {
+      "Name": "Expert Sturdy Crossbow",
+      "Tip": "Physical Damage: 25-102\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nReload Time: 0.75\nRequires: Level 67, 95 Str, 95 Dex"
+    },
+    {
+      "Name": "Expert Varnished Crossbow",
+      "Tip": "Physical Damage: 26-105\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8\nRequires: Level 72, 106 Str, 106 Dex"
+    },
+    {
+      "Name": "Expert Tense Crossbow",
+      "Tip": "Physical Damage: 26-106\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.85\nRequires: Level 77, 116 Str, 116 Dex\n(20\u201330)% increased Bolt Speed"
+    },
+    {
+      "Name": "Expert Dyad Crossbow",
+      "Tip": "Physical Damage: 22-89\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 1.1\nRequires: Level 78, 116 Str, 116 Dex\nLoads an additional bolt"
+    },
+    {
+      "Name": "Expert Bombard Crossbow",
+      "Tip": "Physical Damage: 24-97\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nReload Time: 0.75\nRequires: Level 79, 116 Str, 116 Dex\nGrenade Skills Fire an additional Projectile"
+    },
+    {
+      "Name": "Expert Forlorn Crossbow",
+      "Tip": "Physical Damage: 28-112\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nReload Time: 0.8\nRequires: Level 77, 116 Str, 116 Dex"
+    }
+  ],
+  "Sceptres": [
+    {
+      "Name": "Rattling Sceptre",
+      "Tip": "Spirit: 100\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Stoic Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 6\n Grants Skill: Discipline"
+    },
+    {
+      "Name": "Lupine Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 12\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Omen Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 16\n Grants Skill: Malice"
+    },
+    {
+      "Name": "Ochre Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 21\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Shrine Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 26\n Grants Skill: Purity of Fire"
+    },
+    {
+      "Name": "Shrine Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 26\n Grants Skill: Purity of Ice"
+    },
+    {
+      "Name": "Shrine Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 26\n Grants Skill: Purity of Lightning"
+    },
+    {
+      "Name": "Devouring Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 33\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Clasped Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 36\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Devotional Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 45\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Wrath Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 49\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Aromatic Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 52\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Pious Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 58\n Grants Skill: Skeletal Warrior"
+    },
+    {
+      "Name": "Hallowed Sceptre",
+      "Tip": "Spirit: 100\nRequires: Level 65"
+    }
+  ],
+  "Spears": [
+    {
+      "Name": "Hardwood Spear",
+      "Tip": "Physical Damage: 5-9\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.5"
+    },
+    {
+      "Name": "Ironhead Spear",
+      "Tip": "Physical Damage: 7-13\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 5, 11 Dex"
+    },
+    {
+      "Name": "Hunting Spear",
+      "Tip": "Physical Damage: 10-18\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.5\nRequires: Level 10, 10 Str, 20 Dex\n(15\u201325)% chance to Maim on Hit"
+    },
+    {
+      "Name": "Winged Spear",
+      "Tip": "Physical Damage: 12-22\nCritical Hit Chance: 5%\nAttacks per Second: 1.65\nWeapon Range: 1.5\nRequires: Level 16, 14 Str, 30 Dex"
+    },
+    {
+      "Name": "War Spear",
+      "Tip": "Physical Damage: 14-26\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 21, 17 Str, 39 Dex\n(25\u201335)% increased Projectile Speed when thrown"
+    },
+    {
+      "Name": "Forked Spear",
+      "Tip": "Physical Damage: 17-32\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 26, 20 Str, 48 Dex"
+    },
+    {
+      "Name": "Barbed Spear",
+      "Tip": "Physical Damage: 20-38\nCritical Hit Chance: 6.5%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 33, 25 Str, 60 Dex"
+    },
+    {
+      "Name": "Broad Spear",
+      "Tip": "Physical Damage: 28-51\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.5\nRequires: Level 40, 29 Str, 72 Dex\nUses both hand slots"
+    },
+    {
+      "Name": "Crossblade Spear",
+      "Tip": "Physical Damage: 28-51\nCritical Hit Chance: 5%\nAttacks per Second: 1.55\nWeapon Range: 1.5\nRequires: Level 45, 33 Str, 81 Dex"
+    },
+    {
+      "Name": "Seaglass Spear",
+      "Tip": "Physical Damage: 27-50\nCritical Hit Chance: 10%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 51, 36 Str, 91 Dex, 65 Int"
+    },
+    {
+      "Name": "Sword Spear",
+      "Tip": "Physical Damage: 30-56\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 52, 37 Str, 93 Dex"
+    },
+    {
+      "Name": "Striking Spear",
+      "Tip": "Lightning Damage: 23-91\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 55, 39 Str, 98 Dex\nlocal weapon implicit hidden % base damage is lightning [100]"
+    },
+    {
+      "Name": "Helix Spear",
+      "Tip": "Physical Damage: 37-68\nCritical Hit Chance: 5%\nAttacks per Second: 1.6\nWeapon Range: 1.5\nRequires: Level 65, 45 Str, 116 Dex"
+    }
+  ],
+  "Flails": [
+    {
+      "Name": "Splintered Flail",
+      "Tip": "Physical Damage: 6-9\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1"
+    },
+    {
+      "Name": "Chain Flail",
+      "Tip": "Physical Damage: 8-14\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 13 Str"
+    },
+    {
+      "Name": "Holy Flail",
+      "Tip": "Physical Damage: 10-17\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 22 Str, 11 Int"
+    },
+    {
+      "Name": "Iron Flail",
+      "Tip": "Physical Damage: 14-23\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 30 Str, 14 Int"
+    },
+    {
+      "Name": "Twin Flail",
+      "Tip": "Physical Damage: 8-18\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.1\nRequires: 37 Str, 16 Int"
+    },
+    {
+      "Name": "Slender Flail",
+      "Tip": "Physical Damage: 19-32\nCritical Hit Chance: 8%\nAttacks per Second: 1.5\nWeapon Range: 1.1\nRequires: 48 Str, 20 Int"
+    },
+    {
+      "Name": "Stone Flail",
+      "Tip": "Physical Damage: 23-38\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 60 Str, 25 Int\nUnblockable"
+    },
+    {
+      "Name": "Ring Flail",
+      "Tip": "Physical Damage: 23-44\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 69 Str, 28 Int"
+    },
+    {
+      "Name": "Guarded Flail",
+      "Tip": "Physical Damage: 31-57\nCritical Hit Chance: 10%\nAttacks per Second: 1.4\nWeapon Range: 1.1\nRequires: 81 Str, 33 Int"
+    },
+    {
+      "Name": "Icicle Flail",
+      "Tip": "Cold Damage: 24-55\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 84 Str, 34 Int\nlocal weapon implicit hidden % base damage is cold [100]"
+    },
+    {
+      "Name": "Tearing Flail",
+      "Tip": "Physical Damage: 27-56\nCritical Hit Chance: 12.5%\nAttacks per Second: 1.4\nWeapon Range: 1.1\nRequires: 93 Str, 37 Int"
+    },
+    {
+      "Name": "Great Flail",
+      "Tip": "Physical Damage: 35-58\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 103 Str, 41 Int"
+    },
+    {
+      "Name": "Abyssal Flail",
+      "Tip": "Physical Damage: 36-66\nCritical Hit Chance: 10%\nAttacks per Second: 1.45\nWeapon Range: 1.1\nRequires: 116 Str, 45 Int"
+    }
+  ],
+  "Bows": [
+    {
+      "Name": "Crude Bow",
+      "Tip": "Physical Damage: 6-9\nCritical Hit Chance: 5%\nAttacks per Second: 1.2"
+    },
+    {
+      "Name": "Shortbow",
+      "Tip": "Physical Damage: 7-14\nCritical Hit Chance: 5%\nAttacks per Second: 1.25\nRequires: Level 5, 14 Dex"
+    },
+    {
+      "Name": "Warden Bow",
+      "Tip": "Physical Damage: 12-18\nCritical Hit Chance: 5%\nAttacks per Second: 1.15\nRequires: Level 11, 27 Dex\n(20\u201330)% chance to Chain an additional time"
+    },
+    {
+      "Name": "Recurve Bow",
+      "Tip": "Physical Damage: 15-31\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nRequires: Level 16, 38 Dex"
+    },
+    {
+      "Name": "Composite Bow",
+      "Tip": "Physical Damage: 19-31\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 22, 52 Dex"
+    },
+    {
+      "Name": "Dualstring Bow",
+      "Tip": "Physical Damage: 16-31\nCritical Hit Chance: 5%\nAttacks per Second: 1.1\nRequires: Level 28, 65 Dex\nBow Attacks fire an additional Arrow"
+    },
+    {
+      "Name": "Cultist Bow",
+      "Tip": "Chaos Damage: 36-59\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 33, 76 Dex\nlocal weapon implicit hidden % base damage is chaos [100]"
+    },
+    {
+      "Name": "Zealot Bow",
+      "Tip": "Physical Damage: 31-47\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 39, 90 Dex"
+    },
+    {
+      "Name": "Artillery Bow",
+      "Tip": "Physical Damage: 39-72\nCritical Hit Chance: 5%\nAttacks per Second: 1.15\nRequires: Level 45, 104 Dex\n50% reduced Projectile Range"
+    },
+    {
+      "Name": "Tribal Bow",
+      "Tip": "Physical Damage: 38-57\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 50, 115 Dex"
+    },
+    {
+      "Name": "Greatbow",
+      "Tip": "Physical Damage: 40-82\nCritical Hit Chance: 6.5%\nAttacks per Second: 1.15\nRequires: Level 52, 119 Str, 119 Dex"
+    },
+    {
+      "Name": "Double Limb Bow",
+      "Tip": "Physical Damage: 42-63\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 56, 128 Dex"
+    },
+    {
+      "Name": "Heavy Bow",
+      "Tip": "Physical Damage: 45-75\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 65, 148 Dex"
+    },
+    {
+      "Name": "Advanced Shortbow",
+      "Tip": "Physical Damage: 29-54\nCritical Hit Chance: 5%\nAttacks per Second: 1.25\nRequires: Level 45, 104 Dex"
+    },
+    {
+      "Name": "Advanced Warden Bow",
+      "Tip": "Physical Damage: 35-53\nCritical Hit Chance: 5%\nAttacks per Second: 1.15\nRequires: Level 48, 110 Dex\n(20\u201330)% chance to Chain an additional time"
+    },
+    {
+      "Name": "Advanced Composite Bow",
+      "Tip": "Physical Damage: 36-61\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 51, 117 Dex"
+    },
+    {
+      "Name": "Advanced Dualstring Bow",
+      "Tip": "Physical Damage: 29-54\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 55, 126 Dex\nBow Attacks fire an additional Arrow"
+    },
+    {
+      "Name": "Advanced Cultist Bow",
+      "Tip": "Chaos Damage: 41-69\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 59, 135 Dex\nlocal weapon implicit hidden % base damage is chaos [100]"
+    },
+    {
+      "Name": "Advanced Zealot Bow",
+      "Tip": "Physical Damage: 46-69\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 62, 142 Dex"
+    },
+    {
+      "Name": "Expert Shortbow",
+      "Tip": "Physical Damage: 41-76\nCritical Hit Chance: 5%\nAttacks per Second: 1.25\nRequires: Level 67, 174 Dex"
+    },
+    {
+      "Name": "Expert Composite Bow",
+      "Tip": "Physical Damage: 49-82\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 72, 193 Dex"
+    },
+    {
+      "Name": "Expert Warden Bow",
+      "Tip": "Physical Damage: 53-80\nCritical Hit Chance: 5%\nAttacks per Second: 1.15\nRequires: Level 77, 212 Dex\n(20\u201330)% chance to Chain an additional time"
+    },
+    {
+      "Name": "Expert Dualstring Bow",
+      "Tip": "Physical Damage: 39-73\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 78, 212 Dex\nBow Attacks fire an additional Arrow"
+    },
+    {
+      "Name": "Expert Cultist Bow",
+      "Tip": "Chaos Damage: 52-87\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 79, 212 Dex\nlocal weapon implicit hidden % base damage is chaos [100]"
+    },
+    {
+      "Name": "Expert Zealot Bow",
+      "Tip": "Physical Damage: 56-84\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nRequires: Level 77, 212 Dex"
+    }
+  ],
+  "Staves": [
+    {
+      "Name": "Ashen Staff",
+      "Tip": " Grants Skill: Firebolt"
+    },
+    {
+      "Name": "Gelid Staff",
+      "Tip": "Requires: Level 2\n Grants Skill: Freezing Shards"
+    },
+    {
+      "Name": "Voltaic Staff",
+      "Tip": "Requires: Level 2\n Grants Skill: Lightning Bolt"
+    },
+    {
+      "Name": "Spriggan Staff",
+      "Tip": "Requires: Level 11\n Grants Skill: Firebolt"
+    },
+    {
+      "Name": "Pyrophyte Staff",
+      "Tip": "Requires: Level 16\n Grants Skill: Living Bomb"
+    },
+    {
+      "Name": "Chiming Staff",
+      "Tip": "Requires: Level 25\n Grants Skill: Sigil of Power"
+    },
+    {
+      "Name": "Rending Staff",
+      "Tip": "Requires: Level 33\n Grants Skill: Soulrend"
+    },
+    {
+      "Name": "Reaping Staff",
+      "Tip": "Requires: Level 38\n Grants Skill: Reap"
+    },
+    {
+      "Name": "Icicle Staff",
+      "Tip": "Requires: Level 45\n Grants Skill: Firebolt"
+    },
+    {
+      "Name": "Roaring Staff",
+      "Tip": "Requires: Level 49\n Grants Skill: Unleash"
+    },
+    {
+      "Name": "Paralysing Staff",
+      "Tip": "Requires: Level 52\n Grants Skill: Shock Nova"
+    },
+    {
+      "Name": "Cleric Staff",
+      "Tip": "Requires: Level 56\n Grants Skill: Consecrate"
+    },
+    {
+      "Name": "Dark Staff",
+      "Tip": "Requires: Level 65\n Grants Skill: Dark Pact"
+    }
+  ],
+  "TwoHandSwords": [
+    {
+      "Name": "Energy Blade",
+      "Tip": "Critical Hit Chance: 7%\nAttacks per Second: 1.6\nWeapon Range: 1.3\nAdds to Lightning Damage"
+    },
+    {
+      "Name": "Corroded Longsword",
+      "Tip": "Physical Damage: 9-16\nCritical Hit Chance: 5%\nAttacks per Second: 1.3\nWeapon Range: 1.3"
+    },
+    {
+      "Name": "Iron Greatsword",
+      "Tip": "Physical Damage: 13-23\nCritical Hit Chance: 5%\nAttacks per Second: 1.35\nWeapon Range: 1.3\nRequires: Level 6, 10 Str, 10 Dex"
+    },
+    {
+      "Name": "Blessed Claymore",
+      "Tip": "Physical Damage: 19-32\nCritical Hit Chance: 5%\nAttacks per Second: 1.3\nWeapon Range: 1.3\nRequires: Level 11, 16 Str, 16 Dex"
+    },
+    {
+      "Name": "Broad Greatsword",
+      "Tip": "Physical Damage: 25-42\nCritical Hit Chance: 5%\nAttacks per Second: 1.25\nWeapon Range: 1.3\nRequires: Level 16, 22 Str, 22 Dex"
+    },
+    {
+      "Name": "Rippled Greatsword",
+      "Tip": "Physical Damage: 28-52\nCritical Hit Chance: 5%\nAttacks per Second: 1.3\nWeapon Range: 1.3\nRequires: Level 22, 30 Str, 30 Dex"
+    },
+    {
+      "Name": "Arced Longsword",
+      "Tip": "Physical Damage: 31-58\nCritical Hit Chance: 5%\nAttacks per Second: 1.35\nWeapon Range: 1.3\nRequires: Level 28, 37 Str, 37 Dex"
+    },
+    {
+      "Name": "Stone Greatsword",
+      "Tip": "Physical Damage: 40-67\nCritical Hit Chance: 5%\nAttacks per Second: 1.3\nWeapon Range: 1.3\nRequires: Level 33, 43 Str, 43 Dex"
+    },
+    {
+      "Name": "Obsidian Greatsword",
+      "Tip": "Physical Damage: 49-73\nCritical Hit Chance: 5%\nAttacks per Second: 1.25\nWeapon Range: 1.3\nRequires: Level 36, 46 Str, 46 Dex"
+    },
+    {
+      "Name": "Keen Greatsword",
+      "Tip": "Physical Damage: 45-94\nCritical Hit Chance: 5%\nAttacks per Second: 1.3\nWeapon Range: 1.3\nRequires: Level 45, 57 Str, 57 Dex"
+    },
+    {
+      "Name": "Ancient Greatblade",
+      "Tip": "Physical Damage: 55-103\nCritical Hit Chance: 5%\nAttacks per Second: 1.25\nWeapon Range: 1.3\nRequires: Level 49, 62 Str, 62 Dex"
+    },
+    {
+      "Name": "Flanged Greatblade",
+      "Tip": "Physical Damage: 51-106\nCritical Hit Chance: 5%\nAttacks per Second: 1.3\nWeapon Range: 1.3\nRequires: Level 52, 66 Str, 66 Dex"
+    },
+    {
+      "Name": "Regalia Longsword",
+      "Tip": "Physical Damage: 61-92\nCritical Hit Chance: 5%\nAttacks per Second: 1.35\nWeapon Range: 1.3\nRequires: Level 54, 68 Str, 68 Dex"
+    },
+    {
+      "Name": "Ultra Greatsword",
+      "Tip": "Physical Damage: 72-119\nCritical Hit Chance: 5%\nAttacks per Second: 1.3\nWeapon Range: 1.3\nRequires: Level 65, 81 Str, 81 Dex"
+    }
+  ],
+  "TwoHandAxes": [
+    {
+      "Name": "Splitting Greataxe",
+      "Tip": "Physical Damage: 8-20\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3"
+    },
+    {
+      "Name": "Light Halberd",
+      "Tip": "Physical Damage: 10-25\nCritical Hit Chance: 5%\nAttacks per Second: 1.25\nWeapon Range: 1.3\nRequires: Level 4, 10 Str"
+    },
+    {
+      "Name": "Executioner Greataxe",
+      "Tip": "Physical Damage: 10-41\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 10, 20 Str, 10 Dex\nCulling Strike"
+    },
+    {
+      "Name": "Arched Greataxe",
+      "Tip": "Physical Damage: 17-59\nCritical Hit Chance: 5%\nAttacks per Second: 1.15\nWeapon Range: 1.3\nRequires: Level 16, 30 Str, 14 Dex"
+    },
+    {
+      "Name": "Elegant Glaive",
+      "Tip": "Physical Damage: 19-64\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 20, 37 Str, 16 Dex"
+    },
+    {
+      "Name": "Savage Greataxe",
+      "Tip": "Physical Damage: 23-70\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 27, 50 Str, 21 Dex\nGain (34\u201343) Life per Enemy Killed"
+    },
+    {
+      "Name": "Rending Halberd",
+      "Tip": "Physical Damage: 27-91\nCritical Hit Chance: 6.5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 33, 60 Str, 25 Dex"
+    },
+    {
+      "Name": "Jagged Greataxe",
+      "Tip": "Physical Damage: 43-99\nCritical Hit Chance: 5%\nAttacks per Second: 1.15\nWeapon Range: 1.3\nRequires: Level 40, 72 Str, 29 Dex\n(15\u201325)% chance to cause Bleeding on Hit"
+    },
+    {
+      "Name": "Reaver Glaive",
+      "Tip": "Physical Damage: 43-113\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 45, 81 Str, 33 Dex"
+    },
+    {
+      "Name": "Ember Greataxe",
+      "Tip": "Fire Damage: 58-154\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 50, 89 Str, 36 Dex\nlocal weapon implicit hidden % base damage is fire [100]"
+    },
+    {
+      "Name": "Ceremonial Halberd",
+      "Tip": "Physical Damage: 53-123\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 52, 93 Str, 37 Dex"
+    },
+    {
+      "Name": "Monument Greataxe",
+      "Tip": "Physical Damage: 48-143\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 57, 102 Str, 40 Dex"
+    },
+    {
+      "Name": "Vile Greataxe",
+      "Tip": "Physical Damage: 59-155\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3\nRequires: Level 65, 116 Str, 45 Dex"
+    }
+  ],
+  "Traps": [
+    {
+      "Name": "Clay Trap",
+      "Tip": "Throw Time: 0.75 Sec\nDetonation Type: Proximity"
+    },
+    {
+      "Name": "Clamping Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Proximity"
+    },
+    {
+      "Name": "Shrapnel Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Manual"
+    },
+    {
+      "Name": "Urn Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Proximity"
+    },
+    {
+      "Name": "Incense Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Manual\n(20\u201330)% increased Cooldown Recovery Rate for throwing Traps"
+    },
+    {
+      "Name": "Bladed Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Proximity"
+    },
+    {
+      "Name": "Dart Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Manual"
+    },
+    {
+      "Name": "Spike Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Proximity"
+    },
+    {
+      "Name": "Coiled Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Manual"
+    },
+    {
+      "Name": "Lead Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Proximity"
+    },
+    {
+      "Name": "Medallion Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Proximity"
+    },
+    {
+      "Name": "Intricate Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Manual"
+    },
+    {
+      "Name": "Refined Trap",
+      "Tip": "Throw Time: 0.80 Sec\nDetonation Type: Proximity"
+    }
+  ],
+  "FishingRods": [
+    {
+      "Name": "Fishing Rod",
+      "Tip": "Physical Damage: 10-18\nCritical Hit Chance: 5%\nAttacks per Second: 1.2\nWeapon Range: 1.3"
+    }
+  ],
+  "Quivers": [
+    {
+      "Name": "Broadhead Quiver",
+      "Tip": "Adds 1 to 3 Physical Damage to Attacks"
+    },
+    {
+      "Name": "Fire Quiver",
+      "Tip": "Requires: Level 8\nAdds 3 to 5 Fire damage to Attacks"
+    },
+    {
+      "Name": "Sacral Quiver",
+      "Tip": "Requires: Level 16\nGain (2\u20133) Life per Enemy Hit with Attacks"
+    },
+    {
+      "Name": "Two-Point Quiver",
+      "Tip": "Requires: Level 24\n(20\u201330)% increased Accuracy Rating"
+    },
+    {
+      "Name": "Blunt Quiver",
+      "Tip": "Requires: Level 33\n(20\u201330)% reduced Enemy Stun Threshold"
+    },
+    {
+      "Name": "Toxic Quiver",
+      "Tip": "Requires: Level 39\n(10\u201315)% chance to Poison on Hit with Attacks"
+    },
+    {
+      "Name": "Serrated Quiver",
+      "Tip": "Requires: Level 44\nAttacks have (10\u201315)% chance to cause Bleeding"
+    },
+    {
+      "Name": "Primed Quiver",
+      "Tip": "Requires: Level 51\n(7\u201310)% increased Attack Speed"
+    },
+    {
+      "Name": "Penetrating Quiver",
+      "Tip": "Requires: Level 55\n100% chance to Pierce an Enemy"
+    },
+    {
+      "Name": "Volant Quiver",
+      "Tip": "Requires: Level 61\n(20\u201330)% increased Arrow Speed"
+    },
+    {
+      "Name": "Visceral Quiver",
+      "Tip": "Requires: Level 65\n(20\u201330)% increased Critical Hit Chance for Attacks"
+    }
+  ],
+  "Shields": [
+    {
+      "Name": "Golden Flame",
+      "Tip": "Block chance: 25%\nRequires: Level 15\n+(11\u201319)% to Chaos Resistance"
+    },
+    {
+      "Name": "Splintered Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 18\nBase Movement Speed: -0.03\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Painted Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 29\nBase Movement Speed: -0.03\nRequires: Level 6, 13 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Braced Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 41\nBase Movement Speed: -0.03\nRequires: Level 12, 23 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Barricade Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 50\nBase Movement Speed: -0.03\nRequires: Level 16, 30 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Effigial Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 60\nBase Movement Speed: -0.03\nRequires: Level 21, 40 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Rampart Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 75\nBase Movement Speed: -0.03\nRequires: Level 28, 52 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Heraldric Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 85\nBase Movement Speed: -0.03\nRequires: Level 33, 61 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Stone Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 91\nBase Movement Speed: -0.03\nRequires: Level 36, 66 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Crucible Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 110\nBase Movement Speed: -0.03\nRequires: Level 45, 83 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Ancestor Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 121\nBase Movement Speed: -0.03\nRequires: Level 50, 92 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Phalanx Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 125\nBase Movement Speed: -0.03\nRequires: Level 52, 95 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Defiant Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 137\nBase Movement Speed: -0.03\nRequires: Level 58, 106 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Blacksteel Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 152\nBase Movement Speed: -0.03\nRequires: Level 65, 118 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Hardwood Targe",
+      "Tip": "Block chance: 25%\nArmour: 10\nEvasion Rating: 7\nBase Movement Speed: -0.015\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Pelage Targe",
+      "Tip": "Block chance: 25%\nArmour: 18\nEvasion Rating: 14\nBase Movement Speed: -0.015\nRequires: Level 8, 10 Str, 10 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Studded Targe",
+      "Tip": "Block chance: 25%\nArmour: 27\nEvasion Rating: 23\nBase Movement Speed: -0.015\nRequires: Level 16, 18 Str, 18 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Crescent Targe",
+      "Tip": "Block chance: 25%\nArmour: 39\nEvasion Rating: 34\nBase Movement Speed: -0.015\nRequires: Level 26, 27 Str, 27 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Chiseled Targe",
+      "Tip": "Block chance: 25%\nArmour: 47\nEvasion Rating: 41\nBase Movement Speed: -0.015\nRequires: Level 33, 34 Str, 34 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Feathered Targe",
+      "Tip": "Block chance: 25%\nArmour: 51\nEvasion Rating: 46\nBase Movement Speed: -0.015\nRequires: Level 37, 38 Str, 38 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Stratified Targe",
+      "Tip": "Block chance: 25%\nArmour: 61\nEvasion Rating: 54\nBase Movement Speed: -0.015\nRequires: Level 45, 46 Str, 46 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Carved Targe",
+      "Tip": "Block chance: 25%\nArmour: 63\nEvasion Rating: 57\nBase Movement Speed: -0.015\nRequires: Level 47, 48 Str, 48 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Mosaic Targe",
+      "Tip": "Block chance: 25%\nArmour: 69\nEvasion Rating: 62\nBase Movement Speed: -0.015\nRequires: Level 52, 53 Str, 53 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Aureate Targe",
+      "Tip": "Block chance: 25%\nArmour: 74\nEvasion Rating: 68\nBase Movement Speed: -0.015\nRequires: Level 57, 58 Str, 58 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Grand Targe",
+      "Tip": "Block chance: 25%\nArmour: 84\nEvasion Rating: 76\nBase Movement Speed: -0.015\nRequires: Level 65, 65 Str, 65 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Blazon Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 10\nEnergy Shield: 6\nBase Movement Speed: -0.015\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Sigil Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 17\nEnergy Shield: 8\nBase Movement Speed: -0.015\nRequires: Level 7, 10 Str, 10 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Emblem Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 27\nEnergy Shield: 12\nBase Movement Speed: -0.015\nRequires: Level 16, 18 Str, 18 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Jingling Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 41\nEnergy Shield: 16\nBase Movement Speed: -0.015\nRequires: Level 28, 30 Str, 30 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Sectarian Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 47\nEnergy Shield: 18\nBase Movement Speed: -0.015\nRequires: Level 33, 34 Str, 34 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Omen Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 50\nEnergy Shield: 19\nBase Movement Speed: -0.015\nRequires: Level 36, 37 Str, 37 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Wayward Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 61\nEnergy Shield: 22\nBase Movement Speed: -0.015\nRequires: Level 45, 46 Str, 46 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Seer Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 65\nEnergy Shield: 23\nBase Movement Speed: -0.015\nRequires: Level 49, 50 Str, 50 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Stoic Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 69\nEnergy Shield: 24\nBase Movement Speed: -0.015\nRequires: Level 52, 53 Str, 53 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Empyreal Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 74\nEnergy Shield: 26\nBase Movement Speed: -0.015\nRequires: Level 57, 58 Str, 58 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Deified Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 84\nEnergy Shield: 29\nBase Movement Speed: -0.015\nRequires: Level 65, 65 Str, 65 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Leather Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 12"
+    },
+    {
+      "Name": "Wooden Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 20\nRequires: Level 5, 11 Dex"
+    },
+    {
+      "Name": "Plated Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 32\nRequires: Level 11, 22 Dex"
+    },
+    {
+      "Name": "Iron Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 42\nRequires: Level 16, 30 Dex"
+    },
+    {
+      "Name": "Ridged Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 54\nRequires: Level 22, 42 Dex"
+    },
+    {
+      "Name": "Spiked Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 62\nRequires: Level 26, 49 Dex"
+    },
+    {
+      "Name": "Ringed Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 75\nRequires: Level 33, 61 Dex"
+    },
+    {
+      "Name": "Edged Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 87\nRequires: Level 39, 72 Dex"
+    },
+    {
+      "Name": "Laminate Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 99\nRequires: Level 45, 83 Dex"
+    },
+    {
+      "Name": "Pearl Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 105\nRequires: Level 48, 88 Dex"
+    },
+    {
+      "Name": "Ornate Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 113\nRequires: Level 52, 95 Dex"
+    },
+    {
+      "Name": "Array Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 119\nRequires: Level 55, 101 Dex"
+    },
+    {
+      "Name": "Aegis Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 139\nRequires: Level 65, 118 Dex"
+    },
+    {
+      "Name": "Advanced Painted Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 110\nBase Movement Speed: -0.03\nRequires: Level 45, 83 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Braced Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 116\nBase Movement Speed: -0.03\nRequires: Level 48, 88 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Effigial Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 123\nBase Movement Speed: -0.03\nRequires: Level 51, 94 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Rampart Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 131\nBase Movement Speed: -0.03\nRequires: Level 55, 101 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Heraldric Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 139\nBase Movement Speed: -0.03\nRequires: Level 59, 108 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Stone Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 144\nBase Movement Speed: -0.03\nRequires: Level 61, 112 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Hardwood Targe",
+      "Tip": "Block chance: 25%\nArmour: 61\nEvasion Rating: 54\nBase Movement Speed: -0.015\nRequires: Level 45, 46 Str, 46 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Pelage Targe",
+      "Tip": "Block chance: 25%\nArmour: 64\nEvasion Rating: 58\nBase Movement Speed: -0.015\nRequires: Level 48, 49 Str, 49 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Studded Targe",
+      "Tip": "Block chance: 25%\nArmour: 67\nEvasion Rating: 61\nBase Movement Speed: -0.015\nRequires: Level 51, 52 Str, 52 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Crescent Targe",
+      "Tip": "Block chance: 25%\nArmour: 72\nEvasion Rating: 65\nBase Movement Speed: -0.015\nRequires: Level 55, 55 Str, 55 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Chiseled Targe",
+      "Tip": "Block chance: 25%\nArmour: 77\nEvasion Rating: 70\nBase Movement Speed: -0.015\nRequires: Level 59, 59 Str, 59 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Feathered Targe",
+      "Tip": "Block chance: 25%\nArmour: 80\nEvasion Rating: 73\nBase Movement Speed: -0.015\nRequires: Level 62, 62 Str, 62 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Blazon Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 61\nEnergy Shield: 22\nBase Movement Speed: -0.015\nRequires: Level 45, 46 Str, 46 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Sigil Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 64\nEnergy Shield: 23\nBase Movement Speed: -0.015\nRequires: Level 48, 49 Str, 49 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Emblem Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 67\nEnergy Shield: 24\nBase Movement Speed: -0.015\nRequires: Level 51, 52 Str, 52 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Jingling Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 72\nEnergy Shield: 25\nBase Movement Speed: -0.015\nRequires: Level 55, 55 Str, 55 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Sectarian Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 77\nEnergy Shield: 27\nBase Movement Speed: -0.015\nRequires: Level 59, 59 Str, 59 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Omen Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 80\nEnergy Shield: 28\nBase Movement Speed: -0.015\nRequires: Level 62, 62 Str, 62 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Advanced Wooden Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 99\nRequires: Level 45, 83 Dex"
+    },
+    {
+      "Name": "Advanced Plated Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 105\nRequires: Level 48, 88 Dex"
+    },
+    {
+      "Name": "Advanced Ridged Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 111\nRequires: Level 51, 94 Dex"
+    },
+    {
+      "Name": "Advanced Spiked Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 119\nRequires: Level 55, 101 Dex"
+    },
+    {
+      "Name": "Advanced Ringed Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 127\nRequires: Level 59, 108 Dex"
+    },
+    {
+      "Name": "Advanced Edged Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 131\nRequires: Level 61, 112 Dex"
+    },
+    {
+      "Name": "Expert Braced Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 152\nBase Movement Speed: -0.03\nRequires: Level 65, 118 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Rampart Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 167\nBase Movement Speed: -0.03\nRequires: Level 70, 129 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Stone Tower Shield",
+      "Tip": "Block chance: 26%\nArmour: 182\nBase Movement Speed: -0.03\nRequires: Level 75, 139 Str\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Pelage Targe",
+      "Tip": "Block chance: 25%\nArmour: 84\nEvasion Rating: 76\nBase Movement Speed: -0.015\nRequires: Level 65, 65 Str, 65 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Crescent Targe",
+      "Tip": "Block chance: 25%\nArmour: 92\nEvasion Rating: 84\nBase Movement Speed: -0.015\nRequires: Level 70, 70 Str, 70 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Feathered Targe",
+      "Tip": "Block chance: 25%\nArmour: 100\nEvasion Rating: 91\nBase Movement Speed: -0.015\nRequires: Level 75, 76 Str, 76 Dex\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Sigil Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 84\nEnergy Shield: 29\nBase Movement Speed: -0.015\nRequires: Level 65, 65 Str, 65 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Jingling Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 92\nEnergy Shield: 32\nBase Movement Speed: -0.015\nRequires: Level 70, 70 Str, 70 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Omen Crest Shield",
+      "Tip": "Block chance: 25%\nArmour: 100\nEnergy Shield: 35\nBase Movement Speed: -0.015\nRequires: Level 75, 76 Str, 76 Int\n Grants Skill: Raise Shield"
+    },
+    {
+      "Name": "Expert Plated Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 139\nRequires: Level 65, 118 Dex"
+    },
+    {
+      "Name": "Expert Spiked Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 152\nRequires: Level 70, 129 Dex"
+    },
+    {
+      "Name": "Expert Edged Buckler",
+      "Tip": "Block chance: 24%\nEvasion Rating: 166\nRequires: Level 75, 139 Dex"
+    }
+  ],
+  "Foci": [
+    {
+      "Name": "Twig Focus",
+      "Tip": "Energy Shield: 12"
+    },
+    {
+      "Name": "Woven Focus",
+      "Tip": "Energy Shield: 15\nRequires: 13 Int"
+    },
+    {
+      "Name": "Antler Focus",
+      "Tip": "Energy Shield: 17\nRequires: 20 Int"
+    },
+    {
+      "Name": "Engraved Focus",
+      "Tip": "Energy Shield: 21\nRequires: 30 Int"
+    },
+    {
+      "Name": "Tonal Focus",
+      "Tip": "Energy Shield: 25\nRequires: 42 Int"
+    },
+    {
+      "Name": "Crystal Focus",
+      "Tip": "Energy Shield: 28\nRequires: 49 Int"
+    },
+    {
+      "Name": "Voodoo Focus",
+      "Tip": "Energy Shield: 32\nRequires: 61 Int"
+    },
+    {
+      "Name": "Plumed Focus",
+      "Tip": "Energy Shield: 34\nRequires: 66 Int"
+    },
+    {
+      "Name": "Jade Focus",
+      "Tip": "Energy Shield: 40\nRequires: 83 Int"
+    },
+    {
+      "Name": "Paua Focus",
+      "Tip": "Energy Shield: 43\nRequires: 94 Int"
+    },
+    {
+      "Name": "Elegant Focus",
+      "Tip": "Energy Shield: 44\nRequires: 95 Int"
+    },
+    {
+      "Name": "Attuned Focus",
+      "Tip": "Energy Shield: 47\nRequires: 104 Int"
+    },
+    {
+      "Name": "Magus Focus",
+      "Tip": "Energy Shield: 52\nRequires: 118 Int"
+    },
+    {
+      "Name": "Advanced Woven Focus",
+      "Tip": "Energy Shield: 40\nRequires: 83 Int"
+    },
+    {
+      "Name": "Advanced Antler Focus",
+      "Tip": "Energy Shield: 42\nRequires: 88 Int"
+    },
+    {
+      "Name": "Advanced Tonal Focus",
+      "Tip": "Energy Shield: 43\nRequires: 94 Int"
+    },
+    {
+      "Name": "Advanced Crystal Focus",
+      "Tip": "Energy Shield: 46\nRequires: 101 Int"
+    },
+    {
+      "Name": "Advanced Voodoo Focus",
+      "Tip": "Energy Shield: 49\nRequires: 108 Int"
+    },
+    {
+      "Name": "Advanced Plumed Focus",
+      "Tip": "Energy Shield: 50\nRequires: 112 Int"
+    },
+    {
+      "Name": "Expert Antler Focus",
+      "Tip": "Energy Shield: 52\nRequires: 118 Int"
+    },
+    {
+      "Name": "Expert Crystal Focus",
+      "Tip": "Energy Shield: 58\nRequires: 129 Int"
+    },
+    {
+      "Name": "Expert Plumed Focus",
+      "Tip": "Energy Shield: 63\nRequires: 139 Int"
+    }
+  ],
+  "Gloves": [
+    {
+      "Name": "Golden Bracers",
+      "Tip": "Requires: Level 12\n+(20\u201330) to maximum Life"
+    },
+    {
+      "Name": "Stocky Mitts",
+      "Tip": "Armour: 15"
+    },
+    {
+      "Name": "Riveted Mitts",
+      "Tip": "Armour: 31\nRequires: Level 11, 19 Str"
+    },
+    {
+      "Name": "Tempered Mitts",
+      "Tip": "Armour: 40\nRequires: Level 16, 27 Str"
+    },
+    {
+      "Name": "Bolstered Mitts",
+      "Tip": "Armour: 58\nRequires: Level 27, 44 Str"
+    },
+    {
+      "Name": "Moulded Mitts",
+      "Tip": "Armour: 68\nRequires: Level 33, 53 Str"
+    },
+    {
+      "Name": "Detailed Mitts",
+      "Tip": "Armour: 88\nRequires: Level 45, 73 Str"
+    },
+    {
+      "Name": "Titan Mitts",
+      "Tip": "Armour: 100\nRequires: Level 52, 83 Str"
+    },
+    {
+      "Name": "Grand Mitts",
+      "Tip": "Armour: 122\nRequires: Level 65, 104 Str"
+    },
+    {
+      "Name": "Suede Bracers",
+      "Tip": "Evasion Rating: 10"
+    },
+    {
+      "Name": "Firm Bracers",
+      "Tip": "Evasion Rating: 26\nRequires: Level 11, 19 Dex"
+    },
+    {
+      "Name": "Bound Bracers",
+      "Tip": "Evasion Rating: 33\nRequires: Level 16, 27 Dex"
+    },
+    {
+      "Name": "Sectioned Bracers",
+      "Tip": "Evasion Rating: 52\nRequires: Level 28, 46 Dex"
+    },
+    {
+      "Name": "Spined Bracers",
+      "Tip": "Evasion Rating: 60\nRequires: Level 33, 53 Dex"
+    },
+    {
+      "Name": "Fine Bracers",
+      "Tip": "Evasion Rating: 79\nRequires: Level 45, 73 Dex"
+    },
+    {
+      "Name": "Hardened Bracers",
+      "Tip": "Evasion Rating: 90\nRequires: Level 52, 83 Dex"
+    },
+    {
+      "Name": "Engraved Bracers",
+      "Tip": "Evasion Rating: 111\nRequires: Level 65, 104 Dex"
+    },
+    {
+      "Name": "Torn Gloves",
+      "Tip": "Energy Shield: 9"
+    },
+    {
+      "Name": "Sombre Gloves",
+      "Tip": "Energy Shield: 15\nRequires: Level 12, 20 Int"
+    },
+    {
+      "Name": "Stitched Gloves",
+      "Tip": "Energy Shield: 17\nRequires: Level 16, 27 Int"
+    },
+    {
+      "Name": "Jewelled Gloves",
+      "Tip": "Energy Shield: 22\nRequires: Level 26, 43 Int"
+    },
+    {
+      "Name": "Intricate Gloves",
+      "Tip": "Energy Shield: 26\nRequires: Level 33, 53 Int"
+    },
+    {
+      "Name": "Pauascale Gloves",
+      "Tip": "Energy Shield: 32\nRequires: Level 45, 73 Int"
+    },
+    {
+      "Name": "Embroidered Gloves",
+      "Tip": "Energy Shield: 35\nRequires: Level 52, 83 Int"
+    },
+    {
+      "Name": "Adorned Gloves",
+      "Tip": "Energy Shield: 42\nRequires: Level 65, 104 Int"
+    },
+    {
+      "Name": "Ringmail Gauntlets",
+      "Tip": "Armour: 13\nEvasion Rating: 10\nRequires: Level 6, 7 Str, 7 Dex"
+    },
+    {
+      "Name": "Layered Gauntlets",
+      "Tip": "Armour: 22\nEvasion Rating: 18\nRequires: Level 16, 15 Str, 15 Dex"
+    },
+    {
+      "Name": "Doubled Gauntlets",
+      "Tip": "Armour: 37\nEvasion Rating: 33\nRequires: Level 33, 30 Str, 30 Dex"
+    },
+    {
+      "Name": "Plate Gauntlets",
+      "Tip": "Armour: 48\nEvasion Rating: 44\nRequires: Level 45, 40 Str, 40 Dex"
+    },
+    {
+      "Name": "Burnished Gauntlets",
+      "Tip": "Armour: 55\nEvasion Rating: 50\nRequires: Level 52, 46 Str, 46 Dex"
+    },
+    {
+      "Name": "Ornate Gauntlets",
+      "Tip": "Armour: 67\nEvasion Rating: 61\nRequires: Level 65, 57 Str, 57 Dex"
+    },
+    {
+      "Name": "Rope Cuffs",
+      "Tip": "Armour: 12\nEnergy Shield: 6\nRequires: Level 5, 6 Str, 6 Int"
+    },
+    {
+      "Name": "Aged Cuffs",
+      "Tip": "Armour: 22\nEnergy Shield: 9\nRequires: Level 16, 15 Str, 15 Int"
+    },
+    {
+      "Name": "Goldcast Cuffs",
+      "Tip": "Armour: 37\nEnergy Shield: 14\nRequires: Level 33, 30 Str, 30 Int"
+    },
+    {
+      "Name": "Diviner Cuffs",
+      "Tip": "Armour: 48\nEnergy Shield: 17\nRequires: Level 45, 40 Str, 40 Int"
+    },
+    {
+      "Name": "Righteous Cuffs",
+      "Tip": "Armour: 55\nEnergy Shield: 19\nRequires: Level 52, 46 Str, 46 Int"
+    },
+    {
+      "Name": "Signet Cuffs",
+      "Tip": "Armour: 67\nEnergy Shield: 23\nRequires: Level 65, 57 Str, 57 Int"
+    },
+    {
+      "Name": "Gauze Wraps",
+      "Tip": "Evasion Rating: 8\nEnergy Shield: 6\nRequires: Level 4, 6 Dex, 6 Int"
+    },
+    {
+      "Name": "Linen Wraps",
+      "Tip": "Evasion Rating: 18\nEnergy Shield: 9\nRequires: Level 16, 15 Dex, 15 Int"
+    },
+    {
+      "Name": "Spiral Wraps",
+      "Tip": "Evasion Rating: 33\nEnergy Shield: 14\nRequires: Level 33, 30 Dex, 30 Int"
+    },
+    {
+      "Name": "Buckled Wraps",
+      "Tip": "Evasion Rating: 44\nEnergy Shield: 17\nRequires: Level 45, 40 Dex, 40 Int"
+    },
+    {
+      "Name": "Furtive Wraps",
+      "Tip": "Evasion Rating: 50\nEnergy Shield: 19\nRequires: Level 52, 46 Dex, 46 Int"
+    },
+    {
+      "Name": "Utility Wraps",
+      "Tip": "Evasion Rating: 61\nEnergy Shield: 23\nRequires: Level 65, 57 Dex, 57 Int"
+    },
+    {
+      "Name": "Grand Manchettes",
+      "Tip": "Armour: 44\nEvasion Rating: 40\nEnergy Shield: 15\nRequires: Level 65, 40 Str, 40 Dex, 40 Int"
+    },
+    {
+      "Name": "Advanced Riveted Mitts",
+      "Tip": "Armour: 88\nRequires: Level 45, 73 Str"
+    },
+    {
+      "Name": "Advanced Tempered Mitts",
+      "Tip": "Armour: 98\nRequires: Level 51, 82 Str"
+    },
+    {
+      "Name": "Advanced Bolstered Mitts",
+      "Tip": "Armour: 105\nRequires: Level 55, 88 Str"
+    },
+    {
+      "Name": "Advanced Moulded Mitts",
+      "Tip": "Armour: 111\nRequires: Level 59, 95 Str"
+    },
+    {
+      "Name": "Advanced Firm Bracers",
+      "Tip": "Evasion Rating: 79\nRequires: Level 45, 73 Dex"
+    },
+    {
+      "Name": "Advanced Bound Bracers",
+      "Tip": "Evasion Rating: 89\nRequires: Level 51, 82 Dex"
+    },
+    {
+      "Name": "Advanced Sectioned Bracers",
+      "Tip": "Evasion Rating: 95\nRequires: Level 55, 88 Dex"
+    },
+    {
+      "Name": "Advanced Spined Bracers",
+      "Tip": "Evasion Rating: 101\nRequires: Level 59, 95 Dex"
+    },
+    {
+      "Name": "Advanced Sombre Gloves",
+      "Tip": "Energy Shield: 32\nRequires: Level 45, 73 Int"
+    },
+    {
+      "Name": "Advanced Stitched Gloves",
+      "Tip": "Energy Shield: 35\nRequires: Level 51, 82 Int"
+    },
+    {
+      "Name": "Advanced Jewelled Gloves",
+      "Tip": "Energy Shield: 37\nRequires: Level 55, 88 Int"
+    },
+    {
+      "Name": "Advanced Intricate Gloves",
+      "Tip": "Energy Shield: 39\nRequires: Level 59, 95 Int"
+    },
+    {
+      "Name": "Advanced Ringmail Gauntlets",
+      "Tip": "Armour: 48\nEvasion Rating: 44\nRequires: Level 45, 40 Str, 40 Dex"
+    },
+    {
+      "Name": "Advanced Layered Gauntlets",
+      "Tip": "Armour: 54\nEvasion Rating: 49\nRequires: Level 51, 46 Str, 46 Dex"
+    },
+    {
+      "Name": "Advanced Doubled Gauntlets",
+      "Tip": "Armour: 61\nEvasion Rating: 56\nRequires: Level 59, 52 Str, 52 Dex"
+    },
+    {
+      "Name": "Advanced Rope Cuffs",
+      "Tip": "Armour: 48\nEnergy Shield: 17\nRequires: Level 45, 40 Str, 40 Int"
+    },
+    {
+      "Name": "Advanced Aged Cuffs",
+      "Tip": "Armour: 54\nEnergy Shield: 19\nRequires: Level 51, 46 Str, 46 Int"
+    },
+    {
+      "Name": "Advanced Goldcast Cuffs",
+      "Tip": "Armour: 61\nEnergy Shield: 21\nRequires: Level 59, 52 Str, 52 Int"
+    },
+    {
+      "Name": "Advanced Gauze Wraps",
+      "Tip": "Evasion Rating: 44\nEnergy Shield: 17\nRequires: Level 45, 40 Dex, 40 Int"
+    },
+    {
+      "Name": "Advanced Linen Wraps",
+      "Tip": "Evasion Rating: 49\nEnergy Shield: 19\nRequires: Level 51, 46 Dex, 46 Int"
+    },
+    {
+      "Name": "Advanced Spiral Wraps",
+      "Tip": "Evasion Rating: 56\nEnergy Shield: 21\nRequires: Level 59, 52 Dex, 52 Int"
+    },
+    {
+      "Name": "Expert Riveted Mitts",
+      "Tip": "Armour: 122\nRequires: Level 65, 104 Str"
+    },
+    {
+      "Name": "Expert Bolstered Mitts",
+      "Tip": "Armour: 134\nRequires: Level 70, 113 Str"
+    },
+    {
+      "Name": "Expert Moulded Mitts",
+      "Tip": "Armour: 146\nRequires: Level 75, 122 Str"
+    },
+    {
+      "Name": "Expert Firm Bracers",
+      "Tip": "Evasion Rating: 111\nRequires: Level 65, 104 Dex"
+    },
+    {
+      "Name": "Expert Sectioned Bracers",
+      "Tip": "Evasion Rating: 122\nRequires: Level 70, 113 Dex"
+    },
+    {
+      "Name": "Expert Spined Bracers",
+      "Tip": "Evasion Rating: 133\nRequires: Level 75, 122 Dex"
+    },
+    {
+      "Name": "Expert Sombre Gloves",
+      "Tip": "Energy Shield: 42\nRequires: Level 65, 104 Int"
+    },
+    {
+      "Name": "Expert Jewelled Gloves",
+      "Tip": "Energy Shield: 46\nRequires: Level 70, 113 Int"
+    },
+    {
+      "Name": "Expert Intricate Gloves",
+      "Tip": "Energy Shield: 50\nRequires: Level 75, 122 Int"
+    },
+    {
+      "Name": "Expert Ringmail Gauntlets",
+      "Tip": "Armour: 67\nEvasion Rating: 61\nRequires: Level 65, 57 Str, 57 Dex"
+    },
+    {
+      "Name": "Expert Layered Gauntlets",
+      "Tip": "Armour: 74\nEvasion Rating: 67\nRequires: Level 70, 62 Str, 62 Dex"
+    },
+    {
+      "Name": "Expert Doubled Gauntlets",
+      "Tip": "Armour: 80\nEvasion Rating: 73\nRequires: Level 75, 67 Str, 67 Dex"
+    },
+    {
+      "Name": "Expert Rope Cuffs",
+      "Tip": "Armour: 67\nEnergy Shield: 23\nRequires: Level 65, 57 Str, 57 Int"
+    },
+    {
+      "Name": "Expert Aged Cuffs",
+      "Tip": "Armour: 74\nEnergy Shield: 25\nRequires: Level 70, 62 Str, 62 Int"
+    },
+    {
+      "Name": "Expert Goldcast Cuffs",
+      "Tip": "Armour: 80\nEnergy Shield: 28\nRequires: Level 75, 67 Str, 67 Int"
+    },
+    {
+      "Name": "Expert Gauze Wraps",
+      "Tip": "Evasion Rating: 61\nEnergy Shield: 23\nRequires: Level 65, 57 Dex, 57 Int"
+    },
+    {
+      "Name": "Expert Linen Wraps",
+      "Tip": "Evasion Rating: 67\nEnergy Shield: 25\nRequires: Level 70, 62 Dex, 62 Int"
+    },
+    {
+      "Name": "Expert Spiral Wraps",
+      "Tip": "Evasion Rating: 73\nEnergy Shield: 28\nRequires: Level 75, 67 Dex, 67 Int"
+    }
+  ],
+  "Boots": [
+    {
+      "Name": "Golden Caligae",
+      "Tip": "Requires: Level 12\n+(8\u201316)% to all Elemental Resistances"
+    },
+    {
+      "Name": "Rough Greaves",
+      "Tip": "Armour: 22"
+    },
+    {
+      "Name": "Iron Greaves",
+      "Tip": "Armour: 47\nRequires: Level 11, 20 Str"
+    },
+    {
+      "Name": "Bronze Greaves",
+      "Tip": "Armour: 60\nRequires: Level 16, 29 Str"
+    },
+    {
+      "Name": "Trimmed Greaves",
+      "Tip": "Armour: 87\nRequires: Level 27, 47 Str"
+    },
+    {
+      "Name": "Stone Greaves",
+      "Tip": "Armour: 102\nRequires: Level 33, 57 Str"
+    },
+    {
+      "Name": "Reefsteel Greaves",
+      "Tip": "Armour: 132\nRequires: Level 45, 78 Str"
+    },
+    {
+      "Name": "Monument Greaves",
+      "Tip": "Armour: 150\nRequires: Level 52, 89 Str"
+    },
+    {
+      "Name": "Totemic Greaves",
+      "Tip": "Armour: 182\nRequires: Level 65, 111 Str"
+    },
+    {
+      "Name": "Rawhide Boots",
+      "Tip": "Evasion Rating: 15"
+    },
+    {
+      "Name": "Laced Boots",
+      "Tip": "Evasion Rating: 38\nRequires: Level 11, 20 Dex"
+    },
+    {
+      "Name": "Embossed Boots",
+      "Tip": "Evasion Rating: 50\nRequires: Level 16, 29 Dex"
+    },
+    {
+      "Name": "Steeltoe Boots",
+      "Tip": "Evasion Rating: 79\nRequires: Level 28, 49 Dex"
+    },
+    {
+      "Name": "Lizardscale Boots",
+      "Tip": "Evasion Rating: 90\nRequires: Level 33, 57 Dex"
+    },
+    {
+      "Name": "Flared Boots",
+      "Tip": "Evasion Rating: 119\nRequires: Level 45, 78 Dex"
+    },
+    {
+      "Name": "Leatherplate Boots",
+      "Tip": "Evasion Rating: 135\nRequires: Level 52, 89 Dex"
+    },
+    {
+      "Name": "Embroidered Boots",
+      "Tip": "Evasion Rating: 166\nRequires: Level 65, 111 Dex"
+    },
+    {
+      "Name": "Straw Sandals",
+      "Tip": "Energy Shield: 14"
+    },
+    {
+      "Name": "Wrapped Sandals",
+      "Tip": "Energy Shield: 22\nRequires: Level 11, 20 Int"
+    },
+    {
+      "Name": "Lattice Sandals",
+      "Tip": "Energy Shield: 25\nRequires: Level 16, 29 Int"
+    },
+    {
+      "Name": "Silk Slippers",
+      "Tip": "Energy Shield: 34\nRequires: Level 27, 47 Int"
+    },
+    {
+      "Name": "Feathered Sandals",
+      "Tip": "Energy Shield: 38\nRequires: Level 33, 57 Int"
+    },
+    {
+      "Name": "Flax Sandals",
+      "Tip": "Energy Shield: 48\nRequires: Level 45, 78 Int"
+    },
+    {
+      "Name": "Studded Sandals",
+      "Tip": "Energy Shield: 53\nRequires: Level 52, 89 Int"
+    },
+    {
+      "Name": "Elaborate Sandals",
+      "Tip": "Energy Shield: 63\nRequires: Level 65, 111 Int"
+    },
+    {
+      "Name": "Mail Sabatons",
+      "Tip": "Armour: 19\nEvasion Rating: 15\nRequires: Level 6, 8 Str, 8 Dex"
+    },
+    {
+      "Name": "Braced Sabatons",
+      "Tip": "Armour: 33\nEvasion Rating: 28\nRequires: Level 16, 17 Str, 17 Dex"
+    },
+    {
+      "Name": "Stacked Sabatons",
+      "Tip": "Armour: 56\nEvasion Rating: 50\nRequires: Level 33, 32 Str, 32 Dex"
+    },
+    {
+      "Name": "Covered Sabatons",
+      "Tip": "Armour: 73\nEvasion Rating: 65\nRequires: Level 45, 43 Str, 43 Dex"
+    },
+    {
+      "Name": "Flexile Sabatons",
+      "Tip": "Armour: 82\nEvasion Rating: 74\nRequires: Level 52, 50 Str, 50 Dex"
+    },
+    {
+      "Name": "Bold Sabatons",
+      "Tip": "Armour: 100\nEvasion Rating: 91\nRequires: Level 65, 61 Str, 61 Dex"
+    },
+    {
+      "Name": "Padded Leggings",
+      "Tip": "Armour: 18\nEnergy Shield: 9\nRequires: Level 5, 7 Str, 7 Int"
+    },
+    {
+      "Name": "Secured Leggings",
+      "Tip": "Armour: 33\nEnergy Shield: 14\nRequires: Level 16, 17 Str, 17 Int"
+    },
+    {
+      "Name": "Pelt Leggings",
+      "Tip": "Armour: 56\nEnergy Shield: 21\nRequires: Level 33, 32 Str, 32 Int"
+    },
+    {
+      "Name": "Weaver Leggings",
+      "Tip": "Armour: 73\nEnergy Shield: 26\nRequires: Level 45, 43 Str, 43 Int"
+    },
+    {
+      "Name": "Gilt Leggings",
+      "Tip": "Armour: 82\nEnergy Shield: 29\nRequires: Level 52, 50 Str, 50 Int"
+    },
+    {
+      "Name": "Pious Leggings",
+      "Tip": "Armour: 100\nEnergy Shield: 35\nRequires: Level 65, 61 Str, 61 Int"
+    },
+    {
+      "Name": "Frayed Shoes",
+      "Tip": "Evasion Rating: 13\nEnergy Shield: 9\nRequires: Level 5, 7 Dex, 7 Int"
+    },
+    {
+      "Name": "Threaded Shoes",
+      "Tip": "Evasion Rating: 28\nEnergy Shield: 14\nRequires: Level 16, 17 Dex, 17 Int"
+    },
+    {
+      "Name": "Hunting Shoes",
+      "Tip": "Evasion Rating: 50\nEnergy Shield: 21\nRequires: Level 33, 32 Dex, 32 Int"
+    },
+    {
+      "Name": "Steelpoint Shoes",
+      "Tip": "Evasion Rating: 65\nEnergy Shield: 26\nRequires: Level 45, 43 Dex, 43 Int"
+    },
+    {
+      "Name": "Velour Shoes",
+      "Tip": "Evasion Rating: 74\nEnergy Shield: 29\nRequires: Level 52, 50 Dex, 50 Int"
+    },
+    {
+      "Name": "Bladed Shoes",
+      "Tip": "Evasion Rating: 91\nEnergy Shield: 35\nRequires: Level 65, 61 Dex, 61 Int"
+    },
+    {
+      "Name": "Grand Cuisses",
+      "Tip": "Armour: 66\nEvasion Rating: 60\nEnergy Shield: 23\nRequires: Level 65, 43 Str, 43 Dex, 43 Int"
+    },
+    {
+      "Name": "Advanced Iron Greaves",
+      "Tip": "Armour: 132\nRequires: Level 45, 78 Str"
+    },
+    {
+      "Name": "Advanced Bronze Greaves",
+      "Tip": "Armour: 147\nRequires: Level 51, 88 Str"
+    },
+    {
+      "Name": "Advanced Trimmed Greaves",
+      "Tip": "Armour: 157\nRequires: Level 55, 95 Str"
+    },
+    {
+      "Name": "Advanced Stone Greaves",
+      "Tip": "Armour: 167\nRequires: Level 59, 101 Str"
+    },
+    {
+      "Name": "Advanced Laced Boots",
+      "Tip": "Evasion Rating: 119\nRequires: Level 45, 78 Dex"
+    },
+    {
+      "Name": "Advanced Embossed Boots",
+      "Tip": "Evasion Rating: 133\nRequires: Level 51, 88 Dex"
+    },
+    {
+      "Name": "Advanced Steeltoe Boots",
+      "Tip": "Evasion Rating: 143\nRequires: Level 55, 95 Dex"
+    },
+    {
+      "Name": "Advanced Lizardscale Boots",
+      "Tip": "Evasion Rating: 152\nRequires: Level 59, 101 Dex"
+    },
+    {
+      "Name": "Advanced Wrapped Sandals",
+      "Tip": "Energy Shield: 48\nRequires: Level 45, 78 Int"
+    },
+    {
+      "Name": "Advanced Lattice Sandals",
+      "Tip": "Energy Shield: 52\nRequires: Level 51, 88 Int"
+    },
+    {
+      "Name": "Advanced Silk Slippers",
+      "Tip": "Energy Shield: 55\nRequires: Level 55, 95 Int"
+    },
+    {
+      "Name": "Advanced Feathered Sandals",
+      "Tip": "Energy Shield: 58\nRequires: Level 59, 101 Int"
+    },
+    {
+      "Name": "Advanced Mail Sabatons",
+      "Tip": "Armour: 73\nEvasion Rating: 65\nRequires: Level 45, 43 Str, 43 Dex"
+    },
+    {
+      "Name": "Advanced Braced Sabatons",
+      "Tip": "Armour: 81\nEvasion Rating: 73\nRequires: Level 51, 49 Str, 49 Dex"
+    },
+    {
+      "Name": "Advanced Stacked Sabatons",
+      "Tip": "Armour: 92\nEvasion Rating: 84\nRequires: Level 59, 56 Str, 56 Dex"
+    },
+    {
+      "Name": "Advanced Padded Leggings",
+      "Tip": "Armour: 73\nEnergy Shield: 26\nRequires: Level 45, 43 Str, 43 Int"
+    },
+    {
+      "Name": "Advanced Secured Leggings",
+      "Tip": "Armour: 81\nEnergy Shield: 29\nRequires: Level 51, 49 Str, 49 Int"
+    },
+    {
+      "Name": "Advanced Pelt Leggings",
+      "Tip": "Armour: 92\nEnergy Shield: 32\nRequires: Level 59, 56 Str, 56 Int"
+    },
+    {
+      "Name": "Advanced Frayed Shoes",
+      "Tip": "Evasion Rating: 65\nEnergy Shield: 26\nRequires: Level 45, 43 Dex, 43 Int"
+    },
+    {
+      "Name": "Advanced Threaded Shoes",
+      "Tip": "Evasion Rating: 73\nEnergy Shield: 29\nRequires: Level 51, 49 Dex, 49 Int"
+    },
+    {
+      "Name": "Advanced Hunting Shoes",
+      "Tip": "Evasion Rating: 84\nEnergy Shield: 32\nRequires: Level 59, 56 Dex, 56 Int"
+    },
+    {
+      "Name": "Expert Iron Greaves",
+      "Tip": "Armour: 182\nRequires: Level 65, 111 Str"
+    },
+    {
+      "Name": "Expert Trimmed Greaves",
+      "Tip": "Armour: 200\nRequires: Level 70, 121 Str"
+    },
+    {
+      "Name": "Expert Stone Greaves",
+      "Tip": "Armour: 219\nRequires: Level 75, 131 Str"
+    },
+    {
+      "Name": "Expert Laced Boots",
+      "Tip": "Evasion Rating: 166\nRequires: Level 65, 111 Dex"
+    },
+    {
+      "Name": "Expert Steeltoe Boots",
+      "Tip": "Evasion Rating: 183\nRequires: Level 70, 121 Dex"
+    },
+    {
+      "Name": "Expert Lizardscale Boots",
+      "Tip": "Evasion Rating: 200\nRequires: Level 75, 131 Dex"
+    },
+    {
+      "Name": "Expert Wrapped Sandals",
+      "Tip": "Energy Shield: 63\nRequires: Level 65, 111 Int"
+    },
+    {
+      "Name": "Expert Silk Slippers",
+      "Tip": "Energy Shield: 69\nRequires: Level 70, 121 Int"
+    },
+    {
+      "Name": "Expert Feathered Sandals",
+      "Tip": "Energy Shield: 75\nRequires: Level 75, 131 Int"
+    },
+    {
+      "Name": "Expert Mail Sabatons",
+      "Tip": "Armour: 100\nEvasion Rating: 91\nRequires: Level 65, 61 Str, 61 Dex"
+    },
+    {
+      "Name": "Expert Braced Sabatons",
+      "Tip": "Armour: 110\nEvasion Rating: 101\nRequires: Level 70, 66 Str, 66 Dex"
+    },
+    {
+      "Name": "Expert Stacked Sabatons",
+      "Tip": "Armour: 120\nEvasion Rating: 110\nRequires: Level 75, 71 Str, 71 Dex"
+    },
+    {
+      "Name": "Expert Padded Leggings",
+      "Tip": "Armour: 100\nEnergy Shield: 35\nRequires: Level 65, 61 Str, 61 Int"
+    },
+    {
+      "Name": "Expert Secured Leggings",
+      "Tip": "Armour: 110\nEnergy Shield: 38\nRequires: Level 70, 66 Str, 66 Int"
+    },
+    {
+      "Name": "Expert Pelt Leggings",
+      "Tip": "Armour: 120\nEnergy Shield: 42\nRequires: Level 75, 71 Str, 71 Int"
+    },
+    {
+      "Name": "Expert Frayed Shoes",
+      "Tip": "Evasion Rating: 91\nEnergy Shield: 35\nRequires: Level 65, 61 Dex, 61 Int"
+    },
+    {
+      "Name": "Expert Threaded Shoes",
+      "Tip": "Evasion Rating: 101\nEnergy Shield: 38\nRequires: Level 70, 66 Dex, 66 Int"
+    },
+    {
+      "Name": "Expert Hunting Shoes",
+      "Tip": "Evasion Rating: 110\nEnergy Shield: 42\nRequires: Level 75, 71 Dex, 71 Int"
+    }
+  ],
+  "BodyArmours": [
+    {
+      "Name": "Golden Mantle",
+      "Tip": "Armour: 51\nEvasion Rating: 44\nEnergy Shield: 21\nRequires: Level 20, 8 Str, 8 Dex, 8 Int\n+(15\u201325)% to all Elemental Resistances"
+    },
+    {
+      "Name": "Rusted Cuirass",
+      "Tip": "Armour: 45\nBase Movement Speed: -0.05"
+    },
+    {
+      "Name": "Fur Plate",
+      "Tip": "Armour: 60\nBase Movement Speed: -0.05\nRequires: Level 4, 10 Str"
+    },
+    {
+      "Name": "Iron Cuirass",
+      "Tip": "Armour: 96\nBase Movement Speed: -0.05\nRequires: Level 11, 24 Str"
+    },
+    {
+      "Name": "Raider Plate",
+      "Tip": "Armour: 121\nBase Movement Speed: -0.05\nRequires: Level 16, 34 Str"
+    },
+    {
+      "Name": "Maraketh Cuirass",
+      "Tip": "Armour: 141\nBase Movement Speed: -0.05\nRequires: Level 20, 42 Str"
+    },
+    {
+      "Name": "Steel Plate",
+      "Tip": "Armour: 177\nBase Movement Speed: -0.05\nRequires: Level 27, 57 Str"
+    },
+    {
+      "Name": "Full Plate",
+      "Tip": "Armour: 208\nBase Movement Speed: -0.05\nRequires: Level 33, 68 Str"
+    },
+    {
+      "Name": "Vaal Cuirass",
+      "Tip": "Armour: 228\nBase Movement Speed: -0.05\nRequires: Level 37, 77 Str"
+    },
+    {
+      "Name": "Juggernaut Plate",
+      "Tip": "Armour: 269\nBase Movement Speed: -0.05\nRequires: Level 45, 94 Str"
+    },
+    {
+      "Name": "Chieftain Cuirass",
+      "Tip": "Armour: 294\nBase Movement Speed: -0.05\nRequires: Level 50, 104 Str"
+    },
+    {
+      "Name": "Colosseum Plate",
+      "Tip": "Armour: 304\nBase Movement Speed: -0.05\nRequires: Level 52, 107 Str"
+    },
+    {
+      "Name": "Champion Cuirass",
+      "Tip": "Armour: 335\nBase Movement Speed: -0.05\nRequires: Level 58, 120 Str"
+    },
+    {
+      "Name": "Glorious Plate",
+      "Tip": "Armour: 534\nBase Movement Speed: -0.05\nRequires: Level 65, 157 Str"
+    },
+    {
+      "Name": "Conqueror Plate",
+      "Tip": "Armour: 445\nBase Movement Speed: -0.05\nRequires: Level 68, 157 Str\n(30\u201340)% increased Stun Threshold"
+    },
+    {
+      "Name": "Abyssal Cuirass",
+      "Tip": "Armour: 445\nBase Movement Speed: -0.05\nRequires: Level 73, 157 Str\nRegenerate (1.5\u20132.5)% of Life per second"
+    },
+    {
+      "Name": "Leather Vest",
+      "Tip": "Evasion Rating: 30\nBase Movement Speed: -0.03"
+    },
+    {
+      "Name": "Quilted Vest",
+      "Tip": "Evasion Rating: 44\nBase Movement Speed: -0.03\nRequires: Level 4, 10 Dex"
+    },
+    {
+      "Name": "Pathfinder Coat",
+      "Tip": "Evasion Rating: 78\nBase Movement Speed: -0.03\nRequires: Level 11, 24 Dex"
+    },
+    {
+      "Name": "Shrouded Vest",
+      "Tip": "Evasion Rating: 102\nBase Movement Speed: -0.03\nRequires: Level 16, 34 Dex"
+    },
+    {
+      "Name": "Rhoahide Coat",
+      "Tip": "Evasion Rating: 131\nBase Movement Speed: -0.03\nRequires: Level 22, 47 Dex"
+    },
+    {
+      "Name": "Studded Vest",
+      "Tip": "Evasion Rating: 150\nBase Movement Speed: -0.03\nRequires: Level 26, 55 Dex"
+    },
+    {
+      "Name": "Scout's Vest",
+      "Tip": "Evasion Rating: 184\nBase Movement Speed: -0.03\nRequires: Level 33, 68 Dex"
+    },
+    {
+      "Name": "Serpentscale Coat",
+      "Tip": "Evasion Rating: 198\nBase Movement Speed: -0.03\nRequires: Level 36, 75 Dex"
+    },
+    {
+      "Name": "Corsair Vest",
+      "Tip": "Evasion Rating: 242\nBase Movement Speed: -0.03\nRequires: Level 45, 94 Dex"
+    },
+    {
+      "Name": "Smuggler Coat",
+      "Tip": "Evasion Rating: 256\nBase Movement Speed: -0.03\nRequires: Level 48, 99 Dex"
+    },
+    {
+      "Name": "Strider Vest",
+      "Tip": "Evasion Rating: 275\nBase Movement Speed: -0.03\nRequires: Level 52, 107 Dex"
+    },
+    {
+      "Name": "Hardleather Coat",
+      "Tip": "Evasion Rating: 295\nBase Movement Speed: -0.03\nRequires: Level 56, 115 Dex"
+    },
+    {
+      "Name": "Exquisite Vest",
+      "Tip": "Evasion Rating: 487\nBase Movement Speed: -0.03\nRequires: Level 65, 157 Dex"
+    },
+    {
+      "Name": "Mail Coat",
+      "Tip": "Evasion Rating: 406\nBase Movement Speed: -0.03\nRequires: Level 68, 157 Dex\n(20\u201330)% reduced Slowing Potency of Debuffs on You"
+    },
+    {
+      "Name": "Armoured Vest",
+      "Tip": "Evasion Rating: 406\nBase Movement Speed: -0.03\nRequires: Level 73, 157 Dex\n(30\u201340)% increased Elemental Ailment Threshold"
+    },
+    {
+      "Name": "Tattered Robe",
+      "Tip": "Energy Shield: 28\nBase Movement Speed: -0.03"
+    },
+    {
+      "Name": "Feathered Robe",
+      "Tip": "Energy Shield: 35\nBase Movement Speed: -0.03\nRequires: Level 5, 13 Int"
+    },
+    {
+      "Name": "Hexer's Robe",
+      "Tip": "Energy Shield: 44\nBase Movement Speed: -0.03\nRequires: Level 11, 24 Int"
+    },
+    {
+      "Name": "Bone Raiment",
+      "Tip": "Energy Shield: 52\nBase Movement Speed: -0.03\nRequires: Level 16, 34 Int"
+    },
+    {
+      "Name": "Silk Robe",
+      "Tip": "Energy Shield: 61\nBase Movement Speed: -0.03\nRequires: Level 22, 47 Int"
+    },
+    {
+      "Name": "Keth Raiment",
+      "Tip": "Energy Shield: 70\nBase Movement Speed: -0.03\nRequires: Level 28, 59 Int"
+    },
+    {
+      "Name": "Votive Raiment",
+      "Tip": "Energy Shield: 78\nBase Movement Speed: -0.03\nRequires: Level 33, 68 Int"
+    },
+    {
+      "Name": "Altar Robe",
+      "Tip": "Energy Shield: 89\nBase Movement Speed: -0.03\nRequires: Level 40, 83 Int"
+    },
+    {
+      "Name": "Elementalist Robe",
+      "Tip": "Energy Shield: 97\nBase Movement Speed: -0.03\nRequires: Level 45, 94 Int"
+    },
+    {
+      "Name": "Mystic Raiment",
+      "Tip": "Energy Shield: 100\nBase Movement Speed: -0.03\nRequires: Level 47, 97 Int"
+    },
+    {
+      "Name": "Imperial Robe",
+      "Tip": "Energy Shield: 108\nBase Movement Speed: -0.03\nRequires: Level 52, 107 Int"
+    },
+    {
+      "Name": "Plated Raiment",
+      "Tip": "Energy Shield: 117\nBase Movement Speed: -0.03\nRequires: Level 58, 120 Int"
+    },
+    {
+      "Name": "Havoc Raiment",
+      "Tip": "Energy Shield: 184\nBase Movement Speed: -0.03\nRequires: Level 65, 157 Int"
+    },
+    {
+      "Name": "Enlightened Robe",
+      "Tip": "Energy Shield: 153\nBase Movement Speed: -0.03\nRequires: Level 68, 157 Int\n(40\u201350)% increased Mana Regeneration Rate"
+    },
+    {
+      "Name": "Arcane Robe",
+      "Tip": "Energy Shield: 153\nBase Movement Speed: -0.03\nRequires: Level 73, 157 Int\n(40\u201350)% faster start of Energy Shield Recharge"
+    },
+    {
+      "Name": "Chain Mail",
+      "Tip": "Armour: 25\nEvasion Rating: 16\nBase Movement Speed: -0.04"
+    },
+    {
+      "Name": "Rogue Armour",
+      "Tip": "Armour: 53\nEvasion Rating: 43\nBase Movement Speed: -0.04\nRequires: Level 11, 14 Str, 14 Dex"
+    },
+    {
+      "Name": "Vagabond Armour",
+      "Tip": "Armour: 67\nEvasion Rating: 56\nBase Movement Speed: -0.04\nRequires: Level 16, 20 Str, 20 Dex"
+    },
+    {
+      "Name": "Cloaked Mail",
+      "Tip": "Armour: 95\nEvasion Rating: 83\nBase Movement Speed: -0.04\nRequires: Level 26, 31 Str, 31 Dex"
+    },
+    {
+      "Name": "Explorer Armour",
+      "Tip": "Armour: 114\nEvasion Rating: 101\nBase Movement Speed: -0.04\nRequires: Level 33, 39 Str, 39 Dex"
+    },
+    {
+      "Name": "Scale Mail",
+      "Tip": "Armour: 125\nEvasion Rating: 112\nBase Movement Speed: -0.04\nRequires: Level 37, 43 Str, 43 Dex"
+    },
+    {
+      "Name": "Knight Armour",
+      "Tip": "Armour: 148\nEvasion Rating: 133\nBase Movement Speed: -0.04\nRequires: Level 45, 51 Str, 51 Dex"
+    },
+    {
+      "Name": "Ancestral Mail",
+      "Tip": "Armour: 162\nEvasion Rating: 146\nBase Movement Speed: -0.04\nRequires: Level 50, 57 Str, 57 Dex"
+    },
+    {
+      "Name": "Lamellar Mail",
+      "Tip": "Armour: 167\nEvasion Rating: 151\nBase Movement Speed: -0.04\nRequires: Level 52, 59 Str, 59 Dex"
+    },
+    {
+      "Name": "Gladiator Armour",
+      "Tip": "Armour: 184\nEvasion Rating: 167\nBase Movement Speed: -0.04\nRequires: Level 58, 66 Str, 66 Dex"
+    },
+    {
+      "Name": "Heroic Armour",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 65, 86 Str, 86 Dex\n+(60\u201380) to maximum Life"
+    },
+    {
+      "Name": "Tournament Mail",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 68, 86 Str, 86 Dex\n+(20\u201325)% to Fire Resistance"
+    },
+    {
+      "Name": "Tournament Mail",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 68, 86 Str, 86 Dex\n+(20\u201325)% to Cold Resistance"
+    },
+    {
+      "Name": "Tournament Mail",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 68, 86 Str, 86 Dex\n+(20\u201325)% to Lightning Resistance"
+    },
+    {
+      "Name": "Slayer Armour",
+      "Tip": "Armour: 294\nEvasion Rating: 268\nBase Movement Speed: -0.04\nRequires: Level 73, 86 Str, 86 Dex"
+    },
+    {
+      "Name": "Pilgrim Vestments",
+      "Tip": "Armour: 25\nEnergy Shield: 16\nBase Movement Speed: -0.04"
+    },
+    {
+      "Name": "Pelt Mantle",
+      "Tip": "Armour: 50\nEnergy Shield: 23\nBase Movement Speed: -0.04\nRequires: Level 10, 14 Str, 14 Int"
+    },
+    {
+      "Name": "Mail Vestments",
+      "Tip": "Armour: 67\nEnergy Shield: 28\nBase Movement Speed: -0.04\nRequires: Level 16, 20 Str, 20 Int"
+    },
+    {
+      "Name": "Shaman Mantle",
+      "Tip": "Armour: 100\nEnergy Shield: 39\nBase Movement Speed: -0.04\nRequires: Level 28, 33 Str, 33 Int"
+    },
+    {
+      "Name": "Ironclad Vestments",
+      "Tip": "Armour: 114\nEnergy Shield: 43\nBase Movement Speed: -0.04\nRequires: Level 33, 39 Str, 39 Int"
+    },
+    {
+      "Name": "Sacrificial Mantle",
+      "Tip": "Armour: 123\nEnergy Shield: 46\nBase Movement Speed: -0.04\nRequires: Level 36, 41 Str, 41 Int"
+    },
+    {
+      "Name": "Cleric Vestments",
+      "Tip": "Armour: 148\nEnergy Shield: 53\nBase Movement Speed: -0.04\nRequires: Level 45, 51 Str, 51 Int"
+    },
+    {
+      "Name": "Tideseer Mantle",
+      "Tip": "Armour: 165\nEnergy Shield: 58\nBase Movement Speed: -0.04\nRequires: Level 51, 59 Str, 59 Int"
+    },
+    {
+      "Name": "Gilded Vestments",
+      "Tip": "Armour: 167\nEnergy Shield: 59\nBase Movement Speed: -0.04\nRequires: Level 52, 59 Str, 59 Int"
+    },
+    {
+      "Name": "Venerated Mantle",
+      "Tip": "Armour: 173\nEnergy Shield: 61\nBase Movement Speed: -0.04\nRequires: Level 54, 61 Str, 61 Int"
+    },
+    {
+      "Name": "Revered Vestments",
+      "Tip": "Armour: 245\nEnergy Shield: 84\nBase Movement Speed: -0.04\nRequires: Level 65, 86 Str, 86 Int\n+1% to all Maximum Elemental Resistances"
+    },
+    {
+      "Name": "Corvus Mantle",
+      "Tip": "Armour: 245\nEnergy Shield: 84\nBase Movement Speed: -0.04\nRequires: Level 68, 86 Str, 86 Int\n+(20\u201330) to Spirit"
+    },
+    {
+      "Name": "Zenith Vestments",
+      "Tip": "Armour: 294\nEnergy Shield: 101\nBase Movement Speed: -0.04\nRequires: Level 73, 86 Str, 86 Int"
+    },
+    {
+      "Name": "Hermit Garb",
+      "Tip": "Evasion Rating: 16\nEnergy Shield: 16\nBase Movement Speed: -0.03"
+    },
+    {
+      "Name": "Waxed Jacket",
+      "Tip": "Evasion Rating: 43\nEnergy Shield: 24\nBase Movement Speed: -0.03\nRequires: Level 11, 14 Dex, 14 Int"
+    },
+    {
+      "Name": "Marabout Garb",
+      "Tip": "Evasion Rating: 56\nEnergy Shield: 28\nBase Movement Speed: -0.03\nRequires: Level 16, 20 Dex, 20 Int"
+    },
+    {
+      "Name": "Wayfarer Jacket",
+      "Tip": "Evasion Rating: 88\nEnergy Shield: 39\nBase Movement Speed: -0.03\nRequires: Level 28, 33 Dex, 33 Int"
+    },
+    {
+      "Name": "Anchorite Garb",
+      "Tip": "Evasion Rating: 101\nEnergy Shield: 43\nBase Movement Speed: -0.03\nRequires: Level 33, 39 Dex, 39 Int"
+    },
+    {
+      "Name": "Scalper's Jacket",
+      "Tip": "Evasion Rating: 117\nEnergy Shield: 48\nBase Movement Speed: -0.03\nRequires: Level 39, 45 Dex, 45 Int"
+    },
+    {
+      "Name": "Scoundrel Jacket",
+      "Tip": "Evasion Rating: 133\nEnergy Shield: 53\nBase Movement Speed: -0.03\nRequires: Level 45, 51 Dex, 51 Int"
+    },
+    {
+      "Name": "Ascetic Garb",
+      "Tip": "Evasion Rating: 149\nEnergy Shield: 58\nBase Movement Speed: -0.03\nRequires: Level 51, 59 Dex, 59 Int"
+    },
+    {
+      "Name": "Clandestine Jacket",
+      "Tip": "Evasion Rating: 151\nEnergy Shield: 59\nBase Movement Speed: -0.03\nRequires: Level 52, 59 Dex, 59 Int"
+    },
+    {
+      "Name": "Monastic Garb",
+      "Tip": "Evasion Rating: 162\nEnergy Shield: 63\nBase Movement Speed: -0.03\nRequires: Level 56, 64 Dex, 64 Int"
+    },
+    {
+      "Name": "Torment Jacket",
+      "Tip": "Evasion Rating: 268\nEnergy Shield: 101\nBase Movement Speed: -0.03\nRequires: Level 65, 86 Dex, 86 Int"
+    },
+    {
+      "Name": "Devout Garb",
+      "Tip": "Evasion Rating: 223\nEnergy Shield: 84\nBase Movement Speed: -0.03\nRequires: Level 68, 86 Dex, 86 Int\n+(7\u201313)% to Chaos Resistance"
+    },
+    {
+      "Name": "Assassin Garb",
+      "Tip": "Evasion Rating: 223\nEnergy Shield: 84\nBase Movement Speed: -0.03\nRequires: Level 73, 86 Dex, 86 Int\n5% increased Movement Speed"
+    },
+    {
+      "Name": "Garment",
+      "Tip": ""
+    },
+    {
+      "Name": "Grand Regalia",
+      "Tip": "Armour: 135\nEvasion Rating: 123\nEnergy Shield: 46\nBase Movement Speed: -0.04\nRequires: Level 65, 51 Str, 51 Dex, 51 Int"
+    },
+    {
+      "Name": "Advanced Fur Plate",
+      "Tip": "Armour: 269\nBase Movement Speed: -0.05\nRequires: Level 45, 94 Str"
+    },
+    {
+      "Name": "Advanced Iron Cuirass",
+      "Tip": "Armour: 284\nBase Movement Speed: -0.05\nRequires: Level 48, 99 Str"
+    },
+    {
+      "Name": "Advanced Maraketh Cuirass",
+      "Tip": "Armour: 299\nBase Movement Speed: -0.05\nRequires: Level 51, 105 Str"
+    },
+    {
+      "Name": "Advanced Steel Plate",
+      "Tip": "Armour: 320\nBase Movement Speed: -0.05\nRequires: Level 55, 113 Str"
+    },
+    {
+      "Name": "Advanced Full Plate",
+      "Tip": "Armour: 340\nBase Movement Speed: -0.05\nRequires: Level 59, 122 Str"
+    },
+    {
+      "Name": "Advanced Vaal Cuirass",
+      "Tip": "Armour: 355\nBase Movement Speed: -0.05\nRequires: Level 62, 128 Str"
+    },
+    {
+      "Name": "Advanced Quilted Vest",
+      "Tip": "Evasion Rating: 242\nBase Movement Speed: -0.03\nRequires: Level 45, 94 Dex"
+    },
+    {
+      "Name": "Advanced Pathfinder Coat",
+      "Tip": "Evasion Rating: 256\nBase Movement Speed: -0.03\nRequires: Level 48, 99 Dex"
+    },
+    {
+      "Name": "Advanced Rhoahide Coat",
+      "Tip": "Evasion Rating: 271\nBase Movement Speed: -0.03\nRequires: Level 51, 105 Dex"
+    },
+    {
+      "Name": "Advanced Studded Vest",
+      "Tip": "Evasion Rating: 290\nBase Movement Speed: -0.03\nRequires: Level 55, 113 Dex"
+    },
+    {
+      "Name": "Advanced Scout's Vest",
+      "Tip": "Evasion Rating: 309\nBase Movement Speed: -0.03\nRequires: Level 59, 122 Dex"
+    },
+    {
+      "Name": "Advanced Serpentscale Coat",
+      "Tip": "Evasion Rating: 324\nBase Movement Speed: -0.03\nRequires: Level 62, 128 Dex"
+    },
+    {
+      "Name": "Advanced Feathered Robe",
+      "Tip": "Energy Shield: 97\nBase Movement Speed: -0.03\nRequires: Level 45, 94 Int"
+    },
+    {
+      "Name": "Advanced Hexer's Robe",
+      "Tip": "Energy Shield: 101\nBase Movement Speed: -0.03\nRequires: Level 48, 99 Int"
+    },
+    {
+      "Name": "Advanced Silk Robe",
+      "Tip": "Energy Shield: 106\nBase Movement Speed: -0.03\nRequires: Level 51, 105 Int"
+    },
+    {
+      "Name": "Advanced Keth Raiment",
+      "Tip": "Energy Shield: 112\nBase Movement Speed: -0.03\nRequires: Level 55, 113 Int"
+    },
+    {
+      "Name": "Advanced Votive Raiment",
+      "Tip": "Energy Shield: 119\nBase Movement Speed: -0.03\nRequires: Level 59, 122 Int"
+    },
+    {
+      "Name": "Advanced Altar Robe",
+      "Tip": "Energy Shield: 123\nBase Movement Speed: -0.03\nRequires: Level 62, 128 Int"
+    },
+    {
+      "Name": "Advanced Chain Mail",
+      "Tip": "Armour: 148\nEvasion Rating: 133\nBase Movement Speed: -0.04\nRequires: Level 45, 51 Str, 51 Dex"
+    },
+    {
+      "Name": "Advanced Rogue Armour",
+      "Tip": "Armour: 156\nEvasion Rating: 141\nBase Movement Speed: -0.04\nRequires: Level 48, 55 Str, 55 Dex"
+    },
+    {
+      "Name": "Advanced Vagabond Armour",
+      "Tip": "Armour: 165\nEvasion Rating: 149\nBase Movement Speed: -0.04\nRequires: Level 51, 59 Str, 59 Dex"
+    },
+    {
+      "Name": "Advanced Cloaked Mail",
+      "Tip": "Armour: 176\nEvasion Rating: 159\nBase Movement Speed: -0.04\nRequires: Level 55, 62 Str, 62 Dex"
+    },
+    {
+      "Name": "Advanced Explorer Armour",
+      "Tip": "Armour: 187\nEvasion Rating: 170\nBase Movement Speed: -0.04\nRequires: Level 59, 67 Str, 67 Dex"
+    },
+    {
+      "Name": "Advanced Scale Mail",
+      "Tip": "Armour: 195\nEvasion Rating: 178\nBase Movement Speed: -0.04\nRequires: Level 62, 70 Str, 70 Dex"
+    },
+    {
+      "Name": "Advanced Pilgrim Vestments",
+      "Tip": "Armour: 148\nEnergy Shield: 53\nBase Movement Speed: -0.04\nRequires: Level 45, 51 Str, 51 Int"
+    },
+    {
+      "Name": "Advanced Pelt Mantle",
+      "Tip": "Armour: 156\nEnergy Shield: 56\nBase Movement Speed: -0.04\nRequires: Level 48, 55 Str, 55 Int"
+    },
+    {
+      "Name": "Advanced Mail Vestments",
+      "Tip": "Armour: 165\nEnergy Shield: 58\nBase Movement Speed: -0.04\nRequires: Level 51, 59 Str, 59 Int"
+    },
+    {
+      "Name": "Advanced Shaman Mantle",
+      "Tip": "Armour: 176\nEnergy Shield: 62\nBase Movement Speed: -0.04\nRequires: Level 55, 62 Str, 62 Int"
+    },
+    {
+      "Name": "Advanced Ironclad Vestments",
+      "Tip": "Armour: 187\nEnergy Shield: 65\nBase Movement Speed: -0.04\nRequires: Level 59, 67 Str, 67 Int"
+    },
+    {
+      "Name": "Advanced Sacrificial Mantle",
+      "Tip": "Armour: 195\nEnergy Shield: 68\nBase Movement Speed: -0.04\nRequires: Level 62, 70 Str, 70 Int"
+    },
+    {
+      "Name": "Advanced Hermit Garb",
+      "Tip": "Evasion Rating: 133\nEnergy Shield: 53\nBase Movement Speed: -0.03\nRequires: Level 45, 51 Dex, 51 Int"
+    },
+    {
+      "Name": "Advanced Waxed Jacket",
+      "Tip": "Evasion Rating: 141\nEnergy Shield: 56\nBase Movement Speed: -0.03\nRequires: Level 48, 55 Dex, 55 Int"
+    },
+    {
+      "Name": "Advanced Marabout Garb",
+      "Tip": "Evasion Rating: 149\nEnergy Shield: 58\nBase Movement Speed: -0.03\nRequires: Level 51, 59 Dex, 59 Int"
+    },
+    {
+      "Name": "Advanced Wayfarer Jacket",
+      "Tip": "Evasion Rating: 159\nEnergy Shield: 62\nBase Movement Speed: -0.03\nRequires: Level 55, 62 Dex, 62 Int"
+    },
+    {
+      "Name": "Advanced Anchorite Garb",
+      "Tip": "Evasion Rating: 170\nEnergy Shield: 65\nBase Movement Speed: -0.03\nRequires: Level 59, 67 Dex, 67 Int"
+    },
+    {
+      "Name": "Advanced Scalper's Jacket",
+      "Tip": "Evasion Rating: 178\nEnergy Shield: 68\nBase Movement Speed: -0.03\nRequires: Level 62, 70 Dex, 70 Int"
+    },
+    {
+      "Name": "Expert Iron Cuirass",
+      "Tip": "Armour: 534\nBase Movement Speed: -0.05\nRequires: Level 65, 157 Str"
+    },
+    {
+      "Name": "Expert Steel Plate",
+      "Tip": "Armour: 445\nBase Movement Speed: -0.05\nRequires: Level 70, 157 Str\nRegenerate (1.5\u20132.5)% of Life per second"
+    },
+    {
+      "Name": "Expert Vaal Cuirass",
+      "Tip": "Armour: 445\nBase Movement Speed: -0.05\nRequires: Level 75, 157 Str\n(30\u201340)% increased Stun Threshold"
+    },
+    {
+      "Name": "Expert Pathfinder Coat",
+      "Tip": "Evasion Rating: 406\nBase Movement Speed: -0.03\nRequires: Level 65, 157 Dex\n(20\u201330)% reduced Slowing Potency of Debuffs on You"
+    },
+    {
+      "Name": "Expert Studded Vest",
+      "Tip": "Evasion Rating: 487\nBase Movement Speed: -0.03\nRequires: Level 70, 157 Dex"
+    },
+    {
+      "Name": "Expert Serpentscale Coat",
+      "Tip": "Evasion Rating: 406\nBase Movement Speed: -0.03\nRequires: Level 75, 157 Dex\n(30\u201340)% increased Elemental Ailment Threshold"
+    },
+    {
+      "Name": "Expert Hexer's Robe",
+      "Tip": "Energy Shield: 184\nBase Movement Speed: -0.03\nRequires: Level 65, 157 Int"
+    },
+    {
+      "Name": "Expert Keth Raiment",
+      "Tip": "Energy Shield: 153\nBase Movement Speed: -0.03\nRequires: Level 70, 157 Int\n(40\u201350)% increased Mana Regeneration Rate"
+    },
+    {
+      "Name": "Expert Altar Robe",
+      "Tip": "Energy Shield: 153\nBase Movement Speed: -0.03\nRequires: Level 75, 157 Int\n(40\u201350)% faster start of Energy Shield Recharge"
+    },
+    {
+      "Name": "Expert Rogue Armour",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 65, 86 Str, 86 Dex\n+(60\u201380) to maximum Life"
+    },
+    {
+      "Name": "Expert Cloaked Mail",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 70, 86 Str, 86 Dex\n+(20\u201325)% to Fire Resistance"
+    },
+    {
+      "Name": "Expert Cloaked Mail",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 70, 86 Str, 86 Dex\n+(20\u201325)% to Cold Resistance"
+    },
+    {
+      "Name": "Expert Cloaked Mail",
+      "Tip": "Armour: 245\nEvasion Rating: 223\nBase Movement Speed: -0.04\nRequires: Level 70, 86 Str, 86 Dex\n+(20\u201325)% to Lightning Resistance"
+    },
+    {
+      "Name": "Expert Scale Mail",
+      "Tip": "Armour: 294\nEvasion Rating: 268\nBase Movement Speed: -0.04\nRequires: Level 75, 86 Str, 86 Dex"
+    },
+    {
+      "Name": "Expert Pelt Mantle",
+      "Tip": "Armour: 294\nEnergy Shield: 101\nBase Movement Speed: -0.04\nRequires: Level 65, 86 Str, 86 Int"
+    },
+    {
+      "Name": "Expert Shaman Mantle",
+      "Tip": "Armour: 245\nEnergy Shield: 84\nBase Movement Speed: -0.04\nRequires: Level 70, 86 Str, 86 Int\n+(20\u201330) to Spirit"
+    },
+    {
+      "Name": "Expert Sacrificial Mantle",
+      "Tip": "Armour: 245\nEnergy Shield: 84\nBase Movement Speed: -0.04\nRequires: Level 75, 86 Str, 86 Int\n+1% to all Maximum Elemental Resistances"
+    },
+    {
+      "Name": "Expert Waxed Jacket",
+      "Tip": "Evasion Rating: 268\nEnergy Shield: 101\nBase Movement Speed: -0.03\nRequires: Level 65, 86 Dex, 86 Int"
+    },
+    {
+      "Name": "Expert Wayfarer Jacket",
+      "Tip": "Evasion Rating: 223\nEnergy Shield: 84\nBase Movement Speed: -0.03\nRequires: Level 70, 86 Dex, 86 Int\n+(7\u201313)% to Chaos Resistance"
+    },
+    {
+      "Name": "Expert Scalper's Jacket",
+      "Tip": "Evasion Rating: 223\nEnergy Shield: 84\nBase Movement Speed: -0.03\nRequires: Level 75, 86 Dex, 86 Int\n5% increased Movement Speed"
+    }
+  ],
+  "Helmets": [
+    {
+      "Name": "Golden Wreath",
+      "Tip": "Requires: Level 12\n+(16\u201324) to all Attributes"
+    },
+    {
+      "Name": "Golden Visage",
+      "Tip": "Requires: Level 12\n+(8\u201316)% to all Elemental Resistances"
+    },
+    {
+      "Name": "Rusted Greathelm",
+      "Tip": "Armour: 29"
+    },
+    {
+      "Name": "Soldier Greathelm",
+      "Tip": "Armour: 66\nRequires: Level 12, 23 Str"
+    },
+    {
+      "Name": "Wrapped Greathelm",
+      "Tip": "Armour: 79\nRequires: Level 16, 30 Str"
+    },
+    {
+      "Name": "Spired Greathelm",
+      "Tip": "Armour: 116\nRequires: Level 27, 50 Str"
+    },
+    {
+      "Name": "Elite Greathelm",
+      "Tip": "Armour: 136\nRequires: Level 33, 61 Str"
+    },
+    {
+      "Name": "Warrior Greathelm",
+      "Tip": "Armour: 146\nRequires: Level 36, 66 Str"
+    },
+    {
+      "Name": "Commander Greathelm",
+      "Tip": "Armour: 176\nRequires: Level 45, 83 Str"
+    },
+    {
+      "Name": "Fierce Greathelm",
+      "Tip": "Armour: 196\nRequires: Level 51, 94 Str"
+    },
+    {
+      "Name": "Dueling Greathelm",
+      "Tip": "Armour: 200\nRequires: Level 52, 95 Str"
+    },
+    {
+      "Name": "Goliath Greathelm",
+      "Tip": "Armour: 216\nRequires: Level 57, 104 Str"
+    },
+    {
+      "Name": "Guardian Greathelm",
+      "Tip": "Armour: 243\nRequires: Level 65, 118 Str"
+    },
+    {
+      "Name": "Shabby Hood",
+      "Tip": "Evasion Rating: 19"
+    },
+    {
+      "Name": "Felt Cap",
+      "Tip": "Evasion Rating: 48\nRequires: Level 10, 20 Dex"
+    },
+    {
+      "Name": "Lace Hood",
+      "Tip": "Evasion Rating: 67\nRequires: Level 16, 30 Dex"
+    },
+    {
+      "Name": "Swathed Cap",
+      "Tip": "Evasion Rating: 98\nRequires: Level 26, 49 Dex"
+    },
+    {
+      "Name": "Hunter Hood",
+      "Tip": "Evasion Rating: 121\nRequires: Level 33, 61 Dex"
+    },
+    {
+      "Name": "Viper Cap",
+      "Tip": "Evasion Rating: 136\nRequires: Level 38, 70 Dex"
+    },
+    {
+      "Name": "Corsair Cap",
+      "Tip": "Evasion Rating: 158\nRequires: Level 45, 83 Dex"
+    },
+    {
+      "Name": "Leatherbound Hood",
+      "Tip": "Evasion Rating: 177\nRequires: Level 51, 94 Dex"
+    },
+    {
+      "Name": "Velvet Cap",
+      "Tip": "Evasion Rating: 181\nRequires: Level 52, 95 Dex"
+    },
+    {
+      "Name": "Covert Hood",
+      "Tip": "Evasion Rating: 193\nRequires: Level 56, 102 Dex"
+    },
+    {
+      "Name": "Armoured Cap",
+      "Tip": "Evasion Rating: 222\nRequires: Level 65, 118 Dex"
+    },
+    {
+      "Name": "Twig Circlet",
+      "Tip": "Energy Shield: 19"
+    },
+    {
+      "Name": "Wicker Tiara",
+      "Tip": "Energy Shield: 28\nRequires: Level 10, 20 Int"
+    },
+    {
+      "Name": "Beaded Circlet",
+      "Tip": "Energy Shield: 34\nRequires: Level 16, 30 Int"
+    },
+    {
+      "Name": "Chain Tiara",
+      "Tip": "Energy Shield: 44\nRequires: Level 26, 49 Int"
+    },
+    {
+      "Name": "Feathered Tiara",
+      "Tip": "Energy Shield: 51\nRequires: Level 33, 61 Int"
+    },
+    {
+      "Name": "Gold Circlet",
+      "Tip": "Energy Shield: 58\nRequires: Level 40, 74 Int"
+    },
+    {
+      "Name": "Coral Circlet",
+      "Tip": "Energy Shield: 63\nRequires: Level 45, 83 Int"
+    },
+    {
+      "Name": "Jade Tiara",
+      "Tip": "Energy Shield: 69\nRequires: Level 50, 92 Int"
+    },
+    {
+      "Name": "Noble Circlet",
+      "Tip": "Energy Shield: 71\nRequires: Level 52, 95 Int"
+    },
+    {
+      "Name": "Twilight Tiara",
+      "Tip": "Energy Shield: 77\nRequires: Level 58, 106 Int"
+    },
+    {
+      "Name": "Magus Tiara",
+      "Tip": "Energy Shield: 84\nRequires: Level 65, 118 Int"
+    },
+    {
+      "Name": "Brimmed Helm",
+      "Tip": "Armour: 23\nEvasion Rating: 18\nRequires: Level 5, 7 Str, 7 Dex"
+    },
+    {
+      "Name": "Guarded Helm",
+      "Tip": "Armour: 34\nEvasion Rating: 28\nRequires: Level 11, 13 Str, 13 Dex"
+    },
+    {
+      "Name": "Visored Helm",
+      "Tip": "Armour: 44\nEvasion Rating: 37\nRequires: Level 16, 18 Str, 18 Dex"
+    },
+    {
+      "Name": "Cowled Helm",
+      "Tip": "Armour: 62\nEvasion Rating: 54\nRequires: Level 26, 27 Str, 27 Dex"
+    },
+    {
+      "Name": "Shielded Helm",
+      "Tip": "Armour: 75\nEvasion Rating: 66\nRequires: Level 33, 34 Str, 34 Dex"
+    },
+    {
+      "Name": "Closed Helm",
+      "Tip": "Armour: 97\nEvasion Rating: 87\nRequires: Level 45, 46 Str, 46 Dex"
+    },
+    {
+      "Name": "Decorated Helm",
+      "Tip": "Armour: 110\nEvasion Rating: 99\nRequires: Level 52, 53 Str, 53 Dex"
+    },
+    {
+      "Name": "Gallant Helm",
+      "Tip": "Armour: 134\nEvasion Rating: 122\nRequires: Level 65, 65 Str, 65 Dex"
+    },
+    {
+      "Name": "Iron Crown",
+      "Tip": "Armour: 23\nEnergy Shield: 12\nRequires: Level 5, 7 Str, 7 Int"
+    },
+    {
+      "Name": "Horned Crown",
+      "Tip": "Armour: 33\nEnergy Shield: 15\nRequires: Level 10, 12 Str, 12 Int"
+    },
+    {
+      "Name": "Cultist Crown",
+      "Tip": "Armour: 44\nEnergy Shield: 19\nRequires: Level 16, 18 Str, 18 Int"
+    },
+    {
+      "Name": "Martyr Crown",
+      "Tip": "Armour: 66\nEnergy Shield: 25\nRequires: Level 28, 30 Str, 30 Int"
+    },
+    {
+      "Name": "Heavy Crown",
+      "Tip": "Armour: 75\nEnergy Shield: 28\nRequires: Level 33, 34 Str, 34 Int"
+    },
+    {
+      "Name": "Spiritbone Crown",
+      "Tip": "Armour: 97\nEnergy Shield: 35\nRequires: Level 45, 46 Str, 46 Int"
+    },
+    {
+      "Name": "Lavish Crown",
+      "Tip": "Armour: 110\nEnergy Shield: 39\nRequires: Level 52, 53 Str, 53 Int"
+    },
+    {
+      "Name": "Templar Crown",
+      "Tip": "Armour: 134\nEnergy Shield: 46\nRequires: Level 65, 65 Str, 65 Int"
+    },
+    {
+      "Name": "Hewn Mask",
+      "Tip": "Evasion Rating: 18\nEnergy Shield: 12\nRequires: Level 5, 7 Dex, 7 Int"
+    },
+    {
+      "Name": "Face Mask",
+      "Tip": "Evasion Rating: 26\nEnergy Shield: 15\nRequires: Level 10, 12 Dex, 12 Int"
+    },
+    {
+      "Name": "Hooded Mask",
+      "Tip": "Evasion Rating: 37\nEnergy Shield: 19\nRequires: Level 16, 18 Dex, 18 Int"
+    },
+    {
+      "Name": "Veiled Mask",
+      "Tip": "Evasion Rating: 58\nEnergy Shield: 25\nRequires: Level 28, 30 Dex, 30 Int"
+    },
+    {
+      "Name": "Tribal Mask",
+      "Tip": "Evasion Rating: 66\nEnergy Shield: 28\nRequires: Level 33, 34 Dex, 34 Int"
+    },
+    {
+      "Name": "Solid Mask",
+      "Tip": "Evasion Rating: 87\nEnergy Shield: 35\nRequires: Level 45, 46 Dex, 46 Int"
+    },
+    {
+      "Name": "Shaded Mask",
+      "Tip": "Evasion Rating: 99\nEnergy Shield: 39\nRequires: Level 52, 53 Dex, 53 Int"
+    },
+    {
+      "Name": "Death Mask",
+      "Tip": "Evasion Rating: 122\nEnergy Shield: 46\nRequires: Level 65, 65 Dex, 65 Int"
+    },
+    {
+      "Name": "Grand Visage",
+      "Tip": "Armour: 88\nEvasion Rating: 80\nEnergy Shield: 30\nRequires: Level 65, 46 Str, 46 Dex, 46 Int"
+    },
+    {
+      "Name": "Advanced Rusted Greathelm",
+      "Tip": "Armour: 176\nRequires: Level 45, 83 Str"
+    },
+    {
+      "Name": "Advanced Soldier Greathelm",
+      "Tip": "Armour: 186\nRequires: Level 48, 88 Str"
+    },
+    {
+      "Name": "Advanced Wrapped Greathelm",
+      "Tip": "Armour: 196\nRequires: Level 51, 94 Str"
+    },
+    {
+      "Name": "Advanced Spired Greathelm",
+      "Tip": "Armour: 210\nRequires: Level 55, 101 Str"
+    },
+    {
+      "Name": "Advanced Elite Greathelm",
+      "Tip": "Armour: 223\nRequires: Level 59, 108 Str"
+    },
+    {
+      "Name": "Advanced Shabby Hood",
+      "Tip": "Evasion Rating: 158\nRequires: Level 45, 83 Dex"
+    },
+    {
+      "Name": "Advanced Felt Cap",
+      "Tip": "Evasion Rating: 168\nRequires: Level 48, 88 Dex"
+    },
+    {
+      "Name": "Advanced Lace Hood",
+      "Tip": "Evasion Rating: 177\nRequires: Level 51, 94 Dex"
+    },
+    {
+      "Name": "Advanced Swathed Cap",
+      "Tip": "Evasion Rating: 190\nRequires: Level 55, 101 Dex"
+    },
+    {
+      "Name": "Advanced Hunter Hood",
+      "Tip": "Evasion Rating: 203\nRequires: Level 59, 108 Dex"
+    },
+    {
+      "Name": "Advanced Twig Circlet",
+      "Tip": "Energy Shield: 63\nRequires: Level 45, 83 Int"
+    },
+    {
+      "Name": "Advanced Wicker Tiara",
+      "Tip": "Energy Shield: 67\nRequires: Level 48, 88 Int"
+    },
+    {
+      "Name": "Advanced Beaded Circlet",
+      "Tip": "Energy Shield: 70\nRequires: Level 51, 94 Int"
+    },
+    {
+      "Name": "Advanced Chain Tiara",
+      "Tip": "Energy Shield: 74\nRequires: Level 55, 101 Int"
+    },
+    {
+      "Name": "Advanced Feathered Tiara",
+      "Tip": "Energy Shield: 78\nRequires: Level 59, 108 Int"
+    },
+    {
+      "Name": "Advanced Brimmed Helm",
+      "Tip": "Armour: 97\nEvasion Rating: 87\nRequires: Level 45, 46 Str, 46 Dex"
+    },
+    {
+      "Name": "Advanced Guarded Helm",
+      "Tip": "Armour: 102\nEvasion Rating: 92\nRequires: Level 48, 49 Str, 49 Dex"
+    },
+    {
+      "Name": "Advanced Visored Helm",
+      "Tip": "Armour: 108\nEvasion Rating: 98\nRequires: Level 51, 52 Str, 52 Dex"
+    },
+    {
+      "Name": "Advanced Cowled Helm",
+      "Tip": "Armour: 115\nEvasion Rating: 105\nRequires: Level 55, 55 Str, 55 Dex"
+    },
+    {
+      "Name": "Advanced Shielded Helm",
+      "Tip": "Armour: 123\nEvasion Rating: 111\nRequires: Level 59, 59 Str, 59 Dex"
+    },
+    {
+      "Name": "Advanced Iron Crown",
+      "Tip": "Armour: 97\nEnergy Shield: 35\nRequires: Level 45, 46 Str, 46 Int"
+    },
+    {
+      "Name": "Advanced Horned Crown",
+      "Tip": "Armour: 102\nEnergy Shield: 37\nRequires: Level 48, 49 Str, 49 Int"
+    },
+    {
+      "Name": "Advanced Cultist Crown",
+      "Tip": "Armour: 108\nEnergy Shield: 38\nRequires: Level 51, 52 Str, 52 Int"
+    },
+    {
+      "Name": "Advanced Martyr Crown",
+      "Tip": "Armour: 115\nEnergy Shield: 41\nRequires: Level 55, 55 Str, 55 Int"
+    },
+    {
+      "Name": "Advanced Heavy Crown",
+      "Tip": "Armour: 123\nEnergy Shield: 43\nRequires: Level 59, 59 Str, 59 Int"
+    },
+    {
+      "Name": "Advanced Hewn Mask",
+      "Tip": "Evasion Rating: 87\nEnergy Shield: 35\nRequires: Level 45, 46 Dex, 46 Int"
+    },
+    {
+      "Name": "Advanced Face Mask",
+      "Tip": "Evasion Rating: 92\nEnergy Shield: 37\nRequires: Level 48, 49 Dex, 49 Int"
+    },
+    {
+      "Name": "Advanced Hooded Mask",
+      "Tip": "Evasion Rating: 98\nEnergy Shield: 38\nRequires: Level 51, 52 Dex, 52 Int"
+    },
+    {
+      "Name": "Advanced Veiled Mask",
+      "Tip": "Evasion Rating: 105\nEnergy Shield: 41\nRequires: Level 55, 55 Dex, 55 Int"
+    },
+    {
+      "Name": "Advanced Tribal Mask",
+      "Tip": "Evasion Rating: 111\nEnergy Shield: 43\nRequires: Level 59, 59 Dex, 59 Int"
+    },
+    {
+      "Name": "Expert Soldier Greathelm",
+      "Tip": "Armour: 243\nRequires: Level 65, 118 Str"
+    },
+    {
+      "Name": "Expert Spired Greathelm",
+      "Tip": "Armour: 267\nRequires: Level 70, 129 Str"
+    },
+    {
+      "Name": "Expert Elite Greathelm",
+      "Tip": "Armour: 292\nRequires: Level 75, 139 Str"
+    },
+    {
+      "Name": "Expert Felt Cap",
+      "Tip": "Evasion Rating: 222\nRequires: Level 65, 118 Dex"
+    },
+    {
+      "Name": "Expert Swathed Cap",
+      "Tip": "Evasion Rating: 244\nRequires: Level 70, 129 Dex"
+    },
+    {
+      "Name": "Expert Hunter Hood",
+      "Tip": "Evasion Rating: 266\nRequires: Level 75, 139 Dex"
+    },
+    {
+      "Name": "Expert Wicker Tiara",
+      "Tip": "Energy Shield: 84\nRequires: Level 65, 118 Int"
+    },
+    {
+      "Name": "Expert Chain Tiara",
+      "Tip": "Energy Shield: 92\nRequires: Level 70, 129 Int"
+    },
+    {
+      "Name": "Expert Feathered Tiara",
+      "Tip": "Energy Shield: 101\nRequires: Level 75, 139 Int"
+    },
+    {
+      "Name": "Expert Guarded Helm",
+      "Tip": "Armour: 134\nEvasion Rating: 122\nRequires: Level 65, 65 Str, 65 Dex"
+    },
+    {
+      "Name": "Expert Cowled Helm",
+      "Tip": "Armour: 147\nEvasion Rating: 134\nRequires: Level 70, 70 Str, 70 Dex"
+    },
+    {
+      "Name": "Expert Shielded Helm",
+      "Tip": "Armour: 160\nEvasion Rating: 146\nRequires: Level 75, 76 Str, 76 Dex"
+    },
+    {
+      "Name": "Expert Horned Crown",
+      "Tip": "Armour: 134\nEnergy Shield: 46\nRequires: Level 65, 65 Str, 65 Int"
+    },
+    {
+      "Name": "Expert Martyr Crown",
+      "Tip": "Armour: 147\nEnergy Shield: 51\nRequires: Level 70, 70 Str, 70 Int"
+    },
+    {
+      "Name": "Expert Heavy Crown",
+      "Tip": "Armour: 160\nEnergy Shield: 55\nRequires: Level 75, 76 Str, 76 Int"
+    },
+    {
+      "Name": "Expert Face Mask",
+      "Tip": "Evasion Rating: 122\nEnergy Shield: 46\nRequires: Level 65, 65 Dex, 65 Int"
+    },
+    {
+      "Name": "Expert Veiled Mask",
+      "Tip": "Evasion Rating: 134\nEnergy Shield: 51\nRequires: Level 70, 70 Dex, 70 Int"
+    },
+    {
+      "Name": "Expert Tribal Mask",
+      "Tip": "Evasion Rating: 146\nEnergy Shield: 55\nRequires: Level 75, 76 Dex, 76 Int"
+    }
+  ],
+  "Amulets": [
+    {
+      "Name": "Crimson Amulet",
+      "Tip": "(2\u20134) Life Regeneration per second"
+    },
+    {
+      "Name": "Azure Amulet",
+      "Tip": "(20\u201330)% increased Mana Regeneration Rate"
+    },
+    {
+      "Name": "Amber Amulet",
+      "Tip": "Requires: Level 8\n+(10\u201315) to Strength"
+    },
+    {
+      "Name": "Jade Amulet",
+      "Tip": "Requires: Level 8\n+(10\u201315) to Dexterity"
+    },
+    {
+      "Name": "Lapis Amulet",
+      "Tip": "Requires: Level 8\n+(10\u201315) to Intelligence"
+    },
+    {
+      "Name": "Lunar Amulet",
+      "Tip": "Requires: Level 14\n+(20\u201330) to maximum Energy Shield"
+    },
+    {
+      "Name": "Bloodstone Amulet",
+      "Tip": "Requires: Level 18\n+(30\u201340) to maximum Life"
+    },
+    {
+      "Name": "Stellar Amulet",
+      "Tip": "Requires: Level 25\n+(5\u20137) to all Attributes"
+    },
+    {
+      "Name": "Solar Amulet",
+      "Tip": "Requires: Level 30\n+(10\u201315) to Spirit"
+    },
+    {
+      "Name": "Gold Amulet",
+      "Tip": "Requires: Level 35\n(12\u201320)% increased Rarity of Items found"
+    }
+  ],
+  "Rings": [
+    {
+      "Name": "Iron Ring",
+      "Tip": "Adds 1 to 4 Physical Damage to Attacks"
+    },
+    {
+      "Name": "Lazuli Ring",
+      "Tip": "+(20\u201330) to maximum Mana"
+    },
+    {
+      "Name": "Ruby Ring",
+      "Tip": "Requires: Level 8\n+(20\u201330)% to Fire Resistance"
+    },
+    {
+      "Name": "Sapphire Ring",
+      "Tip": "Requires: Level 12\n+(20\u201330)% to Cold Resistance"
+    },
+    {
+      "Name": "Topaz Ring",
+      "Tip": "Requires: Level 16\n+(20\u201330)% to Lightning Resistance"
+    },
+    {
+      "Name": "Amethyst Ring",
+      "Tip": "Requires: Level 20\n+(7\u201313)% to Chaos Resistance"
+    },
+    {
+      "Name": "Emerald Ring",
+      "Tip": "Requires: Level 26\n+(120\u2013160) to Accuracy Rating"
+    },
+    {
+      "Name": "Pearl Ring",
+      "Tip": "Requires: Level 32\n(7\u201310)% increased Cast Speed"
+    },
+    {
+      "Name": "Prismatic Ring",
+      "Tip": "Requires: Level 35\n+(7\u201310)% to all Elemental Resistances"
+    },
+    {
+      "Name": "Gold Ring",
+      "Tip": "Requires: Level 40\n(6\u201315)% increased Rarity of Items found"
+    },
+    {
+      "Name": "Unset Ring",
+      "Tip": "Requires: Level 44\nGrants 1 additional Skill Slot"
+    },
+    {
+      "Name": "Ring",
+      "Tip": ""
+    },
+    {
+      "Name": "Breach Ring",
+      "Tip": "Requires: Level 40\nMaximum Quality is 50%"
+    }
+  ],
+  "Belts": [
+    {
+      "Name": "Golden Obi",
+      "Tip": "Requires: Level 12\n(20\u201330)% increased Rarity of Items found"
+    },
+    {
+      "Name": "Rawhide Belt",
+      "Tip": "Charm Slots: 1\n(20\u201330)% increased Life Recovery from Flasks"
+    },
+    {
+      "Name": "Linen Belt",
+      "Tip": "Charm Slots: 1\n(20\u201330)% increased Mana Recovery from Flasks"
+    },
+    {
+      "Name": "Wide Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 14\n(20\u201330)% increased Flask Charges gained"
+    },
+    {
+      "Name": "Long Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 20\n(15\u201320)% increased Charm Effect Duration"
+    },
+    {
+      "Name": "Plate Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 25\n+(100\u2013140) to Armour"
+    },
+    {
+      "Name": "Ornate Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 31\n(10\u201315)% reduced Charm Charges used"
+    },
+    {
+      "Name": "Mail Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 40\n(10\u201315)% reduced Flask Charges used"
+    },
+    {
+      "Name": "Double Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 44\n(20\u201330)% increased Charm Charges gained"
+    },
+    {
+      "Name": "Heavy Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 50\n(20\u201330)% increased Stun Threshold"
+    },
+    {
+      "Name": "Utility Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 55\n20% of Flask Recovery applied Instantly"
+    },
+    {
+      "Name": "Fine Belt",
+      "Tip": "Charm Slots: 1\nRequires: Level 62\nFlasks gain 0.17 charges per Second"
+    }
+  ],
+  "Flasks": [
+    {
+      "Name": "Lesser Life Flask",
+      "Tip": "Recovers 50 Life over 3 Second\nConsumes 10 of 60 Charges on use\nCurrently has 60 Charges"
+    },
+    {
+      "Name": "Medium Life Flask",
+      "Tip": "Recovers 90 Life over 5 Second\nConsumes 10 of 65 Charges on use\nCurrently has 65 Charges\nRequires: Level 4"
+    },
+    {
+      "Name": "Greater Life Flask",
+      "Tip": "Recovers 150 Life over 4 Second\nConsumes 10 of 70 Charges on use\nCurrently has 70 Charges\nRequires: Level 10"
+    },
+    {
+      "Name": "Grand Life Flask",
+      "Tip": "Recovers 260 Life over 5 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 16"
+    },
+    {
+      "Name": "Giant Life Flask",
+      "Tip": "Recovers 340 Life over 4 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 23"
+    },
+    {
+      "Name": "Colossal Life Flask",
+      "Tip": "Recovers 450 Life over 4 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 30"
+    },
+    {
+      "Name": "Gargantuan Life Flask",
+      "Tip": "Recovers 710 Life over 5 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 40"
+    },
+    {
+      "Name": "Transcendent Life Flask",
+      "Tip": "Recovers 840 Life over 4 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 50"
+    },
+    {
+      "Name": "Ultimate Life Flask",
+      "Tip": "Recovers 920 Life over 3 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 60"
+    },
+    {
+      "Name": "Lesser Mana Flask",
+      "Tip": "Recovers 50 Mana over 2 Second\nConsumes 10 of 60 Charges on use\nCurrently has 60 Charges"
+    },
+    {
+      "Name": "Medium Mana Flask",
+      "Tip": "Recovers 70 Mana over 3 Second\nConsumes 10 of 65 Charges on use\nCurrently has 65 Charges\nRequires: Level 4"
+    },
+    {
+      "Name": "Greater Mana Flask",
+      "Tip": "Recovers 90 Mana over 2.5 Second\nConsumes 10 of 70 Charges on use\nCurrently has 70 Charges\nRequires: Level 10"
+    },
+    {
+      "Name": "Grand Mana Flask",
+      "Tip": "Recovers 110 Mana over 2.5 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 16"
+    },
+    {
+      "Name": "Giant Mana Flask",
+      "Tip": "Recovers 165 Mana over 3.5 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 23"
+    },
+    {
+      "Name": "Colossal Mana Flask",
+      "Tip": "Recovers 165 Mana over 2.5 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 30"
+    },
+    {
+      "Name": "Gargantuan Mana Flask",
+      "Tip": "Recovers 185 Mana over 2 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 40"
+    },
+    {
+      "Name": "Transcendent Mana Flask",
+      "Tip": "Recovers 285 Mana over 3.5 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 50"
+    },
+    {
+      "Name": "Ultimate Mana Flask",
+      "Tip": "Recovers 310 Mana over 3 Second\nConsumes 10 of 75 Charges on use\nCurrently has 75 Charges\nRequires: Level 60"
+    }
+  ],
+  "Charms": [
+    {
+      "Name": "Thawing Charm",
+      "Tip": "Lasts 3 Second\nConsumes 80 of 80 Charges on use\nCurrently has 80 Charges\nGrants Immunity to Freeze\nRequires: Level 12\nUsed when you become Frozen"
+    },
+    {
+      "Name": "Staunching Charm",
+      "Tip": "Lasts 3 Second\nConsumes 60 of 80 Charges on use\nCurrently has 80 Charges\nGrants Immunity to Bleeding\nRequires: Level 18\nUsed when you start Bleeding"
+    },
+    {
+      "Name": "Antidote Charm",
+      "Tip": "Lasts 3 Second\nConsumes 40 of 80 Charges on use\nCurrently has 80 Charges\nGrants Immunity to Poison\nRequires: Level 24\nUsed when you become Poisoned"
+    },
+    {
+      "Name": "Dousing Charm",
+      "Tip": "Lasts 3 Second\nConsumes 60 of 80 Charges on use\nCurrently has 80 Charges\nGrants Immunity to Ignite\nRequires: Level 32\nUsed when you become Ignited"
+    },
+    {
+      "Name": "Grounding Charm",
+      "Tip": "Lasts 3 Second\nConsumes 50 of 80 Charges on use\nCurrently has 80 Charges\nGrants Immunity to Shock\nRequires: Level 32\nUsed when you become Shocked"
+    },
+    {
+      "Name": "Stone Charm",
+      "Tip": "Lasts 2.5 Second\nConsumes 40 of 80 Charges on use\nCurrently has 80 Charges\nCannot be Stunned\nRequires: Level 8\nUsed when you become Stunned"
+    },
+    {
+      "Name": "Silver Charm",
+      "Tip": "Lasts 3 Second\nConsumes 40 of 80 Charges on use\nCurrently has 80 Charges\nYour speed is unaffected by Slows\nRequires: Level 10\nUsed when you are affected by a Slow"
+    },
+    {
+      "Name": "Ruby Charm",
+      "Tip": "Lasts 4 Second\nConsumes 40 of 80 Charges on use\nCurrently has 80 Charges\n+25% to Fire Resistance\nRequires: Level 5\nUsed when you take Fire damage from a Hit"
+    },
+    {
+      "Name": "Sapphire Charm",
+      "Tip": "Lasts 4 Second\nConsumes 40 of 80 Charges on use\nCurrently has 80 Charges\n+25% to Cold Resistance\nRequires: Level 5\nUsed when you take Cold damage from a Hit"
+    },
+    {
+      "Name": "Topaz Charm",
+      "Tip": "Lasts 4 Second\nConsumes 40 of 80 Charges on use\nCurrently has 80 Charges\n+25% to Lightning Resistance\nRequires: Level 5\nUsed when you take Lightning damage from a Hit"
+    },
+    {
+      "Name": "Amethyst Charm",
+      "Tip": "Lasts 4 Second\nConsumes 60 of 80 Charges on use\nCurrently has 80 Charges\n+18% to Chaos Resistance\nRequires: Level 40\nUsed when you take Chaos damage from a Hit"
+    },
+    {
+      "Name": "Golden Charm",
+      "Tip": "Lasts 1 Second\nConsumes 80 of 80 Charges on use\nCurrently has 80 Charges\n20% increased Rarity of Items found\nRequires: Level 50\nUsed when you Kill a Rare or Unique Enemy"
+    }
+  ],
+  "StackableCurrency": [
+    {
+      "Name": "Blacksmith's Whetstone",
+      "Tip": "Stack Size: 1 / 20\nImproves the quality of a martial weapon"
+    },
+    {
+      "Name": "Arcanist's Etcher",
+      "Tip": "Stack Size: 1 / 20\nImproves the quality of a wand, staff or sceptre"
+    },
+    {
+      "Name": "Scroll of Wisdom",
+      "Tip": "Stack Size: 1 / 40\nIdentifies an item"
+    },
+    {
+      "Name": "Chaos Orb",
+      "Tip": "Stack Size: 1 / 20\nRemoves a random modifier and augments a Rare item with a new random modifier"
+    },
+    {
+      "Name": "Armourer's Scrap",
+      "Tip": "Stack Size: 1 / 20\nImproves the quality of an armour"
+    },
+    {
+      "Name": "Mirror of Kalandra",
+      "Tip": "Stack Size: 1 / 10\nCreates a Mirrored copy of an item"
+    },
+    {
+      "Name": "Orb of Alchemy",
+      "Tip": "Stack Size: 1 / 20\nUpgrades a Normal item to a Rare item with 4 modifiers"
+    },
+    {
+      "Name": "Orb of Chance",
+      "Tip": "Stack Size: 1 / 10\nUnpredictably either upgrades a Normal item to Unique rarity or destroys it"
+    },
+    {
+      "Name": "Orb of Transmutation",
+      "Tip": "Stack Size: 1 / 40\nUpgrades a Normal item to a Magic item with 1 modifier"
+    },
+    {
+      "Name": "Exalted Orb",
+      "Tip": "Stack Size: 1 / 20\nAugments a Rare item with a new random modifier"
+    },
+    {
+      "Name": "Regal Orb",
+      "Tip": "Stack Size: 1 / 20\nUpgrades a Magic item to a Rare item, adding 1 modifier"
+    },
+    {
+      "Name": "Orb of Augmentation",
+      "Tip": "Stack Size: 1 / 30\nAugments a Magic item with a new random modifier"
+    },
+    {
+      "Name": "Glassblower's Bauble",
+      "Tip": "Stack Size: 1 / 20\nImproves the quality of a flask"
+    },
+    {
+      "Name": "Gemcutter's Prism",
+      "Tip": "Stack Size: 1 / 20\nImproves the quality of a skill gem"
+    },
+    {
+      "Name": "Lesser Jeweller's Orb",
+      "Tip": "Stack Size: 1 / 20\nAdds a Support Gem Socket to a Skill Gem with 2 Support Gem Sockets"
+    },
+    {
+      "Name": "Greater Jeweller's Orb",
+      "Tip": "Stack Size: 1 / 20\nAdds a Support Gem Socket to a Skill Gem with 3 Support Gem Sockets"
+    },
+    {
+      "Name": "Perfect Jeweller's Orb",
+      "Tip": "Stack Size: 1 / 20\nAdds a Support Gem Socket to a Skill Gem with 4 Support Gem Sockets"
+    },
+    {
+      "Name": "Artificer's Orb",
+      "Tip": "Stack Size: 1 / 20\nAdds a Rune Socket to a Martial Weapon or Armour"
+    },
+    {
+      "Name": "Divine Orb",
+      "Tip": "Stack Size: 1 / 10\nRandomises the numeric values of modifiers on an item"
+    },
+    {
+      "Name": "Transmutation Shard",
+      "Tip": "Stack Size: 1 / 10"
+    },
+    {
+      "Name": "Alchemy Shard",
+      "Tip": "Stack Size: 1 / 10"
+    },
+    {
+      "Name": "Chance Shard",
+      "Tip": "Stack Size: 1 / 10"
+    },
+    {
+      "Name": "Albino Rhoa Feather",
+      "Tip": "Stack Size: 1 / 10"
+    },
+    {
+      "Name": "Vaal Orb",
+      "Tip": "Stack Size: 1 / 20\nModifies an item unpredictably and Corrupts it"
+    },
+    {
+      "Name": "Orb of Annulment",
+      "Tip": "Stack Size: 1 / 20\nRemoves a random modifier from an item"
+    },
+    {
+      "Name": "Regal Shard",
+      "Tip": "Stack Size: 1 / 10"
+    },
+    {
+      "Name": "Artificer's Shard",
+      "Tip": "Stack Size: 1 / 10"
+    },
+    {
+      "Name": "Exotic Coinage",
+      "Tip": "Stack Size: 1 / 20"
+    },
+    {
+      "Name": "Broken Circle Artifact",
+      "Tip": "Stack Size: 1 / 20"
+    },
+    {
+      "Name": "Black Scythe Artifact",
+      "Tip": "Stack Size: 1 / 20"
+    },
+    {
+      "Name": "Order Artifact",
+      "Tip": "Stack Size: 1 / 20"
+    },
+    {
+      "Name": "Sun Artifact",
+      "Tip": "Stack Size: 1 / 20"
+    },
+    {
+      "Name": "Gold",
+      "Tip": "Stack Size: 1 / 5000\nCan be spent at Vendors."
+    },
+    {
+      "Name": "Bronze Key",
+      "Tip": "Used to open Bronze Caches within the Trials"
+    },
+    {
+      "Name": "Silver Key",
+      "Tip": "Used to open Silver Caches within the Trials"
+    },
+    {
+      "Name": "Gold Key",
+      "Tip": "Used to open Gold Caches within the Trials"
+    },
+    {
+      "Name": "Bronze Key",
+      "Tip": "Used to open Bronze Caches within the Trials"
+    },
+    {
+      "Name": "Silver Key",
+      "Tip": "Used to open Silver Caches within the Trials"
+    },
+    {
+      "Name": "Gold Key",
+      "Tip": "Used to open Gold Caches within the Trials"
+    }
+  ],
+  "DistilledEmotions": [
+    {
+      "Name": "Distilled Despair",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Disgust",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Envy",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Fear",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Greed",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Guilt",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Ire",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Isolation",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Paranoia",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    },
+    {
+      "Name": "Distilled Suffering",
+      "Tip": "Stack Size: 1 / 10\nCan be combined with other Distilled Emotions to Instil Amulets\nwith Notable Passive Skills or Waystones with Layers of Delirium"
+    }
+  ],
+  "Essence": [
+    {
+      "Name": "Essence of the Body",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Life modifier"
+    },
+    {
+      "Name": "Essence of the Mind",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Mana modifier"
+    },
+    {
+      "Name": "Essence of Enhancement",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Defence modifier"
+    },
+    {
+      "Name": "Essence of Torment",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Physical modifier"
+    },
+    {
+      "Name": "Essence of Flames",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Fire modifier"
+    },
+    {
+      "Name": "Essence of Ice",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Cold modifier"
+    },
+    {
+      "Name": "Essence of Electricity",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Lightning modifier"
+    },
+    {
+      "Name": "Essence of Ruin",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Chaos modifier"
+    },
+    {
+      "Name": "Essence of Battle",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Attack modifier"
+    },
+    {
+      "Name": "Essence of Sorcery",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Caster modifier"
+    },
+    {
+      "Name": "Essence of Haste",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Speed modifier"
+    },
+    {
+      "Name": "Essence of the Infinite",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a normal item to Magic with one Attribute modifier"
+    },
+    {
+      "Name": "Greater Essence of the Body",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Life modifier"
+    },
+    {
+      "Name": "Greater Essence of the Mind",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Mana modifier"
+    },
+    {
+      "Name": "Greater Essence of Enhancement",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Defence modifier"
+    },
+    {
+      "Name": "Greater Essence of Torment",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Physical modifier"
+    },
+    {
+      "Name": "Greater Essence of Flames",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Fire modifier"
+    },
+    {
+      "Name": "Greater Essence of Ice",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Cold modifier"
+    },
+    {
+      "Name": "Greater Essence of Electricity",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Lightning modifier"
+    },
+    {
+      "Name": "Greater Essence of Ruin",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Chaos modifier"
+    },
+    {
+      "Name": "Greater Essence of Battle",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Attack modifier"
+    },
+    {
+      "Name": "Greater Essence of Sorcery",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Caster modifier"
+    },
+    {
+      "Name": "Greater Essence of Haste",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one speed modifier"
+    },
+    {
+      "Name": "Greater Essence of the Infinite",
+      "Tip": "Stack Size: 1 / 10\nUpgrades a Magic item to a Rare item with one Attribute modifier"
+    }
+  ],
+  "Splintered": [
+    {
+      "Name": "Breach Splinter",
+      "Tip": "Stack Size: 1 / 300"
+    },
+    {
+      "Name": "Simulacrum Splinter",
+      "Tip": "Stack Size: 1 / 300"
+    }
+  ],
+  "Catalysts": [
+    {
+      "Name": "Flesh Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Life modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Neural Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Mana modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Carapace Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Defence modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Uul-Netol's Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Physical modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Xoph's Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Fire modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Tul's Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Cold modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Esh's Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Lightning modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Chayula's Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Chaos modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Reaver Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Attack modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Sibilant Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Caster modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Skittering Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Speed modifiers on a ring or amulet\nReplaces other quality types"
+    },
+    {
+      "Name": "Adaptive Catalyst",
+      "Tip": "Stack Size: 1 / 10\nAdds quality that enhances Attribute modifiers on a ring or amulet\nReplaces other quality types"
+    }
+  ],
+  "Waystones": [
+    {
+      "Name": "Waystone (Tier 1)",
+      "Tip": "Area Level: 65"
+    },
+    {
+      "Name": "Waystone (Tier 2)",
+      "Tip": "Area Level: 66"
+    },
+    {
+      "Name": "Waystone (Tier 3)",
+      "Tip": "Area Level: 67"
+    },
+    {
+      "Name": "Waystone (Tier 4)",
+      "Tip": "Area Level: 68"
+    },
+    {
+      "Name": "Waystone (Tier 5)",
+      "Tip": "Area Level: 69"
+    },
+    {
+      "Name": "Waystone (Tier 6)",
+      "Tip": "Area Level: 70"
+    },
+    {
+      "Name": "Waystone (Tier 7)",
+      "Tip": "Area Level: 71"
+    },
+    {
+      "Name": "Waystone (Tier 8)",
+      "Tip": "Area Level: 72"
+    },
+    {
+      "Name": "Waystone (Tier 9)",
+      "Tip": "Area Level: 73"
+    },
+    {
+      "Name": "Waystone (Tier 10)",
+      "Tip": "Area Level: 74"
+    },
+    {
+      "Name": "Waystone (Tier 11)",
+      "Tip": "Area Level: 75"
+    },
+    {
+      "Name": "Waystone (Tier 12)",
+      "Tip": "Area Level: 76"
+    },
+    {
+      "Name": "Waystone (Tier 13)",
+      "Tip": "Area Level: 77"
+    },
+    {
+      "Name": "Waystone (Tier 14)",
+      "Tip": "Area Level: 78"
+    },
+    {
+      "Name": "Waystone (Tier 15)",
+      "Tip": "Area Level: 79"
+    },
+    {
+      "Name": "Waystone (Tier 16)",
+      "Tip": "Area Level: 80"
+    }
+  ],
+  "MapFragments": [
+    {
+      "Name": "An Audience with the King",
+      "Tip": ""
+    },
+    {
+      "Name": "Cowardly Fate",
+      "Tip": ""
+    },
+    {
+      "Name": "Deadly Fate",
+      "Tip": ""
+    },
+    {
+      "Name": "Victorious Fate",
+      "Tip": ""
+    },
+    {
+      "Name": "Simulacrum",
+      "Tip": ""
+    },
+    {
+      "Name": "Breachstone",
+      "Tip": ""
+    }
+  ],
+  "Jewels": [
+    {
+      "Name": "Timeless Jewel",
+      "Tip": ""
+    },
+    {
+      "Name": "Ruby",
+      "Tip": ""
+    },
+    {
+      "Name": "Emerald",
+      "Tip": ""
+    },
+    {
+      "Name": "Sapphire",
+      "Tip": ""
+    },
+    {
+      "Name": "Diamond",
+      "Tip": ""
+    },
+    {
+      "Name": "Time-Lost Ruby",
+      "Tip": "local jewel effect base radius [1000]"
+    },
+    {
+      "Name": "Time-Lost Emerald",
+      "Tip": "local jewel effect base radius [1000]"
+    },
+    {
+      "Name": "Time-Lost Sapphire",
+      "Tip": "local jewel effect base radius [1000]"
+    },
+    {
+      "Name": "Time-Lost Diamond",
+      "Tip": "local jewel effect base radius [1300]"
+    }
+  ],
+  "Misc": [
+    {
+      "Name": "Expedition Logbook",
+      "Tip": ""
+    },
+    {
+      "Name": "Inscribed Ultimatum",
+      "Tip": ""
+    }
+  ],
+  "Relics": [
+    {
+      "Name": "Urn Relic",
+      "Tip": ""
+    },
+    {
+      "Name": "Amphora Relic",
+      "Tip": ""
+    },
+    {
+      "Name": "Vase Relic",
+      "Tip": ""
+    },
+    {
+      "Name": "Seal Relic",
+      "Tip": ""
+    },
+    {
+      "Name": "Coffer Relic",
+      "Tip": ""
+    },
+    {
+      "Name": "Tapestry Relic",
+      "Tip": ""
+    },
+    {
+      "Name": "Incense Relic",
+      "Tip": ""
+    }
+  ],
+  "Socketable": [
+    {
+      "Name": "Desert Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Adds 7 to 11 Fire Damage\nArmour:+12% to Fire Resistance"
+    },
+    {
+      "Name": "Glacial Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Adds 6 to 10 Cold Damage\nArmour:+12% to Cold Resistance"
+    },
+    {
+      "Name": "Storm Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Adds 1 to 20 Lightning Damage\nArmour:+12% to Lightning Resistance"
+    },
+    {
+      "Name": "Iron Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:20% increased Physical Damage\nArmour:20% increased Armour, Evasion and Energy Shield"
+    },
+    {
+      "Name": "Body Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Leeches 3% of Physical Damage as Life\nArmour:+25 to maximum Life"
+    },
+    {
+      "Name": "Mind Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Leeches 2% of Physical Damage as Mana\nArmour:+20 to maximum Mana"
+    },
+    {
+      "Name": "Rebirth Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Gain 20 Life per Enemy Killed\nArmour:Regenerate 0.3% of Life per second"
+    },
+    {
+      "Name": "Inspiration Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Gain 10 Mana per Enemy Killed\nArmour:15% increased Mana Regeneration Rate"
+    },
+    {
+      "Name": "Stone Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Causes 25% increased Stun Buildup\nArmour:+40 to Stun Threshold"
+    },
+    {
+      "Name": "Vision Rune",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:+100 to Accuracy Rating\nArmour:10% increased Life and Mana Recovery from Flasks"
+    },
+    {
+      "Name": "Soul Core of Tacati",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:15% chance to Poison on Hit\nArmour:+7% to Chaos Resistance"
+    },
+    {
+      "Name": "Soul Core of Opiloti",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:15% chance to cause Bleeding on Hit\nArmour:10% increased Charm Charges gained"
+    },
+    {
+      "Name": "Soul Core of Jiquani",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Recover 2% of Life on Kill\nArmour:2% increased maximum Life"
+    },
+    {
+      "Name": "Soul Core of Zalatl",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Recover 2% of Mana on Kill\nArmour:2% increased maximum Mana"
+    },
+    {
+      "Name": "Soul Core of Citaqualotl",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:30% increased Elemental Damage with Attacks\nArmour:+5% to all Elemental Resistances"
+    },
+    {
+      "Name": "Soul Core of Puhuarte",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:30% increased chance to Ignite\nArmour:+1% to Maximum Fire Resistance"
+    },
+    {
+      "Name": "Soul Core of Tzamoto",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:20% increased Freeze Buildup\nArmour:+1% to Maximum Cold Resistance"
+    },
+    {
+      "Name": "Soul Core of Xopec",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:30% increased chance to Shock\nArmour:+1% to Maximum Lightning Resistance"
+    },
+    {
+      "Name": "Soul Core of Azcapa",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:+15 to Spirit\nArmour:10% increased Rarity of Items found"
+    },
+    {
+      "Name": "Soul Core of Topotante",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Attacks with this Weapon Penetrate 15% Elemental Resistances\nArmour:15% increased Elemental Ailment Threshold"
+    },
+    {
+      "Name": "Soul Core of Quipolatl",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:5% increased Attack Speed\nArmour:10% reduced Slowing Potency of Debuffs on You"
+    },
+    {
+      "Name": "Soul Core of Ticaba",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:+12% to Critical Damage Bonus\nArmour:Hits against you have 10% reduced Critical Damage Bonus"
+    },
+    {
+      "Name": "Soul Core of Atmohua",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Convert 20% of Requirements to Strength\nArmour:Convert 20% of Requirements to Strength"
+    },
+    {
+      "Name": "Soul Core of Cholotl",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Convert 20% of Requirements to Dexterity\nArmour:Convert 20% of Requirements to Dexterity"
+    },
+    {
+      "Name": "Soul Core of Zantipi",
+      "Tip": "Stack Size: 1 / 10\nMartial Weapons:Convert 20% of Requirements to Intelligence\nArmour:Convert 20% of Requirements to Intelligence"
+    }
+  ],
+  "Tablet": [
+    {
+      "Name": "Breach Precursor Tablet",
+      "Tip": "(5\u201310) Maps in Range contain Breaches"
+    },
+    {
+      "Name": "Expedition Precursor Tablet",
+      "Tip": "(5\u201310) Maps in Range contain Expedition Encounters"
+    },
+    {
+      "Name": "Delirium Precursor Tablet",
+      "Tip": "(5\u201310) Maps in Range contain Mirrors of Delirium"
+    },
+    {
+      "Name": "Ritual Precursor Tablet",
+      "Tip": "(5\u201310) Maps in Range contain Ritual Altars"
+    },
+    {
+      "Name": "Precursor Tablet",
+      "Tip": "(5\u201310) Maps in Range are Irradiated"
+    }
+  ],
+  "Omen": [
+    {
+      "Name": "Omen of Refreshment",
+      "Tip": "While this item is active in your inventory will\nfully recover your flask and charm charges when you reach Low Life"
+    },
+    {
+      "Name": "Omen of Resurgence",
+      "Tip": "While this item is active in your inventory will\nfully recover your Life, Mana and Energy Shield when you reach Low Life"
+    },
+    {
+      "Name": "Omen of Amelioration",
+      "Tip": "While this item is active in your inventory will\nprevent 75% of Experience loss when you die"
+    },
+    {
+      "Name": "Omen of Whittling",
+      "Tip": "While this item is active in your inventory your next\nChaos Orb will remove the lowest level modifier"
+    },
+    {
+      "Name": "Omen of Sinistral Erasure",
+      "Tip": "While this item is active in your inventory your next\nChaos Orb will remove only prefix modifiers"
+    },
+    {
+      "Name": "Omen of Dextral Erasure",
+      "Tip": "While this item is active in your inventory your next\nChaos Orb will remove only suffix modifiers"
+    },
+    {
+      "Name": "Omen of Sinistral Alchemy",
+      "Tip": "While this item is active in your inventory your next\nOrb of Alchemy will result in the maximum number of prefix modifiers"
+    },
+    {
+      "Name": "Omen of Dextral Alchemy",
+      "Tip": "While this item is active in your inventory your next\nOrb of Alchemy will result in the maximum number of suffix modifiers"
+    },
+    {
+      "Name": "Omen of Sinistral Coronation",
+      "Tip": "While this item is active in your inventory your next\nRegal Orb will add only prefix modifiers"
+    },
+    {
+      "Name": "Omen of Dextral Coronation",
+      "Tip": "While this item is active in your inventory your next\nRegal Orb will add only suffix modifiers"
+    },
+    {
+      "Name": "Omen of Corruption",
+      "Tip": "While this item is active in your inventory your next\nVaal Orb will be more unpredictable"
+    },
+    {
+      "Name": "Omen of Greater Exaltation",
+      "Tip": "While this item is active in your inventory your next\nExalted Orb will add two random modifiers"
+    },
+    {
+      "Name": "Omen of Sinistral Exaltation",
+      "Tip": "While this item is active in your inventory your next\nExalted Orb will add only prefix modifiers"
+    },
+    {
+      "Name": "Omen of Dextral Exaltation",
+      "Tip": "While this item is active in your inventory your next\nExalted Orb will add only suffix modifiers"
+    },
+    {
+      "Name": "Omen of Greater Annulment",
+      "Tip": "While this item is active in your inventory your next\nOrb of Annulment will remove two modifiers"
+    },
+    {
+      "Name": "Omen of Sinistral Annulment",
+      "Tip": "While this item is active in your inventory your next\nOrb of Annulment will remove only prefix modifiers"
+    },
+    {
+      "Name": "Omen of Dextral Annulment",
+      "Tip": "While this item is active in your inventory your next\nOrb of Annulment will remove only suffix modifiers"
+    }
+  ],
+  "TialConis": [
+    {
+      "Name": "Djinn Barya",
+      "Tip": ""
+    },
+    {
+      "Name": "Test of Strength Barya",
+      "Tip": ""
+    },
+    {
+      "Name": "Test of Will Barya",
+      "Tip": ""
+    },
+    {
+      "Name": "Test of Cunning Barya",
+      "Tip": ""
+    },
+    {
+      "Name": "Test of Time Barya",
+      "Tip": ""
+    }
+  ],
+  "PinnacleKeys": [
+    {
+      "Name": "Ancient Crisis Fragment",
+      "Tip": ""
+    },
+    {
+      "Name": "Faded Crisis Fragment",
+      "Tip": ""
+    },
+    {
+      "Name": "Weathered Crisis Fragment",
+      "Tip": ""
+    }
+  ],
+  "Gems": [
+    {
+      "Name": "Uncut Skill Gem",
+      "Tip": ""
+    },
+    {
+      "Name": "Uncut Spirit Gem",
+      "Tip": ""
+    },
+    {
+      "Name": "Uncut Support Gem",
+      "Tip": ""
+    }
+  ]
+}

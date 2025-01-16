@@ -1,0 +1,68 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.SoundEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:SoundEditorViewModel"
+    mc:Ignorable="d">
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="Drop Sound" />
+
+
+            <StackPanel
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <Border Margin="16">
+                    <ComboBox
+                        Width="150"
+                        p1:ComboBoxAssist.Label="Sound Sample"
+                        ItemsSource="{Binding Rule.Sounds}"
+                        SelectedItem="{Binding Rule.SelectedSound}"
+                        Theme="{StaticResource MaterialOutlineComboBox}" />
+                </Border>
+
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Margin="12,0,12,0"
+                        Classes="headline5"
+                        Text="Volume" />
+                    <Slider
+                        Width="175"
+                        Classes="Discrete Accent"
+                        IsSnapToTickEnabled="True"
+                        Maximum="300"
+                        Minimum="0"
+                        TickFrequency="1"
+                        TickPlacement="TopLeft"
+                        Value="{Binding Rule.SoundVolume, Mode=TwoWay}" />
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Width="50"
+                        Margin="12,0,0,0"
+                        Classes="headline5"
+                        Text="{Binding Rule.SoundVolume}" />
+                </StackPanel>
+            </StackPanel>
+
+
+
+
+
+        </Grid>
+    </Border>
+</UserControl>

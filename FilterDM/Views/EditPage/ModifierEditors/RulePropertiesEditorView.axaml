@@ -1,0 +1,140 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.RulePropertiesEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:RulePropertiesEditorViewModel"
+    mc:Ignorable="d">
+
+
+
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid HorizontalAlignment="Center" RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline5"
+                Text="Edit Rule" />
+
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="auto auto"
+                RowDefinitions="auto auto auto auto">
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Width="225"
+                    Margin="8"
+                    Classes="outline"
+                    Text="{Binding Rule.Title, Mode=TwoWay}"
+                    Theme="{StaticResource OutlineTextBox}"
+                    UseFloatingWatermark="False"
+                    Watermark="Title" />
+
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="8"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Classes="headline6"
+                        Text="Priority" />
+                    <NumericUpDown
+                        Width="100"
+                        Height="35"
+                        MinWidth="100"
+                        ButtonSpinnerLocation="Right"
+                        Increment="100"
+                        Minimum="0"
+                        Theme="{StaticResource OutlineNumericUpDown}"
+                        Value="{Binding Rule.Priority, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <StackPanel
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="4">
+                        <TextBlock Classes="headline6" Text="Show" />
+                        <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Rule.Show, Mode=TwoWay}">
+                            <ToggleSwitch.Content />
+                        </ToggleSwitch>
+                    </StackPanel>
+                    <StackPanel
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="4">
+                        <TextBlock Classes="headline6" Text="Enabled" />
+                        <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Rule.Enabled, Mode=TwoWay}">
+                            <ToggleSwitch.Content />
+                        </ToggleSwitch>
+                    </StackPanel>
+                </StackPanel>
+
+                <ComboBox
+                    Grid.Row="2"
+                    Width="225"
+                    Margin="8"
+                    HorizontalAlignment="Left"
+                    p1:ComboBoxAssist.Label="Block"
+                    ItemsSource="{Binding Rule.AllBlocks}"
+                    SelectedItem="{Binding Rule.SelectedParent, Mode=TwoWay}"
+                    Theme="{StaticResource MaterialOutlineComboBox}">
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                </ComboBox>
+
+                <ComboBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="225"
+                    Margin="8"
+                    HorizontalAlignment="Left"
+                    p1:ComboBoxAssist.Label="Preset"
+                    ItemsSource="{Binding Rule.Templates}"
+                    SelectedItem="{Binding Rule.SelectedTemplate}"
+                    Theme="{StaticResource MaterialOutlineComboBox}" />
+
+                <StackPanel
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Margin="8"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="16">
+                    <Button
+                        Classes="accent"
+                        Command="{Binding Rule.ApplyPropertiesCommand}"
+                        Content="Apply"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+
+
+                    <Button
+                        Classes="light"
+                        Command="{Binding Rule.ResetCommand}"
+                        Content="Reset"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

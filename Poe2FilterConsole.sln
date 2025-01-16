@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poe2FilterConsole", "Poe2FilterConsole\Poe2FilterConsole.csproj", "{34B181CA-A2DF-4E40-8B67-0B65F7FA903F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterCore", "FilterCore\FilterCore.csproj", "{F517EC86-0688-4067-A409-AF3B27783055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDM", "FilterDM\FilterDM.csproj", "{D5348417-88D1-435C-954E-05AE40B16E07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterDM.Tests", "FilterDM.Tests\FilterDM.Tests.csproj", "{DF03BE15-1A9C-4C99-B71E-ADE590FA8E69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34B181CA-A2DF-4E40-8B67-0B65F7FA903F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B181CA-A2DF-4E40-8B67-0B65F7FA903F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B181CA-A2DF-4E40-8B67-0B65F7FA903F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B181CA-A2DF-4E40-8B67-0B65F7FA903F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F517EC86-0688-4067-A409-AF3B27783055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F517EC86-0688-4067-A409-AF3B27783055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F517EC86-0688-4067-A409-AF3B27783055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F517EC86-0688-4067-A409-AF3B27783055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5348417-88D1-435C-954E-05AE40B16E07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5348417-88D1-435C-954E-05AE40B16E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5348417-88D1-435C-954E-05AE40B16E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5348417-88D1-435C-954E-05AE40B16E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF03BE15-1A9C-4C99-B71E-ADE590FA8E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF03BE15-1A9C-4C99-B71E-ADE590FA8E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF03BE15-1A9C-4C99-B71E-ADE590FA8E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF03BE15-1A9C-4C99-B71E-ADE590FA8E69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

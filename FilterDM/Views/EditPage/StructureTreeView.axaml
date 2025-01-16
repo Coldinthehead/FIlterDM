@@ -1,0 +1,130 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.StructureTreeView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage"
+    d:DesignHeight="450"
+    d:DesignWidth="300"
+    x:DataType="vm:StructureTreeViewModel"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:StructureTreeViewModel />
+    </Design.DataContext>
+
+    <Border
+        MinWidth="300"
+        Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+        Classes="ToolContainer">
+        <Grid ColumnDefinitions="* * " RowDefinitions="auto *">
+
+            <StackPanel
+                Margin="4,8"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="4">
+                <TextBlock
+                    Grid.Column="0"
+                    Classes="headline5"
+                    Text="Structure" />
+                <Button
+                    Grid.Row="0"
+                    Classes="Icon"
+                    Command="{Binding NewBlockCommand}">
+                    <Button.Content>
+                        <materialIcons:MaterialIcon
+                            Width="24"
+                            Height="24"
+                            Foreground="{DynamicResource MaterialSecondaryLightBrush}"
+                            Kind="PlusCircleOutline" />
+                    </Button.Content>
+                </Button>
+
+
+            </StackPanel>
+
+
+            <TreeView
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Padding="0,0,24,0"
+                AutoScrollToSelectedItem="True"
+                Background="{DynamicResource MaterialPaperBrush}"
+                BorderBrush="{DynamicResource MaterialDividerBrush}"
+                BorderThickness="1"
+                CornerRadius="0 12"
+                ItemsSource="{Binding Blocks}"
+                SelectedItem="{Binding SelectedNode, Mode=TwoWay}"
+                SelectionMode="Single">
+                <TreeView.DataTemplates>
+                    <!--  Шаблон для блоків  -->
+                    <TreeDataTemplate DataType="vm:BlockDetailsViewModel" ItemsSource="{Binding Rules}">
+                        <Grid ColumnDefinitions="* * *">
+                            <TextBlock
+                                MaxWidth="160"
+                                Classes="body1"
+                                Text="{Binding Title}" />
+                            <Button
+                                Grid.Column="1"
+                                Classes="Icon"
+                                Command="{Binding NewRuleCommand}">
+                                <Button.Content>
+                                    <materialIcons:MaterialIcon
+                                        Width="20"
+                                        Height="20"
+                                        Foreground="{DynamicResource MaterialSecondaryLightBrush}"
+                                        Kind="PlusCircleOutline" />
+                                </Button.Content>
+                            </Button>
+                            <Button
+                                Grid.Column="2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Classes="Icon"
+                                Command="{Binding DeleteBlockCommand}"
+                                ToolTip.Tip="Delete Rule">
+                                <Button.Content>
+                                    <materialIcons:MaterialIcon
+                                        Width="24"
+                                        Height="24"
+                                        Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                                        Kind="TrashCan" />
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                    </TreeDataTemplate>
+
+                    <!--  Шаблон для правил  -->
+                    <TreeDataTemplate DataType="vm:RuleDetailsViewModel">
+                        <Grid Margin="0,0,6,0" ColumnDefinitions="auto *">
+                            <TextBlock
+                                Width="140"
+                                Classes="body2"
+                                Text="{Binding Title}" />
+                            <Button
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Classes="Icon"
+                                Command="{Binding DeleteMeCommand}"
+                                ToolTip.Tip="Delete Rule">
+                                <Button.Content>
+                                    <materialIcons:MaterialIcon
+                                        Width="20"
+                                        Height="20"
+                                        Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                                        Kind="TrashCan" />
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                    </TreeDataTemplate>
+                </TreeView.DataTemplates>
+            </TreeView>
+        </Grid>
+
+    </Border>
+</UserControl>

@@ -1,0 +1,50 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.RarityEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:RarityEditorViewModel"
+    mc:Ignorable="d">
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid HorizontalAlignment="Center" RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="Rarity" />
+
+            <StackPanel
+                Grid.Row="1"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="24">
+
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Classes="headline5" Text="Normal" />
+                    <CheckBox IsChecked="{Binding Decorator.UseNormal, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Classes="headline5" Text="Magic" />
+                    <CheckBox IsChecked="{Binding Decorator.UseMagic, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Classes="headline5" Text="Rare" />
+                    <CheckBox IsChecked="{Binding Decorator.UseRare, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Classes="headline5" Text="Unique" />
+                    <CheckBox IsChecked="{Binding Decorator.UseUnique, Mode=TwoWay}" />
+                </StackPanel>
+
+
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

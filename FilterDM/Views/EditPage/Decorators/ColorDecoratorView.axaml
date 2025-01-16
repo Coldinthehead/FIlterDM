@@ -1,0 +1,58 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.Decorators.ColorDecoratorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:FilterDM.Convertors;assembly=FilterDM"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.Decorators"
+    d:DesignHeight="75"
+    d:DesignWidth="250"
+    x:DataType="vm:ColorDecoratorViewModel"
+    mc:Ignorable="d">
+
+
+
+    <Grid ColumnDefinitions="auto * auto">
+        <TextBlock
+            Margin="0,0,16,0"
+            VerticalAlignment="Center"
+            Classes="headline5"
+            Text="Colors" />
+        <StackPanel
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Orientation="Horizontal"
+            Spacing="14">
+            <TextBlock
+                Classes="body1"
+                IsVisible="{Binding Rule.UseFontColor}"
+                Text="FT" />
+            <TextBlock
+                Classes="body1"
+                IsVisible="{Binding Rule.UseBorderColor}"
+                Text="BD" />
+            <TextBlock
+                Classes="body1"
+                IsVisible="{Binding Rule.UseBackColor}"
+                Text="BG" />
+        </StackPanel>
+
+        <Button
+            Grid.Column="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Classes="Icon"
+            Command="{Binding DeleteMeCommand}">
+            <Button.Content>
+                <materialIcons:MaterialIcon
+                    Width="24"
+                    Height="24"
+                    Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                    Kind="TrashCan" />
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

@@ -1,0 +1,91 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.NumericEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="using:FilterDM.Convertors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:NumericEditorViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:BoolNegationConvertor x:Key="negBool" />
+        <conv:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    </UserControl.Resources>
+
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid HorizontalAlignment="Center" RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="{Binding Decorator.LongTitle}" />
+
+            <Border
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Spacing="16">
+                    <StackPanel Orientation="Vertical">
+
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                            <RadioButton GroupName="1" IsChecked="{Binding Decorator.Sign, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Greater}" />
+                            <TextBlock Classes="headline5" Text="Min" />
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                            <RadioButton GroupName="1" IsChecked="{Binding Decorator.Sign, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Less}" />
+                            <TextBlock Classes="headline5" Text="Max" />
+                        </StackPanel>
+
+
+
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                            <RadioButton GroupName="1" IsChecked="{Binding Decorator.Sign, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Eq}" />
+                            <TextBlock Classes="headline5" Text="Exact" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel
+                        VerticalAlignment="Center"
+                        Orientation="Vertical"
+                        Spacing="12">
+                        <NumericUpDown
+                            Height="35"
+                            MinWidth="100"
+                            ButtonSpinnerLocation="Right"
+                            Increment="1"
+                            Maximum="{Binding Decorator.MaxValue}"
+                            Minimum="0"
+                            Theme="{StaticResource OutlineNumericUpDown}"
+                            Value="{Binding Decorator.Value, Mode=TwoWay}" />
+
+
+                        <Border Classes="ToolContainer">
+                            <Slider
+                                Width="175"
+                                Classes="Discrete Accent"
+                                IsSnapToTickEnabled="True"
+                                Maximum="{Binding Decorator.MaxValue}"
+                                Minimum="0"
+                                SmallChange="1"
+                                TickFrequency="1"
+                                TickPlacement="TopLeft"
+                                Value="{Binding Decorator.Value, Mode=TwoWay}" />
+                        </Border>
+                    </StackPanel>
+
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock
+                            Width="75"
+                            Classes="headline5"
+                            Text="{Binding Decorator.ValueRepr}" />
+                    </Border>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,172 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.TypeEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    x:Name="parent"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:TypeEditorViewModel"
+    mc:Ignorable="d">
+
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid x:Name="GridPanel" RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="Item Types" />
+
+            <FlyoutBase.AttachedFlyout>
+                <Flyout Placement="TopEdgeAlignedRight">
+                    <Border
+                        MaxHeight="500"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{DynamicResource MaterialPaperBrush}"
+                        BorderBrush="{DynamicResource MaterialPrimaryLightBrush}"
+                        BorderThickness="1"
+                        Classes="ToolContainer">
+                        <Grid RowDefinitions="auto , *">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Classes="headline5"
+                                Text="Select names" />
+                            <Border Grid.Row="1" Padding="2">
+                                <Grid ColumnDefinitions="auto, auto">
+                                    <Border Grid.Column="0">
+                                        <ListBox
+                                            Width="125"
+                                            ItemsSource="{Binding Decorator.TypeList}"
+                                            SelectedItem="{Binding Decorator.CurrentTypeList, Mode=TwoWay}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Classes="body2" Text="{Binding Title}" />
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </Border>
+                                    <Border
+                                        Grid.Column="1"
+                                        Margin="4,0,0,0"
+                                        Padding="2"
+                                        Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                                        CornerRadius="12">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                                            <ItemsControl ItemsSource="{Binding Decorator.CurrentTypeNames}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Width="280" Orientation="Horizontal" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <ToggleButton
+                                                            Margin="4"
+                                                            Command="{Binding #parent.((vm:TypeEditorViewModel)DataContext).Decorator.TypeSelectedCommand}"
+                                                            CommandParameter="{Binding $self.DataContext}"
+                                                            Content="{Binding Name}"
+                                                            FontSize="14"
+                                                            IsChecked="{Binding IsSelected}"
+                                                            Theme="{StaticResource MaterialOutlineToggleButton}"
+                                                            ToolTip.Tip="{Binding Description}">
+                                                            <!--  Вміст кнопки  -->
+
+                                                            <ToggleButton.Styles>
+                                                                <Style Selector="ToggleButton:checked">
+                                                                    <Setter Property="Foreground" Value="{DynamicResource MaterialSecondaryLightBrush}" />
+                                                                </Style>
+                                                                <Style Selector="ToggleButton">
+                                                                    <Setter Property="Foreground" Value="{DynamicResource MaterialPrimaryLightBrush}" />
+                                                                </Style>
+                                                            </ToggleButton.Styles>
+                                                        </ToggleButton>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                    </Border>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+            <Grid Grid.Row="1" ColumnDefinitions="* auto">
+
+
+                <Border
+                    Grid.Column="0"
+                    Margin="12"
+                    Padding="12,12,12,12"
+                    HorizontalAlignment=" "
+                    Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                    CornerRadius="12">
+                    <ScrollViewer Padding="0,0,12,0" HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Decorator.SelectedTypes}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton
+                                        Margin="4"
+                                        Command="{Binding #parent.((vm:TypeEditorViewModel)DataContext).Decorator.TypeSelectedCommand}"
+                                        CommandParameter="{Binding $self.DataContext}"
+                                        Content="{Binding Name}"
+                                        FontSize="16"
+                                        IsChecked="{Binding IsSelected}"
+                                        Theme="{StaticResource MaterialOutlineToggleButton}"
+                                        ToolTip.Tip="{Binding Description}">
+                                        <!--  Вміст кнопки  -->
+
+                                        <ToggleButton.Styles>
+                                            <Style Selector="ToggleButton:checked">
+                                                <Setter Property="Foreground" Value="{DynamicResource MaterialSecondaryLightBrush}" />
+                                            </Style>
+                                            <Style Selector="ToggleButton">
+                                                <Setter Property="Foreground" Value="{DynamicResource MaterialPrimaryLightBrush}" />
+                                            </Style>
+                                        </ToggleButton.Styles>
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    Margin="6"
+                    Padding="6,12,6,6">
+                    <Grid RowDefinitions="auto * auto">
+
+                        <Button
+                            x:Name="AddButton"
+                            Grid.Row="0"
+                            Classes="accent"
+                            Content="Add"
+                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                        <Button
+                            Grid.Row="2"
+                            Classes="light"
+                            Command="{Binding Decorator.ClearCommand}"
+                            Content="Clear"
+                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                    </Grid>
+                </Border>
+            </Grid>
+
+        </Grid>
+
+
+    </Border>
+</UserControl>

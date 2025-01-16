@@ -1,0 +1,166 @@
+<UserControl
+    x:Class="FilterDM.Views.Pages.ProjectPageView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+    xmlns:vm="using:FilterDM.ViewModels.Pages"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:ProjectPageViewModel"
+    mc:Ignorable="d">
+    <Border
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Classes="ToolContainer">
+        <Grid ColumnDefinitions=" auto auto " RowDefinitions="auto auto auto">
+            <TextBlock
+                Grid.ColumnSpan="2"
+                Padding="0,16,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Classes="headline4"
+                Text="Filter Editor" />
+
+            <Border
+                Grid.Row="1"
+                Margin="0,0,25,0"
+                Padding="12"
+                Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                Classes="ToolContainer">
+                <Grid RowDefinitions="auto * auto">
+                    <TextBlock Classes="headline5" Text="Create New" />
+                    <Border
+                        Grid.Row="1"
+                        Background="{DynamicResource MaterialPaperBrush}"
+                        Classes="ToolContainer">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBox
+                                Grid.Row="1"
+                                Width="275"
+                                Margin="8"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Classes="outline"
+                                Text="{Binding NewFilterName, Mode=TwoWay}"
+                                Theme="{StaticResource OutlineTextBox}"
+                                UseFloatingWatermark="False"
+                                Watermark="Filter name" />
+
+                            <ComboBox
+                                Width="225"
+                                Margin="8"
+                                HorizontalAlignment="Left"
+                                p1:ComboBoxAssist.Label="Preset"
+                                ItemsSource="{Binding AvailableFilterPresets}"
+                                SelectedItem="{Binding SelectedFilterPreset, Mode=TwoWay}"
+                                Theme="{StaticResource MaterialOutlineComboBox}" />
+
+                        </StackPanel>
+                    </Border>
+
+
+                    <Button
+                        Grid.Row="2"
+                        Margin="0,12,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Classes="accent"
+                        Command="{Binding NewFilterCommand}"
+                        Theme="{StaticResource MaterialOutlineButton}">
+                        <Button.Content>
+                            <TextBlock Classes="headline6" Text="Create" />
+                        </Button.Content>
+
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                MinHeight="400"
+                Margin="4,0,0,0"
+                Padding="12,4,12,12"
+                Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                Classes="ToolContainer">
+                <Grid RowDefinitions="auto * auto">
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="4,8"
+                        Orientation="Horizontal"
+                        Spacing="4">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="headline5"
+                            Text="Recent" />
+                    </StackPanel>
+
+                    <Border Grid.Row="1">
+                        <ListBox
+                            MinWidth="325"
+                            Classes="Container"
+                            CornerRadius="0 12"
+                            ItemsSource="{Binding RecentProjects}"
+                            SelectedItem="{Binding SelectedProject}"
+                            SelectionMode="Single">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,24,0" ColumnDefinitions="auto *">
+                                        <StackPanel
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="16">
+                                            <TextBlock
+                                                MaxWidth="300"
+                                                Padding="2,2"
+                                                Classes="headline6"
+                                                Text="{Binding Title}" />
+
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Spacing="">
+                                            <Button
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Classes="Icon"
+                                                Command="{Binding DeleteMeCommand}">
+                                                <Button.Content>
+                                                    <materialIcons:MaterialIcon
+                                                        Width="24"
+                                                        Height="24"
+                                                        Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                                                        Kind="TrashCan" />
+                                                </Button.Content>
+                                            </Button>
+
+
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
+
+
+                    <Button
+                        Grid.Row="2"
+                        Margin="0,12,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Classes="light"
+                        Command="{Binding LoadFilterCommand}"
+                        Theme="{StaticResource MaterialOutlineButton}">
+                        <Button.Content>
+                            <TextBlock Classes="headline6" Text="Load" />
+                        </Button.Content>
+                    </Button>
+
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>

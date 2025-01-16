@@ -1,0 +1,272 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.RuleEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="using:FilterDM.Convertors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:RuleEditorViewModel"
+    mc:Ignorable="d">
+
+
+    <UserControl.Resources>
+        <conv:SolidRGBConvertor x:Key="rgbToB" />
+        <conv:BoolNegationConvertor x:Key="negBool" />
+    </UserControl.Resources>
+
+
+    <Border Background="{DynamicResource MaterialCardBackgroundBrush}" Classes="ToolContainer">
+        <Grid RowDefinitions="auto * ">
+            <TextBlock
+                Padding="4,2"
+                Classes="headline4"
+                Text="{Binding Rule.Title}" />
+            <Button
+                Padding="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Classes="Icon"
+                Command="{Binding CloseMeCommand}">
+                <Button.Content>
+                    <materialIcons:MaterialIcon
+                        Width="36"
+                        Height="36"
+                        Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                        Kind="CloseCircleOutline" />
+                </Button.Content>
+            </Button>
+
+            <Border
+                Grid.Row="1"
+                Background="{DynamicResource MaterialCardBackgroundBrush}"
+                Classes="ToolContainer">
+                <Grid
+                    Grid.Row="1"
+                    ColumnDefinitions="0.6* auto 0.4*"
+                    RowDefinitions="0.35* 0.6*">
+
+                    <!--  Item preview  -->
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="4"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Classes="ToolContainer">
+                        <Border
+                            Padding="8,4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{Binding Rule.BackColor, Converter={StaticResource rgbToB}}"
+                            BorderBrush="{Binding Rule.BorderColor, Converter={StaticResource rgbToB}}"
+                            BorderThickness="3">
+                            <TextBlock
+                                FontSize="{Binding Rule.FontSize}"
+                                Foreground="{Binding Rule.TextColor, Converter={StaticResource rgbToB}}"
+                                Text="Item preview" />
+
+                        </Border>
+                    </Border>
+
+                    <!--  Available modidifers  -->
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="4"
+                        Padding="4,8"
+                        Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                        Classes="ToolContainer">
+                        <Grid Margin="4,8" RowDefinitions="auto *">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Classes="headline5"
+                                Text="Add Modifiers" />
+                            <Border
+                                Grid.Row="1"
+                                Padding="0,4"
+                                Background="{DynamicResource MaterialPaperBrush}"
+                                BorderBrush="{DynamicResource MaterialDividerBrush}"
+                                BorderThickness="1"
+                                Classes="ToolContainer"
+                                CornerRadius="0 12">
+                                <ScrollViewer>
+                                    <StackPanel HorizontalAlignment="Center" Spacing="3">
+                                        <Button
+                                            Classes="accent"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="FontSize"
+                                            Content="Text Size"
+                                            IsVisible="{Binding Rule.UseFontSize, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="accent"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="Colors"
+                                            Content="Colors"
+                                            IsVisible="{Binding Rule.UseAnyColor, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                                        <Button
+                                            Classes="accent"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="Beam"
+                                            Content="Beam"
+                                            IsVisible="{Binding Rule.UseBeam, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="accent"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="Icon"
+                                            Content="Icon"
+                                            IsVisible="{Binding Rule.UseMinimapIcon, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="accent"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="Sound"
+                                            Content="Sound "
+                                            IsVisible="{Binding Rule.UseSound, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="ClassFilter"
+                                            Content="Class"
+                                            IsVisible="{Binding Rule.UseClassFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="TypeFilter"
+                                            Content="Name"
+                                            IsVisible="{Binding Rule.UseNameFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="RarityFilter"
+                                            Content="Rarity"
+                                            IsVisible="{Binding Rule.UseRarityFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="StackFilter"
+                                            Content="Stack count"
+                                            IsVisible="{Binding Rule.UseStackFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="ItemLevelFilter"
+                                            Content="Item Level"
+                                            IsVisible="{Binding Rule.UseItemLevelFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="DropLevelFilter"
+                                            Content="Drop Level "
+                                            IsVisible="{Binding Rule.UseDropLevelFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="AreaLevelFilter"
+                                            Content="AreaLevel "
+                                            IsVisible="{Binding Rule.UseAreaLevelFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="QualityFilter"
+                                            Content="Quality"
+                                            IsVisible="{Binding Rule.UseQualityFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="SocketFilter"
+                                            Content="Sockets"
+                                            IsVisible="{Binding Rule.UseSocketFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="ArmorFilter"
+                                            Content="Base Armor"
+                                            IsVisible="{Binding Rule.UseArmorFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="EvasionFilter"
+                                            Content="Base Evasion"
+                                            IsVisible="{Binding Rule.UseEvasionFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <Button
+                                            Classes="light"
+                                            Command="{Binding AddModifierCommand}"
+                                            CommandParameter="ESFilter"
+                                            Content="Base ES"
+                                            IsVisible="{Binding Rule.UseESFilter, Converter={StaticResource negBool}}"
+                                            Theme="{StaticResource MaterialOutlineButton}" />
+
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <!--  APPlied modifiers  -->
+                    <Border
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2"
+                        Margin="4"
+                        Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                        Classes="ToolContainer">
+                        <Grid Margin="4,8" RowDefinitions="auto *">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Classes="headline5"
+                                Text="Modifiers" />
+                            <Border Grid.Row="1">
+                                <ListBox
+                                    Classes="Container"
+                                    CornerRadius="0 12"
+                                    ItemsSource="{Binding Rule.Modifiers}"
+                                    SelectedItem="{Binding SelectedModifier, Mode=TwoWay}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="4"
+                        Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                        Classes="ToolContainer">
+                        <Grid>
+                            <ContentControl Content="{Binding CurrentModifierEditor}" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
+
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,89 @@
+<Application
+    x:Class="FilterDM.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FilterDM"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:templates="clr-namespace:ColorPicker.AvaloniaUI.Templates;assembly=ColorPicker.AvaloniaUI"
+    xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
+    RequestedThemeVariant="Dark">
+    <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+
+
+    <Application.Styles>
+        <themes:MaterialTheme
+            BaseTheme="Dark"
+            PrimaryColor="Blue"
+            SecondaryColor="Orange" />
+        <materialIcons:MaterialIconStyles />
+        <templates:SimpleColorPickerTheme />
+
+
+
+        <Style Selector="Border.ToolContainer">
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="CornerRadius" Value="12" />
+        </Style>
+
+        <Style Selector="ListBox.Container">
+            <Setter Property="Background" Value="{DynamicResource MaterialPaperBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDividerBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style Selector="ScrollViewer.Container">
+            <Setter Property="Background" Value="{DynamicResource MaterialPaperBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDividerBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+    </Application.Styles>
+
+    <Application.Resources>
+        <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border
+                        x:Name="PART_Root"
+                        Background="Transparent"
+                        RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </Border.RenderTransform>
+
+                        <ContentPresenter
+                            x:Name="PART_ContentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style Selector="^:pressed">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="0.95" ScaleY="0.95" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ControlTheme>
+    </Application.Resources>
+
+</Application>

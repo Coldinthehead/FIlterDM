@@ -1,0 +1,92 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.DecoratorsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:DecoratorsViewModel"
+    mc:Ignorable="d">
+
+    <Grid RowDefinitions="* * *">
+        <Grid Grid.Row="0" ColumnDefinitions="* * *">
+            <ToggleSwitch
+                Grid.Column="0"
+                Classes="accent"
+                Content="Beam" />
+            <ToggleSwitch
+                Grid.Column="1"
+                Classes="accent"
+                Content="Permanent" />
+            <ComboBox
+                Grid.Column="2"
+                p1:ComboBoxAssist.Label="Color"
+                ItemsSource="{Binding BeamColors}"
+                SelectedItem="{Binding SelectedBeamColor}"
+                Theme="{StaticResource MaterialOutlineComboBox}" />
+        </Grid>
+        <!--  Minimap icon  -->
+        <Grid Grid.Row="1" ColumnDefinitions="* * * * ">
+            <ToggleSwitch
+                Grid.Column="0"
+                Classes="accent"
+                Content="Mimimap Icon" />
+            <ComboBox
+                Grid.Column="1"
+                p1:ComboBoxAssist.Label="Size"
+                ItemsSource="{Binding IconSizes}"
+                SelectedItem="{Binding SelectedIconSize}"
+                Theme="{StaticResource MaterialOutlineComboBox}" />
+
+            <ComboBox
+                Grid.Column="2"
+                p1:ComboBoxAssist.Label="Color"
+                ItemsSource="{Binding BeamColors}"
+                SelectedItem="{Binding SelectedIconColor}"
+                Theme="{StaticResource MaterialOutlineComboBox}" />
+
+            <ComboBox
+                Grid.Column="3"
+                p1:ComboBoxAssist.Label="Shape"
+                ItemsSource="{Binding IconShapes}"
+                SelectedItem="{Binding SelectedShape}"
+                Theme="{StaticResource MaterialOutlineComboBox}" />
+        </Grid>
+
+        <!--  Sound  -->
+
+        <Grid Grid.Row="2" ColumnDefinitions="* * 2* ">
+            <ToggleSwitch
+                Grid.Column="0"
+                Classes="accent"
+                Content="Sound" />
+            <ComboBox
+                Grid.Column="1"
+                p1:ComboBoxAssist.Label="Sound"
+                ItemsSource="{Binding Sounds}"
+                SelectedItem="{Binding SelectedSound}"
+                Theme="{StaticResource MaterialOutlineComboBox}" />
+
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock Text="Volume" />
+                <Slider
+                    Width="150"
+                    Margin="12,0,12,0"
+                    Classes="Discrete Accent"
+                    IsSnapToTickEnabled="True"
+                    Maximum="300"
+                    Minimum="0"
+                    TickFrequency="1"
+                    TickPlacement="TopLeft" />
+                <TextBlock Text="300" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

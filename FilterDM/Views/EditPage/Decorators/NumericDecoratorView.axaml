@@ -1,0 +1,41 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.Decorators.NumericDecoratorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.Decorators"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:NumericDecoratorViewModel"
+    mc:Ignorable="d">
+    <Grid ColumnDefinitions="auto * auto">
+        <TextBlock
+            VerticalAlignment="Center"
+            Classes="headline5"
+            Text="{Binding ShortTitle}" />
+
+        <TextBlock
+            Grid.Column="1"
+            Padding="16,0,0,0"
+            VerticalAlignment="Center"
+            Classes="headline6"
+            Text="{Binding ValueRepr}" />
+
+        <Button
+            Grid.Column="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Classes="Icon"
+            Command="{Binding DeleteMeCommand}">
+            <Button.Content>
+                <materialIcons:MaterialIcon
+                    Width="24"
+                    Height="24"
+                    Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                    Kind="TrashCan" />
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

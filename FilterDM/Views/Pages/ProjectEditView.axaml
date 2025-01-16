@@ -1,0 +1,129 @@
+<UserControl
+    x:Class="FilterDM.Views.Pages.ProjectEditView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="using:FilterDM.Convertors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:FilterDM.ViewModels.Pages"
+    xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+    xmlns:ev="using:FilterDM.Views.EditPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:styles="using:Material.Styles.Controls"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    x:DataType="data:ProjectEditViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Styles>
+        <Style Selector="Button.TopOpt">
+            <Setter Property="Theme" Value="{StaticResource MaterialOutlineButton}" />
+        </Style>
+
+    </UserControl.Styles>
+
+    <Design.DataContext>
+        <data:ProjectEditViewModel />
+    </Design.DataContext>
+
+
+    <UserControl.Resources>
+        <conv:BoolNegationConvertor x:Key="negBool" />
+
+
+
+    </UserControl.Resources>
+
+    <Grid Margin="4" RowDefinitions="auto * auto">
+        <!--  Page title  -->
+        <Border
+            Padding="4,8"
+            Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+            CornerRadius="12">
+            <Grid Margin="12" ColumnDefinitions="auto  *">
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock
+                        MaxWidth="800"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Classes="headline3"
+                        Text="{Binding Name}" />
+                    <TextBlock
+                        Classes="headline3"
+                        IsVisible="{Binding Changes}"
+                        Text="*" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,12,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="8">
+
+
+                    <Button
+                        Classes="light"
+                        Command="{Binding NewFilterCommand}"
+                        Content="Create New"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+                    <Button
+                        Classes="light"
+                        Command="{Binding LoadCommand}"
+                        Content="Open"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+
+                    <Button
+                        Classes="light"
+                        Command="{Binding SaveCurrentCommand}"
+                        Content="Save"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+                    <Button
+                        Classes="light"
+                        Command="{Binding SaveAsCommand}"
+                        Content="Save as"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+
+                    <Button
+                        Classes="light"
+                        Command="{Binding ParseCommand}"
+                        Content="Import"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+
+                    <Button
+                        Classes="light"
+                        Command="{Binding ExportCommand}"
+                        Content="Export"
+                        Theme="{StaticResource MaterialOutlineButton}" />
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--  Page content  -->
+        <Border
+            Grid.Row="1"
+            Padding="4,8"
+            Background="{DynamicResource MaterialPaperBrush}"
+            CornerRadius="12">
+            <Grid ColumnDefinitions="auto 8 *">
+
+                <ContentControl Grid.Column="0" Content="{Binding FilterTree}" />
+                <ContentControl Grid.Column="2" Content="{Binding EditorPanel}" />
+
+            </Grid>
+        </Border>
+
+
+        <Border
+            Grid.Row="2"
+            Padding="4,8"
+            Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+            CornerRadius="12">
+            <TextBlock HorizontalAlignment="Center" />
+        </Border>
+
+    </Grid>
+
+
+</UserControl>

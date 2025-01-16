@@ -1,0 +1,55 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.Decorators.MapIconDecoratorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.Decorators"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MapIconDecoratorViewModel"
+    mc:Ignorable="d">
+    <Grid ColumnDefinitions="auto * auto">
+        <TextBlock
+            VerticalAlignment="Center"
+            Classes="headline5"
+            Text="Icon" />
+
+        <StackPanel
+            Grid.Column="1"
+            Margin="16,0,0,0"
+            Orientation="Horizontal"
+            Spacing="4">
+            <TextBlock
+                VerticalAlignment="Center"
+                Classes="body2"
+                Text="{Binding Rule.SelectedIconSize}" />
+            <TextBlock
+                VerticalAlignment="Center"
+                Classes="body2"
+                Text="{Binding Rule.SelectedIconColor}" />
+
+            <TextBlock
+                VerticalAlignment="Center"
+                Classes="body2"
+                Text="{Binding Rule.SelectedShape}" />
+
+        </StackPanel>
+
+        <Button
+            Grid.Column="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Classes="Icon"
+            Command="{Binding DeleteMeCommand}">
+            <Button.Content>
+                <materialIcons:MaterialIcon
+                    Width="24"
+                    Height="24"
+                    Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                    Kind="TrashCan" />
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

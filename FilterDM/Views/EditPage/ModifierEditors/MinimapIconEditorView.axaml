@@ -1,0 +1,51 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.MinimapIconEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MinimapIconEditorViewModel"
+    mc:Ignorable="d">
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid HorizontalAlignment="Center" RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="Minimap Icon" />
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Border Margin="16">
+                    <ComboBox
+                        Width="150"
+                        p1:ComboBoxAssist.Label="Size"
+                        ItemsSource="{Binding Rule.IconSizes}"
+                        SelectedItem="{Binding Rule.SelectedIconSize}"
+                        Theme="{StaticResource MaterialOutlineComboBox}" />
+
+                </Border>
+                <Border Margin="16">
+                    <ComboBox
+                        Width="150"
+                        p1:ComboBoxAssist.Label="Color"
+                        ItemsSource="{Binding Rule.BeamColors}"
+                        SelectedItem="{Binding Rule.SelectedIconColor}"
+                        Theme="{StaticResource MaterialOutlineComboBox}" />
+
+                </Border>
+                <Border Margin="16">
+                    <ComboBox
+                        Width="150"
+                        p1:ComboBoxAssist.Label="Shape"
+                        ItemsSource="{Binding Rule.IconShapes}"
+                        SelectedItem="{Binding Rule.SelectedShape}"
+                        Theme="{StaticResource MaterialOutlineComboBox}" />
+
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

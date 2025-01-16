@@ -1,0 +1,113 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.ColorEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI"
+    xmlns:conv="clr-namespace:FilterDM.Convertors;assembly=FilterDM"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:ColorEditorViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:SolidRGBConvertor x:Key="rbgToB" />
+        <SolidColorBrush x:Key="ThemeBackgroundBrush">#789094</SolidColorBrush>
+    </UserControl.Resources>
+
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="Colors" />
+
+            <Grid
+                Grid.Row="1"
+                Margin="50,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                ColumnDefinitions="* * "
+                RowDefinitions="* * * ">
+
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="12">
+                    <TextBlock Classes="headline5" Text="Font" />
+                    <ToggleSwitch
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Classes="LeftHeader"
+                        IsChecked="{Binding Rule.UseFontColor}">
+                        <ToggleSwitch.Content />
+                    </ToggleSwitch>
+                </StackPanel>
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Classes="DecoratorItem"
+                    IsVisible="{Binding Rule.UseFontColor}">
+                    <colorPicker:PortableColorPicker
+                        Width="52"
+                        Height="52"
+                        SelectedColor="{Binding Rule.TextColor, Mode=TwoWay}" />
+                </Border>
+
+
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="12">
+
+
+                    <TextBlock Classes="headline5" Text="Background" />
+                    <ToggleSwitch IsChecked="{Binding Rule.UseBackColor}" />
+                </StackPanel>
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    IsVisible="{Binding Rule.UseBackColor}">
+                    <colorPicker:PortableColorPicker
+                        Width="52"
+                        Height="52"
+                        SelectedColor="{Binding Rule.BackColor, Mode=TwoWay}" />
+                </Border>
+
+
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="12">
+                    <TextBlock Classes="headline5" Text="Border" />
+                    <ToggleSwitch
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        IsChecked="{Binding Rule.UseBorderColor}">
+                        <ToggleSwitch.Content />
+                    </ToggleSwitch>
+                </StackPanel>
+                <Border
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    IsVisible="{Binding Rule.UseBorderColor}">
+                    <colorPicker:PortableColorPicker
+                        Width="52"
+                        Height="52"
+                        SelectedColor="{Binding Rule.BorderColor, Mode=TwoWay}" />
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

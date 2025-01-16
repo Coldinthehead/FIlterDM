@@ -1,0 +1,86 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.ModifierEditors.BeamEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:FilterDM.Convertors;assembly=FilterDM"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:BeamEditorViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:SolidRGBConvertor x:Key="rbgToB" />
+    </UserControl.Resources>
+
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="Beam" />
+
+            <Grid
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                ColumnDefinitions="* * "
+                RowDefinitions="* * ">
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="16"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="12">
+                    <TextBlock Classes="headline5" Text="Permanent" />
+                    <ToggleSwitch
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Classes="LeftHeader"
+                        IsChecked="{Binding Rule.IsBeamPermanent}">
+                        <ToggleSwitch.Content />
+                    </ToggleSwitch>
+                </StackPanel>
+
+
+                <StackPanel
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Border Margin="16">
+                        <ComboBox
+                            x:Name="ColorBox"
+                            Width="150"
+                            p1:ComboBoxAssist.Label="Color"
+                            ItemsSource="{Binding Rule.BeamColors}"
+                            SelectedItem="{Binding Rule.SelectedBeamColor}"
+                            Theme="{StaticResource MaterialOutlineComboBox}" />
+
+                    </Border>
+
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        BorderBrush="Black"
+                        BorderThickness="2">
+                        <Rectangle
+                            Width="35"
+                            Height="35"
+                            Fill="{Binding Rule.SelectedBeamRGB, Converter={StaticResource rbgToB}}" />
+                    </Border>
+
+                </StackPanel>
+            </Grid>
+
+
+        </Grid>
+    </Border>
+</UserControl>

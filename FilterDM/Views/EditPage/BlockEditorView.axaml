@@ -1,0 +1,228 @@
+<UserControl
+    x:Class="FilterDM.Views.EditPage.BlockEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Material.Styles.Controls"
+    xmlns:conv="using:FilterDM.Convertors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+    xmlns:vm="using:FilterDM.ViewModels.EditPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:BlockEditorViewModel"
+    mc:Ignorable="d">
+
+
+
+    <UserControl.Resources>
+        <conv:SolidRGBConvertor x:Key="rgbToB" />
+        <conv:BoolNegationConvertor x:Key="negBool" />
+        <conv:HalfFontSizeConvertor x:Key="halfSize" />
+    </UserControl.Resources>
+
+
+    <Border Background="{DynamicResource MaterialCardBackgroundBrush}" Classes="ToolContainer">
+        <Grid ColumnDefinitions="*, auto" RowDefinitions="auto *">
+            <TextBlock
+                Grid.Row="0"
+                Padding="4,2"
+                Classes="headline4"
+                Text="{Binding Block.Title}" />
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Padding="12"
+                Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                Classes="ToolContainer">
+
+                <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+                    <Grid ColumnDefinitions="* auto" RowDefinitions="* * *">
+
+                        <Grid Grid.Column="0" ColumnDefinitions="* * *">
+                            <TextBox
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Width="225"
+                                Margin="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Classes="outline"
+                                Text="{Binding Block.Title, Mode=TwoWay}"
+                                Theme="{StaticResource OutlineTextBox}"
+                                UseFloatingWatermark="False"
+                                Watermark="Title" />
+
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="8"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Classes="headline6"
+                                    Text="Priority" />
+                                <NumericUpDown
+                                    Width="100"
+                                    Height="35"
+                                    MinWidth="100"
+                                    ButtonSpinnerLocation="Right"
+                                    Increment="100"
+                                    Minimum="0"
+                                    Theme="{StaticResource OutlineNumericUpDown}"
+                                    Value="{Binding Block.Priority, Mode=TwoWay}" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal"
+                                Spacing="4">
+                                <TextBlock Classes="headline6" Text="Enabled" />
+                                <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Block.Enabled, Mode=TwoWay}">
+                                    <ToggleSwitch.Content />
+                                </ToggleSwitch>
+                            </StackPanel>
+                        </Grid>
+
+                        <ComboBox
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            Width="225"
+                            Margin="8"
+                            HorizontalAlignment="Center"
+                            p1:ComboBoxAssist.Label="Preset"
+                            ItemsSource="{Binding Templates}"
+                            SelectedItem="{Binding SelectedTempalte}"
+                            Theme="{StaticResource MaterialOutlineComboBox}" />
+
+                        <StackPanel
+                            Grid.Row="2"
+                            Margin="8"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="16">
+                            <Button
+                                Classes="accent"
+                                Command="{Binding ApplyChangesCommand}"
+                                Content="Apply"
+                                Theme="{StaticResource MaterialOutlineButton}" />
+
+
+                            <Button
+                                Classes="light"
+                                Command="{Binding ResetCommand}"
+                                Content="Reset"
+                                Theme="{StaticResource MaterialOutlineButton}" />
+
+                        </StackPanel>
+                    </Grid>
+
+                </Border>
+            </Border>
+
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="4,0,0,0"
+                Padding="12,4,12,12"
+                Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                Classes="ToolContainer">
+                <Grid RowDefinitions="auto  *">
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="4,8"
+                        Orientation="Horizontal"
+                        Spacing="4">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="headline5"
+                            Text="Rules" />
+                        <Button
+                            Grid.Row="0"
+                            Classes="Icon"
+                            Command="{Binding Block.NewRuleCommand}">
+                            <Button.Content>
+                                <materialIcons:MaterialIcon
+                                    Width="24"
+                                    Height="24"
+                                    Foreground="{DynamicResource MaterialSecondaryLightBrush}"
+                                    Kind="PlusCircleOutline" />
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+
+                    <Border Grid.Row="1">
+                        <ListBox
+                            Width="350"
+                            Classes="Container"
+                            CornerRadius="0 12"
+                            ItemsSource="{Binding Block.Rules}"
+                            SelectedItem="{Binding SelectedRule, Mode=TwoWay}"
+                            SelectionMode="Single">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,24,0" ColumnDefinitions="auto *">
+                                        <StackPanel
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="16">
+                                            <TextBlock
+                                                MaxWidth="120"
+                                                Padding="2,2"
+                                                Classes="headline6"
+                                                Text="{Binding Title}" />
+
+                                            <Border
+                                                Padding="8,4"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Background="{Binding BackColor, Converter={StaticResource rgbToB}}"
+                                                BorderBrush="{Binding BorderColor, Converter={StaticResource rgbToB}}"
+                                                BorderThickness="3">
+                                                <TextBlock
+                                                    FontSize="{Binding FontSize, Converter={StaticResource halfSize}}"
+                                                    Foreground="{Binding TextColor, Converter={StaticResource rgbToB}}"
+                                                    Text="Item preview" />
+
+                                            </Border>
+
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Spacing="">
+                                            <Button
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Classes="Icon"
+                                                Command="{Binding DeleteMeCommand}"
+                                                ToolTip.Tip="Delete Rule">
+                                                <Button.Content>
+                                                    <materialIcons:MaterialIcon
+                                                        Width="24"
+                                                        Height="24"
+                                                        Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                                                        Kind="TrashCan" />
+                                                </Button.Content>
+                                            </Button>
+
+                                            <TextBlock
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
+                                                Classes="body2"
+                                                Text="{Binding Modifiers.Count}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+
+</UserControl>
