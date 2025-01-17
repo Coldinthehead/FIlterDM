@@ -15,6 +15,12 @@ public class ProjectRepositoryService : IInit
 
     private Dictionary<string, FilterModel> _models;
 
+    private JsonSerializerOptions _saveOptions = new JsonSerializerOptions()
+    {
+        WriteIndented = true,
+        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+    };
+
     public async Task Init()
     {
         var filters = Directory.GetFiles(RepositoryPath);
@@ -27,7 +33,7 @@ public class ProjectRepositoryService : IInit
                 _models[model.Name]=  model;
             }
         });
-        Task.WaitAll(tasks);
+        await Task.WhenAll(tasks);
     }
 
     public List<string> GetProjectNames => [.. _models.Keys];
@@ -42,12 +48,7 @@ public class ProjectRepositoryService : IInit
     {
         var filename = GetFullName(model.Name);
         using var fs = File.Create(filename);
-        var opt = new JsonSerializerOptions()
-        {
-            WriteIndented = true,
-            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
-        };
-        await JsonSerializer.SerializeAsync<FilterModel>(fs, model, opt);
+        await JsonSerializer.SerializeAsync<FilterModel>(fs, model, _saveOptions);
     }
 
     private async Task<FilterModel> LoadModelFromFileAsync(string filePath)
