@@ -2,6 +2,7 @@
 using FilterDM.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace FilterDM;
@@ -14,12 +15,19 @@ internal sealed class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        try
+        {
 
         BuildAvaloniaApp()
         .StartWithClassicDesktopLifetime(args);
-
-
-
+        }
+        catch (Exception ex)
+        {
+            using var fs = File.Create($"{DateTime.Now}_crash.txt");
+            using var sw = new StreamWriter(fs);
+            sw.Write(ex.Message);
+            sw.Close();
+        }
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
