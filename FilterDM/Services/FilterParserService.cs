@@ -1,17 +1,12 @@
-﻿using Avalonia.Controls.Platform;
-using Avalonia.Media;
+﻿using Avalonia.Media;
 using FilterCore.Parser;
 using FilterDM.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
-
 namespace FilterDM.Services;
-
 
 public struct ImportResult
 {
@@ -461,6 +456,12 @@ public class FilterParserService
         {
             model.Title = "decorator";
         }
+
+        if (model.Title == "")
+        {
+            model.Title = "unknown";
+        }
+
         return model;
     }
 }

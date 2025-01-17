@@ -196,6 +196,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
                 var model = result.Model;
                 model.Name = Path.GetFileNameWithoutExtension(file.Path.LocalPath);
                 OnEnter(model);
+                await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter imported with {result.ParseResult.Result.Count} Rules");
             }
             else
             {
