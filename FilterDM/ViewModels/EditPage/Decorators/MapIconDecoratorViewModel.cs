@@ -60,7 +60,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         Colors = _staticColors;
         SelectedIconColor = Colors[0];
         SelectedIconSize = IconSizes[0];
-        SelectedShape = IconSizes[0];
+        SelectedShape = IconShapes[0];
     }
 
     public override void Apply(RuleModel model)

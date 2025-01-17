@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using FilterDM.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace FilterDM.Services;
@@ -49,4 +50,22 @@ public class DialogService
         return result;
     }
 
+    internal async Task<bool> ShowError(string message)
+    {
+        var viewModel = new OkDialogViewModel()
+        {
+            Message = message,
+        };
+
+        // Ініціалізація діалогу
+        var dialog = new ErrorWindow
+        {
+            DataContext = viewModel // Прив'язуємо ViewModel до вікна
+        };
+
+        // Показуємо діалогове вікно і чекаємо результат
+        var result = await dialog.ShowDialog<bool>(_target);
+        return result;
+
+    }
 }

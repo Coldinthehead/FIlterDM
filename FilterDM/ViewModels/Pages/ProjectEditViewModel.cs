@@ -74,8 +74,12 @@ public partial class ProjectEditViewModel : ObservableRecipient
             {
                 App.Current.Services.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);
                 var str = App.Current.Services.GetService<CoreFilterService>().Build(_model);
-                using var fs = File.Create(file.Path.LocalPath);
-                /* File.WriteAllText(file.Path.LocalPath, str);*/
+                var path = file.Path.LocalPath;
+                if (!Path.HasExtension(path) || !Path.GetExtension(path).Equals("filter"))
+                {
+                    path = Path.ChangeExtension(path, "filter");
+                }
+                using var fs = File.Create(path);
                 using var sr = new StreamWriter(fs);
                 sr.Write(str);
                 await App.Current.Services.GetService<DialogService>().ShowOkDialog("Filter Exported!");

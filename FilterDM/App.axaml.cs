@@ -39,7 +39,6 @@ public partial class App : Application
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
 
-
             IServiceCollection container = new ServiceCollection();
             var mainVm = new MainWindowViewModel();
             desktop.MainWindow = new MainWindow()
@@ -59,6 +58,7 @@ public partial class App : Application
             container.BindService<SaveFilterService>();
             Services = container.BuildServiceProvider();
 
+
             IEnumerable<IInit> initialiable = Services.GetServices<IInit>();
             List<Task> tasts = new();
             foreach (var i in initialiable)
@@ -68,10 +68,12 @@ public partial class App : Application
             await Task.WhenAll(tasts);
 
             mainVm.EnterProjectsPage();
+
         }
 
         base.OnFrameworkInitializationCompleted();
     }
+
 
     private void DisableAvaloniaDataAnnotationValidation()
     {
