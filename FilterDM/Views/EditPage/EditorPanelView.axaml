@@ -23,7 +23,7 @@
 
         <TabControl.ItemTemplate>
             <DataTemplate x:DataType="vm:EditorBaseViewModel">
-                <Grid Margin="8,4" ColumnDefinitions="auto, auto">
+                <StackPanel Margin="8,4" Orientation="Horizontal">
                     <TextBlock
                         Width="120"
                         Padding="8,4"
@@ -31,20 +31,19 @@
                         Classes="body1"
                         Text="{Binding Content.Title, Mode=TwoWay}" />
                     <Button
-                        Grid.Column="1"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Classes="Icon"
                         Command="{Binding CloseMeCommand}">
                         <Button.Content>
                             <materialIcons:MaterialIcon
-                                Width="20"
-                                Height="20"
+                                Width="24"
+                                Height="24"
                                 Foreground="{DynamicResource MaterialPrimaryMidBrush}"
                                 Kind="CloseCircleOutline" />
                         </Button.Content>
                     </Button>
-                </Grid>
+                </StackPanel>
             </DataTemplate>
         </TabControl.ItemTemplate>
 
