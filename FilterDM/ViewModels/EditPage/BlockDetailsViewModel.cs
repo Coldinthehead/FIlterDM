@@ -6,7 +6,6 @@ using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -116,7 +115,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [ObservableProperty]
     private bool _isSelected;
 
-    partial void OnTitleChanged(string? value)
+    partial void OnTitleChanged(string value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
@@ -188,7 +187,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     }
 
 
-
     [RelayCommand]
     public async void DeleteBlock()
     {
@@ -208,8 +206,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
     }
 
-
-
     [RelayCommand]
     public void NewRule()
     {
@@ -218,8 +214,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         var vm = AddRule(model);
         Messenger.Send(new RuleCreateRequestEvent(vm));
     }
-
-
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
@@ -236,7 +230,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
         _scopeManager = new(TypeDecoratorViewModel.BuildEmptyList());
     }
-
 
     public BlockModel GetModel()
     {
@@ -298,7 +291,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             {
                 _scopeManager.RemoveByRule(rule);
             }
-
             return true;
         }
         return false;
@@ -307,13 +299,8 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void AddRule(RuleDetailsViewModel rule)
     {
         rule.Properties.Title = GetNextTitle(rule.Properties.Title);
-
         Rules.Add(rule);
-
-
         _scopeManager.AddByExistingRule(rule);
-
-
         SortRules();
     }
 
@@ -343,7 +330,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             else
             {
                 return res;
-
             }
         }
     }
