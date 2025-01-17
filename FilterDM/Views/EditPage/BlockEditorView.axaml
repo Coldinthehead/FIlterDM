@@ -9,8 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
     xmlns:vm="using:FilterDM.ViewModels.EditPage"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
     x:DataType="vm:BlockEditorViewModel"
     mc:Ignorable="d">
 
@@ -39,9 +39,9 @@
                 Classes="ToolContainer">
 
                 <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
-                    <Grid ColumnDefinitions="* auto" RowDefinitions="* * *">
+                    <Grid ColumnDefinitions="* auto" RowDefinitions="* * * *">
 
-                        <Grid Grid.Column="0" ColumnDefinitions="* * *">
+                        <Grid Grid.Column="0" ColumnDefinitions="* * * ">
                             <TextBox
                                 Grid.Row="0"
                                 Grid.Column="0"
@@ -98,8 +98,26 @@
                             SelectedItem="{Binding Block.SelectedTempalte}"
                             Theme="{StaticResource MaterialOutlineComboBox}" />
 
+
+                        <StackPanel Grid.Row="2">
+
+                            <StackPanel
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal"
+                                Spacing="4">
+                                <TextBlock
+                                    Classes="headline6"
+                                    Text="'BlockScope' Names"
+                                    ToolTip.Tip="When used , item name can be selected only once." />
+                                <ToggleSwitch Classes="LeftHeader" IsChecked="{Binding Block.UseScopeNames}">
+                                    <ToggleSwitch.Content />
+                                </ToggleSwitch>
+                            </StackPanel>
+                        </StackPanel>
+
                         <StackPanel
-                            Grid.Row="2"
+                            Grid.Row="3"
                             Margin="8"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"

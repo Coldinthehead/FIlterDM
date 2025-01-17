@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
+using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -51,6 +52,10 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     [ObservableProperty]
     private string _selectedTempalte;
+
+
+    [ObservableProperty]
+    private bool _useScopeNames;
 
     [RelayCommand]
     private async void Reset()
@@ -226,4 +231,26 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
     }
 
+  
+
+    public TypeDecoratorViewModel GetScoperdDecorator(RuleDetailsViewModel vm)
+    {
+        TypeDecoratorViewModel decorator = new(vm, vm.RemoveTypeFilter);
+
+        decorator.InitializeFromScope();
+
+        return decorator;
+    }
+
+    internal TypeDecoratorViewModel GetTypeDecorator(RuleDetailsViewModel vm)
+    {
+        return GetDefaultDecorator(vm);  
+    }
+
+    public TypeDecoratorViewModel GetDefaultDecorator(RuleDetailsViewModel vm)
+    {
+        TypeDecoratorViewModel decorator = new(vm, vm.RemoveTypeFilter);
+        decorator.InitalizeList();
+        return decorator;
+    }
 }

@@ -105,20 +105,30 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
     public TypeDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
 
-        Dictionary<string, List<ItemTypeDetails>> types = App.Current!.Services!.GetRequiredService<ItemTypeService>().GetItemTypes();
+        
+    }
+
+    public void InitalizeScoped(List<TypeListViewModel> categories)
+    {
+
+    }
+
+    public void InitalizeList()
+    {
+        Dictionary<string, List<ItemTypeDetails>> IterCategories = App.Current!.Services!.GetRequiredService<ItemTypeService>().GetItemTypes();
         List<TypeListViewModel> typeModels = [];
         List<TypeViewModel> selected = [];
-        foreach (string typename in  types.Keys)
+        foreach (string category in IterCategories.Keys)
         {
             TypeListViewModel vm = new();
-            vm.Title = typename;
+            vm.Title = category;
             List<TypeViewModel> typeItemList = [];
-            foreach (ItemTypeDetails detail in types[typename])
+            foreach (ItemTypeDetails detail in IterCategories[category])
             {
                 TypeViewModel typeModel = new()
                 {
                     Name = detail.Name,
-                    Description = detail.Tip != string.Empty ? detail.Tip :  "No Tip :(",
+                    Description = detail.Tip != string.Empty ? detail.Tip : "No Tip :(",
                 };
                 typeItemList.Add(typeModel);
             }

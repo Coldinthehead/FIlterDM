@@ -213,7 +213,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public TypeDecoratorViewModel AddTypeFilter()
     {
-        TypeDecoratorViewModel vm = new TypeDecoratorViewModel(this, RemoveTypeFilter);
+        TypeDecoratorViewModel vm = Properties.RealParent.GetTypeDecorator(this);
         UseNameFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
@@ -222,14 +222,14 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public void AddTypeFilter(TypeConditionModel condition)
     {
-        TypeDecoratorViewModel vm = new TypeDecoratorViewModel(this, RemoveTypeFilter);
+        TypeDecoratorViewModel vm = Properties.RealParent.GetTypeDecorator(this);
         vm.SetModel(condition);
         UseNameFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
-    private void RemoveTypeFilter(ModifierViewModelBase modifier)
+    public void RemoveTypeFilter(ModifierViewModelBase modifier)
     {
         if (Modifiers.Remove(modifier) && modifier is TypeDecoratorViewModel condition)
         {
