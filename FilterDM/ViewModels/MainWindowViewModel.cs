@@ -3,6 +3,7 @@ using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.Pages;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace FilterDM.ViewModels;
 
@@ -52,6 +53,8 @@ public partial class MainWindowViewModel : ViewModelBase
         var model = new FilterModel()
         {
             Name = filterName,
+            ID = Guid.NewGuid(),
+            LastSaveDate = DateTime.Now
         };
 
         var filterRepos = App.Current.Services.GetService<ProjectRepositoryService>();

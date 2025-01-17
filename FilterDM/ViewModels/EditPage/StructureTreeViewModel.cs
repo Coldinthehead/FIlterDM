@@ -36,9 +36,10 @@ public partial class StructureTreeViewModel : ObservableRecipient
     private void NewBlock()
     {
         var model = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
-        model.Title = _model.GetGenericBlockTitle();
+        model.Title = GetGenericBlockTitle();
         var b = new BlockDetailsViewModel(Blocks);
         b.SetModel(model);
+        Blocks.Add(b);
         Messenger.Send(new BlockCreatedRequestEvent(b));
     }
 
@@ -73,6 +74,21 @@ public partial class StructureTreeViewModel : ObservableRecipient
 
         Blocks = next;
     }
+
+    public string GetGenericBlockTitle()
+    {
+        int i = 1;
+        string title = "Block(0)";
+
+        while (BlockTitleTaken(title))
+        {
+            title = $"Block({i++})";
+        }
+        return title;
+    }
+
+    private bool BlockTitleTaken(string title)
+    => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
 
     internal void SortBlocks()
     {

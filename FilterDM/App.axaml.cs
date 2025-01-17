@@ -56,6 +56,7 @@ public partial class App : Application
             container.BindService<BlockTemplateService>();
             container.BindService<CoreFilterService>();
             container.BindService<FilterParserService>();
+            container.BindService<SaveFilterService>();
             Services = container.BuildServiceProvider();
 
             IEnumerable<IInit> initialiable = Services.GetServices<IInit>();

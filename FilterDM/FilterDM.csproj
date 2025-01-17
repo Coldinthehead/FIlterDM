@@ -33,9 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\EditPage\BlockToolbarView.axaml.cs">
-      <DependentUpon>BlockToolbarView.axaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\EditPage\DecoratorsView.axaml.cs">
       <DependentUpon>DecoratorsView.axaml</DependentUpon>
     </Compile>

@@ -40,20 +40,9 @@ public class FilterModel
         return block;
     }
 
-    public string GetGenericBlockTitle()
-    {
-        int i = 1;
-        string title = "Block(0)";
+ 
 
-        while (BlockTitleTaken(title))
-        {
-            title = $"Block({i++})";
-        }
-        return title;
-    }
 
-    private bool BlockTitleTaken(string title)
-        => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
 }
 
 public class BlockModel : IEquatable<BlockModel>
