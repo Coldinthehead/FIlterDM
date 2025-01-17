@@ -100,6 +100,22 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
     {
     }
 
+    public override void Apply(RuleModel model)
+    {
+        if (UseFontColor)
+        {
+            model.AddTextColor(TextColor);
+        }
+        if (UseBackColor)
+        {
+            model.AddBackgroundColor(BackColor);
+        }
+        if (UseBorderColor)
+        {
+            model.AddBorderColor(BorderColor);
+        }
+    }
+
     internal void SetModel(RuleModel rule)
     {
         if (rule.TryGetTextColor(out Color textColor))

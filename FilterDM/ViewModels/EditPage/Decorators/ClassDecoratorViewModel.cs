@@ -65,6 +65,15 @@ public partial class ClassDecoratorViewModel : ModifierViewModelBase
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
 
+    public override void Apply(RuleModel model)
+    {
+        ClassConditionModel condition = model.AddClassCondition();
+        foreach (ClassItemViewModel item in SelectList)
+        {
+            condition.Add(item.Name);
+        }
+    }
+
     public void SetModel(ClassConditionModel model)
     {
         foreach (var item in _selectList)

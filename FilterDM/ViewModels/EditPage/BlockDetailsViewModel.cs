@@ -128,6 +128,21 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     }
 
+
+    public BlockModel GetModel()
+    {
+        BlockModel block = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
+        block.Title = Title;
+        block.Enabled = Enabled;
+        block.Priority = Priority;
+        block.TemplateName = SelectedTempalte;
+        foreach (RuleDetailsViewModel rule in Rules)
+        {
+            block.AddRule(rule.GetModel());
+        }
+        return block;
+    }
+
     public void SetModel(BlockModel model)
     {
         var currentRules = Rules.ToArray();
@@ -210,4 +225,5 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             }
         }
     }
+
 }

@@ -131,6 +131,15 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         CurrentTypeList = TypeList.First();
     }
 
+    public override void Apply(RuleModel model)
+    {
+        TypeConditionModel condition = model.AddTypeCondition();
+        foreach (var selectedItem in SelectedTypes)
+        {
+            condition.SelectedTypes.Add(selectedItem.Name);
+        }
+    }
+
     public void SetModel(TypeConditionModel model)
     {
         foreach (TypeListViewModel category in TypeList)

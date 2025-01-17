@@ -9,6 +9,8 @@ namespace FilterDM.Models;
 public class FilterModel
 {
     public string Name { get; set; }
+    public Guid ID { get; set; }    
+    public DateTime LastSaveDate { get; set; }
     public List<BlockModel> Blocks { get; set; }
 
     public FilterModel()

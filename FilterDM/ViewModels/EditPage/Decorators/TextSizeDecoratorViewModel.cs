@@ -41,6 +41,11 @@ public partial class TextSizeDecoratorViewModel : ModifierViewModelBase
     {
     }
 
+    public override void Apply(RuleModel model)
+    {
+        model.FontSize = (int)FontSize;
+    }
+
     internal void SetModel(RuleModel rule)
     {
         FontSize = rule.FontSize;

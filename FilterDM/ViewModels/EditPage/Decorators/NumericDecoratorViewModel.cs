@@ -66,6 +66,13 @@ public partial class NumericDecoratorViewModel : ModifierViewModelBase
         MaxValue = helper.MaxValue;
     }
 
+    public override void Apply(RuleModel model)
+    {
+        NumericCondition condition = model.AddNumericCondition();
+        condition.ValueName = _type.ToString();
+        condition.Number = Value;
+        condition.UseEquals = Sign;
+    }
     public void SetModel(NumericCondition model)
     {
         Value = model.Number;

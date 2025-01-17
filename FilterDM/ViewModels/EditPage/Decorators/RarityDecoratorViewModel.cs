@@ -76,6 +76,15 @@ public partial class RarityDecoratorViewModel : ModifierViewModelBase
         GenerateDescription();
     }
 
+    public override void Apply(RuleModel model)
+    {
+        RarityConditionModel rarity = model.AddRarityCondition();
+        rarity.UseNormal = UseNormal;
+        rarity.UseMagic = UseMagic;
+        rarity.UseRare = UseRare;
+        rarity.UseUnique = UseUnique;   
+    }
+
     public void SetModel(RarityConditionModel model)
     {
         UseNormal = model.UseNormal;

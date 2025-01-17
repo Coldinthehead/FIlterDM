@@ -107,6 +107,15 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         _realParent = parentBlock;
     }
 
+    public override void Apply(RuleModel model)
+    {
+        model.Title = Title;
+        model.Enabled = Enabled;
+        model.Priority = Priority;
+        model.Show = Show;
+        model.TemplateName = SelectedTemplate;
+    }
+
     internal void SetModel(RuleModel rule)
     {
         Title = rule.Title;

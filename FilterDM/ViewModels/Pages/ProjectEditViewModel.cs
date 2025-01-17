@@ -40,7 +40,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCurrentCommand))]
-    [NotifyCanExecuteChangedFor(nameof(SaveAsCommand))]
     private bool _changes = false;
     public bool CanSave()
     {
@@ -57,6 +56,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
 
     public Action BackToMenuAction { get; set; }
+
     [RelayCommand]
     private async void NewFilter()
     {
@@ -110,6 +110,8 @@ public partial class ProjectEditViewModel : ObservableRecipient
                 DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
             };
 
+            App.Current?.Services?.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);
+
             JsonSerializer.Serialize(writeStream, _model, options: opt);
             if (file is null)
                 return;
@@ -134,6 +136,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
     {
         try
         {
+            App.Current?.Services?.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);
             await App.Current.Services.GetService<ProjectRepositoryService>().SaveFilter(_model);
             _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {_model.Name} saved!");
             Changes = false;
@@ -212,8 +215,8 @@ public partial class ProjectEditViewModel : ObservableRecipient
             }
         }
        catch (Exception e)
-        {
-        }
+       {
+       }
     }
 
     public void OnEnter(FilterModel model)

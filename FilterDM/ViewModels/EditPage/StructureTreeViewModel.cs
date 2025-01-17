@@ -38,6 +38,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
         var model = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
         model.Title = _model.GetGenericBlockTitle();
         var b = new BlockDetailsViewModel(Blocks);
+        b.SetModel(model);
         Messenger.Send(new BlockCreatedRequestEvent(b));
     }
 

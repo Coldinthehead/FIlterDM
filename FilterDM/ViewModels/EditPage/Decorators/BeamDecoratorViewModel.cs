@@ -78,11 +78,21 @@ public partial class BeamDecoratorViewModel : ModifierViewModelBase
     public BeamDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
         BeamColors = _staticBeamColors;
+        SelectedBeamColor = BeamColors[0];
+        IsBeamPermanent = false;
+       
     }
 
     internal void SetModel(BeamDetails beam)
     {
         SelectedBeamColor = beam.Color;
         IsBeamPermanent = beam.IsPermanent;
+    }
+
+    public override void Apply(RuleModel model)
+    {
+        model.EnableBeam();
+        model.Beam!.Color = SelectedBeamColor;
+        model.Beam!.IsPermanent = IsBeamPermanent;
     }
 }

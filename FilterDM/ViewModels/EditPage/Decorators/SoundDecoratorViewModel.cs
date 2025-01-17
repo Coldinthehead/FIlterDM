@@ -37,8 +37,16 @@ public partial class SoundDecoratorViewModel : ModifierViewModelBase
     public SoundDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
         Sounds = new([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+        SelectedSound = Sounds[0];
+        SoundVolume = 300;
     }
 
+    public override void Apply(RuleModel model)
+    {
+        model.EnableSound();
+        model.Sound!.Sample = SelectedSound;
+        model.Sound.Volume = SoundVolume;
+    }
 
     internal void SetModel(SoundDetails sound)
     {

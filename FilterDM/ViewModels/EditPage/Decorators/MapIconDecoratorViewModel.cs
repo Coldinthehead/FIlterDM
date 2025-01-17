@@ -62,6 +62,13 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         Colors = _staticColors;
     }
 
+    public override void Apply(RuleModel model)
+    {
+        model.EnableIcon();
+        model.Icon!.Size = SelectedIconSize;
+        model.Icon.Shape = SelectedShape;
+        model.Icon.Color = SelectedIconColor;
+    }
     internal void SetModel(MinimapIconDetails icon)
     {
         SelectedIconSize = icon.Size;

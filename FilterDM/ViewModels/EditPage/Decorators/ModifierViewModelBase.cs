@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FilterDM.Models;
 using System;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
@@ -15,6 +16,8 @@ public abstract partial class ModifierViewModelBase : ObservableRecipient
     {
         DeleteCallback();
     }
+
+    public abstract void Apply(RuleModel model);
 
     protected virtual void DeleteCallback()
     {
