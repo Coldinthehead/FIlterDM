@@ -7,7 +7,7 @@ namespace FilterDM.ViewModels.EditPage.Decorators;
 
 public abstract partial class ModifierViewModelBase : ObservableRecipient
 {
-    public Action<ModifierViewModelBase> DeleteAction;
+    public Action<ModifierViewModelBase> DeleteAction { get; set; }
 
     [ObservableProperty]
     private RuleDetailsViewModel _rule;

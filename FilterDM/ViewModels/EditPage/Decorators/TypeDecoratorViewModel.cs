@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
 
@@ -18,6 +19,9 @@ public partial class TypeViewModel : ViewModelBase
 {
     [ObservableProperty]
     private bool _isSelected;
+
+    [ObservableProperty]
+    private bool _takenInScope = false;
 
     [ObservableProperty]
     private string _name;
@@ -36,6 +40,7 @@ public partial class TypeListViewModel : ViewModelBase
 
     public TypeListViewModel()
     {
+
     }
 }
      
@@ -66,14 +71,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
     [RelayCommand]
     private void TypeSelected(TypeViewModel viewModel)
     {
-        if (viewModel.IsSelected)
-        {
-            SelectedTypes.Add(viewModel);
-        }
-        else
-        {
-            SelectedTypes.Remove(viewModel);
-        }
+        TypeSelector.Invoke(viewModel);
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
 
@@ -102,49 +100,154 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
             DeleteAction.Invoke(this);
         }
     }
+
+    public Action<TypeViewModel> TypeSelector { get; set; }
+
     public TypeDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
-
-        
+        SelectedTypes = new();
+        TypeSelector = (vm) =>
+        {
+            if (vm.IsSelected)
+            {
+                SelectedTypes.Add(vm);
+            }
+            else
+            {
+                SelectedTypes.Remove(vm);
+            }
+        };
     }
 
-    public void InitalizeScoped(List<TypeListViewModel> categories)
+    public void InitalizeFromList(List<TypeListViewModel> categories)
     {
-
+        TypeList = new(categories);
+        SelectedTypes = new();
+        CurrentTypeList = TypeList.First();
     }
 
-    public void InitalizeList()
+    public void InitalizeFromEmpty()
+    {
+        TypeList = new(BuildEmptyList());
+        CurrentTypeList = TypeList.First();
+        TypeSelector = (vm) =>
+        {
+            if (vm.IsSelected)
+            {
+                SelectedTypes.Add(vm);
+            }
+            else
+            {
+                SelectedTypes.Remove(vm);
+            }
+        };
+    }
+
+    public void ReleaseScope()
+    {
+        TypeSelector = (vm) =>
+        {
+            if (vm.IsSelected)
+            {
+                SelectedTypes.Add(vm);
+            }
+            else
+            {
+                SelectedTypes.Remove(vm);
+            }
+        };
+
+        foreach (var item in SelectedTypes)
+        {
+            item.IsSelected = false;
+            item.TakenInScope = false;
+        }
+        TypeList = new(BuildEmptyList());
+
+        List<string> selectedName = SelectedTypes.Select(x => x.Name).ToList();
+        List<TypeViewModel> next = [];
+        foreach (var cat in TypeList)
+        {
+            foreach (TypeViewModel name in cat.Types)
+            {
+                if (selectedName.Contains(name.Name))
+                {
+                    name.IsSelected = true;
+                    next.Add(name);
+                }
+            }
+        }
+
+
+        SelectedTypes = new(next);
+        CurrentTypeList = TypeList.First();
+    }
+
+    internal void SetScoped(List<TypeListViewModel> scopel)
+    {
+        TypeList = new(scopel);
+        TypeSelector = (vm) =>
+        {
+            if (vm.IsSelected)
+            {
+                SelectedTypes.Add(vm);
+                vm.TakenInScope = true;
+            }
+            else
+            {
+                SelectedTypes.Remove(vm);
+                vm.TakenInScope = false;
+            }
+        };
+
+        List<TypeViewModel> nextSelected = [];
+        var selectedItems = SelectedTypes.Select(t => t.Name).ToList();
+
+        foreach (var categoty in TypeList)
+        {
+            foreach (TypeViewModel itemName in categoty.Types)
+            {
+                if (selectedItems.Contains(itemName.Name) && itemName.IsSelected == false && itemName.TakenInScope == false)
+                {
+                    nextSelected.Add(itemName);
+                    itemName.IsSelected = true;
+                    itemName.TakenInScope = true;
+                }
+            }
+        }
+        SelectedTypes = new(nextSelected);
+        CurrentTypeList = TypeList.First();
+    }
+
+    public List<TypeListViewModel> BuildEmptyList()
     {
         Dictionary<string, List<ItemTypeDetails>> IterCategories = App.Current!.Services!.GetRequiredService<ItemTypeService>().GetItemTypes();
-        List<TypeListViewModel> typeModels = [];
-        List<TypeViewModel> selected = [];
-        foreach (string category in IterCategories.Keys)
+        List<TypeListViewModel> catagoryList = [];
+        foreach (string currentCategoryName in IterCategories.Keys)
         {
-            TypeListViewModel vm = new();
-            vm.Title = category;
-            List<TypeViewModel> typeItemList = [];
-            foreach (ItemTypeDetails detail in IterCategories[category])
+            TypeListViewModel listViewModel = new();
+            
+            listViewModel.Title = currentCategoryName;
+            List<TypeViewModel> itemNamesList = [];
+            foreach (ItemTypeDetails detail in IterCategories[currentCategoryName])
             {
                 TypeViewModel typeModel = new()
                 {
                     Name = detail.Name,
                     Description = detail.Tip != string.Empty ? detail.Tip : "No Tip :(",
                 };
-                typeItemList.Add(typeModel);
+                itemNamesList.Add(typeModel);
             }
-            vm.Types = new(typeItemList);
-            typeModels.Add(vm);
+            listViewModel.Types = new(itemNamesList);
+            catagoryList.Add(listViewModel);
         }
-        TypeList = new(typeModels);
-        SelectedTypes = new(selected);
-
-        CurrentTypeList = TypeList.First();
+        return catagoryList;
     }
 
     public override void Apply(RuleModel model)
     {
         TypeConditionModel condition = model.AddTypeCondition();
-        foreach (var selectedItem in SelectedTypes)
+        foreach (TypeViewModel selectedItem in SelectedTypes)
         {
             condition.SelectedTypes.Add(selectedItem.Name);
         }
@@ -154,7 +257,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
     {
         foreach (TypeListViewModel category in TypeList)
         {
-            foreach (var item in category.Types)
+            foreach (TypeViewModel item in category.Types)
             {
                 if (model.HasType(item.Name))
                 {
@@ -163,6 +266,5 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
                 }
             }
         }
-
     }
 }

@@ -2,6 +2,7 @@
     x:Class="FilterDM.Views.EditPage.ModifierEditors.TypeEditorView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cov="using:FilterDM.Convertors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
@@ -10,6 +11,10 @@
     d:DesignWidth="800"
     x:DataType="vm:TypeEditorViewModel"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <cov:BoolNegationConvertor x:Key="negBool" />
+    </UserControl.Resources>
 
     <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
         <Grid x:Name="GridPanel" RowDefinitions="auto *">
@@ -70,6 +75,7 @@
                                                             Content="{Binding Name}"
                                                             FontSize="14"
                                                             IsChecked="{Binding IsSelected}"
+                                                            IsEnabled="{Binding TakenInScope, Converter={StaticResource negBool}}"
                                                             Theme="{StaticResource MaterialOutlineToggleButton}"
                                                             ToolTip.Tip="{Binding Description}">
                                                             <!--  Вміст кнопки  -->

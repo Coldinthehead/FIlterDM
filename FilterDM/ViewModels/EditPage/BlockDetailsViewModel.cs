@@ -14,7 +14,7 @@ using System.Linq;
 namespace FilterDM.ViewModels.EditPage;
 
 public partial class BlockDetailsViewModel : ObservableRecipient
-    ,IRecipient<RuleDeleteRequestEvent>
+    , IRecipient<RuleDeleteRequestEvent>
 {
     [ObservableProperty]
     private ObservableCollection<RuleDetailsViewModel> _rules = new();
@@ -53,9 +53,28 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [ObservableProperty]
     private string _selectedTempalte;
 
-
     [ObservableProperty]
     private bool _useScopeNames;
+    partial void OnUseScopeNamesChanged(bool oldValue, bool newValue)
+    {
+        if (newValue == false && _decorators.Count > 0)
+        {
+            foreach (var decorator in _decorators)
+            {
+                decorator.ReleaseScope();
+            }
+
+        }
+        else if (newValue == true && _decorators.Count > 0)
+        {
+            foreach (var decorator in _decorators)
+            {
+                decorator.SetScoped(_scopeNames);
+            }
+        }
+    }
+
+
 
     [RelayCommand]
     private async void Reset()
@@ -104,18 +123,18 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
     }
 
-  
+
 
     [RelayCommand]
     public void NewRule()
     {
         var teplateSerivice = App.Current.Services.GetService<RuleTemplateService>();
         var model = teplateSerivice.BuildEmpty();
-        var vm =  AddRule(model);
+        var vm = AddRule(model);
         Messenger.Send(new RuleCreateRequestEvent(vm));
     }
 
- 
+
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
@@ -157,7 +176,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             rule.DeleteSafe();
         }
 
-        foreach (var  rule in model.Rules)
+        foreach (var rule in model.Rules)
         {
             AddRule(rule);
         }
@@ -188,6 +207,20 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         if (Rules.Contains(rule))
         {
             Rules.Remove(rule);
+
+            if (UseScopeNames && _decorators != null && _decorators.Count > 0)
+            {
+                foreach (var d in _decorators)
+                {
+                    if (d.Rule == rule)
+                    {
+                        _decorators.Remove(d);
+                        d.ReleaseScope();
+                        break;
+                    }
+                }
+            }
+
             return true;
         }
         return false;
@@ -196,7 +229,29 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void AddRule(RuleDetailsViewModel rule)
     {
         rule.Properties.Title = GetNextTitle(rule.Properties.Title);
+
         Rules.Add(rule);
+
+
+        foreach (var mod in rule.Modifiers)
+        {
+            if (mod is TypeDecoratorViewModel mode)
+            {
+                if (_scopeNames == null)
+                {
+                    _scopeNames = mode.BuildEmptyList();
+
+                }
+                _decorators.Add(mode);
+                mode.DeleteAction = RemoveDecatorator;
+                if (UseScopeNames)
+                {
+                    mode.SetScoped(_scopeNames);
+                }
+            }
+        }
+
+
         SortRules();
     }
 
@@ -231,26 +286,47 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
     }
 
-  
+    private List<TypeListViewModel> _scopeNames;
+
+    private List<TypeDecoratorViewModel> _decorators = [];
+
+
+    private void RemoveDecatorator(ModifierViewModelBase vm)
+    {
+        if (vm is TypeDecoratorViewModel model)
+        {
+            vm.Rule.RemoveTypeFilter(model);
+            _decorators.Remove(model);
+            if (UseScopeNames)
+            {
+                model.ReleaseScope();
+            }
+        }
+    }
 
     public TypeDecoratorViewModel GetScoperdDecorator(RuleDetailsViewModel vm)
     {
-        TypeDecoratorViewModel decorator = new(vm, vm.RemoveTypeFilter);
+        TypeDecoratorViewModel decorator = new(vm, RemoveDecatorator);
+        _decorators.Add(decorator);
 
-        decorator.InitializeFromScope();
+        if (_scopeNames == null)
+        {
+            _scopeNames = decorator.BuildEmptyList();
+        }
+        if (UseScopeNames)
+        {
+            decorator.SetScoped(_scopeNames);
+        }
+        else
+        {
+            decorator.InitalizeFromEmpty();
+        }
 
         return decorator;
     }
 
     internal TypeDecoratorViewModel GetTypeDecorator(RuleDetailsViewModel vm)
     {
-        return GetDefaultDecorator(vm);  
-    }
-
-    public TypeDecoratorViewModel GetDefaultDecorator(RuleDetailsViewModel vm)
-    {
-        TypeDecoratorViewModel decorator = new(vm, vm.RemoveTypeFilter);
-        decorator.InitalizeList();
-        return decorator;
+        return GetScoperdDecorator(vm);
     }
 }
