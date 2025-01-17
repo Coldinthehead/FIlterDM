@@ -1,6 +1,4 @@
-﻿using Avalonia.Controls.Shapes;
-using Avalonia.Media;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.ViewModels.EditPage.Events;
@@ -60,6 +58,9 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         IconShapes = new(["Circle", "Diamond", "Hexagon", "Square", "Star", "Triangle", "Cross", "Moon", "Raindrop", "Kite"
             , "Pentagon", "UpsideDownHouse"]);
         Colors = _staticColors;
+        SelectedIconColor = Colors[0];
+        SelectedIconSize = IconSizes[0];
+        SelectedShape = IconSizes[0];
     }
 
     public override void Apply(RuleModel model)

@@ -70,7 +70,10 @@ public partial class ClassDecoratorViewModel : ModifierViewModelBase
         ClassConditionModel condition = model.AddClassCondition();
         foreach (ClassItemViewModel item in SelectList)
         {
-            condition.Add(item.Name);
+            if (item.IsSelected)
+            {
+                condition.Add(item.Name);
+            }
         }
     }
 
