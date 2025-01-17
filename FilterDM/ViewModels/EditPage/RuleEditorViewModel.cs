@@ -64,7 +64,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
             AddRarityFilter();
             break;
             case "StackFilter":
-            AddNumericFilter(NumericFilterType.Stack);
+            AddNumericFilter(NumericFilterType.StackSize);
             break;
             case "ItemLevelFilter":
             AddNumericFilter(NumericFilterType.ItemLevel);
@@ -79,10 +79,10 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
             AddNumericFilter(NumericFilterType.Quality);
             break;
             case "SocketFilter":
-            AddNumericFilter(NumericFilterType.Socket);
+            AddNumericFilter(NumericFilterType.Sockets);
             break;
             case "ArmorFilter":
-            AddNumericFilter(NumericFilterType.BaseArmor);
+            AddNumericFilter(NumericFilterType.BaseArmour);
             break; 
             case "EvasionFilter":
             AddNumericFilter(NumericFilterType.BaseEvasion);

@@ -1,5 +1,12 @@
 ﻿namespace FilterCore.Parser;
 
+public class ParseException : Exception
+{
+    public ParseException(string msg) : base(msg)
+    {
+    }
+}
+
 public class RuleParser
 {
 
@@ -21,16 +28,32 @@ public class RuleParser
             {
                 case TokenType.RULE_START:
                 {
-                    Rule rule = BuildRule();
-                    rules.Add(rule);
+                    try
+                    {
+                        Rule rule = BuildRule();
+                        rules.Add(rule);
+                    }
+                    catch (Exception e)
+                    {
+                        Errors.Add(e.Message);
+                        Advance();
+                    }
 
                 }
                 break;
                 default:
                 {
                     Errors.Add($"expect Rule start token at {Peek().Line} : {Peek().Value}");
-                    while (Peek(1).type != TokenType.RULE_START || Peek(1).type == TokenType.EOF)
+                    while (true)
                     {
+                        if (Peek().type == TokenType.RULE_START)
+                        {
+                            break;
+                        }
+                        if (Peek().type == TokenType.EOF)
+                        {
+                            break;
+                        }
                         Advance();
                     }
                     break;
@@ -173,13 +196,10 @@ public class RuleParser
                     {
                         node.Parameters.Add(Consume());
                     }
-                    while (Peek().type == TokenType.STRING)
+                    while (Peek().type == TokenType.STRING || Peek().type == TokenType.SHAPE )
                     {
                         node.Parameters.Add(Consume());
                     }
-                
-
-
                     rule.Nodes.Add(node);
                 }
                 break;
@@ -241,7 +261,9 @@ public class RuleParser
                     rule.Nodes.Add(node); 
                 }
                 break;
-
+                default:
+                throw new ParseException($"unexpected token : {token.type} at {token.Line}");
+                break;
             }
 
         }

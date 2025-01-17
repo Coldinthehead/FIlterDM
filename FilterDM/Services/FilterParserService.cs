@@ -11,29 +11,36 @@ using System.Linq;
 
 
 namespace FilterDM.Services;
+
+
+public struct ImportResult
+{
+    public readonly string ErorrMessage;
+    public readonly ParseReuslt ParseResult;
+    public FilterModel Model { get; set;  }
+
+    public ImportResult(string erorrMessage, ParseReuslt parseResult)
+    {
+        ErorrMessage = erorrMessage;
+        ParseResult = parseResult;
+    }
+}
+
 public class FilterParserService
 {
-
-    public FilterModel Parse(string input)
+    
+    public ImportResult Parse(string input)
     {
         FilterModel model = new FilterModel();
-        BlockModel block = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
-        model.AddBlock(block);
 
-        ParseReuslt result = ParseRules(input);
+        ImportResult result = ParseRules(input);
 
         List<RuleModel> models = [];
-        if (result.Result.Count > 0)
+        if (result.ParseResult.Result.Count > 0)
         {
-            int i = 2000 +  result.Result.Count * 100;
-            int c = 0;
-            foreach (var rule in result.Result)
+            int i = 2000 +  result.ParseResult.Result.Count * 100;
+            foreach (var rule in result.ParseResult.Result)
             {
-                c++;
-                if (c == 56)
-                {
-
-                }
                 try
                 {
                     RuleModel rm = ParseSingleRule(rule, i);
@@ -41,7 +48,7 @@ public class FilterParserService
                 }
                 catch (Exception ex)
                 {
-                    int index = result.Result.IndexOf(rule);
+                    int index = result.ParseResult.Result.IndexOf(rule);
                 }
               
                 i -= 100;
@@ -63,6 +70,10 @@ public class FilterParserService
                     blockData["unknown"].Add(pModel);
                 }
             }
+            if (blockData["unknown"].Count == 0)
+            {
+                blockData.Remove("unknown");
+            }
 
             foreach (string key in blockData.Keys)
             {
@@ -76,17 +87,14 @@ public class FilterParserService
                 model.AddBlock(newBlock);
             }
 
+            result.Model = model;
 
-            return model; 
-        }
-        else
-        {
-            return null;
         }
 
+        return result;
     }
 
-    private ParseReuslt ParseRules(string input)
+    private ImportResult ParseRules(string input)
     {
         var lexer = new FilterLexer();
         List<Token> tokens;
@@ -97,11 +105,12 @@ public class FilterParserService
         }
         catch (LexerError e)
         {
-            return new ParseReuslt(1, []);
+            return new ImportResult(e.Message, new ParseReuslt(1, []));
         }
         var parser = new RuleParser();
         List<Rule> rules = parser.Parse(tokens);
-        return new ParseReuslt(parser.Errors.Count, rules);
+        ParseReuslt res = new ParseReuslt(parser.Errors.Count, rules);
+        return new ImportResult(parser.Errors.Count > 0 ? parser.Errors[0] : "", res);
     }
 
     private RuleModel ParseSingleRule(Rule rule, int priority)

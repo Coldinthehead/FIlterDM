@@ -341,13 +341,13 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public RuleDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks, BlockDetailsViewModel parentBlock)
     {
-        _numericHelpers.Add(NumericFilterType.Stack, new NumericFilterHelper(NumericFilterType.Stack, "Stack Size", "Stack", 5000, (x) => UseStackFilter = x));
+        _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000, (x) => UseStackFilter = x));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100, (x) => UseItemLevelFilter = x));
         _numericHelpers.Add(NumericFilterType.DropLevel, new NumericFilterHelper(NumericFilterType.DropLevel, "Drop Level", "DLevel", 100, (x) => UseDropLevelFilter = x));
         _numericHelpers.Add(NumericFilterType.AreaLevel, new NumericFilterHelper(NumericFilterType.AreaLevel, "Area Level", "ALevel", 100, (x) => UseAreaLevelFilter = x));
         _numericHelpers.Add(NumericFilterType.Quality, new NumericFilterHelper(NumericFilterType.Quality, "Quality", "Quality", 100, (x) => UseQualityFilter = x));
-        _numericHelpers.Add(NumericFilterType.Socket, new NumericFilterHelper(NumericFilterType.Socket, "Sockets Count", "Sockets", 4, (x) => UseSocketFilter = x));
-        _numericHelpers.Add(NumericFilterType.BaseArmor, new NumericFilterHelper(NumericFilterType.BaseArmor, "Base Armor", "Armor", 5000, (x) => UseArmorFilter = x));
+        _numericHelpers.Add(NumericFilterType.Sockets, new NumericFilterHelper(NumericFilterType.Sockets, "Sockets Count", "Sockets", 4, (x) => UseSocketFilter = x));
+        _numericHelpers.Add(NumericFilterType.BaseArmour, new NumericFilterHelper(NumericFilterType.BaseArmour, "Base Armor", "Armor", 5000, (x) => UseArmorFilter = x));
         _numericHelpers.Add(NumericFilterType.BaseEvasion, new NumericFilterHelper(NumericFilterType.BaseEvasion, "Base Evasion", "Evasion", 5000, (x) => UseEvasionFilter = x));
         _numericHelpers.Add(NumericFilterType.BaseEnergyShield, new NumericFilterHelper(NumericFilterType.BaseEnergyShield, "Base Energy Shield", "ES", 5000, (x) => UseESFilter = x));
         _numericHelpers.Add(NumericFilterType.WaystoneTier, new NumericFilterHelper(NumericFilterType.WaystoneTier, "WaystoneTier", "T", 16, (x) => UseWaystoneFilter = x));

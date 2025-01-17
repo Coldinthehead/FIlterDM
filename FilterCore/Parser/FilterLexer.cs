@@ -154,7 +154,7 @@ public class FilterLexer
     private List<Token> Parse()
     {
         List<Token> result = [];
-        _currentLine = 0;
+        _currentLine = 1;
         _currentCharacter = Peek();
         while (Peek() != '\0' || _currentIndex < _input.Length)
         {
@@ -227,7 +227,22 @@ public class FilterLexer
                         word.Add(_currentCharacter);
                         Advance();
                     }
-                    result.Add(new Token { type = TokenType.STRING, Value = string.Join("", word), Line = _currentLine });
+
+                    var _word = string.Join("", word);
+                    if (_keywordsMap.ContainsKey(_word))
+                    {
+                        result.Add(new Token()
+                        {
+                            type = _keywordsMap[_word],
+                            Value = _word,
+                            Line = _currentLine
+                        });
+                    }
+                    else
+                    {
+                    result.Add(new Token { type = TokenType.STRING, Value = string.Join("",_word), Line = _currentLine });
+
+                    }
                     Advance();
                 }
                 break;
@@ -295,7 +310,7 @@ public class FilterLexer
             }
         }
 
-        result.Add(new Token() { type = TokenType.EOF, Line = _currentLine });
+        result.Add(new Token() { type = TokenType.EOF, Line = _currentLine +1 });
         return result;
     }
 

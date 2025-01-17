@@ -2,13 +2,13 @@
 
 public enum NumericFilterType
 {
-    Stack,
+    StackSize,
     ItemLevel,
     DropLevel,
     AreaLevel,
     Quality,
-    Socket,
-    BaseArmor,
+    Sockets,
+    BaseArmour,
     BaseEvasion,
     BaseEnergyShield,
     WaystoneTier,

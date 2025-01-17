@@ -36,20 +36,9 @@ public partial class ProjectEditViewModel : ObservableRecipient
     [ObservableProperty]
     private string _name;
 
-    private string _lastFilename;
 
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(SaveCurrentCommand))]
     private bool _changes = false;
-    public bool CanSave()
-    {
-        return Changes;
-    }
-
-    public bool CanSaveAs()
-    {
-        return Changes;
-    }
 
     public FilterModel Model => _model;
     private FilterModel _model;
@@ -83,8 +72,12 @@ public partial class ProjectEditViewModel : ObservableRecipient
             var file = await filesService.ExportFilterFile(_model.Name);
             if (file != null)
             {
+                App.Current.Services.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);
                 var str = App.Current.Services.GetService<CoreFilterService>().Build(_model);
-                File.WriteAllText(file.Path.LocalPath, str);
+                using var fs = File.Create(file.Path.LocalPath);
+                /* File.WriteAllText(file.Path.LocalPath, str);*/
+                using var sr = new StreamWriter(fs);
+                sr.Write(str);
                 await App.Current.Services.GetService<DialogService>().ShowOkDialog("Filter Exported!");
             }
         }
@@ -94,8 +87,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
         }
 
     }
-
-    [RelayCommand(CanExecute = nameof(CanSaveAs))]
+    [RelayCommand]
     private async void SaveAs()
     {
         try
@@ -119,8 +111,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
             {
                 Name = Path.GetFileNameWithoutExtension(file.Name);
                 _model.Name = Name;
-                _lastFilename = file.Path.LocalPath;
-
             }
             Changes = false;
 
@@ -131,12 +121,12 @@ public partial class ProjectEditViewModel : ObservableRecipient
         }
     }
 
-    [RelayCommand(CanExecute = nameof(CanSave))]
+    [RelayCommand]
     private async void SaveCurrent()
     {
         try
         {
-            App.Current?.Services?.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);
+            App.Current.Services.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);  
             await App.Current.Services.GetService<ProjectRepositoryService>().SaveFilter(_model);
             _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {_model.Name} saved!");
             Changes = false;
@@ -173,7 +163,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
             FilterModel? m = await JsonSerializer.DeserializeAsync<FilterModel>(readStream);
             if (m != null)
             {
-                _lastFilename = file.Path.LocalPath;
                 OnEnter(m);
             }
         }
@@ -195,17 +184,16 @@ public partial class ProjectEditViewModel : ObservableRecipient
             if (file is null)
                 return;
 
-          /*  if (!Path.GetExtension(file.Path.LocalPath).Equals("filter"))
-            {
-                await App.Current.Services.GetService<DialogService>().ShowOkDialog("Select file with .filter extension!");
-                    return;
-            }*/
 
             string input = File.ReadAllText(file.Path.LocalPath);
-            var model = App.Current.Services.GetService<FilterParserService>().Parse(input);
-            if (model != null)
+            var result = App.Current.Services.GetService<FilterParserService>().Parse(input);
+            if (result.ErorrMessage != "")
             {
-                _lastFilename = file.Path.LocalPath;
+                await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Import Error: {result.ErorrMessage}");
+            }
+            if (result.ParseResult.Result != null)
+            {
+                var model = result.Model;
                 model.Name = Path.GetFileNameWithoutExtension(file.Path.LocalPath);
                 OnEnter(model);
             }
@@ -227,7 +215,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
         EditorPanel = new();
         FilterTree.BindBlocks();
         Changes = false;
-        SaveCurrentCommand.NotifyCanExecuteChanged();
     }
 
     public ProjectEditViewModel()
@@ -297,7 +284,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
     public void Receive(FilterEditedRequestEvent message)
     {
         Changes = true;
-        SaveCurrentCommand.NotifyCanExecuteChanged();
     }
 
     public void Receive(BlockModelChangedEvent message)

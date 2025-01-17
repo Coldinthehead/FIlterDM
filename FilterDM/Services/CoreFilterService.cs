@@ -133,18 +133,18 @@ public class CoreFilterService
     }
 
 
-    private readonly Dictionary<string, string> _nameToOperator = new Dictionary<string, string>()
+/*    private readonly Dictionary<string, string> _nameToOperator = new Dictionary<string, string>()
     {
-        {"Stack Size", "StackSize" },
-        {"Item Level", "ItemLevel" },
-        {"Area Level", "AreaLevel" },
-         {"Drop Level", "DropLevel" },
+        {"StackSize", "StackSize" },
+        {"ItemLevel", "ItemLevel" },
+        {"AreaLevel", "AreaLevel" },
+        {"DropLevel", "DropLevel" },
         {"Quality", "Quality" },
         {"Sockets Count", "Sockets" } ,
-        {"Base Armor", "BaseArmour" } ,
+        {"Bas Armor", "BaseArmour" } ,
         {"Base Evasion", "BaseEvasion" } ,
         {"Base Energy Shield", "BaseEnergyShield" } ,
-    };
+    };*/
 
     private readonly Dictionary<NumericConditionSign, string> _operatorTypeToString = new()
     {
@@ -155,9 +155,9 @@ public class CoreFilterService
 
     private string BuildNumericCondition(NumericCondition condition)
     {
-        var name = _nameToOperator[condition.ValueName];
-        var @operator = _operatorTypeToString[condition.UseEquals];
-        return $"\t{name} {@operator} {condition.Number}";
+        var name = condition.ValueName;
+        var sign = _operatorTypeToString[condition.UseEquals];
+        return $"\t{name} {sign} {condition.Number}";
     }
 
 }
