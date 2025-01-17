@@ -469,4 +469,9 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
+
+    internal void DeleteSafe()
+    {
+        Messenger.Send(new RuleDeleteRequestEvent(this));
+    }
 }

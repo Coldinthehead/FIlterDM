@@ -94,8 +94,8 @@
                             Margin="8"
                             HorizontalAlignment="Center"
                             p1:ComboBoxAssist.Label="Preset"
-                            ItemsSource="{Binding Templates}"
-                            SelectedItem="{Binding SelectedTempalte}"
+                            ItemsSource="{Binding Block.Templates}"
+                            SelectedItem="{Binding Block.SelectedTempalte}"
                             Theme="{StaticResource MaterialOutlineComboBox}" />
 
                         <StackPanel
@@ -114,7 +114,7 @@
 
                             <Button
                                 Classes="light"
-                                Command="{Binding ResetCommand}"
+                                Command="{Binding Block.ResetCommand}"
                                 Content="Reset"
                                 Theme="{StaticResource MaterialOutlineButton}" />
 

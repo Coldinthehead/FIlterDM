@@ -3,9 +3,9 @@
 
 namespace FilterDM.ViewModels.EditPage.Events;
 
-public class BlockPriorityChangedRequest : ValueChangedMessage<BlockEditorViewModel>
+public class BlockPriorityChangedRequest : ValueChangedMessage<BlockDetailsViewModel>
 {
-    public BlockPriorityChangedRequest(BlockEditorViewModel value) : base(value)
+    public BlockPriorityChangedRequest(BlockDetailsViewModel value) : base(value)
     {
     }
 }

@@ -16,34 +16,68 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     ,IRecipient<RuleDeleteRequestEvent>
 {
     [ObservableProperty]
+    private ObservableCollection<RuleDetailsViewModel> _rules = new();
+
+    [ObservableProperty]
     private string _title;
 
     [ObservableProperty]
     private bool _isSelected;
 
-    partial void OnTitleChanged(string? oldValue, string newValue)
+    partial void OnTitleChanged(string? value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
     [ObservableProperty]
     private bool _enabled;
-    partial void OnEnabledChanged(bool oldValue, bool newValue)
+    partial void OnEnabledChanged(bool value)
     {
-        if (oldValue != newValue)
-        {
-            Messenger.Send(new FilterEditedRequestEvent(this));
-        }
+        Messenger.Send(new FilterEditedRequestEvent(this));
+
     }
 
     [ObservableProperty]
     private float _priority;
-    partial void OnPriorityChanged(float oldValue, float newValue)
+    partial void OnPriorityChanged(float value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
     [ObservableProperty]
     private RuleDetailsViewModel _selectedRule;
+
+    [ObservableProperty]
+    private ObservableCollection<string> _templates;
+
+    [ObservableProperty]
+    private string _selectedTempalte;
+
+    [RelayCommand]
+    private async void Reset()
+    {
+        if (SelectedTempalte != null)
+        {
+            if (Rules.Count > 0)
+            {
+                var confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to override {Rules.Count} rules?");
+                if (!confirm)
+                {
+                    return;
+                }
+            }
+            var service = App.Current.Services.GetService<BlockTemplateService>();
+            BlockModel? nextTeplate = service.GetTemplate(SelectedTempalte);
+            if (nextTeplate != null)
+            {
+                nextTeplate.Title = Title;
+                SetModel(nextTeplate);
+
+            }
+        }
+        Messenger.Send(new FilterEditedRequestEvent(this));
+        Messenger.Send(new BlockPriorityChangedRequest(this));
+    }
+
 
 
     [RelayCommand]
@@ -65,8 +99,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
     }
 
-    [ObservableProperty]
-    private ObservableCollection<RuleDetailsViewModel> _rules = new();
+  
 
     [RelayCommand]
     public void NewRule()
@@ -77,25 +110,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         Messenger.Send(new RuleCreateRequestEvent(vm));
     }
 
-    private string GetNextTitle(string title)
-    {
-        int i = 0;
-        string res = title;
-        List<string> titles = Rules.Select(x => x.Properties.Title).ToList();
-        while (true)
-        {
-
-            if (titles.Contains(res))
-            {
-                res = $"{title}({i++})";
-            }
-            else
-            {
-                return res;
-
-            }
-        }
-    }
+ 
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
@@ -104,16 +119,24 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         _allBlocks = allBlocks;
         Messenger.Register<RuleDeleteRequestEvent>(this);
+
+        if (_templates == null)
+        {
+            var service = App.Current.Services.GetService<BlockTemplateService>();
+            Templates = new ObservableCollection<string>(service.GetTempalteNames());
+        }
+
     }
 
     public void SetModel(BlockModel model)
     {
-        foreach (var rule in Rules)
+        var currentRules = Rules.ToArray();
+        Rules.Clear();
+        foreach (var rule in currentRules)
         {
-            rule.DeleteMeCommand.Execute(null);
+            rule.DeleteSafe();
         }
 
-        Rules.Clear();
         foreach (var  rule in model.Rules)
         {
             AddRule(rule);
@@ -121,6 +144,14 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         Title = model.Title;
         Enabled = model.Enabled;
         Priority = model.Priority;
+        if (model.TemplateName != null && Templates.Contains(model.TemplateName))
+        {
+            SelectedTempalte = model.TemplateName;
+        }
+        else
+        {
+            SelectedTempalte = "Empty";
+        }
     }
 
     public RuleDetailsViewModel AddRule(RuleModel model)
@@ -158,5 +189,25 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void Receive(RuleDeleteRequestEvent message)
     {
         Rules.Remove(message.Value);
+    }
+
+    private string GetNextTitle(string title)
+    {
+        int i = 0;
+        string res = title;
+        List<string> titles = Rules.Select(x => x.Properties.Title).ToList();
+        while (true)
+        {
+
+            if (titles.Contains(res))
+            {
+                res = $"{title}({i++})";
+            }
+            else
+            {
+                return res;
+
+            }
+        }
     }
 }
