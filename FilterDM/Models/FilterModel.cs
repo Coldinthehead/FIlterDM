@@ -53,6 +53,8 @@ public class BlockModel : IEquatable<BlockModel>
     public List<RuleModel> Rules { get; set; }
     public string TemplateName { get; set; }
 
+    public bool UseBlockTypeScope { get; set; }
+
     public BlockModel()
     {
         Rules = [];

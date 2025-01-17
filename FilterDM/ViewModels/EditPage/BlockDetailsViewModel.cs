@@ -6,7 +6,6 @@ using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -160,6 +159,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         block.Enabled = Enabled;
         block.Priority = Priority;
         block.TemplateName = SelectedTempalte;
+        block.UseBlockTypeScope = UseScopeNames;
         foreach (RuleDetailsViewModel rule in Rules)
         {
             block.AddRule(rule.GetModel());
@@ -170,12 +170,13 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void SetModel(BlockModel model)
     {
         var currentRules = Rules.ToArray();
+
         Rules.Clear();
         foreach (var rule in currentRules)
         {
             rule.DeleteSafe();
         }
-
+        UseScopeNames = model.UseBlockTypeScope;
         foreach (var rule in model.Rules)
         {
             AddRule(rule);
@@ -183,6 +184,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         Title = model.Title;
         Enabled = model.Enabled;
         Priority = model.Priority;
+      
         if (model.TemplateName != null && Templates.Contains(model.TemplateName))
         {
             SelectedTempalte = model.TemplateName;
@@ -204,10 +206,8 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public bool DeleteRule(RuleDetailsViewModel rule)
     {
-        if (Rules.Contains(rule))
+        if (Rules.Remove(rule))
         {
-            Rules.Remove(rule);
-
             if (UseScopeNames && _decorators != null && _decorators.Count > 0)
             {
                 foreach (var d in _decorators)
