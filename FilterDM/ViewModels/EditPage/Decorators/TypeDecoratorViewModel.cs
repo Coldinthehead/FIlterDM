@@ -219,7 +219,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         CurrentTypeList = TypeList.First();
     }
 
-    public List<TypeListViewModel> BuildEmptyList()
+    public static List<TypeListViewModel> BuildEmptyList()
     {
         Dictionary<string, List<ItemTypeDetails>> IterCategories = App.Current!.Services!.GetRequiredService<ItemTypeService>().GetItemTypes();
         List<TypeListViewModel> catagoryList = [];
