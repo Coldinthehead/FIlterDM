@@ -28,7 +28,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     [ObservableProperty]
     private TextSizeDecoratorViewModel _textSize;
 
-
     [ObservableProperty]
     private bool _useBeam = false;
 
@@ -37,7 +36,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     [ObservableProperty]
     private bool _useMinimapIcon = false;
-
 
     #region Filters
 
@@ -101,7 +99,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     }
 
-
     #region Moidifiers Methods
 
     public TextSizeDecoratorViewModel AddFontSizeModifier()
@@ -159,14 +156,13 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public void AddRarityFilter(RarityConditionModel model)
     {
-        RarityDecoratorViewModel vm = new RarityDecoratorViewModel(this, RemoveRarityFilter);
+        RarityDecoratorViewModel vm = new(this, RemoveRarityFilter);
         vm.SetModel(model);
         UseRarityFilter = true;
         Messenger.Send(new FilterEditedRequestEvent(this));
         Modifiers.Add(vm);
     }
 
-    private Dictionary<NumericFilterType, Action<bool>> _numericActions = [];
     public NumericDecoratorViewModel AddNumericFilter(NumericFilterType type)
     {
         NumericFilterHelper helper = _numericHelpers[type];
@@ -181,9 +177,8 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         string name = condition.ValueName.Replace(" ", "");
 
-        if (_helperFromString.ContainsKey(name))
+        if (_helperFromString.TryGetValue(name, out NumericFilterHelper? helper))
         {
-            NumericFilterHelper helper = _helperFromString[name];
             NumericDecoratorViewModel vm = new(this, helper, RemoveNumericFilter);
             vm.SetModel(condition);
             Modifiers.Add(vm);
@@ -329,15 +324,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     }
 
     #endregion
-
-
     public float CalculatedPriority => Properties.Enabled ? -1 : 1 * Properties.Priority;
 
     private readonly Dictionary<NumericFilterType, NumericFilterHelper> _numericHelpers = [];
     private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];
-
-
-    
 
     public RuleDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks, BlockDetailsViewModel parentBlock)
     {
@@ -361,8 +351,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         Properties = new(this, allBlocks, parentBlock);
         Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
-
-
     }
 
     public RuleModel GetModel()
@@ -380,7 +368,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         Modifiers = [Properties];
         Properties.SetModel(rule);
       
-
         if (rule.FontSize != 0 && rule.FontSize != 32)
         {
             AddFontSizeModifier().SetModel(rule);
@@ -400,9 +387,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             Colors.UseBorderColor = false;
             Colors.UseFontColor = false;
         }
-        
-
-        
         
         if (rule.Beam != null)
         {
@@ -470,8 +454,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             AddNumericFilter(item);
         }
 
-
-        
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
