@@ -277,7 +277,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void Receive(RuleCreateRequestEvent message)
     {
-        FilterTree.SelectedNode = message.Value.RealParent;
+        FilterTree.SelectedNode = message.Value.Properties.RealParent;
     }
 
     public void Receive(BlockCreatedRequestEvent message)

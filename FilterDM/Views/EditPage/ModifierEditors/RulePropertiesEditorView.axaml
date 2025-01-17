@@ -87,8 +87,8 @@
                     Margin="8"
                     HorizontalAlignment="Left"
                     p1:ComboBoxAssist.Label="Block"
-                    ItemsSource="{Binding Rule.AllBlocks}"
-                    SelectedItem="{Binding Rule.SelectedParent, Mode=TwoWay}"
+                    ItemsSource="{Binding Rule.Properties.AllBlocks}"
+                    SelectedItem="{Binding Rule.Properties.SelectedParent, Mode=TwoWay}"
                     Theme="{StaticResource MaterialOutlineComboBox}">
 
                     <ComboBox.ItemTemplate>
@@ -106,8 +106,8 @@
                     Margin="8"
                     HorizontalAlignment="Left"
                     p1:ComboBoxAssist.Label="Preset"
-                    ItemsSource="{Binding Rule.Templates}"
-                    SelectedItem="{Binding Rule.SelectedTemplate}"
+                    ItemsSource="{Binding Rule.Properties.Templates}"
+                    SelectedItem="{Binding Rule.Properties.SelectedTemplate}"
                     Theme="{StaticResource MaterialOutlineComboBox}" />
 
                 <StackPanel
@@ -120,14 +120,14 @@
                     Spacing="16">
                     <Button
                         Classes="accent"
-                        Command="{Binding Rule.ApplyPropertiesCommand}"
+                        Command="{Binding Rule.Properties.ApplyPropertiesCommand}"
                         Content="Apply"
                         Theme="{StaticResource MaterialOutlineButton}" />
 
 
                     <Button
                         Classes="light"
-                        Command="{Binding Rule.ResetCommand}"
+                        Command="{Binding Rule.Properties.ResetCommand}"
                         Content="Reset"
                         Theme="{StaticResource MaterialOutlineButton}" />
 

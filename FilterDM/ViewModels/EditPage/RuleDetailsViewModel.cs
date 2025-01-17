@@ -20,76 +20,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private ObservableCollection<ModifierViewModelBase> _modifiers;
 
     [ObservableProperty]
-    private ObservableCollection<BlockDetailsViewModel> _allBlocks;
-
-    [ObservableProperty]
-    private BlockDetailsViewModel _selectedParent;
-
-    [ObservableProperty]
-    private string _selectedTemplate;
-
-    public BlockDetailsViewModel RealParent => _realParent;
-    private BlockDetailsViewModel _realParent;
-
-    [RelayCommand]
-    private async Task DeleteMe()
-    {
-        if (Modifiers.Count > 1)
-        {
-            var dialogResult = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete Rule with {Modifiers.Count} modifiers?");
-            if (dialogResult)
-            {
-                Messenger.Send(new RuleDeleteRequestEvent(this));
-            }
-        }
-        else
-        {
-            Messenger.Send(new RuleDeleteRequestEvent(this));
-        }
-       
-    
-    }
-
-    [RelayCommand]
-    private void ApplyProperties()
-    {
-        if (SelectedParent == null || _realParent == null)
-        {
-            return;
-        }
-
-        if (RealParent == SelectedParent)
-        {
-            SelectedParent.SortRules();
-        }
-        else
-        {
-            RealParent.DeleteRule(this);
-            _realParent = SelectedParent;
-            SelectedParent.AddRule(this);
-        }
-
-        Messenger.Send(new RuleTitleApplyEvent(this), this);
-    }
-
-    [RelayCommand]
-    private void Reset()
-    {
-        if (SelectedTemplate != null)
-        {
-            RuleTemplateService? service = App.Current.Services.GetService<0>();
-            RuleModel? nextTempate = service.GetTemplate(SelectedTemplate);
-            if (nextTempate != null)
-            {
-                var title = Properties.Title;
-                SetModel(nextTempate);
-                Properties.Title = title;
-            }
-        }
-    }
-
-
-    [ObservableProperty]
     private RulePropertiesDecoratorViewModel _properties;
 
     [ObservableProperty]
@@ -151,6 +81,26 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private bool _useWaystoneFilter;
 
     #endregion
+
+    [RelayCommand]
+    private async Task DeleteMe()
+    {
+        if (Modifiers.Count > 1)
+        {
+            var dialogResult = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete Rule with {Modifiers.Count} modifiers?");
+            if (dialogResult)
+            {
+                Messenger.Send(new RuleDeleteRequestEvent(this));
+            }
+        }
+        else
+        {
+            Messenger.Send(new RuleDeleteRequestEvent(this));
+        }
+
+
+    }
+
 
     #region Moidifiers Methods
 
@@ -386,18 +336,11 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly Dictionary<NumericFilterType, NumericFilterHelper> _numericHelpers = [];
     private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];
 
-    [ObservableProperty]
-    private ObservableCollection<string> _templates;
+
     
 
     public RuleDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks, BlockDetailsViewModel parentBlock)
     {
-        if (_templates == null)
-        {
-            var templateService = App.Current.Services.GetService<RuleTemplateService>();
-            _templates = new ObservableCollection<string>(templateService.GetTempalteNames());
-        }
-
         _numericHelpers.Add(NumericFilterType.Stack, new NumericFilterHelper(NumericFilterType.Stack, "Stack Size", "Stack", 5000, (x) => UseStackFilter = x));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100, (x) => UseItemLevelFilter = x));
         _numericHelpers.Add(NumericFilterType.DropLevel, new NumericFilterHelper(NumericFilterType.DropLevel, "Drop Level", "DLevel", 100, (x) => UseDropLevelFilter = x));
@@ -415,13 +358,11 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             _helperFromString[value.ShortName] = value;
         }
 
-        Properties = new(this);
+        Properties = new(this, allBlocks, parentBlock);
         Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
 
-        AllBlocks = allBlocks;
-        SelectedParent = parentBlock;
-        _realParent = parentBlock;
+
     }
 
     public RuleModel GetModel()
@@ -525,14 +466,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
 
 
-        if (rule.TemplateName != null && Templates.Contains(rule.TemplateName))
-        {
-            SelectedTemplate = rule.TemplateName;
-        }
-        else
-        {
-            SelectedTemplate = "Empty";
-        }
+        
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 }
