@@ -16,3 +16,10 @@ public class BlockCollectionInFilterChanged : ValueChangedMessage<ObservableColl
     {
     }
 }
+
+public class BlockDeletedInFilter : ValueChangedMessage<BlockDetailsViewModel>
+{
+    public BlockDeletedInFilter(BlockDetailsViewModel value) : base(value)
+    {
+    }
+}

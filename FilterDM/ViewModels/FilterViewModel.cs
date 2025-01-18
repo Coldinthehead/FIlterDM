@@ -47,7 +47,7 @@ public partial class FilterViewModel : ObservableRecipient
     {
         if (Blocks.Remove(vm))
         {
-
+            Messenger.Send(new BlockDeletedInFilter(vm));
         }
     }
 
