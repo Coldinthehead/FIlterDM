@@ -278,7 +278,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public RuleDetailsViewModel AddRule(RuleModel model)
     {
-        var ruleVm = new RuleDetailsViewModel(_allBlocks, this);
+        var ruleVm = new RuleDetailsViewModel(_allBlocks, this, new());
         model.Title = GetNextTitle(model.Title);
         ruleVm.SetModel(model);
         Rules.Add(ruleVm);

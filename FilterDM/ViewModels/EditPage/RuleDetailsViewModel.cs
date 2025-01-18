@@ -329,7 +329,9 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly Dictionary<NumericFilterType, NumericFilterHelper> _numericHelpers = [];
     private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];
 
-    public RuleDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks, BlockDetailsViewModel parentBlock)
+    public RuleDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks
+        , BlockDetailsViewModel parentBlock
+        , ObservableCollection<string> templates)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000, (x) => UseStackFilter = x));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100, (x) => UseItemLevelFilter = x));
@@ -348,7 +350,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             _helperFromString[value.ShortName] = value;
         }
 
-        Properties = new(this, allBlocks, parentBlock);
+        Properties = new(this, allBlocks, parentBlock, templates);
         Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
     }

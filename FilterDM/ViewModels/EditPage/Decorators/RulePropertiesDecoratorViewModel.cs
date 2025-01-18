@@ -94,14 +94,11 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
 
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule
         , ObservableCollection<BlockDetailsViewModel> allBlocks
-        , BlockDetailsViewModel parentBlock) : base(rule, null)
+        , BlockDetailsViewModel parentBlock
+        , ObservableCollection<string> templates) : base(rule, null)
     {
-        if (_templates == null)
-        {
-            var templateService = App.Current.Services.GetService<RuleTemplateService>();
-            _templates = new ObservableCollection<string>(templateService.GetTempalteNames());
-        }
 
+        Templates = templates;
         AllBlocks = allBlocks;
         SelectedParent = parentBlock;
         _realParent = parentBlock;

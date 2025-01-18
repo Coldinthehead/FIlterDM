@@ -55,7 +55,8 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewRule(BlockDetailsViewModel parent)
     {
-        RuleDetailsViewModel ruleVm = new RuleDetailsViewModel(Blocks, parent);
+        RuleDetailsViewModel ruleVm = new(Blocks, parent, _ruleTemplateService.GetObservableNames());
+        ruleVm.SetModel(_ruleTemplateService.BuildEmpty());
 
         parent.AddRule(ruleVm);
     }

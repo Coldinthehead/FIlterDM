@@ -92,9 +92,27 @@ public class RuleTemplateService : IInit
 {
     public Dictionary<string, RuleModel> _templates;
 
+    private ObservableCollection<string> _templateNames;
+
     const string REPOS_PATH = "./data/templates/rules.json";
 
     private RuleModel _empty;
+
+    public RuleTemplateService()
+    {
+        _templates = new Dictionary<string, RuleModel>();
+        _empty = new()
+        {
+            Title = "Empty",
+            Enabled = true,
+            Show = true,
+            TemplateName = "Empty",
+            Priority = 2000,
+
+        };
+        _templates["Empty"] = _empty;
+        _templateNames = new(_templates.Keys);
+    }
 
     public RuleModel Build(string name)
     {
@@ -150,6 +168,7 @@ public class RuleTemplateService : IInit
             };
             _templates["Empty"] = _empty;
         }
+        _templateNames = new(_templates.Keys);
     }
 
     public RuleModel? GetTemplate(string selectedTemplate)
@@ -160,4 +179,6 @@ public class RuleTemplateService : IInit
         }
         return null;
     }
+
+    public ObservableCollection<string> GetObservableNames() => _templateNames;
 }
