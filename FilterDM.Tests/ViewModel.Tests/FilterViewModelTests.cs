@@ -178,6 +178,23 @@ public class FilterViewModelTests
         Assert.That(block.Rules, Has.Count.EqualTo(1));
     }
 
+    [Test]
+    public void NewRule_ShouldSetEmptyTemplate()
+    {
+        RuleTemplateService service = new();
+        FilterViewModel sut = new(new(), new(), service);
+        sut.NewBlock();
+        BlockDetailsViewModel block = sut.Blocks.First();
+        
+        sut.NewRule(block);
+        RuleDetailsViewModel rule = block.Rules.First();
+
+        RuleModel template = service.BuildEmpty();
+        Assert.That(rule.Properties.Enabled, Is.EqualTo(template.Enabled));
+        Assert.That(rule.Properties.Priority, Is.EqualTo(template.Priority));
+        Assert.That(rule.Properties.Show, Is.EqualTo(template.Show));
+    }
+
 
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
