@@ -65,4 +65,20 @@ public class EditorPanelViewModelTests
         Assert.That(sut.Items, Has.Count.EqualTo(1));
         Assert.That(sut.Items.Select(x=>x.IsPartOf(testBlock)).First(), Is.False);
     }
+
+    [Test]
+    public void ShouldOpenTab_WhenBlockSelectedInTree()
+    {
+        FilterViewModel fitlerVm = new(new(), new());
+        fitlerVm.NewBlock();
+        fitlerVm.NewBlock();
+        StructureTreeViewModel tree = new();
+        tree.SetBlocks(fitlerVm.Blocks);
+        EditorPanelViewModel sut = new();
+        BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
+
+        tree.Select(testBlock);
+
+        Assert.That(sut.Items.Select(x => x.IsPartOf(testBlock)).First(), Is.True);
+    }
 }
