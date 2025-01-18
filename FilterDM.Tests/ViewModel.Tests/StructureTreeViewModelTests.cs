@@ -5,6 +5,7 @@ using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 using Material.Ripple;
+using NUnit.Framework.Internal;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class StructureTreeViewModelTests
@@ -104,6 +105,19 @@ public class StructureTreeViewModelTests
 
         Assert.That(listener.Recieved, Is.True);
         Assert.That(listener.Selection, Is.EqualTo(testRule));
+    }
+
+    [Test]
+    public void ShouldClearSelection_WhenBlockEditorClosedEvent()
+    {
+        StructureTreeViewModel sut = new();
+        sut.SetBlocks(_filterVm.Blocks);
+        BlockDetailsViewModel block = _filterVm.Blocks.First();
+        sut.Select(block);
+
+        WeakReferenceMessenger.Default.Send(new EditorClosedEvent(new BlockEditorViewModel(block)));
+
+        Assert.That(sut.Select , Is.Null);
     }
 
 
