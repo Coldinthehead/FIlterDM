@@ -1,4 +1,5 @@
-﻿using FilterDM.ViewModels.EditPage;
+﻿using FilterDM.ViewModels;
+using FilterDM.ViewModels.EditPage;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class EditorPanelViewModelTests
@@ -35,5 +36,20 @@ public class EditorPanelViewModelTests
         sut.AddBlock(testBlock);
 
         Assert.That(sut.Items, Has.Count.EqualTo(1));
+    }
+
+    [Test]
+    public void ShouldCloseEditor_WhenBlockDeleted()
+    {
+        EditorPanelViewModel sut = new();
+        FilterViewModel fitlerVm = new(new(), new());
+        fitlerVm.NewBlock();
+        fitlerVm.NewBlock();
+
+        BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
+        fitlerVm.DeleteBlock(testBlock);
+
+        Assert.That(sut.Items, Has.Count.EqualTo(1));
+        Assert.That(sut.Items.Select(x=>x.IsPartOf(testBlock)).First(), Is.False);
     }
 }
