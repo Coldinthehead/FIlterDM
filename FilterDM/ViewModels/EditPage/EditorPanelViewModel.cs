@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 namespace FilterDM.ViewModels.EditPage;
 
 public partial class EditorPanelViewModel : ObservableRecipient
+    , IRecipient<BlockInFilterCreated>
 {
     [ObservableProperty]
     private ObservableCollection<EditorBaseViewModel> _items;
@@ -122,8 +123,18 @@ public partial class EditorPanelViewModel : ObservableRecipient
         Items.Clear();
     }
 
+
     public EditorPanelViewModel()
     {
         Items = new();
+        Messenger.Register<BlockInFilterCreated>(this);
     }
+
+    #region event handlers
+    public void Receive(BlockInFilterCreated message)
+    {
+        AddBlock(message.Value);
+    }
+
+    #endregion
 }
