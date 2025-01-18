@@ -88,6 +88,19 @@ public class StructureTreeViewModelTests
         Assert.That(listener.Selection, Is.EqualTo(_filterVm.Blocks.First()));
     }
 
+    [Test]
+    public void ShouldDeselect_WhenBlockEdtorClosedRaisedWithSelectedBlock()
+    {
+        StructureTreeViewModel sut = new();
+        sut.SetBlocks(_filterVm.Blocks);
+        BlockDetailsViewModel testBlock = _filterVm.Blocks.First();
+        sut.Select(testBlock);
+
+        WeakReferenceMessenger.Default.Send(new BlockEditorClosed(new BlockEditorViewModel(testBlock)));
+
+        Assert.That(sut.SelectedNode, Is.Null);
+    }
+
     public class SelectLisener : ObservableRecipient
         , IRecipient<BlockSelectedInTree>
     {
