@@ -13,6 +13,9 @@ public partial class FilterViewModel : ObservableRecipient
     , IRecipient<CreateBlockRequest>
 {
     [ObservableProperty]
+    private string _name;
+
+    [ObservableProperty]
     public ObservableCollection<BlockDetailsViewModel> _blocks;
 
     private ObservableCollection<string> _templateNames;
@@ -38,6 +41,19 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Send(new BlockInFilterCreated(blockVm));
     }
 
+    public void SetModel(FilterModel model)
+    {
+        Name = model.Name;
+        foreach (BlockModel blockModel in model.Blocks)
+        {
+            BlockDetailsViewModel blockVm = new BlockDetailsViewModel(Blocks, _templateNames, new TypeScopeManager(_typeService));
+            blockVm.SetModel(blockModel);
+            blockVm.Title = blockModel.Title;
+            Blocks.Add(blockVm);
+        }
+    }
+
+
     public string GetGenericBlockTitle()
     {
         int i = 0;
@@ -52,7 +68,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     private bool BlockTitleTaken(string title)
         => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
-    internal void SetModel(FilterModel model) => throw new NotImplementedException();
+  
 
     internal FilterModel GetModel() => throw new NotImplementedException();
     public void Receive(CreateBlockRequest message)
