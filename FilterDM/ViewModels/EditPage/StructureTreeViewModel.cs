@@ -70,8 +70,24 @@ public partial class StructureTreeViewModel : ObservableRecipient
 
     public void Receive(BlockCollectionInFilterChanged message)
     {
-        ClearSelection();
+        var currentSelection = SelectedNode;
         Blocks = message.Value;
+        foreach (var block in Blocks)
+        {
+            if (currentSelection == block)
+            {
+                Select(currentSelection);
+                break;
+            }
+            foreach (var rule in block.Rules)
+            {
+                if (currentSelection == rule)
+                {
+                    Select(rule);
+                    break;
+                }
+            }
+        }
     }
 
     public void Receive(BlockDeletedInFilter message)
