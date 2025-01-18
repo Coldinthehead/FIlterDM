@@ -1,5 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
@@ -135,7 +134,6 @@ public class FilterViewModelTests
             Enabled = false,
         });
 
-
         sut.SetModel(testModel);
 
         Assert.That(listener.Recieved , Is.True);
@@ -164,9 +162,8 @@ public class FilterViewModelTests
 
         sut.DeleteBlock(block);
 
-        Assert.That(listener.Recieved , Is.True);
+        Assert.That(listener.Recieved , Is.True);   
         Assert.That(listener.Block, Is.EqualTo(block));
-        
     }
 
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
@@ -198,7 +195,6 @@ public class FilterViewModelTests
         }
         return true;
     }
-
 
     public class BlockCreatedListener : ObservableRecipient, IRecipient<BlockInFilterCreated>
     {
