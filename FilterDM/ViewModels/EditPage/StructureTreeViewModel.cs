@@ -39,6 +39,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
     {
         Messenger.Register<BlockInFilterCreated>(this);
         Messenger.Register<BlockCollectionInFilterChanged>(this);
+        Messenger.Register<BlockDeletedInFilter>(this);
     }
 
     public void SetBlocks(ObservableCollection<BlockDetailsViewModel> blocks)

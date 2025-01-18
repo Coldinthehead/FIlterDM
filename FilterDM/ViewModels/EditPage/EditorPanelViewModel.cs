@@ -55,7 +55,6 @@ public partial class EditorPanelViewModel : ObservableRecipient
         }
     }
 
-
     public void AddEditor(EditorBaseViewModel editor)
     {
         foreach (var item in Items)
