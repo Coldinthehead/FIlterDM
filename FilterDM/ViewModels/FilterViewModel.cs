@@ -59,6 +59,8 @@ public partial class FilterViewModel : ObservableRecipient
         ruleVm.SetModel(_ruleTemplateService.BuildEmpty());
 
         parent.AddRule(ruleVm);
+
+        Messenger.Send(new RuleCreatedInFilter(ruleVm));
     }
 
     public void SetModel(FilterModel model)

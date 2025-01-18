@@ -24,6 +24,13 @@ public class BlockDeletedInFilter : ValueChangedMessage<BlockDetailsViewModel>
     }
 }
 
+public class RuleCreatedInFilter : ValueChangedMessage<RuleDetailsViewModel>
+{
+    public RuleCreatedInFilter(RuleDetailsViewModel value) : base(value)
+    {
+    }
+}
+
 public class BlockSelectedInTree : ValueChangedMessage<BlockDetailsViewModel>
 {
     public BlockSelectedInTree(BlockDetailsViewModel value) : base(value)
