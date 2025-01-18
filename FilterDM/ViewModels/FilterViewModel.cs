@@ -44,13 +44,16 @@ public partial class FilterViewModel : ObservableRecipient
     public void SetModel(FilterModel model)
     {
         Name = model.Name;
+        ObservableCollection<BlockDetailsViewModel> next = new();
         foreach (BlockModel blockModel in model.Blocks)
         {
             BlockDetailsViewModel blockVm = new BlockDetailsViewModel(Blocks, _templateNames, new TypeScopeManager(_typeService));
             blockVm.SetModel(blockModel);
             blockVm.Title = blockModel.Title;
-            Blocks.Add(blockVm);
+            next.Add(blockVm);
         }
+        Blocks = next;
+        Messenger.Send(new BlockCollectionInFilterChanged(Blocks));
     }
 
 
