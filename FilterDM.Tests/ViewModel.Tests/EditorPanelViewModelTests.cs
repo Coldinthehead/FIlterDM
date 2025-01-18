@@ -45,7 +45,7 @@ public class EditorPanelViewModelTests
     public void ShouldOpenEditor_WhenBlockCreated()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new());
+        FilterViewModel fitlerVm = new(new(), new(), new());
 
         fitlerVm.NewBlock();
         BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
@@ -58,7 +58,7 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenBlockDeleted()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new());
+        FilterViewModel fitlerVm = new(new(), new(), new());
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
 
@@ -72,7 +72,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldOpenTab_WhenBlockSelectedInTree()
     {
-        FilterViewModel fitlerVm = new(new(), new());
+        FilterViewModel fitlerVm = new(new(), new(), new());
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
         StructureTreeViewModel tree = new();
@@ -88,7 +88,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldRaiseEvent_WhenTabClosed()
     {
-        FilterViewModel fitlerVm = new(new(), new());
+        FilterViewModel fitlerVm = new(new(), new(), new());
         EditorPanelViewModel sut = new();
         fitlerVm.NewBlock();
         EditorBaseViewModel testEditor = sut.Items.First();

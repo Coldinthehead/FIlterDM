@@ -5,6 +5,7 @@ namespace FilterDM.Tests.ViewModel.Tests;
 public class ProjectEditViewModelTests
 {
     private FilterModel _model;
+    private ProjectEditViewModel _sut;
     [SetUp]
     public void SetUp()
     {
@@ -18,35 +19,32 @@ public class ProjectEditViewModelTests
         {
             Title = "block1",
         });
+        _sut = new(new(), new(), new());
     }
 
     [Test]
     public void OnEnter_ShouldCreateFilterViewModel()
     {
-        ProjectEditViewModel sut = new(new(), new());
 
-        sut.OnEnter(_model);
+        _sut.OnEnter(_model);
 
-        Assert.That(sut.Name, Is.EqualTo(_model.Name));
+        Assert.That(_sut.Name, Is.EqualTo(_model.Name));
     }
 
     [Test]
     public void OnEnter_ShouldUpdateScturcureViewModel()
     {
-        ProjectEditViewModel sut = new(new(), new());
 
-        sut.OnEnter(_model);
+        _sut.OnEnter(_model);
 
-        Assert.That(sut.FilterTree.Blocks, Has.Count.EqualTo(_model.Blocks.Count));
+        Assert.That(_sut.FilterTree.Blocks, Has.Count.EqualTo(_model.Blocks.Count));
     }
 
     [Test]
     public void OnEnter_ShouldCloseAllEditors()
-    {
-        ProjectEditViewModel sut = new(new(), new());
+    { 
+        _sut.OnEnter(_model);
 
-        sut.OnEnter(_model);
-
-        Assert.That(sut.EditorPanel.Items, Has.Count.EqualTo(0));
+        Assert.That(_sut.EditorPanel.Items, Has.Count.EqualTo(0));
     }
 }

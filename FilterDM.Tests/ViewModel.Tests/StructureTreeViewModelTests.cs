@@ -13,7 +13,7 @@ public class StructureTreeViewModelTests
     [SetUp]
     public void SetUp()
     {
-        _filterVm = new(new(), new());
+        _filterVm = new(new(), new(), new());
         _filterVm.NewBlock();
         _filterVm.NewBlock();
     }

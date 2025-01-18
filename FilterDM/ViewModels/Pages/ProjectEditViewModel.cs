@@ -205,7 +205,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     public void OnEnter(FilterModel model)
     {
         Name = model.Name;
-        _currentFilterVm = new(_typeService, _blockTemplateService);
+        _currentFilterVm = new(_typeService, _blockTemplateService, _ruleTempalateService);
         _currentFilterVm.SetModel(model);
 
         FilterTree.SetBlocks(_currentFilterVm.Blocks);
@@ -215,14 +215,18 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
 
     private readonly ItemTypeService _typeService;
     private readonly BlockTemplateService _blockTemplateService;
+    private readonly RuleTemplateService _ruleTempalateService;
 
-    public ProjectEditViewModel(ItemTypeService typeService, BlockTemplateService blockTempalteService)
+    public ProjectEditViewModel(ItemTypeService typeService
+        , BlockTemplateService blockTempalteService
+        , RuleTemplateService ruleTempalateService)
     {
         _typeService = typeService;
         _blockTemplateService = blockTempalteService;
         FilterTree = new();
         EditorPanel = new();
         Messenger.Register<FilterEditedRequestEvent>(this);
+        _ruleTempalateService = ruleTempalateService;
     }
 
     public void Receive(FilterEditedRequestEvent message)

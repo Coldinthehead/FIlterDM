@@ -23,11 +23,13 @@ public partial class FilterViewModel : ObservableRecipient
 
     private readonly ItemTypeService _typeService;
     private readonly BlockTemplateService _blockTempalteSerivice;
+    private readonly RuleTemplateService _ruleTemplateService;
 
-    public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTempalteSerivice)
+    public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTempalteSerivice, RuleTemplateService ruleTemplateService)
     {
         _typeService = typeService;
         _blockTempalteSerivice = blockTempalteSerivice;
+        _ruleTemplateService = ruleTemplateService;
         _blocks = new();
         _templateNames = new();
         Messenger.Register<CreateBlockRequest>(this);
@@ -49,6 +51,13 @@ public partial class FilterViewModel : ObservableRecipient
         {
             Messenger.Send(new BlockDeletedInFilter(vm));
         }
+    }
+
+    public void NewRule(BlockDetailsViewModel parent)
+    {
+        RuleDetailsViewModel ruleVm = new RuleDetailsViewModel(Blocks, parent);
+
+        parent.AddRule(ruleVm);
     }
 
     public void SetModel(FilterModel model)
