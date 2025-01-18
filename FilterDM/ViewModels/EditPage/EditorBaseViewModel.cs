@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.ViewModels.EditPage.Events;
+using System;
 
 
 
@@ -22,4 +23,9 @@ public  partial class EditorBaseViewModel : ObservableRecipient
     private string _title;
     public virtual bool IsPartOf(BlockDetailsViewModel vm)
     { return false; }
+
+    public virtual ObservableRecipient GetSelectedContext()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -51,6 +51,11 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
         return Block == vm;
     }
 
+    public override ObservableRecipient GetSelectedContext()
+    {
+        return Block;
+    }
+
     public override bool Equals(object? obj)
     {
         if (obj is  BlockEditorViewModel other)

@@ -238,6 +238,10 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         return _editorTypesToModifierTypes[editor] == modifier;
     }
 
+    public override ObservableRecipient GetSelectedContext()
+    {
+        return Rule;
+    }
 
     public override bool Equals(object? obj)
     {
