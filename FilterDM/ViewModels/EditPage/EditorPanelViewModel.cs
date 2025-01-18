@@ -1,13 +1,9 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using FilterCore.PoeData;
-using FilterDM.Models;
 using FilterDM.ViewModels.EditPage.Events;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Tracing;
-
 
 namespace FilterDM.ViewModels.EditPage;
 
