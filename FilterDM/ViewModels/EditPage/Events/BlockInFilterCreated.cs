@@ -45,10 +45,9 @@ public class RuleSelectedInTree : ValueChangedMessage<RuleDetailsViewModel>
     }
 }
 
-
-public class BlockEditorClosed : ValueChangedMessage<BlockEditorViewModel>
+public class EditorClosedEvent : ValueChangedMessage<EditorBaseViewModel>
 {
-    public BlockEditorClosed(BlockEditorViewModel value) : base(value)
+    public EditorClosedEvent(EditorBaseViewModel value) : base(value)
     {
     }
 }

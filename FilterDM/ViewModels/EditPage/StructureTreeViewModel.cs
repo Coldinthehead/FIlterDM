@@ -10,7 +10,6 @@ public partial class StructureTreeViewModel : ObservableRecipient
     , IRecipient<BlockInFilterCreated>
     , IRecipient<BlockCollectionInFilterChanged>
     , IRecipient<BlockDeletedInFilter>
-    , IRecipient<BlockEditorClosed>
 {
     [ObservableProperty]
     private ObservableCollection<BlockDetailsViewModel> _blocks;
@@ -34,7 +33,6 @@ public partial class StructureTreeViewModel : ObservableRecipient
         Messenger.Register<BlockInFilterCreated>(this);
         Messenger.Register<BlockCollectionInFilterChanged>(this);
         Messenger.Register<BlockDeletedInFilter>(this);
-        Messenger.Register<BlockEditorClosed>(this);
     }
 
     public void SetBlocks(ObservableCollection<BlockDetailsViewModel> blocks)
@@ -80,13 +78,6 @@ public partial class StructureTreeViewModel : ObservableRecipient
         }
     }
 
-    public void Receive(BlockEditorClosed message)
-    {
-        if (message.Value != null && message.Value.Block == SelectedNode)
-        {
-            ClearSelection();
-        }
-    }
 
     #endregion
 }

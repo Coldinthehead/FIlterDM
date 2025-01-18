@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.ViewModels.EditPage.Events;
 
 
 
@@ -13,6 +15,7 @@ public  partial class EditorBaseViewModel : ObservableRecipient
     [RelayCommand]
     private void CloseMe()
     {
+        Messenger.Send(new EditorClosedEvent(this));
     }
 
     [ObservableProperty]

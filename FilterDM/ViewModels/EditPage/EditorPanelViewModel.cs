@@ -11,6 +11,7 @@ public partial class EditorPanelViewModel : ObservableRecipient
     , IRecipient<BlockDeletedInFilter>
     , IRecipient<BlockSelectedInTree>
     , IRecipient<RuleSelectedInTree>
+    , IRecipient<EditorClosedEvent>
 {
     [ObservableProperty]
     private ObservableCollection<EditorBaseViewModel> _items;
@@ -103,6 +104,7 @@ public partial class EditorPanelViewModel : ObservableRecipient
         Messenger.Register<BlockDeletedInFilter>(this);
         Messenger.Register<BlockSelectedInTree>(this);
         Messenger.Register<RuleSelectedInTree>(this);
+        Messenger.Register<EditorClosedEvent>(this);
     }
 
     #region event handlers
@@ -125,6 +127,12 @@ public partial class EditorPanelViewModel : ObservableRecipient
     {
         AddRule(message.Value);
     }
+
+    public void Receive(EditorClosedEvent message)
+    {
+        Items.Remove(message.Value);
+    }
+
 
     #endregion
 }
