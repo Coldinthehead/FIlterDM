@@ -56,7 +56,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
         }
         else if (vm is RuleDetailsViewModel rule)
         {
-            Messenger.Send(new RuleSelectedRequestEvent(rule));
+            Messenger.Send(new RuleSelectedInTree(rule));
         }
     }
 

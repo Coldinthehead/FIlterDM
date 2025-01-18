@@ -38,6 +38,13 @@ public class BlockSelectedInTree : ValueChangedMessage<BlockDetailsViewModel>
     }
 }
 
+public class RuleSelectedInTree : ValueChangedMessage<RuleDetailsViewModel>
+{
+    public RuleSelectedInTree(RuleDetailsViewModel value) : base(value)
+    {
+    }
+}
+
 
 public class BlockEditorClosed : ValueChangedMessage<BlockEditorViewModel>
 {
