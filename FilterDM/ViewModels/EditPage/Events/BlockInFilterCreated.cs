@@ -23,3 +23,10 @@ public class BlockDeletedInFilter : ValueChangedMessage<BlockDetailsViewModel>
     {
     }
 }
+
+public class BlockSelectedInTree : ValueChangedMessage<BlockDetailsViewModel>
+{
+    public BlockSelectedInTree(BlockDetailsViewModel value) : base(value)
+    {
+    }
+}

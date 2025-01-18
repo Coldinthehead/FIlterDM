@@ -19,14 +19,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
 
     partial void OnSelectedNodeChanged(ObservableRecipient? oldValue, ObservableRecipient newValue)
     {
-        if (newValue is  BlockDetailsViewModel block)
-        {
-            Messenger.Send(new BlockSelectedRequestEvent(block));
-        }
-        else if (newValue is RuleDetailsViewModel rule)
-        {
-            Messenger.Send(new RuleSelectedRequestEvent(rule));
-        }
+        Select(newValue);
     }
 
     [RelayCommand]
@@ -55,6 +48,14 @@ public partial class StructureTreeViewModel : ObservableRecipient
     public void Select(ObservableRecipient vm)
     {
         SelectedNode = vm;
+        if (vm is BlockDetailsViewModel block)
+        {
+            Messenger.Send(new BlockSelectedInTree(block));
+        }
+        else if (vm is RuleDetailsViewModel rule)
+        {
+            Messenger.Send(new RuleSelectedRequestEvent(rule));
+        }
     }
 
     #region event handlers
