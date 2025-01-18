@@ -166,6 +166,19 @@ public class FilterViewModelTests
         Assert.That(listener.Block, Is.EqualTo(block));
     }
 
+    [Test]
+    public void NewRule_ShouldUpdateParentWithNewRule()
+    {
+        FilterViewModel sut = new(new(), new());
+        sut.NewBlock();
+        BlockDetailsViewModel block = sut.Blocks.First();
+
+        sut.NewRule(block);
+
+        Assert.That(block.Rules, Has.Count.EqualTo(1));
+    }
+
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
