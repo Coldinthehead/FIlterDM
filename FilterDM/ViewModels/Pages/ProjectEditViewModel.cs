@@ -214,13 +214,12 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void OnEnter(FilterModel model)
     {
-       
         Name = model.Name;
-        FilterViewModel filterVm = new(App.Current.Services.GetService<ItemTypeService>(),
+        _currentFilterVm = new(App.Current.Services.GetService<ItemTypeService>(),
             App.Current.Services.GetService<BlockTemplateService>());
-        filterVm.SetModel(model);
+        _currentFilterVm.SetModel(model);
 
-        FilterTree.SetBlocks(filterVm.Blocks);
+        FilterTree.SetBlocks(_currentFilterVm.Blocks);
        /* FilterTree.BindBlocks();*/
         Changes = false;
     }
