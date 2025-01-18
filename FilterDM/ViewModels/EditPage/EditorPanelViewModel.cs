@@ -10,6 +10,7 @@ namespace FilterDM.ViewModels.EditPage;
 
 public partial class EditorPanelViewModel : ObservableRecipient
     , IRecipient<BlockInFilterCreated>
+    , IRecipient<BlockDeletedInFilter>
 {
     [ObservableProperty]
     private ObservableCollection<EditorBaseViewModel> _items;
@@ -128,12 +129,18 @@ public partial class EditorPanelViewModel : ObservableRecipient
     {
         Items = new();
         Messenger.Register<BlockInFilterCreated>(this);
+        Messenger.Register<BlockDeletedInFilter>(this);
     }
 
     #region event handlers
     public void Receive(BlockInFilterCreated message)
     {
         AddBlock(message.Value);
+    }
+
+    public void Receive(BlockDeletedInFilter message)
+    {
+        CloseRulesFromBlock(message.Value);
     }
 
     #endregion
