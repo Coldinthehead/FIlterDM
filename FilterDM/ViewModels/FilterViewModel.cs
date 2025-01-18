@@ -60,6 +60,7 @@ public partial class FilterViewModel : ObservableRecipient
     {
         List<BlockDetailsViewModel> next = Blocks.Select(x => x).OrderBy(x => x.CalculatedPriority).ToList();
         Blocks = new(next);
+        Messenger.Send(new BlockCollectionInFilterChanged(Blocks));
     }
 
     public void NewRule(BlockDetailsViewModel parent)
