@@ -14,17 +14,7 @@ using System.Threading.Tasks;
 namespace FilterDM.ViewModels.Pages;
 
 
-public partial class ProjectEditViewModel : ObservableRecipient
-    , IRecipient<BlockSelectedRequestEvent>
-    , IRecipient<BlockCloseRequestEvent>
-    , IRecipient<DeleteBlockRequest>
-    , IRecipient<RuleSelectedRequestEvent>
-    , IRecipient<RuleCloseRequestEvent>
-    , IRecipient<RuleDeleteRequestEvent>
-    , IRecipient<RuleCreateRequestEvent>
-    , IRecipient<BlockPriorityChangedRequest>
-    , IRecipient<FilterEditedRequestEvent>
-    , IRecipient<BlockModelChangedEvent>
+public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<FilterEditedRequestEvent>
 {
 
     [ObservableProperty]
@@ -220,7 +210,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
         _currentFilterVm.SetModel(model);
 
         FilterTree.SetBlocks(_currentFilterVm.Blocks);
-       /* FilterTree.BindBlocks();*/
         Changes = false;
     }
 
@@ -228,65 +217,11 @@ public partial class ProjectEditViewModel : ObservableRecipient
     {
         FilterTree = new();
         EditorPanel = new();
-        Messenger.Register<BlockSelectedRequestEvent>(this);
-        Messenger.Register<BlockCloseRequestEvent>(this);
-        Messenger.Register<DeleteBlockRequest>(this);
-        Messenger.Register<RuleSelectedRequestEvent>(this);
-        Messenger.Register<RuleCloseRequestEvent>(this);
-        Messenger.Register<RuleDeleteRequestEvent>(this);
-        Messenger.Register<RuleCreateRequestEvent>(this);
-        Messenger.Register<BlockPriorityChangedRequest>(this);
         Messenger.Register<FilterEditedRequestEvent>(this);
-        Messenger.Register<BlockModelChangedEvent>(this);
-    }
-
-    public void Receive(BlockSelectedRequestEvent message)
-    {
-
-    }
-
-    public void Receive(BlockCloseRequestEvent message)
-    {
-       
-    }
-
-    public void Receive(DeleteBlockRequest message)
-    {
-   
-    }
-
-    public void Receive(RuleSelectedRequestEvent message)
-    {
-
-    }
-
-    public void Receive(RuleCloseRequestEvent message)
-    {
-
-    }
-
-    public void Receive(RuleDeleteRequestEvent message)
-    {
-       
-    }
-
-    public void Receive(RuleCreateRequestEvent message)
-    {
-       
-    }
-
-
-    public void Receive(BlockPriorityChangedRequest message)
-    {
-       /* FilterTree.SortBlocks();*/
     }
 
     public void Receive(FilterEditedRequestEvent message)
     {
         Changes = true;
-    }
-
-    public void Receive(BlockModelChangedEvent message)
-    {
     }
 }
