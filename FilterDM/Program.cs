@@ -23,9 +23,9 @@ internal sealed class Program
         }
         catch (Exception ex)
         {
-            using var fs = File.Create($"{DateTime.Now}_crash.txt");
+            using var fs = File.Create($"{DateTime.Now:MM-dd_HH-mm}_crash.txt");
             using var sw = new StreamWriter(fs);
-            sw.Write(ex.Message);
+            sw.Write(ex);
             sw.Close();
         }
     }
