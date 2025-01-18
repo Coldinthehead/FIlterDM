@@ -8,6 +8,7 @@ namespace FilterDM.ViewModels.EditPage;
 
 public partial class StructureTreeViewModel : ObservableRecipient
     , IRecipient<BlockInFilterCreated>
+    , IRecipient<BlockCollectionInFilterChanged>
 {
     [ObservableProperty]
     private ObservableCollection<BlockDetailsViewModel> _blocks;
@@ -36,6 +37,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
     public StructureTreeViewModel()
     {
         Messenger.Register<BlockInFilterCreated>(this);
+        Messenger.Register<BlockCollectionInFilterChanged>(this);
     }
 
     public void SetBlocks(ObservableCollection<BlockDetailsViewModel> blocks)
@@ -56,5 +58,11 @@ public partial class StructureTreeViewModel : ObservableRecipient
     public void Receive(BlockInFilterCreated message)
     {
         Select(message.Value);
+    }
+
+    public void Receive(BlockCollectionInFilterChanged message)
+    {
+        ClearSelection();
+        Blocks = message.Value;
     }
 }
