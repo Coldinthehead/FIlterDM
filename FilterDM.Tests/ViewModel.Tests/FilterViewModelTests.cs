@@ -219,7 +219,7 @@ public class FilterViewModelTests
         sut.NewBlock();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
-        block.Priority = 40000;
+        block.Priority = 100;
 
         WeakReferenceMessenger.Default.Send(new SortBlocksRequest(block));
 
