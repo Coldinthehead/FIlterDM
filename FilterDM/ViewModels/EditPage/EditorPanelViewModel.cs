@@ -79,15 +79,19 @@ public partial class EditorPanelViewModel : ObservableRecipient
     public void CloseTab(EditorBaseViewModel vm)
     {
         Items.Remove(vm);
+        if (vm is BlockEditorViewModel block)
+        {
+            Messenger.Send(new BlockEditorClosed(block));
+        }
 
-        if (vm is RuleEditorViewModel r)
+    /*    if (vm is RuleEditorViewModel r)
         {
             Messenger.Send(new RuleCloseRequestEvent(r));
         }
         else if (vm is BlockEditorViewModel b)
         {
             Messenger.Send(new BlockCloseRequestEvent(b));
-        }
+        }*/
     }
 
     public void CloseRulesFromBlock(BlockDetailsViewModel block)

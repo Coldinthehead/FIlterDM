@@ -30,3 +30,11 @@ public class BlockSelectedInTree : ValueChangedMessage<BlockDetailsViewModel>
     {
     }
 }
+
+
+public class BlockEditorClosed : ValueChangedMessage<BlockEditorViewModel>
+{
+    public BlockEditorClosed(BlockEditorViewModel value) : base(value)
+    {
+    }
+}
