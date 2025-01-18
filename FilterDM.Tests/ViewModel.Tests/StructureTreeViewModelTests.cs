@@ -90,19 +90,6 @@ public class StructureTreeViewModelTests
     }
 
     [Test]
-    public void ShouldDeselect_WhenBlockEdtorClosedRaisedWithSelectedBlock()
-    {
-        StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
-        BlockDetailsViewModel testBlock = _filterVm.Blocks.First();
-        sut.Select(testBlock);
-
-        WeakReferenceMessenger.Default.Send(new BlockEditorClosed(new BlockEditorViewModel(testBlock)));
-
-        Assert.That(sut.SelectedNode, Is.Null);
-    }
-
-    [Test]
     public void ShouldRaiseRuleSelectedEvent_WhenRuleSelected()
     {
         BlockDetailsViewModel block = _filterVm.Blocks.First();

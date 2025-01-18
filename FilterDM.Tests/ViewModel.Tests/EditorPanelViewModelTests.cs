@@ -30,7 +30,7 @@ public class EditorPanelViewModelTests
     }
 
     [Test]
-    public void AddBlock_ShouldNotCreateBlockEdtiro_WhenEditorExists()
+    public void AddBlock_ShouldNotCreateBlockEditor_WhenEditorExists()
     {
         EditorPanelViewModel sut = new();
         BlockDetailsViewModel testBlock = new BlockDetailsViewModel(new(), new(), new(new()));
@@ -103,19 +103,17 @@ public class EditorPanelViewModelTests
         Assert.That(editor.Rule, Is.EqualTo(testRule));
     }
 
-
-    public class EditorCloseListener : ObservableRecipient, IRecipient<BlockEditorClosed>
+    [Test]
+    public void ShouldCloseBlockEditor_WhenEventRaised()
     {
-        public bool Recieved = false;
-        public BlockEditorViewModel Editor;
-        public EditorCloseListener()
-        {
-            Messenger.Register(this);
-        }
-        public void Receive(BlockEditorClosed message)
-        {
-            Recieved = true;
-            Editor = message.Value;
-        }
+        FilterViewModel fitlerVm = new(new(), new(), new());
+        EditorPanelViewModel sut = new();
+        fitlerVm.NewBlock();
+        EditorBaseViewModel editor = sut.Items.First();
+        
+        WeakReferenceMessenger.Default.Send(new EditorClosedEvent(editor));
+
+        Assert.That(sut.Items.Contains(editor), Is.False);
+        Assert.That(sut.Items.Count, Is.EqualTo(0));
     }
 }
