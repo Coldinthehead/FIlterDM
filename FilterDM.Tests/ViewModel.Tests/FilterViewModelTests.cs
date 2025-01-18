@@ -227,6 +227,21 @@ public class FilterViewModelTests
         Assert.That(sut.Blocks.IndexOf(block), Is.EqualTo(1));
     }
 
+    [Test]
+    public void SortBlocks_ShouldRaiseBlocksChanged()
+    {
+        RuleTemplateService service = new();
+        FilterViewModel sut = new(new(), new(), service);
+        sut.NewBlock();
+        sut.NewBlock();
+        NewBlocksListener listener = new();
+
+        sut.SortBlocks();
+
+        Assert.That(listener.Received, Is.True);
+        Assert.That(listener.Blocks, Is.EqualTo(sut.Blocks));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
@@ -255,6 +270,22 @@ public class FilterViewModelTests
             }
         }
         return true;
+    }
+
+    public class NewBlocksListener : ObservableRecipient, IRecipient<BlockCollectionInFilterChanged>
+    {
+        public bool Received = false;
+        public ObservableCollection<BlockDetailsViewModel> Blocks;
+
+        public NewBlocksListener()
+        {
+            Messenger.Register(this);
+        }
+        public void Receive(BlockCollectionInFilterChanged message)
+        {
+            Received = true;
+            Blocks = message.Value;
+        }
     }
 
     public class RuleCreatedListener : ObservableRecipient, IRecipient<RuleCreatedInFilter>
