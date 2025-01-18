@@ -81,4 +81,7 @@ public class EditorPanelViewModelTests
 
         Assert.That(sut.Items.Select(x => x.IsPartOf(testBlock)).First(), Is.True);
     }
+
+    [Test]
+    public void 
 }
