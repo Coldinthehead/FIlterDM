@@ -1,5 +1,8 @@
-﻿using FilterDM.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
+using FilterDM.ViewModels.EditPage.Events;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class EditorPanelViewModelTests
@@ -83,5 +86,32 @@ public class EditorPanelViewModelTests
     }
 
     [Test]
-    public void 
+    public void ShouldRaiseEvent_WhenTabClosed()
+    {
+        FilterViewModel fitlerVm = new(new(), new());
+        EditorPanelViewModel sut = new();
+        fitlerVm.NewBlock();
+        EditorBaseViewModel testEditor = sut.Items.First();
+        EditorCloseListener listener = new();
+        testEditor.CloseMeCommand.Execute(null);
+
+        Assert.That(listener.Recieved, Is.True);
+        Assert.That(listener.Editor.Block, Is.EqualTo(fitlerVm.Blocks.First()));
+    }
+
+
+    public class EditorCloseListener : ObservableRecipient, IRecipient<BlockEditorClosed>
+    {
+        public bool Recieved = false;
+        public BlockEditorViewModel Editor;
+        public EditorCloseListener()
+        {
+            Messenger.Register(this);
+        }
+        public void Receive(BlockEditorClosed message)
+        {
+            Recieved = true;
+            Editor = message.Value;
+        }
+    }
 }
