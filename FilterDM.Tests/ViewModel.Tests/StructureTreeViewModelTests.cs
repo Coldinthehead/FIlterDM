@@ -1,6 +1,9 @@
-﻿using FilterDM.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Models;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
+using FilterDM.ViewModels.EditPage.Events;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class StructureTreeViewModelTests
@@ -70,5 +73,36 @@ public class StructureTreeViewModelTests
         _filterVm.SetModel(new FilterModel());
 
         Assert.That(sut.Blocks, Is.EqualTo(_filterVm.Blocks));
+    }
+
+    [Test]
+    public void Select_ShouldRaiseEvent_WhenSelectionIsNotNull()
+    {
+        StructureTreeViewModel sut = new();
+        sut.SetBlocks(_filterVm.Blocks);
+        SelectLisener listener = new();
+
+        sut.Select(_filterVm.Blocks.First());
+
+        Assert.That(listener.Recieved, Is.True);
+        Assert.That(listener.Selection, Is.EqualTo(_filterVm.Blocks.First()));
+    }
+
+    public class SelectLisener : ObservableRecipient
+        , IRecipient<BlockSelectedInTree>
+    {
+        public bool Recieved = false;
+        public BlockDetailsViewModel Selection;
+
+        public SelectLisener()
+        {
+            Messenger.Register(this);
+        }
+
+        public void Receive(BlockSelectedInTree message)
+        {
+            Recieved = true;
+            Selection = message.Value;
+        }
     }
 }
