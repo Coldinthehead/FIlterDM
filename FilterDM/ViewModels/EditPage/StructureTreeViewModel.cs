@@ -1,19 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using FilterDM.Models;
-using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace FilterDM.ViewModels.EditPage;
 
-
-
 public partial class StructureTreeViewModel : ObservableRecipient
+    , IRecipient<BlockInFilterCreated>
 {
     [ObservableProperty]
     private ObservableCollection<BlockDetailsViewModel> _blocks;
@@ -36,54 +30,31 @@ public partial class StructureTreeViewModel : ObservableRecipient
     [RelayCommand]
     private void NewBlock()
     {
-        var model = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
-        var templateService = App.Current.Services.GetService<BlockTemplateService>();
-        var itemTypeService = App.Current.Services.GetService<ItemTypeService>();
-        model.Title = "block";
-        var b = new BlockDetailsViewModel(Blocks, templateService.GetObservableNames(), new TypeScopeManager(itemTypeService));
-        b.SetModel(model);
-        Blocks.Add(b);
-        Messenger.Send(new BlockCreatedRequestEvent(b));
+        Messenger.Send(new CreateBlockRequest(this));
     }
 
-    private FilterModel _model;
-
-    public void RemoveBlock(BlockDetailsViewModel block)
+    public StructureTreeViewModel()
     {
-        if (Blocks.Remove(block))
-        {
-            if (SelectedNode == block)
-            {
-                SelectedNode = null;
-            }
-        }
-        
+        Messenger.Register<BlockInFilterCreated>(this);
     }
 
-    public StructureTreeViewModel(FilterModel model)
+    public void SetBlocks(ObservableCollection<BlockDetailsViewModel> blocks)
     {
-        _model = model;
+        Blocks = blocks;
+        ClearSelection();
     }
 
-    public void BindBlocks()
+    public void ClearSelection()
     {
-        var templateService = App.Current.Services.GetService<BlockTemplateService>();
-        var itemTypeService = App.Current.Services.GetService<ItemTypeService>();
-        ObservableCollection<BlockDetailsViewModel> next = new();
-        foreach (var item in _model.Blocks)
-        {
-            var vm = new BlockDetailsViewModel(next, templateService.GetObservableNames(), new TypeScopeManager(itemTypeService));
-            vm.SetModel(item);
-            next.Add(vm);
-        }
-
-        Blocks = next;
+        SelectedNode = null;
+    }
+    public void Select(ObservableRecipient vm)
+    {
+        SelectedNode = vm;
     }
 
-
-    internal void SortBlocks()
+    public void Receive(BlockInFilterCreated message)
     {
-        List<BlockDetailsViewModel> sorted = [.. Blocks.ToList().OrderBy(x => x.CalculatedPriority)];
-        Blocks = new ObservableCollection<BlockDetailsViewModel>(sorted);
+        Select(message.Value);
     }
 }

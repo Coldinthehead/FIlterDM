@@ -10,10 +10,3 @@ public class BlockSelectedRequestEvent : ValueChangedMessage<BlockDetailsViewMod
     }
 
 }
-
-public class BlockCreatedRequestEvent : ValueChangedMessage<BlockDetailsViewModel>
-{
-    public BlockCreatedRequestEvent(BlockDetailsViewModel value) : base(value)
-    {
-    }
-}

@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace FilterDM.ViewModels;
 public partial class FilterViewModel : ObservableRecipient
+    , IRecipient<CreateBlockRequest>
 {
     [ObservableProperty]
     public ObservableCollection<BlockDetailsViewModel> _blocks;
@@ -25,6 +26,7 @@ public partial class FilterViewModel : ObservableRecipient
         _blockTempalteSerivice = blockTempalteSerivice;
         _blocks = new();
         _templateNames = new();
+        Messenger.Register<CreateBlockRequest>(this);
     }
     public void NewBlock()
     {
@@ -33,7 +35,7 @@ public partial class FilterViewModel : ObservableRecipient
         blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
         Blocks.Add(blockVm);
-        Messenger.Send(new BlockCreatedRequestEvent(blockVm));
+        Messenger.Send(new BlockInFilterCreated(blockVm));
     }
 
     public string GetGenericBlockTitle()
@@ -50,4 +52,11 @@ public partial class FilterViewModel : ObservableRecipient
 
     private bool BlockTitleTaken(string title)
         => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
+    internal void SetModel(FilterModel model) => throw new NotImplementedException();
+
+    internal FilterModel GetModel() => throw new NotImplementedException();
+    public void Receive(CreateBlockRequest message)
+    {
+        NewBlock();
+    }
 }

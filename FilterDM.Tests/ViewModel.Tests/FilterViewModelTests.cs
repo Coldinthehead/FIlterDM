@@ -72,17 +72,27 @@ public class FilterViewModelTests
         Assert.That(listener.EventModel, Is.EqualTo(newBlock));
     }
 
+    [Test]
+    public void ShouldCreateNewBlock_WhenRequestSended()
+    {
+        FilterViewModel sut = new(new(), new());
 
-    public class BlockCreatedListener : ObservableRecipient, IRecipient<BlockCreatedRequestEvent>
+        WeakReferenceMessenger.Default.Send(new CreateBlockRequest(null));
+
+        Assert.That(sut.Blocks, Has.Count.EqualTo(1));
+    }
+
+
+    public class BlockCreatedListener : ObservableRecipient, IRecipient<BlockInFilterCreated>
     {
         public bool Recieved = false;
         public BlockDetailsViewModel? EventModel;
         public BlockCreatedListener()
         {
-            Messenger.Register<BlockCreatedRequestEvent>(this);
+            Messenger.Register<BlockInFilterCreated>(this);
         }
 
-        public void Receive(BlockCreatedRequestEvent message)
+        public void Receive(BlockInFilterCreated message)
         {
             Recieved = true;
             EventModel = message.Value;

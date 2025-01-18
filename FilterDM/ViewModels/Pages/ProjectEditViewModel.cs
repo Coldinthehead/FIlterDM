@@ -22,7 +22,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
     , IRecipient<RuleCloseRequestEvent>
     , IRecipient<RuleDeleteRequestEvent>
     , IRecipient<RuleCreateRequestEvent>
-    , IRecipient<BlockCreatedRequestEvent>
     , IRecipient<BlockPriorityChangedRequest>
     , IRecipient<FilterEditedRequestEvent>
     , IRecipient<BlockModelChangedEvent>
@@ -40,11 +39,9 @@ public partial class ProjectEditViewModel : ObservableRecipient
     [ObservableProperty]
     private bool _changes = false;
 
-    public FilterModel Model => _model;
-    private FilterModel _model;
-
-
     public Action BackToMenuAction { get; set; }
+
+    private FilterViewModel _currentFilterVm;
 
     [RelayCommand]
     private async void NewFilter()
@@ -66,14 +63,15 @@ public partial class ProjectEditViewModel : ObservableRecipient
     [RelayCommand]
     private async void Export()
     {
+        FilterModel model = _currentFilterVm.GetModel();
         try
         {
             var filesService = App.Current?.Services?.GetService<FilesService>();
-            var file = await filesService.ExportFilterFile(_model.Name);
+            var file = await filesService.ExportFilterFile(model.Name);
             if (file != null)
             {
-                App.Current.Services.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);
-                var str = App.Current.Services.GetService<CoreFilterService>().Build(_model);
+               /* App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.Blocks);*/
+                var str = App.Current.Services.GetService<CoreFilterService>().Build(model);
                 var path = file.Path.LocalPath;
                 if (!Path.HasExtension(path) || !Path.GetExtension(path).Equals("filter"))
                 {
@@ -94,10 +92,11 @@ public partial class ProjectEditViewModel : ObservableRecipient
     [RelayCommand]
     private async void SaveAs()
     {
+        FilterModel model = _currentFilterVm.GetModel();
         try
         {
             var filesService = App.Current?.Services?.GetService<FilesService>();
-            var file = await filesService.SaveFilterProjectFile(_model.Name);
+            var file = await filesService.SaveFilterProjectFile(model.Name);
 
             await using var writeStream = File.Create(file.Path.LocalPath);
             var opt = new JsonSerializerOptions()
@@ -106,15 +105,15 @@ public partial class ProjectEditViewModel : ObservableRecipient
                 DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
             };
 
-            App.Current?.Services?.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);
+         /*   App.Current?.Services?.GetService<SaveFilterService>().SaveModel(model, FilterTree.Blocks);*/
 
-            JsonSerializer.Serialize(writeStream, _model, options: opt);
+            JsonSerializer.Serialize(writeStream, model, options: opt);
             if (file is null)
                 return;
             else
             {
                 Name = Path.GetFileNameWithoutExtension(file.Name);
-                _model.Name = Name;
+                model.Name = Name;
             }
             Changes = false;
 
@@ -128,11 +127,12 @@ public partial class ProjectEditViewModel : ObservableRecipient
     [RelayCommand]
     private async void SaveCurrent()
     {
+        FilterModel model = _currentFilterVm.GetModel();
         try
         {
-            App.Current.Services.GetService<SaveFilterService>().SaveModel(_model, FilterTree.Blocks);  
-            await App.Current.Services.GetService<ProjectRepositoryService>().SaveFilter(_model);
-            _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {_model.Name} saved!");
+/*            App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.Blocks);  
+*/            await App.Current.Services.GetService<ProjectRepositoryService>().SaveFilter(model);
+            _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {model.Name} saved!");
             Changes = false;
         }
         catch (Exception ex)
@@ -214,20 +214,24 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void OnEnter(FilterModel model)
     {
-        _model = model;
+       
         Name = model.Name;
-        FilterTree = new(_model);
-        EditorPanel = new();
-        FilterTree.BindBlocks();
+        FilterViewModel filterVm = new(App.Current.Services.GetService<ItemTypeService>(),
+            App.Current.Services.GetService<BlockTemplateService>());
+        filterVm.SetModel(model);
+
+        FilterTree.SetBlocks(filterVm.Blocks);
+       /* FilterTree.BindBlocks();*/
         Changes = false;
     }
 
     public ProjectEditViewModel()
     {
+        FilterTree = new();
+        EditorPanel = new();
         Messenger.Register<BlockSelectedRequestEvent>(this);
         Messenger.Register<BlockCloseRequestEvent>(this);
         Messenger.Register<BlockDeleteRequestEvent>(this);
-        Messenger.Register<BlockCreatedRequestEvent>(this);
         Messenger.Register<RuleSelectedRequestEvent>(this);
         Messenger.Register<RuleCloseRequestEvent>(this);
         Messenger.Register<RuleDeleteRequestEvent>(this);
@@ -250,7 +254,6 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void Receive(BlockDeleteRequestEvent message)
     {
-        FilterTree.RemoveBlock(message.Value);
         EditorPanel.CloseRulesFromBlock(message.Value);
     }
 
@@ -275,15 +278,10 @@ public partial class ProjectEditViewModel : ObservableRecipient
         FilterTree.SelectedNode = message.Value.Properties.RealParent;
     }
 
-    public void Receive(BlockCreatedRequestEvent message)
-    {
-
-        FilterTree.SelectedNode = message.Value;
-    }
 
     public void Receive(BlockPriorityChangedRequest message)
     {
-        FilterTree.SortBlocks();
+       /* FilterTree.SortBlocks();*/
     }
 
     public void Receive(FilterEditedRequestEvent message)
