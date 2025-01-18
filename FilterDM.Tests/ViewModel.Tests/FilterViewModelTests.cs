@@ -195,6 +195,21 @@ public class FilterViewModelTests
         Assert.That(rule.Properties.Show, Is.EqualTo(template.Show));
     }
 
+    [Test]
+    public void NewRule_ShouldRaiseRuleCreatedEvent()
+    {
+        RuleTemplateService service = new();
+        FilterViewModel sut = new(new(), new(), service);
+        sut.NewBlock();
+        BlockDetailsViewModel block = sut.Blocks.First();
+        RuleCreatedListener listener = new();
+
+        sut.NewRule(block);
+        RuleDetailsViewModel rule = block.Rules.First();
+
+        Assert.That(listener.Received, Is.True);
+        Assert.That(listener.Rule, Is.EqualTo(rule));
+    }
 
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
@@ -224,6 +239,22 @@ public class FilterViewModelTests
             }
         }
         return true;
+    }
+
+    public class RuleCreatedListener : ObservableRecipient, IRecipient<RuleCreatedInFilter>
+    {
+        public bool Received = false;
+        public RuleDetailsViewModel Rule;
+
+        public RuleCreatedListener()
+        {
+            Messenger.Register(this);
+        }
+        public void Receive(RuleCreatedInFilter message)
+        {
+            Received = true;
+            Rule = message.Value;
+        }
     }
 
     public class BlockCreatedListener : ObservableRecipient, IRecipient<BlockInFilterCreated>
