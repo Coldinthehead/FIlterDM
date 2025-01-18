@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.ViewModels.EditPage.Events;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -114,6 +115,11 @@ public partial class EditorPanelViewModel : ObservableRecipient
         {
             Items.Remove(editor);
         }
+    }
+
+    public void Clear()
+    {
+        Items.Clear();
     }
 
     public EditorPanelViewModel()
