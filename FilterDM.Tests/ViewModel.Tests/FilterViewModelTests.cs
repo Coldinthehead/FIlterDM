@@ -149,9 +149,24 @@ public class FilterViewModelTests
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
 
-        WeakReferenceMessenger.Default.Send(new BlockDeleteRequestEvent(block));
+        WeakReferenceMessenger.Default.Send(new DeleteBlockRequest(block));
 
         Assert.That(sut.Blocks, Does.Not.Contain(block));
+    }
+
+    [Test]
+    public void DeleteBlock_ShouldRaiseBlockDeletedEvent()
+    {
+        FilterViewModel sut = new(new(), new());
+        sut.NewBlock();
+        BlockDetailsViewModel block = sut.Blocks.First();
+        BlockDeletedListener listener = new();
+
+        sut.DeleteBlock(block);
+
+        Assert.That(listener.Recieved , Is.True);
+        Assert.That(listener.Block, Is.EqualTo(block));
+        
     }
 
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
@@ -214,6 +229,22 @@ public class FilterViewModelTests
         {
             Recieved = true;
             Blocks = message.Value;
+        }
+    }
+
+    public class BlockDeletedListener : ObservableRecipient, IRecipient<BlockDeletedInFilter>
+    {
+        public bool Recieved = false;
+        public BlockDetailsViewModel Block;
+
+        public BlockDeletedListener()
+        {
+            Messenger.Register(this);
+        }
+        public void Receive(BlockDeletedInFilter message)
+        {
+            Recieved = true;
+            Block = message.Value;  
         }
     }
 }
