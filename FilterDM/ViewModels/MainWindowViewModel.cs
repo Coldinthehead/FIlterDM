@@ -18,7 +18,14 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        _editorViewModel = new()
+        
+    }
+
+    public void Initialize()
+    {
+        var typeService = App.Current.Services.GetService<ItemTypeService>();
+        var blockTeplateService = App.Current.Services.GetService<BlockTemplateService>();
+        _editorViewModel = new(typeService, blockTeplateService)
         {
             BackToMenuAction = EnterProjectsPage,
         };
@@ -26,7 +33,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             CreateFilterAction = NewFilterCreated,
             ChoseFilterAction = FilterSelected,
-            
+
         };
         CurrentPage = _projectsPageViewModel;
     }
