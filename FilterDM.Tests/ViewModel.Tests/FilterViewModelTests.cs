@@ -142,6 +142,18 @@ public class FilterViewModelTests
         Assert.That(listener.Blocks, Is.EqualTo(sut.Blocks));
     }
 
+    [Test]
+    public void ShouldDeleteBlock_WhenDeleteRequestRaised()
+    {
+        FilterViewModel sut = new(new(), new());
+        sut.NewBlock();
+        BlockDetailsViewModel block = sut.Blocks.First();
+
+        WeakReferenceMessenger.Default.Send(new BlockDeleteRequestEvent(block));
+
+        Assert.That(sut.Blocks, Does.Not.Contain(block));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
