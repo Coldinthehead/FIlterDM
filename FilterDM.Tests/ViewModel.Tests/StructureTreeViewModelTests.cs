@@ -119,6 +119,7 @@ public class StructureTreeViewModelTests
         Assert.That(listener.Selection, Is.EqualTo(testRule));
     }
 
+
     public class RuleSelectListener : ObservableRecipient, IRecipient<RuleSelectedInTree>
     {
         public bool Recieved = false;

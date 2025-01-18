@@ -15,10 +15,6 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
     private RuleDetailsViewModel _selectedRule;
     partial void OnSelectedRuleChanged(RuleDetailsViewModel? oldValue, RuleDetailsViewModel newValue)
     {
-        if (newValue != null)
-        {
-            Messenger.Send(new RuleSelectedRequestEvent(newValue));
-        }
     }
 
     [RelayCommand]
