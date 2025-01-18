@@ -6,6 +6,7 @@ using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 using Material.Ripple;
 using NUnit.Framework.Internal;
+using System.Collections.ObjectModel;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class StructureTreeViewModelTests
@@ -118,6 +119,31 @@ public class StructureTreeViewModelTests
         WeakReferenceMessenger.Default.Send(new EditorClosedEvent(new BlockEditorViewModel(block)));
 
         Assert.That(sut.SelectedNode , Is.Null);
+    }
+
+    [Test]
+    public void ShouldChangeBlocks_WhenCollectionChangedEventRaised()
+    {
+        StructureTreeViewModel sut = new();
+
+        ObservableCollection<BlockDetailsViewModel> next = new();
+
+        WeakReferenceMessenger.Default.Send(new BlockCollectionInFilterChanged(next));
+
+        Assert.That(sut.Blocks, Is.EqualTo(next));
+    }
+
+    [Test]
+    public void SelectionShouldNotClear_WhenCollectionChanged()
+    {
+        StructureTreeViewModel sut = new();
+        sut.SetBlocks(_filterVm.Blocks);
+        BlockDetailsViewModel selectedBlock = _filterVm.Blocks.First();
+        sut.Select(selectedBlock);
+
+        _filterVm.SortBlocks();
+
+        Assert.That(sut.SelectedNode, Is.EqualTo(selectedBlock));
     }
 
 
