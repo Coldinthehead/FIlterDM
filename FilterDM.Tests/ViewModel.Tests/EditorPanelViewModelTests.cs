@@ -11,7 +11,7 @@ public class EditorPanelViewModelTests
 
         sut.Clear();
 
-        Assert.That(sut.Items.Count, Is.EqualTo(0));
+        Assert.That(sut.Items, Is.Empty);
     }
     [Test]
     public void AddBlock_ShouldCreateBlockEditor_WhenEditorNotExists()
