@@ -13,6 +13,7 @@ namespace FilterDM.ViewModels;
 public partial class FilterViewModel : ObservableRecipient
     , IRecipient<CreateBlockRequest>
     , IRecipient<DeleteBlockRequest>
+    , IRecipient<SortBlocksRequest>
 {
     [ObservableProperty]
     private string _name;
@@ -34,7 +35,8 @@ public partial class FilterViewModel : ObservableRecipient
         _blocks = new();
         _templateNames = new();
         Messenger.Register<CreateBlockRequest>(this);
-        Messenger.Register<DeleteBlockRequest>(this);   
+        Messenger.Register<DeleteBlockRequest>(this);
+        Messenger.Register<SortBlocksRequest>(this);
     }
     public void NewBlock()
     {
@@ -57,7 +59,7 @@ public partial class FilterViewModel : ObservableRecipient
     public void SortBlocks()
     {
         List<BlockDetailsViewModel> next = Blocks.Select(x => x).OrderBy(x => x.CalculatedPriority).ToList();
-        
+        Blocks = new(next);
     }
 
     public void NewRule(BlockDetailsViewModel parent)
@@ -113,6 +115,11 @@ public partial class FilterViewModel : ObservableRecipient
     public void Receive(DeleteBlockRequest message)
     {
         DeleteBlock(message.Value);
+    }
+
+    public void Receive(SortBlocksRequest message)
+    {
+        SortBlocks();
     }
     #endregion
 }
