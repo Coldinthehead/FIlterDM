@@ -211,6 +211,22 @@ public class FilterViewModelTests
         Assert.That(listener.Rule, Is.EqualTo(rule));
     }
 
+    [Test]
+    public void ShouldSortBlocks_OnSortBlockRequestEvent()
+    {
+        RuleTemplateService service = new();
+        FilterViewModel sut = new(new(), new(), service);
+        sut.NewBlock();
+        sut.NewBlock();
+        BlockDetailsViewModel block = sut.Blocks.First();
+        block.Priority = 40000;
+
+        WeakReferenceMessenger.Default.Send(new SortBlocksRequest(block));
+
+        
+        Assert.That(sut.Blocks.IndexOf(block), Is.EqualTo(1));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
