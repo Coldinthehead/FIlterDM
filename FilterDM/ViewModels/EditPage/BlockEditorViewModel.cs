@@ -24,7 +24,7 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
     [RelayCommand]
     private void DeleteCurrent()
     {
-        Messenger.Send(new BlockDeleteRequestEvent(Block));
+        Messenger.Send(new DeleteBlockRequest(Block));
         Messenger.Send(new FilterEditedRequestEvent(this));
         Block = null;
     }

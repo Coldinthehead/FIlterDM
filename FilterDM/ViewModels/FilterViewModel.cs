@@ -11,6 +11,7 @@ using System.Linq;
 namespace FilterDM.ViewModels;
 public partial class FilterViewModel : ObservableRecipient
     , IRecipient<CreateBlockRequest>
+    , IRecipient<DeleteBlockRequest>
 {
     [ObservableProperty]
     private string _name;
@@ -30,6 +31,7 @@ public partial class FilterViewModel : ObservableRecipient
         _blocks = new();
         _templateNames = new();
         Messenger.Register<CreateBlockRequest>(this);
+        Messenger.Register<DeleteBlockRequest>(this);   
     }
     public void NewBlock()
     {
@@ -39,6 +41,14 @@ public partial class FilterViewModel : ObservableRecipient
         blockVm.Title = GetGenericBlockTitle();
         Blocks.Add(blockVm);
         Messenger.Send(new BlockInFilterCreated(blockVm));
+    }
+
+    public void DeleteBlock(BlockDetailsViewModel vm)
+    {
+        if (Blocks.Remove(vm))
+        {
+
+        }
     }
 
     public void SetModel(FilterModel model)
@@ -74,8 +84,16 @@ public partial class FilterViewModel : ObservableRecipient
   
 
     internal FilterModel GetModel() => throw new NotImplementedException();
+
+    #region event hadlers
     public void Receive(CreateBlockRequest message)
     {
         NewBlock();
     }
+
+    public void Receive(DeleteBlockRequest message)
+    {
+        DeleteBlock(message.Value);
+    }
+    #endregion
 }

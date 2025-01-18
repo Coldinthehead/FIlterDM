@@ -198,13 +198,13 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             var dialogResult = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete {Rules.Count} rules?");
             if (dialogResult)
             {
-                Messenger.Send(new BlockDeleteRequestEvent(this));
+                Messenger.Send(new DeleteBlockRequest(this));
                 Messenger.Send(new FilterEditedRequestEvent(this));
             }
         }
         else
         {
-            Messenger.Send(new BlockDeleteRequestEvent(this));
+            Messenger.Send(new DeleteBlockRequest(this));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }

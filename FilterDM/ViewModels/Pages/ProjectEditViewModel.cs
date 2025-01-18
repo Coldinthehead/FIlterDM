@@ -17,7 +17,7 @@ namespace FilterDM.ViewModels.Pages;
 public partial class ProjectEditViewModel : ObservableRecipient
     , IRecipient<BlockSelectedRequestEvent>
     , IRecipient<BlockCloseRequestEvent>
-    , IRecipient<BlockDeleteRequestEvent>
+    , IRecipient<DeleteBlockRequest>
     , IRecipient<RuleSelectedRequestEvent>
     , IRecipient<RuleCloseRequestEvent>
     , IRecipient<RuleDeleteRequestEvent>
@@ -230,7 +230,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
         EditorPanel = new();
         Messenger.Register<BlockSelectedRequestEvent>(this);
         Messenger.Register<BlockCloseRequestEvent>(this);
-        Messenger.Register<BlockDeleteRequestEvent>(this);
+        Messenger.Register<DeleteBlockRequest>(this);
         Messenger.Register<RuleSelectedRequestEvent>(this);
         Messenger.Register<RuleCloseRequestEvent>(this);
         Messenger.Register<RuleDeleteRequestEvent>(this);
@@ -251,7 +251,7 @@ public partial class ProjectEditViewModel : ObservableRecipient
         FilterTree.SelectedNode = null;
     }
 
-    public void Receive(BlockDeleteRequestEvent message)
+    public void Receive(DeleteBlockRequest message)
     {
         EditorPanel.CloseRulesFromBlock(message.Value);
     }
