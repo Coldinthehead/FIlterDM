@@ -6,7 +6,6 @@ using FilterDM.ViewModels.EditPage.Events;
 namespace FilterDM.ViewModels.EditPage;
 
 public partial class BlockEditorViewModel : EditorBaseViewModel
-    , IRecipient<RuleCloseRequestEvent>
 {
     [ObservableProperty]
     private BlockDetailsViewModel _block;
@@ -23,15 +22,6 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
     }
 
     [RelayCommand]
-    private void DeleteCurrent()
-    {
-        Messenger.Send(new DeleteBlockRequest(Block));
-        Messenger.Send(new FilterEditedRequestEvent(this));
-        Block = null;
-    }
-
-
-    [RelayCommand]
     public void ApplyChanges()
     {
         Messenger.Send(new BlockPriorityChangedRequest(Block));
@@ -39,7 +29,6 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
-   
 
     public BlockEditorViewModel(BlockDetailsViewModel block) : base()
     {
@@ -47,8 +36,6 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
         Block = block;
         Content = this;
         Title = block.Title;
-   
-        Messenger.Register<RuleCloseRequestEvent>(this);
     }
 
     public override bool IsPartOf(BlockDetailsViewModel vm)
@@ -73,13 +60,5 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
             return Block == other.Block;
         }
         return false;
-    }
-
-    public void Receive(RuleCloseRequestEvent message)
-    {
-        if (SelectedRule == message.Value.Rule)
-        {
-            SelectedRule = null;
-        }
     }
 }
