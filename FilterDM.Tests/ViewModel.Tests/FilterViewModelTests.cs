@@ -82,6 +82,65 @@ public class FilterViewModelTests
         Assert.That(sut.Blocks, Has.Count.EqualTo(1));
     }
 
+    [Test]
+    public void SetModel_ShouldReplicateBlocks()
+    {
+        FilterViewModel sut = new(new(), new());
+        FilterModel testModel = new FilterModel()
+        {
+            Name = "Hello",
+            Blocks = new()
+        };
+        testModel.AddBlock(new BlockModel()
+        {
+            Title = "Hello1",
+            Priority = 1,
+            Enabled = true,
+        });
+        testModel.AddBlock(new BlockModel()
+        {
+            Title = "Hello2",
+            Priority = 125,
+            Enabled = false,
+        });
+
+
+        sut.SetModel(testModel);
+
+        Assert.That(sut.Blocks.Count, Is.EqualTo(testModel.Blocks.Count));
+        Assert.That(ModelMatchViewModel(testModel, sut), Is.True);
+    }
+
+    public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
+    {
+        if (!model.Name.Equals(vm.Name))
+        {
+            return false;
+        }
+        if (model.Blocks.Count != vm.Blocks.Count)
+        {
+            return false;
+        }
+        for (int i = 0; i <model.Blocks.Count;i++)
+        {
+            BlockModel blockModel = model.Blocks[i];
+            BlockDetailsViewModel blockVm = vm.Blocks[i];
+            if (!blockModel.Title.Equals(blockVm.Title))
+            {
+                return false;
+            }
+            if (blockModel.Enabled != blockVm.Enabled)
+            {
+                return false;
+            }
+            if (blockModel.Priority != blockVm.Priority)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public class BlockCreatedListener : ObservableRecipient, IRecipient<BlockInFilterCreated>
     {
