@@ -39,6 +39,19 @@ public class EditorPanelViewModelTests
     }
 
     [Test]
+    public void ShouldOpenEditor_WhenBlockCreated()
+    {
+        EditorPanelViewModel sut = new();
+        FilterViewModel fitlerVm = new(new(), new());
+
+        fitlerVm.NewBlock();
+        BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
+
+        Assert.That(sut.Items, Has.Count.EqualTo(1));
+        Assert.That(sut.Items.Select(x => x.IsPartOf(testBlock)).First(), Is.True);
+    }
+
+    [Test]
     public void ShouldCloseEditor_WhenBlockDeleted()
     {
         EditorPanelViewModel sut = new();
