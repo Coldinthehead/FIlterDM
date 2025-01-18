@@ -1,5 +1,7 @@
 ﻿
 using FilterCore.PoeData;
+using FilterDM.ViewModels.EditPage.Decorators;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -64,7 +66,7 @@ public class ItemClassesService : IItemClassesService
 
 public class ItemTypeService : IItemClassesService
 {
-    Dictionary<string, List<ItemTypeDetails>> _types;
+    Dictionary<string, List<ItemTypeDetails>> _typeCategories;
 
     private const string REPO_PATH = "./data/poe/types.json";
 
@@ -74,7 +76,7 @@ public class ItemTypeService : IItemClassesService
         Dictionary<string, List<ItemTypeDetails>> types = await JsonSerializer.DeserializeAsync<Dictionary<string, List<ItemTypeDetails>>> (fs);
         if (types != null)
         {
-            _types = types;
+            _typeCategories = types;
         }
         else
         {
@@ -82,11 +84,11 @@ public class ItemTypeService : IItemClassesService
         }
     }
 
-    public Dictionary<string, List<ItemTypeDetails>> GetItemTypes() => _types;
+    public Dictionary<string, List<ItemTypeDetails>> GetItemTypes() => _typeCategories;
     internal IEnumerable<string> GetPartialMatches(string v)
     {
         List<string> result = [];
-        foreach (List<ItemTypeDetails> category in _types.Values)
+        foreach (List<ItemTypeDetails> category in _typeCategories.Values)
         {
             foreach (ItemTypeDetails item in category)
             {
@@ -103,7 +105,7 @@ public class ItemTypeService : IItemClassesService
     public IEnumerable<string> GetExactMatches(string name)
     {
         List<string> result = [];
-        foreach (var category in _types.Values)
+        foreach (var category in _typeCategories.Values)
         {
             foreach (ItemTypeDetails item in category)
             {
@@ -115,5 +117,28 @@ public class ItemTypeService : IItemClassesService
         }
 
         return result;
+    }
+
+    public List<TypeListViewModel> BuildEmptyList()
+    {
+        List<TypeListViewModel> catagoryList = [];
+        foreach (string currentCategoryName in _typeCategories.Keys)
+        {
+            TypeListViewModel listViewModel = new();
+            listViewModel.Title = currentCategoryName;
+            List<TypeViewModel> itemNamesList = [];
+            foreach (ItemTypeDetails typeDetails in  _typeCategories[currentCategoryName])
+            {
+                TypeViewModel typeModel = new()
+                {
+                    Name = typeDetails.Name,
+                    Description = typeDetails.Tip != string.Empty ? typeDetails.Tip : "No Tip :(",
+                };
+                itemNamesList.Add(typeModel);
+            }
+            listViewModel.Types = new(itemNamesList);
+            catagoryList.Add(listViewModel);
+        }
+        return catagoryList;
     }
 }

@@ -1,7 +1,9 @@
 ﻿using FilterDM.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -10,6 +12,8 @@ namespace FilterDM.Services;
 public class BlockTemplateService : IInit
 {
     private Dictionary<string, BlockModel> _templates;
+
+    private ObservableCollection<string> _templateNames;
 
     const string REPOS_PATH = "./data/templates/templates.json";
 
@@ -24,7 +28,6 @@ public class BlockTemplateService : IInit
             if (items != null)
             {
                 _templates = items;
-
             }
 
         }
@@ -47,6 +50,8 @@ public class BlockTemplateService : IInit
             };
             _templates["Empty"] = _empty;
         }
+
+        _templateNames = new([.. _templates.Keys]);
     }
 
     public BlockModel GetEmpty() => _empty.Clone();
@@ -62,6 +67,11 @@ public class BlockTemplateService : IInit
             return template.Clone();
         }
         return null;
+    }
+
+    internal ObservableCollection<string> GetObservableNames()
+    {
+        return _templateNames;
     }
 }
 

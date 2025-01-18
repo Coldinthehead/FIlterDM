@@ -126,9 +126,9 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         CurrentTypeList = TypeList.First();
     }
 
-    public void InitalizeFromEmpty()
+    public void InitalizeFromEmpty(List<TypeListViewModel> categories)
     {
-        TypeList = new(BuildEmptyList());
+        TypeList = new(categories);
         CurrentTypeList = TypeList.First();
         TypeSelector = (vm) =>
         {
@@ -143,7 +143,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         };
     }
 
-    public void ReleaseScope()
+    public void ReleaseScope(List<TypeListViewModel> categories)
     {
         TypeSelector = (vm) =>
         {
@@ -162,7 +162,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
             item.IsSelected = false;
             item.TakenInScope = false;
         }
-        TypeList = new(BuildEmptyList());
+        TypeList = new(categories);
 
         List<string> selectedName = SelectedTypes.Select(x => x.Name).ToList();
         List<TypeViewModel> next = [];
@@ -219,30 +219,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         CurrentTypeList = TypeList.First();
     }
 
-    public static List<TypeListViewModel> BuildEmptyList()
-    {
-        Dictionary<string, List<ItemTypeDetails>> IterCategories = App.Current!.Services!.GetRequiredService<ItemTypeService>().GetItemTypes();
-        List<TypeListViewModel> catagoryList = [];
-        foreach (string currentCategoryName in IterCategories.Keys)
-        {
-            TypeListViewModel listViewModel = new();
-            
-            listViewModel.Title = currentCategoryName;
-            List<TypeViewModel> itemNamesList = [];
-            foreach (ItemTypeDetails detail in IterCategories[currentCategoryName])
-            {
-                TypeViewModel typeModel = new()
-                {
-                    Name = detail.Name,
-                    Description = detail.Tip != string.Empty ? detail.Tip : "No Tip :(",
-                };
-                itemNamesList.Add(typeModel);
-            }
-            listViewModel.Types = new(itemNamesList);
-            catagoryList.Add(listViewModel);
-        }
-        return catagoryList;
-    }
+   
 
     public override void Apply(RuleModel model)
     {

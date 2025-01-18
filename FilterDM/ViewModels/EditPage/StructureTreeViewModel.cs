@@ -36,8 +36,9 @@ public partial class StructureTreeViewModel : ObservableRecipient
     private void NewBlock()
     {
         var model = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
+        var templateService = App.Current.Services.GetService<BlockTemplateService>();
         model.Title = GetGenericBlockTitle();
-        var b = new BlockDetailsViewModel(Blocks);
+        var b = new BlockDetailsViewModel(Blocks, templateService.GetObservableNames());
         b.SetModel(model);
         Blocks.Add(b);
         Messenger.Send(new BlockCreatedRequestEvent(b));
@@ -64,10 +65,11 @@ public partial class StructureTreeViewModel : ObservableRecipient
 
     public void BindBlocks()
     {
+        var templateService = App.Current.Services.GetService<BlockTemplateService>();
         ObservableCollection<BlockDetailsViewModel> next = new();
         foreach (var item in _model.Blocks)
         {
-            var vm = new BlockDetailsViewModel(next);
+            var vm = new BlockDetailsViewModel(next, templateService.GetObservableNames());
             vm.SetModel(item);
             next.Add(vm);
         }

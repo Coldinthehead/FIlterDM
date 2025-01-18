@@ -20,9 +20,12 @@ public class TypeScopeManager
 
     private bool _useScope = false;
 
-    public TypeScopeManager(List<TypeListViewModel> scopeNames)
+    private readonly ItemTypeService _typeService;
+
+    public TypeScopeManager(ItemTypeService typeService)
     {
-        _scopeNames = scopeNames;
+        _typeService = typeService;
+        _scopeNames = typeService.BuildEmptyList();
     }
 
     public void DisableScope()
@@ -30,7 +33,7 @@ public class TypeScopeManager
         _useScope = false;
         foreach (var decorator in _decorators)
         {
-            decorator.ReleaseScope();
+            decorator.ReleaseScope(_typeService.BuildEmptyList());
         }
     }
 
@@ -50,7 +53,7 @@ public class TypeScopeManager
             if (d.Rule == rule)
             {
                 _decorators.Remove(d);
-                d.ReleaseScope();
+                d.ReleaseScope(_typeService.BuildEmptyList());
                 break;
             }
         }
@@ -83,7 +86,7 @@ public class TypeScopeManager
         }
         else
         {
-            decorator.InitalizeFromEmpty();
+            decorator.InitalizeFromEmpty(_typeService.BuildEmptyList());
         }
         return decorator;
     }
@@ -97,7 +100,7 @@ public class TypeScopeManager
             _decorators.Remove(model);
             if (_useScope)
             {
-                model.ReleaseScope();
+                model.ReleaseScope(_typeService.BuildEmptyList());
             }
         }
     }
@@ -218,17 +221,16 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
     private readonly ObservableCollection<BlockDetailsViewModel> _allBlocks;
-    public BlockDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks)
+    public BlockDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks
+        , ObservableCollection<string> templateNames
+        , TypeScopeManager scopeManager
+        )
     {
         _allBlocks = allBlocks;
         Messenger.Register<RuleDeleteRequestEvent>(this);
 
-        if (_templates == null)
-        {
-            var service = App.Current.Services.GetService<BlockTemplateService>();
-            Templates = new ObservableCollection<string>(service.GetTempalteNames());
-        }
-        _scopeManager = new(TypeDecoratorViewModel.BuildEmptyList());
+        Templates = templateNames;
+        _scopeManager = scopeManager;
     }
 
     public BlockModel GetModel()
