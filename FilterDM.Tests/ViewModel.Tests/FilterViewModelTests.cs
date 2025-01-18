@@ -6,6 +6,7 @@ using FilterDM.Services;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
+using System.Collections.ObjectModel;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class FilterViewModelTests
@@ -111,6 +112,36 @@ public class FilterViewModelTests
         Assert.That(ModelMatchViewModel(testModel, sut), Is.True);
     }
 
+    [Test]
+    public void SetModel_ShouldRaiseBlocksCollectionChanged()
+    {
+        FilterViewModel sut = new(new(), new());
+        BlockCollectionChangedListener listener = new();
+        FilterModel testModel = new FilterModel()
+        {
+            Name = "Hello",
+            Blocks = new()
+        };
+        testModel.AddBlock(new BlockModel()
+        {
+            Title = "Hello1",
+            Priority = 1,
+            Enabled = true,
+        });
+        testModel.AddBlock(new BlockModel()
+        {
+            Title = "Hello2",
+            Priority = 125,
+            Enabled = false,
+        });
+
+
+        sut.SetModel(testModel);
+
+        Assert.That(listener.Recieved , Is.True);
+        Assert.That(listener.Blocks, Is.EqualTo(sut.Blocks));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
@@ -148,13 +179,29 @@ public class FilterViewModelTests
         public BlockDetailsViewModel? EventModel;
         public BlockCreatedListener()
         {
-            Messenger.Register<BlockInFilterCreated>(this);
+            Messenger.Register(this);
         }
 
         public void Receive(BlockInFilterCreated message)
         {
             Recieved = true;
             EventModel = message.Value;
+        }
+    }
+
+    public class BlockCollectionChangedListener : ObservableRecipient, IRecipient<BlockCollectionInFilterChanged>
+    {
+        public ObservableCollection<BlockDetailsViewModel> Blocks;
+        public bool Recieved = false;
+
+        public BlockCollectionChangedListener()
+        {
+            Messenger.Register(this);
+        }
+        public void Receive(BlockCollectionInFilterChanged message)
+        {
+            Recieved = true;
+            Blocks = message.Value;
         }
     }
 }
