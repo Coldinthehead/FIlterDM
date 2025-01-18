@@ -1,4 +1,5 @@
-﻿using FilterDM.ViewModels;
+﻿using FilterDM.Models;
+using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 
 namespace FilterDM.Tests.ViewModel.Tests;
@@ -57,5 +58,17 @@ public class StructureTreeViewModelTests
         _filterVm.DeleteBlock(_filterVm.Blocks.First());
 
         Assert.That(sut.SelectedNode, Is.Null);
+    }
+
+    [Test]
+    public void ShouldChangeBlockCollection_WhenCollectionChangedInFilter()
+    {
+        StructureTreeViewModel sut = new();
+        sut.SetBlocks(_filterVm.Blocks);
+
+
+        _filterVm.SetModel(new FilterModel());
+
+        Assert.That(sut.Blocks, Is.EqualTo(_filterVm.Blocks));
     }
 }
