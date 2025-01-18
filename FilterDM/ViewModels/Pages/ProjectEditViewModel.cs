@@ -242,24 +242,22 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void Receive(BlockSelectedRequestEvent message)
     {
-        EditorPanel.AddBlock(message.Value);
-        FilterTree.SelectedNode = message.Value;
+
     }
 
     public void Receive(BlockCloseRequestEvent message)
     {
-        FilterTree.SelectedNode = null;
+       
     }
 
     public void Receive(DeleteBlockRequest message)
     {
-        EditorPanel.CloseRulesFromBlock(message.Value);
+   
     }
 
     public void Receive(RuleSelectedRequestEvent message)
     {
-        EditorPanel.AddRule(message.Value);
-        FilterTree.SelectedNode = message.Value;
+
     }
 
     public void Receive(RuleCloseRequestEvent message)
@@ -269,12 +267,12 @@ public partial class ProjectEditViewModel : ObservableRecipient
 
     public void Receive(RuleDeleteRequestEvent message)
     {
-        EditorPanel.CloseRule(message.Value);
+       
     }
 
     public void Receive(RuleCreateRequestEvent message)
     {
-        FilterTree.SelectedNode = message.Value.Properties.RealParent;
+       
     }
 
 
