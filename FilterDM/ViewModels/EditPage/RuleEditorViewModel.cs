@@ -238,6 +238,11 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         return _editorTypesToModifierTypes[editor] == modifier;
     }
 
+    public override void UpdateTitle()
+    {
+        Title = Rule.Properties.Title;
+    }
+
     public override ObservableRecipient GetSelectedContext()
     {
         return Rule;

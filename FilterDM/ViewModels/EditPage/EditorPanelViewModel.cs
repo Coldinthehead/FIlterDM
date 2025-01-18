@@ -20,13 +20,10 @@ public partial class EditorPanelViewModel : ObservableRecipient
     private EditorBaseViewModel _selectedItem;
     partial void OnSelectedItemChanged(EditorBaseViewModel? oldValue, EditorBaseViewModel newValue)
     {
-        if (newValue is RuleEditorViewModel r)
+        if (newValue != null)
         {
-            r.Title = r.Rule.Properties.Title;
-        }
-        else if (newValue is BlockEditorViewModel b)
-        {
-            b.Title = b.Block.Title;
+            Messenger.Send(new EditorSelectedEvent(newValue));
+            newValue.UpdateTitle();
         }
     }
 

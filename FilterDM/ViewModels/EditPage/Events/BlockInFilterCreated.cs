@@ -51,3 +51,10 @@ public class EditorClosedEvent : ValueChangedMessage<EditorBaseViewModel>
     {
     }
 }
+
+public class EditorSelectedEvent : ValueChangedMessage<EditorBaseViewModel>
+{
+    public EditorSelectedEvent(EditorBaseViewModel value) : base(value)
+    {
+    }
+}

@@ -28,4 +28,9 @@ public  partial class EditorBaseViewModel : ObservableRecipient
     {
         throw new NotImplementedException();
     }
+
+    public virtual void UpdateTitle()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -15,6 +15,11 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
     private RuleDetailsViewModel _selectedRule;
     partial void OnSelectedRuleChanged(RuleDetailsViewModel? oldValue, RuleDetailsViewModel newValue)
     {
+        if (newValue != null)
+        {
+            SelectedRule = null;
+            Messenger.Send(new RuleSelectedInTree(newValue));
+        }
     }
 
     [RelayCommand]
@@ -54,6 +59,11 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
     public override ObservableRecipient GetSelectedContext()
     {
         return Block;
+    }
+
+    public override void UpdateTitle()
+    {
+        Title = Block.Title;
     }
 
     public override bool Equals(object? obj)
