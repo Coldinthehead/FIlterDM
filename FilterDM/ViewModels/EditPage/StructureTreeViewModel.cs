@@ -20,6 +20,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
 
     [ObservableProperty]
     private ObservableRecipient _selectedNode;
+
     partial void OnSelectedNodeChanged(ObservableRecipient? oldValue, ObservableRecipient newValue)
     {
         if (newValue is  BlockDetailsViewModel block)
@@ -38,7 +39,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
         var model = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
         var templateService = App.Current.Services.GetService<BlockTemplateService>();
         var itemTypeService = App.Current.Services.GetService<ItemTypeService>();
-        model.Title = GetGenericBlockTitle();
+        model.Title = "block";
         var b = new BlockDetailsViewModel(Blocks, templateService.GetObservableNames(), new TypeScopeManager(itemTypeService));
         b.SetModel(model);
         Blocks.Add(b);
@@ -79,20 +80,6 @@ public partial class StructureTreeViewModel : ObservableRecipient
         Blocks = next;
     }
 
-    public string GetGenericBlockTitle()
-    {
-        int i = 1;
-        string title = "Block(0)";
-
-        while (BlockTitleTaken(title))
-        {
-            title = $"Block({i++})";
-        }
-        return title;
-    }
-
-    private bool BlockTitleTaken(string title)
-    => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
 
     internal void SortBlocks()
     {

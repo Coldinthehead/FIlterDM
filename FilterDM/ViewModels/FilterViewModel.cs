@@ -1,12 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
+using FilterDM.ViewModels.EditPage.Events;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FilterDM.ViewModels;
-public partial class FilterViewModel : ViewModelBase
+public partial class FilterViewModel : ObservableRecipient
 {
     [ObservableProperty]
     public ObservableCollection<BlockDetailsViewModel> _blocks;
@@ -28,7 +31,23 @@ public partial class FilterViewModel : ViewModelBase
         BlockDetailsViewModel blockVm = new(Blocks, _templateNames, new TypeScopeManager(_typeService));
         BlockModel template = _blockTempalteSerivice.GetEmpty();
         blockVm.SetModel(template);
-        blockVm.Title = "Block";
+        blockVm.Title = GetGenericBlockTitle();
         Blocks.Add(blockVm);
+        Messenger.Send(new BlockCreatedRequestEvent(blockVm));
     }
+
+    public string GetGenericBlockTitle()
+    {
+        int i = 0;
+        string title = "Block";
+
+        while (BlockTitleTaken(title))
+        {
+            title = $"Block({i++})";
+        }
+        return title;
+    }
+
+    private bool BlockTitleTaken(string title)
+        => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
 }

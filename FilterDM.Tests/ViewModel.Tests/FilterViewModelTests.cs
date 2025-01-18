@@ -1,8 +1,11 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
+using FilterDM.ViewModels.EditPage.Events;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class FilterViewModelTests
@@ -51,8 +54,38 @@ public class FilterViewModelTests
         sut.NewBlock();
         BlockDetailsViewModel first = sut.Blocks.First();
 
-        BlockDetailsViewModel blockWithDuplicateTitle = sut.Blocks.Skip(1).First(x => x.Title.Equals(first.Title));
-        Assert.That(blockWithDuplicateTitle, Is.Null);
+        HashSet<string> titles = [.. sut.Blocks.Select(x => x.Title)];
+        Assert.That(titles, Has.Count.EqualTo(sut.Blocks.Count));
     }
 
+    [Test]
+    public void NewBlock_ShouldRaiseBlockCreatedEvent()
+    {
+        FilterViewModel sut = new(new(), new());
+        BlockCreatedListener listener = new();
+
+        sut.NewBlock();
+        BlockDetailsViewModel newBlock = sut.Blocks.First();
+
+        Assert.That(listener.Recieved, Is.True);
+        Assert.That(listener.EventModel, Is.Not.Null);
+        Assert.That(listener.EventModel, Is.EqualTo(newBlock));
+    }
+
+
+    public class BlockCreatedListener : ObservableRecipient, IRecipient<BlockCreatedRequestEvent>
+    {
+        public bool Recieved = false;
+        public BlockDetailsViewModel? EventModel;
+        public BlockCreatedListener()
+        {
+            Messenger.Register<BlockCreatedRequestEvent>(this);
+        }
+
+        public void Receive(BlockCreatedRequestEvent message)
+        {
+            Recieved = true;
+            EventModel = message.Value;
+        }
+    }
 }
