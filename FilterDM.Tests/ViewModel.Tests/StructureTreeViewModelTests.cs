@@ -117,7 +117,7 @@ public class StructureTreeViewModelTests
 
         WeakReferenceMessenger.Default.Send(new EditorClosedEvent(new BlockEditorViewModel(block)));
 
-        Assert.That(sut.Select , Is.Null);
+        Assert.That(sut.SelectedNode , Is.Null);
     }
 
 
