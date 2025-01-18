@@ -18,6 +18,19 @@ public class BlockTemplateService : IInit
     const string REPOS_PATH = "./data/templates/templates.json";
 
     private BlockModel _empty;
+
+    public BlockTemplateService()
+    {
+        _templates = new();
+        _empty = new()
+        {
+            Enabled = true,
+            Priority = 2000,
+            TemplateName = "Empty",
+        };
+        _templates["Empty"] = _empty;
+        _templateNames = new([.. _templates.Keys]);
+    }
     public async Task Init()
     {
         _templates = new();
@@ -46,7 +59,7 @@ public class BlockTemplateService : IInit
             {
                 Enabled = true,
                 Priority = 2000,
-
+                TemplateName = "Empty",
             };
             _templates["Empty"] = _empty;
         }
