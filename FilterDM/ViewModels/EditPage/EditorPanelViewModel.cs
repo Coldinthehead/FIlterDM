@@ -1,38 +1,15 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterCore.PoeData;
 using FilterDM.Models;
 using FilterDM.ViewModels.EditPage.Events;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Tracing;
 
 
 namespace FilterDM.ViewModels.EditPage;
-
-public  partial class EditorBaseViewModel : ObservableRecipient
-{
-    public EditorBaseViewModel Content { get; set; }
-
-    public Action<EditorBaseViewModel> CloseAction { get; set; }
-
-    [RelayCommand]
-    private void CloseMe()
-    {
-        CloseAction?.Invoke(this);
-    }
-
-    [ObservableProperty]
-    private string _title;
-
-
-
-    public virtual bool IsPartOf(BlockDetailsViewModel vm)
-    { return false; }
-}
 
 public partial class EditorPanelViewModel : ObservableRecipient
 {
