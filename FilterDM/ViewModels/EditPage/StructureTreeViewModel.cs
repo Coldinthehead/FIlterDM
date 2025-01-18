@@ -9,6 +9,7 @@ namespace FilterDM.ViewModels.EditPage;
 public partial class StructureTreeViewModel : ObservableRecipient
     , IRecipient<BlockInFilterCreated>
     , IRecipient<BlockCollectionInFilterChanged>
+    , IRecipient<BlockDeletedInFilter>
 {
     [ObservableProperty]
     private ObservableCollection<BlockDetailsViewModel> _blocks;
@@ -55,6 +56,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
         SelectedNode = vm;
     }
 
+    #region event handlers
     public void Receive(BlockInFilterCreated message)
     {
         Select(message.Value);
@@ -65,4 +67,14 @@ public partial class StructureTreeViewModel : ObservableRecipient
         ClearSelection();
         Blocks = message.Value;
     }
+
+    public void Receive(BlockDeletedInFilter message)
+    {
+        if (SelectedNode == message.Value)
+        {
+            ClearSelection();
+        }
+    }
+
+    #endregion
 }
