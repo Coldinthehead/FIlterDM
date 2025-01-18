@@ -5,6 +5,7 @@ using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -51,6 +52,12 @@ public partial class FilterViewModel : ObservableRecipient
         {
             Messenger.Send(new BlockDeletedInFilter(vm));
         }
+    }
+
+    public void SortBlocks()
+    {
+        List<BlockDetailsViewModel> next = Blocks.Select(x => x).OrderBy(x => x.CalculatedPriority).ToList();
+        
     }
 
     public void NewRule(BlockDetailsViewModel parent)

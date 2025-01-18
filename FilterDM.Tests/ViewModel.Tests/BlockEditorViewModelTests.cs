@@ -18,6 +18,31 @@ public class BlockEditorViewModelTests
         Assert.That(listener.Editor, Is.EqualTo(editor));
     }
 
+    [Test]
+    public void ApplyCommand_ShouldRaiseEvent()
+    {
+        BlockEditorViewModel editor = new BlockEditorViewModel(new BlockDetailsViewModel([], [], new(new())));
+        SortBlocksListener listener = new();
+
+        editor.ApplyChangesCommand.Execute(null);
+
+        Assert.That(listener.Received, Is.True);
+    }
+
+    public class SortBlocksListener : ObservableRecipient, IRecipient<SortBlocksRequest>
+    {
+        public bool Received = false;
+
+        public SortBlocksListener()
+        {
+            Messenger.Register(this);
+        }
+        public void Receive(SortBlocksRequest message)
+        {
+            Received = true;
+        }
+    }
+
     public class CloseEditorListener: ObservableRecipient , IRecipient<EditorClosedEvent>
     {
         public bool Recieve = false;

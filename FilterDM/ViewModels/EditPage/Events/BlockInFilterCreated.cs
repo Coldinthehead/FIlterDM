@@ -58,3 +58,10 @@ public class EditorSelectedEvent : ValueChangedMessage<EditorBaseViewModel>
     {
     }
 }
+
+public class SortBlocksRequest : ValueChangedMessage<BlockDetailsViewModel>
+{
+    public SortBlocksRequest(BlockDetailsViewModel value) : base(value)
+    {
+    }
+}

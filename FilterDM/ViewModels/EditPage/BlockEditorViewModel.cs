@@ -24,8 +24,8 @@ public partial class BlockEditorViewModel : EditorBaseViewModel
     [RelayCommand]
     public void ApplyChanges()
     {
-        Messenger.Send(new BlockPriorityChangedRequest(Block));
         Title = this.Block.Title;
+        Messenger.Send(new SortBlocksRequest(Block));
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
