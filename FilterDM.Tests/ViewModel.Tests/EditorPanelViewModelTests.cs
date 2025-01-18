@@ -99,6 +99,24 @@ public class EditorPanelViewModelTests
         Assert.That(listener.Editor.Block, Is.EqualTo(fitlerVm.Blocks.First()));
     }
 
+    [Test]
+    public void ShouldOpenEditor_WhenRuleSelectedEvent()
+    {
+        FilterViewModel fitlerVm = new(new(), new(), new());
+        fitlerVm.NewBlock();
+        BlockDetailsViewModel block = fitlerVm.Blocks.First();
+        fitlerVm.NewRule(block);
+        RuleDetailsViewModel testRule = block.Rules.First();
+        EditorPanelViewModel sut = new();
+
+        WeakReferenceMessenger.Default.Send(new RuleSelectedInTree(testRule));
+
+        RuleEditorViewModel editor = sut.Items.First() as RuleEditorViewModel;
+        Assert.That(sut.Items, Has.Count.EqualTo(1));
+        Assert.That(editor, Is.Not.Null);
+        Assert.That(editor.Rule, Is.EqualTo(testRule));
+    }
+
 
     public class EditorCloseListener : ObservableRecipient, IRecipient<BlockEditorClosed>
     {
