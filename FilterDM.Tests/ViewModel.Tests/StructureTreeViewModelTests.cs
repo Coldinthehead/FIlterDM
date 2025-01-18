@@ -4,6 +4,7 @@ using FilterDM.Models;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
+using Material.Ripple;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class StructureTreeViewModelTests
@@ -99,6 +100,40 @@ public class StructureTreeViewModelTests
         WeakReferenceMessenger.Default.Send(new BlockEditorClosed(new BlockEditorViewModel(testBlock)));
 
         Assert.That(sut.SelectedNode, Is.Null);
+    }
+
+    [Test]
+    public void ShouldRaiseRuleSelectedEvent_WhenRuleSelected()
+    {
+        BlockDetailsViewModel block = _filterVm.Blocks.First();
+        _filterVm.NewRule(block);
+        RuleDetailsViewModel testRule = block.Rules.First();
+        StructureTreeViewModel sut = new();
+        sut.SetBlocks(_filterVm.Blocks);
+        RuleSelectListener listener = new();
+
+        sut.Select(testRule);
+
+
+        Assert.That(listener.Recieved, Is.True);
+        Assert.That(listener.Selection, Is.EqualTo(testRule));
+    }
+
+    public class RuleSelectListener : ObservableRecipient, IRecipient<RuleSelectedInTree>
+    {
+        public bool Recieved = false;
+        public RuleDetailsViewModel Selection;
+
+        public RuleSelectListener()
+        {
+            Messenger.Register(this);
+        }
+
+        public void Receive(RuleSelectedInTree message)
+        {
+            Recieved = true;
+            Selection = message.Value;
+        }
     }
 
     public class SelectLisener : ObservableRecipient
