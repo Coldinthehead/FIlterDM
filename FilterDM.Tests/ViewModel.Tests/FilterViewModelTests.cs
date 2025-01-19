@@ -328,6 +328,23 @@ public class FilterViewModelTests
         Assert.That(testBlock.Rules, Has.Count.EqualTo(0));
     }
 
+    [Test]
+    public void DeleteRule_ShouldRaiseRuleDeletedEvent()
+    {
+        FilterViewModel sut = Build();
+        sut.NewBlock();
+        BlockDetailsViewModel vm = sut.Blocks.First();
+        sut.NewRule(vm);
+        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        RuleDetailsViewModel testRule = testBlock.Rules.First();
+        EventListener<RuleDeleteEvent, RuleDetailsViewModel> listener = new();
+
+        sut.DeleteRule(testRule);
+
+        Assert.That(listener.Received, Is.True);
+        Assert.That(listener.Playload, Is.EqualTo(testRule));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
