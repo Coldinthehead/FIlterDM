@@ -242,6 +242,18 @@ public class FilterViewModelTests
         Assert.That(listener.Blocks, Is.EqualTo(sut.Blocks));
     }
 
+    [Test]
+    public void ShouldCreateNewRule_OnCreateRuleEvent()
+    {
+        FilterViewModel sut = new(new(), new(), new());
+        sut.NewBlock();
+        BlockDetailsViewModel testBlock = sut.Blocks.First();
+
+        WeakReferenceMessenger.Default.Send(new CreateRuleRequest(testBlock));
+
+        Assert.That(testBlock.Rules, Has.Count.EqualTo(1));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
