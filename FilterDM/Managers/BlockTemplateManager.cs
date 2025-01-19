@@ -20,6 +20,6 @@ public partial class BlockTemplateManager : ViewModelBase
         Templates = new (blockTemplateService.GetTemplates());
     }
 
-    internal BlockModel GetEmpty() => throw new NotImplementedException();
-    internal bool HasTemplate(string templateName) => throw new NotImplementedException();
+    internal BlockModel GetEmpty() => _blockTemplateService.GetEmpty();
+    internal bool HasTemplate(string templateName) => _blockTemplateService.HasTemplate(templateName);
 }

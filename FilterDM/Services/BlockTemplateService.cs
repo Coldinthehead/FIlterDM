@@ -20,16 +20,7 @@ public class BlockTemplateService
     {
         return _repository.GetEmpty();
     }
-    public bool TryGetTemplate(string templateName, out BlockModel template)
-    {
-        if (_repository.Exists(templateName))
-        {
-            template = _repository.Get(templateName);
-            return true;
-        }
-        template = null;
-        return false;
-    }
 
-    internal List<BlockModel> GetTemplates() => throw new NotImplementedException();
+    internal List<BlockModel> GetTemplates() => _repository.GetAll();
+    internal bool HasTemplate(string templateName) => _repository.Exists(templateName);
 }

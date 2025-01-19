@@ -12,11 +12,7 @@ namespace FilterDM.Repositories;
 public class BlockTemplateRepository : IBlockTemplateRepository
 {
     private Dictionary<string, BlockModel> _templates;
-
-    private ObservableCollection<string> _templateNames;
-
     const string REPOS_PATH = "./data/templates/templates.json";
-
     private BlockModel _empty;
 
     public BlockTemplateRepository()
@@ -29,7 +25,6 @@ public class BlockTemplateRepository : IBlockTemplateRepository
             TemplateName = "Empty",
         };
         _templates["Empty"] = _empty;
-        _templateNames = new([.. _templates.Keys]);
     }
     public async Task Init()
     {
@@ -63,30 +58,9 @@ public class BlockTemplateRepository : IBlockTemplateRepository
             };
             _templates["Empty"] = _empty;
         }
-
-        _templateNames = new([.. _templates.Keys]);
     }
 
     public BlockModel GetEmpty() => _empty.Clone();
-    internal IEnumerable<string> GetTempalteNames()
-    {
-        return [.. _templates.Keys];
-    }
-
-    internal BlockModel? GetTemplate(string name)
-    {
-        if (_templates.TryGetValue(name, out BlockModel template))
-        {
-            return template.Clone();
-        }
-        return null;
-    }
-
-    internal ObservableCollection<string> GetObservableNames()
-    {
-        return _templateNames;
-    }
-
     public bool Exists(string templateName)
     {
         return _templates.ContainsKey(templateName);
@@ -95,4 +69,6 @@ public class BlockTemplateRepository : IBlockTemplateRepository
     {
         return _templates[templateName];
     }
+
+    public List<BlockModel> GetAll() => [.. _templates.Values];
 }
