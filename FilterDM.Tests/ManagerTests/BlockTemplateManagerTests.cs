@@ -15,7 +15,7 @@ public class BlockTemplateManagerTests
         BlockTemplateManager sut = new(new Services.BlockTemplateService(new BlockTemplateRepository()));
         EventListener<ResetTemplateRequest, TemplateChangeDetils> listener = new();
         BlockDetailsViewModel testBlock = new(sut, new(new()));
-        testBlock.AddRule(new RuleDetailsViewModel(new(), new(new()), new ViewModels.EditPage.Managers.RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())));
+        testBlock.AddRule(new RuleDetailsViewModel(new(), new(new()), new ViewModels.EditPage.Managers.RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository()))));
         BlockModel template = new BlockTemplateRepository().GetEmpty();
 
         sut.SetTempalte(testBlock, template);

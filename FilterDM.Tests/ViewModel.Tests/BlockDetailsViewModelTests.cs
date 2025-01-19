@@ -40,5 +40,6 @@ public class BlockDetailsViewModelTests
 
         Assert.That(sut.Enabled, Is.EqualTo(empty.Enabled));
         Assert.That(sut.Priority, Is.EqualTo(empty.Priority));
+        Assert.That(sut.SelectedTemplate.TemplateName, Is.EqualTo(empty.TemplateName));
     }
 }
