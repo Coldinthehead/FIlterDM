@@ -1,4 +1,5 @@
 ﻿using FilterDM.ViewModels.EditPage;
+using FilterDM.ViewModels.EditPage.Events;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class BlockDetailsViewModelTests
@@ -13,5 +14,17 @@ public class BlockDetailsViewModelTests
 
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Block, Is.EqualTo(sut));
+    }
+
+    [Test]
+    public void OnDeleteConfirmed_ShouldRaiseEvent()
+    {
+        BlockDetailsViewModel sut = new(new(), new(), new(new()) );
+        EventListener<DeleteBlockRequest,BlockDetailsViewModel> listener = new();
+
+        sut.OnDeleteConfirmed();
+
+        Assert.That(listener.Received, Is.True);
+        Assert.That(listener.Playload, Is.EqualTo(sut));
     }
 }
