@@ -16,6 +16,7 @@ public partial class FilterViewModel : ObservableRecipient
     , IRecipient<DeleteBlockRequest>
     , IRecipient<SortBlocksRequest>
     , IRecipient<CreateRuleRequest>
+    , IRecipient<ResetTemplateRequest>
 {
     [ObservableProperty]
     private string _name;
@@ -26,14 +27,14 @@ public partial class FilterViewModel : ObservableRecipient
     private ObservableCollection<string> _templateNames;
 
     private readonly ItemTypeService _typeService;
-    private readonly BlockTemplateRepository _blockTempalteSerivice;
     private readonly RuleTemplateService _ruleTemplateService;
+    private readonly BlockTemplateService _blockTemplateService;
 
-    public FilterViewModel(ItemTypeService typeService, BlockTemplateRepository blockTempalteSerivice, RuleTemplateService ruleTemplateService)
+    public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTempalteService, RuleTemplateService ruleTemplateService)
     {
         _typeService = typeService;
-        _blockTempalteSerivice = blockTempalteSerivice;
         _ruleTemplateService = ruleTemplateService;
+        _blockTemplateService = blockTempalteService;
         _blocks = new();
         _templateNames = new();
         Messenger.Register<CreateBlockRequest>(this);
@@ -44,10 +45,10 @@ public partial class FilterViewModel : ObservableRecipient
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
         _typeService = new();
-        _blockTempalteSerivice = new();
         _ruleTemplateService = new();
         _blocks = new();
         _templateNames = new();
+        _blockTemplateService = new(new BlockTemplateRepository());
         Messenger.Register<CreateBlockRequest>(this);
         Messenger.Register<DeleteBlockRequest>(this);
         Messenger.Register<SortBlocksRequest>(this);
@@ -57,7 +58,7 @@ public partial class FilterViewModel : ObservableRecipient
     public void NewBlock()
     {
         BlockDetailsViewModel blockVm = new(Blocks, _templateNames, new TypeScopeManager(_typeService));
-        BlockModel template = _blockTempalteSerivice.GetEmpty();
+        BlockModel template = _blockTemplateService.GetEmpty();
         blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
         Blocks.Add(blockVm);
@@ -69,6 +70,15 @@ public partial class FilterViewModel : ObservableRecipient
         if (Blocks.Remove(vm))
         {
             Messenger.Send(new BlockDeletedInFilter(vm));
+        }
+    }
+
+    public void ResetBlockTemplate(BlockDetailsViewModel block, string tempalteName)
+    {
+        if (_blockTemplateService.TryGetTemplate(tempalteName, out BlockModel template))
+        {
+            template.Title = block.Title;
+            block.SetModel(template);
         }
     }
 
@@ -144,6 +154,14 @@ public partial class FilterViewModel : ObservableRecipient
         if (Blocks.Contains(message.Value))
         {
             NewRule(message.Value);
+        }
+    }
+
+    public void Receive(ResetTemplateRequest message)
+    {
+        if (Blocks.Contains(message.Value.Block))
+        {
+            ResetBlockTemplate(message.Value.Block, message.Value.TempalteName);
         }
     }
     #endregion
