@@ -18,4 +18,12 @@ public class RulePropertiesDecoratorViewModelTests
         Assert.That(listener.Playload, Is.EqualTo(rule));
     }
 
+  /*  [Test]
+    public void OnResetConfirmed_ShouldRaiseChangeTemplateRequest()
+    {
+        RuleDetailsViewModel rule = new(new([]), null, new());
+        RulePropertiesDecoratorViewModel sut = rule.Properties;
+        EventListener<>
+    }*/
+
 }

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace FilterDM.ViewModels.EditPage.Decorators;
+namespace FilterDM.ViewModels.EditPage.Managers;
 
 public partial class RuleParentManager : ViewModelBase
 {

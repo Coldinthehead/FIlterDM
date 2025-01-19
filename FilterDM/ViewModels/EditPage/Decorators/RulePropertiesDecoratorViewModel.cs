@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 

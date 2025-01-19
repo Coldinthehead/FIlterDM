@@ -1,8 +1,9 @@
 ﻿using FilterDM.Services;
+using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Decorators;
 using System.Collections.Generic;
 
-namespace FilterDM.ViewModels.EditPage;
+namespace FilterDM.Managers;
 
 public class TypeScopeManager
 {

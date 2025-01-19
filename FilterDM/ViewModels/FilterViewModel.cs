@@ -1,11 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Managers;
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.Managers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
