@@ -136,4 +136,16 @@ public class EditorPanelViewModelTests
 
         Assert.That(sut.Items.Count, Is.EqualTo(1));
     }
+
+    [Test]
+    public void ShouldCloseEditor_WhenRuleDeleted()
+    {
+        EditorPanelViewModel sut = new();
+        RuleDetailsViewModel testModel = new([], null, []);
+        sut.AddRule(testModel);
+
+        WeakReferenceMessenger.Default.Send(new RuleDeleteEvent(testModel));
+        
+        Assert.That(sut.Items, Has.Count.EqualTo(0));   
+    }
 }
