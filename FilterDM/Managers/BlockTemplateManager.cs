@@ -23,10 +23,10 @@ public partial class BlockTemplateManager : ObservableRecipient
         Templates = new (blockTemplateService.GetTemplates());
     }
 
-    internal BlockModel GetEmpty() => _blockTemplateService.GetEmpty();
-    internal BlockModel GetTemplate(string templateName) => _blockTemplateService.GetTemplate(templateName);
-    internal bool HasTemplate(string templateName) => _blockTemplateService.HasTemplate(templateName);
-    internal void SetTempalte(BlockDetailsViewModel blockDetailsViewModel, BlockModel selectedTemplate)
+    public BlockModel GetEmpty() => _blockTemplateService.GetEmpty();
+    public BlockModel GetTemplate(string templateName) => _blockTemplateService.GetTemplate(templateName);
+    public bool HasTemplate(string templateName) => _blockTemplateService.HasTemplate(templateName);
+    public void SetTempalte(BlockDetailsViewModel blockDetailsViewModel, BlockModel selectedTemplate)
     {
         Messenger.Send(new ResetTemplateRequest(new TemplateChangeDetils(blockDetailsViewModel, selectedTemplate)));
     }

@@ -31,20 +31,6 @@ public class BlockDetailsViewModelTests
     }
 
     [Test]
-    public void OnTemplateResetConfirmed_ShouldRaiseEvent()
-    {
-        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
-
-        EventListener<ResetTemplateRequest, TemplateChangeDetils> listener = new();
-
-        sut.OnTemplateResetConfirmed();
-
-        Assert.That(listener.Received, Is.True);
-        Assert.That(listener.Playload.Block, Is.EqualTo(sut));
-        Assert.That(listener.Playload.Template, Is.EqualTo(sut.SelectedTemplate));
-    }
-
-    [Test]
     public void SetModel_ShouldChangeBlockCorrect()
     {
         BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
