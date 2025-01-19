@@ -53,7 +53,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     {
         if (_parentManager.RequireChange(Rule, SelectedParent))
         {
-            _parentManager.ChangeParent(Rule, SelectedParent);
+            ParentManager.ChangeParent(Rule, SelectedParent);
         }
         else
         {
