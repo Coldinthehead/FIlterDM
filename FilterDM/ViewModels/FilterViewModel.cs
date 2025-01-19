@@ -82,6 +82,9 @@ public partial class FilterViewModel : ObservableRecipient
         {
             template.Title = block.Title;
             block.SetModel(template);
+            List<RuleDetailsViewModel> currentRules = block.Rules.ToList();
+            block.Rules.Clear();
+            Messenger.Send(new MultipleRulesDeleted(new MultipleRuleDeletedDetails(block, currentRules)));
             foreach (RuleModel model in template.Rules)
             {
                 NewRule(model, block);
