@@ -6,5 +6,7 @@ namespace FilterDM.Services;
 
 public interface IRuleTemplateService
 {
+    RuleModel Get(string templateName);
     IEnumerable<RuleModel> GetAll();
+    RuleModel GetEmpty();
 }

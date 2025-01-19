@@ -12,5 +12,14 @@ public class RuleTemplateService : IRuleTemplateService
         _repository = repository;
     }
 
+    public RuleModel Get(string templateName)
+    {
+        if (_repository.Has(templateName))
+        {
+            return _repository.Get(templateName);
+        }
+        return _repository.GetEmpty();
+    }
     public IEnumerable<RuleModel> GetAll() => _repository.GetAll();
+    public RuleModel GetEmpty() => _repository.GetEmpty();
 }

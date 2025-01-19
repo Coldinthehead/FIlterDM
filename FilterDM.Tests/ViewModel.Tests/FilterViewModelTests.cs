@@ -194,7 +194,7 @@ public class FilterViewModelTests
         sut.NewRule(block);
         RuleDetailsViewModel rule = block.Rules.First();
 
-        RuleModel template = service.BuildEmpty();
+        RuleModel template = service.GetEmpty();
         Assert.That(rule.Properties.Enabled, Is.EqualTo(template.Enabled));
         Assert.That(rule.Properties.Priority, Is.EqualTo(template.Priority));
         Assert.That(rule.Properties.Show, Is.EqualTo(template.Show));
@@ -282,7 +282,7 @@ public class FilterViewModelTests
     [Test]
     public void AddRule_ShouldCreateRuleFromModel()
     {
-        RuleModel empty = new RuleTemplateRepository().BuildEmpty();
+        RuleModel empty = new RuleTemplateRepository().GetEmpty();
         FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel testBlock = sut.GetBlocks().First();

@@ -111,7 +111,7 @@ public class FilterParserService
 
     private RuleModel ParseSingleRule(Rule rule, int priority)
     {
-        RuleModel model = App.Current.Services.GetService<RuleTemplateRepository>().BuildEmpty();
+        RuleModel model = App.Current.Services.GetService<RuleTemplateRepository>().GetEmpty();
         model.Show = rule.StartToken.Value.Equals("Show") ? true : false;
         model.Priority = priority;
 

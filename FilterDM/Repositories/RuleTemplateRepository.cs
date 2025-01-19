@@ -29,7 +29,7 @@ public class RuleTemplateRepository : IRuleTemplateRepository
         _templates["Empty"] = _empty;
     }
 
-    public RuleModel BuildEmpty()
+    public RuleModel GetEmpty()
     {
         return _empty.Clone();
     }
@@ -71,4 +71,6 @@ public class RuleTemplateRepository : IRuleTemplateRepository
         }
     }
     public IEnumerable<RuleModel> GetAll() => [.. _templates.Values];
+    public RuleModel Get(string templateName) => _templates[templateName].Clone();
+    public bool Has(string templateName) => _templates.ContainsKey(templateName);
 }

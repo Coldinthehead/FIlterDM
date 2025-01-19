@@ -19,7 +19,10 @@ public partial class RuleTemplateManager : ObservableRecipient
         _templates = new (_ruleTemplateService.GetAll());
     }
 
-    internal RuleModel Get(string templateName) => throw new NotImplementedException();
-    internal RuleModel GetEmpty() => throw new NotImplementedException();
-    internal void SetTemplate(RuleDetailsViewModel rule, RuleModel selectedTemplate) => throw new NotImplementedException();
+    internal RuleModel Get(string templateName) => _ruleTemplateService.Get(templateName);
+    internal RuleModel GetEmpty() => _ruleTemplateService.GetEmpty();
+    internal void SetTemplate(RuleDetailsViewModel rule, RuleModel selectedTemplate)
+    {
+        throw new NotImplementedException();
+    }
 }
