@@ -181,6 +181,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void AddRule(RuleDetailsViewModel rule)
     {
         rule.Properties.Title = GetNextTitle(rule.Properties.Title);
+        rule.Properties.SelectedParent = this;
         Rules.Add(rule);
         _scopeManager.AddByExistingRule(rule);
         SortRules();
