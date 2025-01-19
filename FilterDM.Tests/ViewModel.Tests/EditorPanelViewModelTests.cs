@@ -117,4 +117,23 @@ public class EditorPanelViewModelTests
         Assert.That(sut.Items.Contains(editor), Is.False);
         Assert.That(sut.Items.Count, Is.EqualTo(0));
     }
+
+    [Test]
+    public void ShouldCloseOpenedRules_WhenBlockTempalteChanged()
+    {
+        FilterViewModel filterVm = new(new(), new(new BlockTemplateRepository()), new());
+        EditorPanelViewModel sut = new();
+        filterVm.NewBlock();
+        BlockDetailsViewModel testBlock = filterVm.Blocks.First();
+        filterVm.NewRule(testBlock);
+        filterVm.NewRule(testBlock);
+        filterVm.NewRule(testBlock);
+        foreach (var rule in testBlock.Rules)
+        {
+            sut.AddRule(rule);
+        }
+        filterVm.ResetBlockTemplate(testBlock, "Empty");
+
+        Assert.That(sut.Items.Count, Is.EqualTo(1));
+    }
 }
