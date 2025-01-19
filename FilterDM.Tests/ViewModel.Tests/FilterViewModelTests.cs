@@ -1,11 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
-using System.Collections.ObjectModel;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class FilterViewModelTests
@@ -282,85 +280,5 @@ public class FilterViewModelTests
             }
         }
         return true;
-    }
-
-    public class NewBlocksListener : ObservableRecipient, IRecipient<BlockCollectionInFilterChanged>
-    {
-        public bool Received = false;
-        public ObservableCollection<BlockDetailsViewModel> Blocks;
-
-        public NewBlocksListener()
-        {
-            Messenger.Register(this);
-        }
-        public void Receive(BlockCollectionInFilterChanged message)
-        {
-            Received = true;
-            Blocks = message.Value;
-        }
-    }
-
-    public class RuleCreatedListener : ObservableRecipient, IRecipient<RuleCreatedInFilter>
-    {
-        public bool Received = false;
-        public RuleDetailsViewModel Rule;
-
-        public RuleCreatedListener()
-        {
-            Messenger.Register(this);
-        }
-        public void Receive(RuleCreatedInFilter message)
-        {
-            Received = true;
-            Rule = message.Value;
-        }
-    }
-
-    public class BlockCreatedListener : ObservableRecipient, IRecipient<BlockInFilterCreated>
-    {
-        public bool Recieved = false;
-        public BlockDetailsViewModel? EventModel;
-        public BlockCreatedListener()
-        {
-            Messenger.Register(this);
-        }
-
-        public void Receive(BlockInFilterCreated message)
-        {
-            Recieved = true;
-            EventModel = message.Value;
-        }
-    }
-
-    public class BlockCollectionChangedListener : ObservableRecipient, IRecipient<BlockCollectionInFilterChanged>
-    {
-        public ObservableCollection<BlockDetailsViewModel> Blocks;
-        public bool Recieved = false;
-
-        public BlockCollectionChangedListener()
-        {
-            Messenger.Register(this);
-        }
-        public void Receive(BlockCollectionInFilterChanged message)
-        {
-            Recieved = true;
-            Blocks = message.Value;
-        }
-    }
-
-    public class BlockDeletedListener : ObservableRecipient, IRecipient<BlockDeletedInFilter>
-    {
-        public bool Recieved = false;
-        public BlockDetailsViewModel Block;
-
-        public BlockDeletedListener()
-        {
-            Messenger.Register(this);
-        }
-        public void Receive(BlockDeletedInFilter message)
-        {
-            Recieved = true;
-            Block = message.Value;  
-        }
     }
 }

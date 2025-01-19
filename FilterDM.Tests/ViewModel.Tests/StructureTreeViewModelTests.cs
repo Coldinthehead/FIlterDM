@@ -1,10 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
-using Material.Ripple;
 using NUnit.Framework.Internal;
 using System.Collections.ObjectModel;
 
@@ -144,41 +142,5 @@ public class StructureTreeViewModelTests
         _filterVm.SortBlocks();
 
         Assert.That(sut.SelectedNode, Is.EqualTo(selectedBlock));
-    }
-
-
-    public class RuleSelectListener : ObservableRecipient, IRecipient<RuleSelectedInTree>
-    {
-        public bool Recieved = false;
-        public RuleDetailsViewModel Selection;
-
-        public RuleSelectListener()
-        {
-            Messenger.Register(this);
-        }
-
-        public void Receive(RuleSelectedInTree message)
-        {
-            Recieved = true;
-            Selection = message.Value;
-        }
-    }
-
-    public class SelectLisener : ObservableRecipient
-        , IRecipient<BlockSelectedInTree>
-    {
-        public bool Recieved = false;
-        public BlockDetailsViewModel Selection;
-
-        public SelectLisener()
-        {
-            Messenger.Register(this);
-        }
-
-        public void Receive(BlockSelectedInTree message)
-        {
-            Recieved = true;
-            Selection = message.Value;
-        }
     }
 }

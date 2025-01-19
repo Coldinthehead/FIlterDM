@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
-using FilterDM.ViewModels.EditPage;
-using FilterDM.ViewModels.EditPage.Events;
+﻿using FilterDM.ViewModels.EditPage;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class BlockDetailsViewModelTests
@@ -17,22 +14,4 @@ public class BlockDetailsViewModelTests
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Block, Is.EqualTo(sut));
     }
-
-
-    public class RuleCreateRequestListener : ObservableRecipient, IRecipient<CreateRuleRequest>
-    {
-        public bool Received = false;
-        public BlockDetailsViewModel Block;
-
-        public RuleCreateRequestListener()
-        {
-            Messenger.Register(this);
-        }
-        public void Receive(CreateRuleRequest message)
-        {
-            Received = true;
-            Block = message.Value;
-        }
-    }
-
 }
