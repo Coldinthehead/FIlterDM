@@ -78,3 +78,10 @@ public class MultipleRulesDeleted : ValueChangedMessage<MultipleRuleDeletedDetai
     {
     }
 }
+
+public class RuleDeleteEvent : ValueChangedMessage<RuleDetailsViewModel>
+{
+    public RuleDeleteEvent(RuleDetailsViewModel value) : base(value)
+    {
+    }
+}

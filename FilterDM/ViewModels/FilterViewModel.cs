@@ -127,6 +127,7 @@ public partial class FilterViewModel : ObservableRecipient
             if (block.Rules.Contains(rule))
             {
                 block.DeleteRule(rule);
+                Messenger.Send(new RuleDeleteEvent(rule));
                 break;
             }
         }
