@@ -117,7 +117,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public void OnTemplateResetConfirmed()
     {
-        Messenger.Send(new ResetTemplateRequest(new TemplateChangeDetils(this, SelectedTemplate)));
+        TemplateManager.SetTempalte(this, SelectedTemplate);
     }
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
