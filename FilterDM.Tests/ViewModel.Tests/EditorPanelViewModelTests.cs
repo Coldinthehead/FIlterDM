@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Repositories;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
@@ -45,7 +46,7 @@ public class EditorPanelViewModelTests
     public void ShouldOpenEditor_WhenBlockCreated()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new(), new());
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new());
 
         fitlerVm.NewBlock();
         BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
@@ -58,7 +59,7 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenBlockDeleted()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new(), new());
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new());
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
 
@@ -72,7 +73,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldOpenTab_WhenBlockSelectedInTree()
     {
-        FilterViewModel fitlerVm = new(new(), new(), new());
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new());
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
         StructureTreeViewModel tree = new();
@@ -88,7 +89,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldOpenEditor_WhenRuleSelectedEvent()
     {
-        FilterViewModel fitlerVm = new(new(), new(), new());
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new());
         fitlerVm.NewBlock();
         BlockDetailsViewModel block = fitlerVm.Blocks.First();
         fitlerVm.NewRule(block);
@@ -106,7 +107,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldCloseBlockEditor_WhenEventRaised()
     {
-        FilterViewModel fitlerVm = new(new(), new(), new());
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new());
         EditorPanelViewModel sut = new();
         fitlerVm.NewBlock();
         EditorBaseViewModel editor = sut.Items.First();

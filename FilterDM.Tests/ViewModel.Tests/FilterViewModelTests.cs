@@ -9,10 +9,16 @@ using FilterDM.ViewModels.EditPage.Events;
 namespace FilterDM.Tests.ViewModel.Tests;
 public class FilterViewModelTests
 {
+
+    public static FilterViewModel Build()
+    {
+        return new FilterViewModel(new ItemTypeService(), new(new BlockTemplateRepository()), new RuleTemplateService());
+    }
+
     [Test]
     public void NewBlock_ShouldCreateEmptyBlock()
     {
-        FilterViewModel sut = new FilterViewModel(new(), new(), new());
+        FilterViewModel sut = Build();
 
         sut.NewBlock();
 
@@ -25,7 +31,7 @@ public class FilterViewModelTests
     {
         BlockTemplateRepository templateService = new();
         BlockModel empty = templateService.GetEmpty();
-        FilterViewModel sut = new(new(), templateService, new());
+        FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel newBlock = sut.Blocks.First();
 
@@ -38,7 +44,7 @@ public class FilterViewModelTests
     [Test]
     public void NewBlock_ShouldSetBlockTitleToGenericName_WhenBlocksEmpty()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
 
         sut.NewBlock();
 
@@ -48,7 +54,7 @@ public class FilterViewModelTests
     [Test]
     public void NewBlock_ShouldCreateBlockWithUniqueName()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
         BlockDetailsViewModel first = sut.Blocks.First();
@@ -60,7 +66,7 @@ public class FilterViewModelTests
     [Test]
     public void NewBlock_ShouldRaiseBlockCreatedEvent()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();   
         BlockCreatedListener listener = new();
 
         sut.NewBlock();
@@ -74,7 +80,7 @@ public class FilterViewModelTests
     [Test]
     public void ShouldCreateNewBlock_WhenRequestSended()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
 
         WeakReferenceMessenger.Default.Send(new CreateBlockRequest(null));
 
@@ -84,7 +90,7 @@ public class FilterViewModelTests
     [Test]
     public void SetModel_ShouldReplicateBlocks()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
         FilterModel testModel = new FilterModel()
         {
             Name = "Hello",
@@ -113,7 +119,7 @@ public class FilterViewModelTests
     [Test]
     public void SetModel_ShouldRaiseBlocksCollectionChanged()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
         BlockCollectionChangedListener listener = new();
         FilterModel testModel = new FilterModel()
         {
@@ -142,7 +148,7 @@ public class FilterViewModelTests
     [Test]
     public void ShouldDeleteBlock_WhenDeleteRequestRaised()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
 
@@ -154,7 +160,7 @@ public class FilterViewModelTests
     [Test]
     public void DeleteBlock_ShouldRaiseBlockDeletedEvent()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
         BlockDeletedListener listener = new();
@@ -168,7 +174,7 @@ public class FilterViewModelTests
     [Test]
     public void NewRule_ShouldUpdateParentWithNewRule()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
 
@@ -181,7 +187,7 @@ public class FilterViewModelTests
     public void NewRule_ShouldSetEmptyTemplate()
     {
         RuleTemplateService service = new();
-        FilterViewModel sut = new(new(), new(), service);
+        FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
 
@@ -198,7 +204,7 @@ public class FilterViewModelTests
     public void NewRule_ShouldRaiseRuleCreatedEvent()
     {
         RuleTemplateService service = new();
-        FilterViewModel sut = new(new(), new(), service);
+        FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
         RuleCreatedListener listener = new();
@@ -214,7 +220,7 @@ public class FilterViewModelTests
     public void ShouldSortBlocks_OnSortBlockRequestEvent()
     {
         RuleTemplateService service = new();
-        FilterViewModel sut = new(new(), new(), service);
+        FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
@@ -230,7 +236,7 @@ public class FilterViewModelTests
     public void SortBlocks_ShouldRaiseBlocksChanged()
     {
         RuleTemplateService service = new();
-        FilterViewModel sut = new(new(), new(), service);
+        FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
         NewBlocksListener listener = new();

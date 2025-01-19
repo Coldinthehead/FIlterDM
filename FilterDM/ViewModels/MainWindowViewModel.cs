@@ -25,7 +25,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public void Initialize()
     {
         var typeService = App.Current.Services.GetService<ItemTypeService>();
-        var blockTeplateService = App.Current.Services.GetService<BlockTemplateRepository>();
+        var blockTeplateService = App.Current.Services.GetService<BlockTemplateService>();
         var ruleTemplateService = App.Current.Services.GetService<RuleTemplateService>();
         _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService)
         {

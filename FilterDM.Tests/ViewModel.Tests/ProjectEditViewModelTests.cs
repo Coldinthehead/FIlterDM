@@ -1,4 +1,5 @@
 ﻿using FilterDM.Models;
+using FilterDM.Repositories;
 using FilterDM.ViewModels.Pages;
 
 namespace FilterDM.Tests.ViewModel.Tests;
@@ -19,7 +20,7 @@ public class ProjectEditViewModelTests
         {
             Title = "block1",
         });
-        _sut = new(new(), new(), new());
+        _sut = new(new(), new Services.BlockTemplateService(new BlockTemplateRepository()), new());
     }
 
     [Test]
