@@ -14,6 +14,7 @@ public partial class FilterViewModel : ObservableRecipient
     , IRecipient<CreateBlockRequest>
     , IRecipient<DeleteBlockRequest>
     , IRecipient<SortBlocksRequest>
+    , IRecipient<CreateRuleRequest>
 {
     [ObservableProperty]
     private string _name;
@@ -37,6 +38,7 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Register<CreateBlockRequest>(this);
         Messenger.Register<DeleteBlockRequest>(this);
         Messenger.Register<SortBlocksRequest>(this);
+        Messenger.Register<CreateRuleRequest>(this);
     }
     public void NewBlock()
     {
@@ -121,6 +123,11 @@ public partial class FilterViewModel : ObservableRecipient
     public void Receive(SortBlocksRequest message)
     {
         SortBlocks();
+    }
+
+    public void Receive(CreateRuleRequest message)
+    {
+        NewRule(message.Value);
     }
     #endregion
 }
