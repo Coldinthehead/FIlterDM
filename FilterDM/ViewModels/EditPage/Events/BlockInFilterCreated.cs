@@ -92,3 +92,11 @@ public class SortRulesRequest : ValueChangedMessage<RuleDetailsViewModel>
     {
     }
 }
+
+public class SelectRuleInTreeRequest : ValueChangedMessage<RuleDetailsViewModel>
+{
+    public SelectRuleInTreeRequest(RuleDetailsViewModel value) : base(value)
+    {
+    }
+}
+

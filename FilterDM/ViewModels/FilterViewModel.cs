@@ -104,9 +104,10 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Send(new BlockCollectionInFilterChanged(Blocks));
     }
 
-    public void SortRules(BlockDetailsViewModel block)
+    public void SortRules(BlockDetailsViewModel block, RuleDetailsViewModel sender)
     {
         block.SortRules();
+        Messenger.Send(new SelectRuleInTreeRequest(sender));
     }
 
     public void NewRule(BlockDetailsViewModel parent)
@@ -216,7 +217,7 @@ public partial class FilterViewModel : ObservableRecipient
         {
             if (block.Rules.Contains(message.Value))
             {
-                SortRules(block);
+                SortRules(block, message.Value);
             }
         }
     }
