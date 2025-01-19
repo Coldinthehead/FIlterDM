@@ -29,7 +29,7 @@ public class FilterViewModelTests
         sut.NewBlock();
         BlockDetailsViewModel newBlock = sut.Blocks.First();
 
-        Assert.That(newBlock.SelectedTempalte, Is.EqualTo(empty.TemplateName));
+        Assert.That(newBlock.SelectedTemplate, Is.EqualTo(empty.TemplateName));
         Assert.That(newBlock.Enabled, Is.EqualTo(empty.Enabled));
         Assert.That(newBlock.Priority, Is.EqualTo(empty.Priority));
         Assert.That(newBlock.Rules, Has.Count.EqualTo(empty.Rules.Count));
