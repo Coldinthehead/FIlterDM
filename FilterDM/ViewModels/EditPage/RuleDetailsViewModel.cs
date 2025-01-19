@@ -359,6 +359,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         Properties = new(this, allBlocks, parentBlock, templates);
         Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
+        Modifiers = new([Properties]);
     }
 
     public RuleModel GetModel()
