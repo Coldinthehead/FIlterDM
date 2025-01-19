@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
@@ -11,8 +12,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace FilterDM.ViewModels.EditPage;
-
-
 
 public partial class BlockDetailsViewModel : ObservableRecipient
     , IRecipient<RuleDeleteRequestEvent>
@@ -84,14 +83,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
                     return;
                 }
             }
-            var service = App.Current.Services.GetService<BlockTemplateRepository>();
-            BlockModel? nextTeplate = service.GetTemplate(SelectedTempalte);
-            if (nextTeplate != null)
-            {
-                nextTeplate.Title = Title;
-                SetModel(nextTeplate);
-
-            }
+            OnTemplateResetConfirmed();
         }
         Messenger.Send(new FilterEditedRequestEvent(this));
         Messenger.Send(new BlockPriorityChangedRequest(this));
@@ -125,6 +117,18 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         Messenger.Send(new DeleteBlockRequest(this));
         Messenger.Send(new FilterEditedRequestEvent(this));
+    }
+
+    public void OnTemplateResetConfirmed()
+    {
+        var service = App.Current.Services.GetService<BlockTemplateRepository>();
+        BlockModel? nextTeplate = service.GetTemplate(SelectedTempalte);
+        if (nextTeplate != null)
+        {
+            nextTeplate.Title = Title;
+            SetModel(nextTeplate);
+
+        }
     }
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
