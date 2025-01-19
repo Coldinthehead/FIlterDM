@@ -284,8 +284,11 @@ public class FilterViewModelTests
     {
         RuleModel empty = new RuleTemplateService().BuildEmpty();
         FilterViewModel sut = Build();
+        sut.NewBlock();
+        BlockDetailsViewModel testBlock = sut.Blocks.First();
 
-        RuleDetailsViewModel result = sut.NewRule(empty);
+        sut.NewRule(empty, testBlock);
+        RuleDetailsViewModel result = testBlock.Rules.First();
 
         Assert.That(result, Is.Not.Null);
         Assert.That(result.Properties.Enabled, Is.EqualTo(empty.Enabled));
