@@ -104,14 +104,12 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             var dialogResult = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete {Rules.Count} rules?");
             if (dialogResult)
             {
-                Messenger.Send(new DeleteBlockRequest(this));
-                Messenger.Send(new FilterEditedRequestEvent(this));
+                OnDeleteConfirmed();
             }
         }
         else
         {
-            Messenger.Send(new DeleteBlockRequest(this));
-            Messenger.Send(new FilterEditedRequestEvent(this));
+            OnDeleteConfirmed();
         }
     }
 
@@ -119,6 +117,12 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void NewRule()
     {
         Messenger.Send(new CreateRuleRequest(this));
+    }
+
+    public void OnDeleteConfirmed()
+    {
+        Messenger.Send(new DeleteBlockRequest(this));
+        Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
