@@ -366,6 +366,23 @@ public class FilterViewModelTests
         Assert.That(testBlock.Rules.IndexOf(rule), Is.EqualTo(2));
     }
 
+    [Test]
+    public void SortRules_ShouldRaiseSelectRuleInTreeRequest()
+    {
+        FilterViewModel sut = Build();
+        sut.NewBlock();
+        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        sut.NewRule(testBlock);
+        RuleDetailsViewModel rule = testBlock.Rules.First();
+        EventListener<SelectRuleInTreeRequest, RuleDetailsViewModel> listener = new();
+
+        sut.SortRules(testBlock, rule);
+
+        Assert.That(listener.Received, Is.True);
+        Assert.That(listener.Playload, Is.EqualTo(rule));
+    }
+
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
