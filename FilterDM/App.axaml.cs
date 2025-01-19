@@ -57,6 +57,7 @@ public partial class App : Application
             container.BindService<CoreFilterService>();
             container.BindService<FilterParserService>();
             container.BindService<SaveFilterService>();
+            container.BindService<BlockTemplateService>();
             Services = container.BuildServiceProvider();
 
 
