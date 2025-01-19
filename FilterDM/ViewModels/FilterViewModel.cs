@@ -102,6 +102,14 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Send(new RuleCreatedInFilter(ruleVm));
     }
 
+    public void NewRule(RuleModel model, BlockDetailsViewModel parent)
+    {
+        RuleDetailsViewModel ruleVm = new(Blocks, parent, _ruleTemplateService.GetObservableNames());
+        ruleVm.SetModel(model);
+        parent.AddRule(ruleVm);
+        Messenger.Send(new RuleCreatedInFilter(ruleVm));
+    }
+
     public void SetModel(FilterModel model)
     {
         Name = model.Name;
