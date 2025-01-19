@@ -1,4 +1,6 @@
-﻿using FilterDM.Tests.ViewModel.Tests;
+﻿using FilterDM.Repositories;
+using FilterDM.Services;
+using FilterDM.Tests.ViewModel.Tests;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
@@ -9,7 +11,7 @@ public class RulePropertiesDecoratorViewModelTests
     [Test]
     public void OnSortRules_ShouldRaiseSortRulesRequest()
     {
-        RuleDetailsViewModel rule = new(new(), null, new());
+        RuleDetailsViewModel rule = new(new(), null, null);
         RulePropertiesDecoratorViewModel sut = rule.Properties;
         EventListener<SortRulesRequest, RuleDetailsViewModel> listener = new();
         sut.OnSortRules();

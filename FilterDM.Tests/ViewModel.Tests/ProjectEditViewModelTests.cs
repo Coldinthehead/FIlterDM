@@ -20,7 +20,7 @@ public class ProjectEditViewModelTests
         {
             Title = "block1",
         });
-        _sut = new(new(), new Services.BlockTemplateService(new BlockTemplateRepository()), new());
+        _sut = new(new(), new Services.BlockTemplateService(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
     }
 
     [Test]

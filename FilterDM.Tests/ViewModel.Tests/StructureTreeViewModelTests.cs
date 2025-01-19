@@ -15,7 +15,7 @@ public class StructureTreeViewModelTests
     [SetUp]
     public void SetUp()
     {
-        _filterVm = new(new(), new(new BlockTemplateRepository()), new());
+        _filterVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
         _filterVm.NewBlock();
         _filterVm.NewBlock();
     }
