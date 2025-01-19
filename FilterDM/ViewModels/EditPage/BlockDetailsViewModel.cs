@@ -153,12 +153,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void SetModel(BlockModel model)
     {
         var currentRules = Rules.ToArray();
-
-        Rules.Clear();
-        foreach (var rule in currentRules)
-        {
-            rule.DeleteSafe();
-        }
         UseScopeNames = model.UseBlockTypeScope;
         Title = model.Title;
         Enabled = model.Enabled;
