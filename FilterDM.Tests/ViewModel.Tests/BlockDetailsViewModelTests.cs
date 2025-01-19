@@ -27,4 +27,18 @@ public class BlockDetailsViewModelTests
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Playload, Is.EqualTo(sut));
     }
+
+    [Test]
+    public void OnTemplateResetConfirmed_ShouldRaiseEvent()
+    {
+        BlockDetailsViewModel sut = new(new(), new(), new(new()));
+
+        EventListener<ResetTemplateRequest, TemplateChangeDetils> listener = new();
+
+        sut.OnTemplateResetConfirmed();
+
+        Assert.That(listener.Received, Is.True);
+        Assert.That(listener.Playload.Block, Is.EqualTo(sut));
+        Assert.That(listener.Playload.TempalteName, Is.EqualTo(sut.SelectedTempalte));
+    }
 }
