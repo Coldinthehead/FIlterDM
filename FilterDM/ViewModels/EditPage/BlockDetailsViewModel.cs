@@ -118,10 +118,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [RelayCommand]
     public void NewRule()
     {
-        var teplateSerivice = App.Current.Services.GetService<RuleTemplateService>();
-        var model = teplateSerivice.BuildEmpty();
-        var vm = AddRule(model);
-        Messenger.Send(new RuleCreateRequestEvent(vm));
+        Messenger.Send(new CreateRuleRequest(this));
     }
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;

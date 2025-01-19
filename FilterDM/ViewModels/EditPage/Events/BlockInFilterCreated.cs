@@ -65,3 +65,10 @@ public class SortBlocksRequest : ValueChangedMessage<BlockDetailsViewModel>
     {
     }
 }
+
+public class CreateRuleRequest : ValueChangedMessage<BlockDetailsViewModel>
+{
+    public CreateRuleRequest(BlockDetailsViewModel value) : base(value)
+    {
+    }
+}
