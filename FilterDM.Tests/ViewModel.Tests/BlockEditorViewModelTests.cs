@@ -1,4 +1,5 @@
-﻿using FilterDM.ViewModels.EditPage;
+﻿using FilterDM.Repositories;
+using FilterDM.ViewModels.EditPage;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class BlockEditorViewModelTests
@@ -6,7 +7,7 @@ public class BlockEditorViewModelTests
     [Test]
     public void CloseMeCommand_ShouldRaiseEvent()
     {
-        BlockEditorViewModel editor = new BlockEditorViewModel(new BlockDetailsViewModel ([], new(new())));
+        BlockEditorViewModel editor = new BlockEditorViewModel(new(new(new(new BlockTemplateRepository())), new(new())));
         CloseEditorListener listener = new();
         editor.CloseMeCommand.Execute(null);
 
@@ -17,7 +18,7 @@ public class BlockEditorViewModelTests
     [Test]
     public void ApplyCommand_ShouldRaiseEvent()
     {
-        BlockEditorViewModel editor = new BlockEditorViewModel(new BlockDetailsViewModel([], new(new())));
+        BlockEditorViewModel editor = new BlockEditorViewModel(new(new(new(new BlockTemplateRepository())), new(new())));
         SortBlocksListener listener = new();
 
         editor.ApplyChangesCommand.Execute(null);

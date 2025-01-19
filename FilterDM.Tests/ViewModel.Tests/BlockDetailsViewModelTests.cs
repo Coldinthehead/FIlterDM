@@ -9,7 +9,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void NewRuleCommand_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(), new(new()));
+        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
         RuleCreateRequestListener listener = new();
 
         sut.NewRuleCommand.Execute(sut);
@@ -21,7 +21,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void OnDeleteConfirmed_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(), new(new()) );
+        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()) );
         EventListener<DeleteBlockRequest,BlockDetailsViewModel> listener = new();
 
         sut.OnDeleteConfirmed();
@@ -33,7 +33,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void OnTemplateResetConfirmed_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(), new(new()));
+        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
 
         EventListener<ResetTemplateRequest, TemplateChangeDetils> listener = new();
 
@@ -41,13 +41,13 @@ public class BlockDetailsViewModelTests
 
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Playload.Block, Is.EqualTo(sut));
-        Assert.That(listener.Playload.TempalteName, Is.EqualTo(sut.SelectedTemplate));
+        Assert.That(listener.Playload.Template, Is.EqualTo(sut.SelectedTemplate));
     }
 
     [Test]
     public void SetModel_ShouldChangeBlockCorrect()
     {
-        BlockDetailsViewModel sut = new([], new(new()));
+        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
         BlockModel empty = new BlockTemplateRepository().GetEmpty();
 
         sut.SetModel(empty);

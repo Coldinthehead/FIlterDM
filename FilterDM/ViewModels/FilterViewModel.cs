@@ -29,21 +29,18 @@ public partial class FilterViewModel : ObservableRecipient
     [ObservableProperty]
     public ObservableCollection<BlockDetailsViewModel> _blocks;
 
-    private ObservableCollection<string> _templateNames;
-
     private readonly ItemTypeService _typeService;
     private readonly RuleTemplateService _ruleTemplateService;
-    private readonly BlockTemplateService _blockTemplateService;
+    private readonly BlockTemplateManager _blockTemplates;
 
     private readonly RuleParentManager _parentManager;
 
-    public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTempalteService, RuleTemplateService ruleTemplateService)
+    public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTemplateService, RuleTemplateService ruleTemplateService)
     {
         _typeService = typeService;
         _ruleTemplateService = ruleTemplateService;
-        _blockTemplateService = blockTempalteService;
+        _blockTemplates = new BlockTemplateManager(blockTemplateService);
         Blocks = new();
-        _templateNames = new();
         _parentManager = new(Blocks);
         RegisterEvents();
     }
@@ -52,8 +49,7 @@ public partial class FilterViewModel : ObservableRecipient
         _typeService = new();
         _ruleTemplateService = new();
         Blocks = new();
-        _templateNames = new();
-        _blockTemplateService = new(new BlockTemplateRepository());
+        _blockTemplates = new(new(new BlockTemplateRepository()));
         _parentManager = new(Blocks);
         RegisterEvents();
     }
@@ -71,8 +67,8 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewBlock()
     {
-        BlockDetailsViewModel blockVm = new(_templateNames, new TypeScopeManager(_typeService));
-        BlockModel template = _blockTemplateService.GetEmpty();
+        BlockDetailsViewModel blockVm = new(_blockTemplates, new TypeScopeManager(_typeService));
+        BlockModel template = _blockTemplates.GetEmpty();
         blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
         Blocks.Add(blockVm);
@@ -89,19 +85,17 @@ public partial class FilterViewModel : ObservableRecipient
         }
     }
 
-    public void ResetBlockTemplate(BlockDetailsViewModel block, string tempalteName)
+    public void ResetBlockTemplate(BlockDetailsViewModel block, BlockModel template)
     {
-        if (_blockTemplateService.TryGetTemplate(tempalteName, out BlockModel template))
+        var currentTitle = block.Title;
+        block.SetModel(template);
+        block.Title = currentTitle;
+        List<RuleDetailsViewModel> currentRules = block.Rules.ToList();
+        block.Rules.Clear();
+        Messenger.Send(new MultipleRulesDeleted(new MultipleRuleDeletedDetails(block, currentRules)));
+        foreach (RuleModel model in template.Rules)
         {
-            template.Title = block.Title;
-            block.SetModel(template);
-            List<RuleDetailsViewModel> currentRules = block.Rules.ToList();
-            block.Rules.Clear();
-            Messenger.Send(new MultipleRulesDeleted(new MultipleRuleDeletedDetails(block, currentRules)));
-            foreach (RuleModel model in template.Rules)
-            {
-                NewRule(model, block);
-            }
+            NewRule(model, block);
         }
     }
 
@@ -154,7 +148,7 @@ public partial class FilterViewModel : ObservableRecipient
         ObservableCollection<BlockDetailsViewModel> next = new();
         foreach (BlockModel blockModel in model.Blocks)
         {
-            BlockDetailsViewModel blockVm = new BlockDetailsViewModel(_templateNames, new TypeScopeManager(_typeService));
+            BlockDetailsViewModel blockVm = new BlockDetailsViewModel(_blockTemplates, new TypeScopeManager(_typeService));
             blockVm.SetModel(blockModel);
             next.Add(blockVm);
         }
@@ -209,7 +203,7 @@ public partial class FilterViewModel : ObservableRecipient
     {
         if (Blocks.Contains(message.Value.Block))
         {
-            ResetBlockTemplate(message.Value.Block, message.Value.TempalteName);
+            ResetBlockTemplate(message.Value.Block, message.Value.Template);
         }
     }
 

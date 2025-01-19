@@ -1,6 +1,9 @@
 ﻿using FilterDM.Models;
 using FilterDM.Repositories;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace FilterDM.Services;
 
@@ -27,4 +30,6 @@ public class BlockTemplateService
         template = null;
         return false;
     }
+
+    internal List<BlockModel> GetTemplates() => throw new NotImplementedException();
 }

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
@@ -12,7 +13,7 @@ public class EditorPanelViewModelTests
     public void Clear_ShouldDeleteAllEditors()
     {
         EditorPanelViewModel sut = new();
-        sut.AddBlock(new BlockDetailsViewModel(new(), new(new())));
+        sut.AddBlock(new(new(new(new BlockTemplateRepository())), new(new())));
 
         sut.Clear();
 
@@ -22,7 +23,7 @@ public class EditorPanelViewModelTests
     public void AddBlock_ShouldCreateBlockEditor_WhenEditorNotExists()
     {
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock = new BlockDetailsViewModel(new(), new(new()));
+        BlockDetailsViewModel testBlock =  new(new(new(new BlockTemplateRepository())), new(new()));
 
         sut.AddBlock(testBlock);
 
@@ -34,7 +35,7 @@ public class EditorPanelViewModelTests
     public void AddBlock_ShouldNotCreateBlockEditor_WhenEditorExists()
     {
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock = new BlockDetailsViewModel(new(), new(new()));
+        BlockDetailsViewModel testBlock = new(new(new(new BlockTemplateRepository())), new(new()));
         sut.AddBlock(testBlock);
 
         sut.AddBlock(testBlock);
@@ -132,7 +133,9 @@ public class EditorPanelViewModelTests
         {
             sut.AddRule(rule);
         }
-        filterVm.ResetBlockTemplate(testBlock, "Empty");
+        BlockModel empty = new BlockTemplateRepository().GetEmpty();
+
+        filterVm.ResetBlockTemplate(testBlock, empty);
 
         Assert.That(sut.Items.Count, Is.EqualTo(1));
     }

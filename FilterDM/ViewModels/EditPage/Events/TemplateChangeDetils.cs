@@ -1,14 +1,16 @@
-﻿namespace FilterDM.ViewModels.EditPage.Events;
+﻿using FilterDM.Models;
+
+namespace FilterDM.ViewModels.EditPage.Events;
 
 public struct TemplateChangeDetils
 {
     public readonly BlockDetailsViewModel Block;
-    public readonly string TempalteName;
+    public readonly BlockModel Template;
 
-    public TemplateChangeDetils(BlockDetailsViewModel block, string tempalteName)
+    public TemplateChangeDetils(BlockDetailsViewModel block, BlockModel template)
     {
         Block = block;
-        TempalteName = tempalteName;
+        Template = template;
     }
 }
 

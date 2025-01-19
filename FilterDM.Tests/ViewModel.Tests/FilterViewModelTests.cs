@@ -35,7 +35,7 @@ public class FilterViewModelTests
         sut.NewBlock();
         BlockDetailsViewModel newBlock = sut.Blocks.First();
 
-        Assert.That(newBlock.SelectedTemplate, Is.EqualTo(empty.TemplateName));
+        Assert.That(newBlock.SelectedTemplate, Is.EqualTo(empty));
         Assert.That(newBlock.Enabled, Is.EqualTo(empty.Enabled));
         Assert.That(newBlock.Priority, Is.EqualTo(empty.Priority));
         Assert.That(newBlock.Rules, Has.Count.EqualTo(empty.Rules.Count));
@@ -271,7 +271,7 @@ public class FilterViewModelTests
         sut.NewRule(testBlock);
         sut.NewRule(testBlock);
 
-        messenger.Send(new ResetTemplateRequest(new TemplateChangeDetils(testBlock, empty.TemplateName)));
+        messenger.Send(new ResetTemplateRequest(new TemplateChangeDetils(testBlock, empty)));
 
 
         Assert.That(testBlock.Rules, Has.Count.EqualTo(0));
@@ -307,7 +307,7 @@ public class FilterViewModelTests
         sut.NewRule(vm);
         sut.NewRule(vm);
         EventListener<MultipleRulesDeleted, MultipleRuleDeletedDetails> listener = new();
-        sut.ResetBlockTemplate(vm, "Empty");
+        sut.ResetBlockTemplate(vm, new BlockTemplateRepository().GetEmpty());
 
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Playload.Block, Is.EqualTo(vm));

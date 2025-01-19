@@ -94,9 +94,15 @@
                             Margin="8"
                             HorizontalAlignment="Center"
                             p1:ComboBoxAssist.Label="Preset"
-                            ItemsSource="{Binding Block.Templates}"
+                            ItemsSource="{Binding Block.TemplateManager.Templates}"
                             SelectedItem="{Binding Block.SelectedTemplate}"
-                            Theme="{StaticResource MaterialOutlineComboBox}" />
+                            Theme="{StaticResource MaterialOutlineComboBox}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
 
                         <StackPanel Grid.Row="2">

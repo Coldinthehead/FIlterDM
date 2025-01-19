@@ -48,10 +48,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     private RuleDetailsViewModel _selectedRule;
 
     [ObservableProperty]
-    private ObservableCollection<string> _templates;
-
-    [ObservableProperty]
-    private string _selectedTemplate;
+    private BlockModel _selectedTemplate;
 
     private readonly TypeScopeManager _scopeManager;
     [ObservableProperty]
@@ -121,16 +118,19 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public void OnTemplateResetConfirmed()
     {
-        Messenger.Send(new ResetTemplateRequest(new TemplateChangeDetils(this, this.SelectedTemplate)));
+        Messenger.Send(new ResetTemplateRequest(new TemplateChangeDetils(this, SelectedTemplate)));
     }
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
     public TypeScopeManager ScopeManager => _scopeManager;
 
-    public BlockDetailsViewModel(ObservableCollection<string> templateNames , TypeScopeManager scopeManager )
-    { 
-        Templates = templateNames;
+    [ObservableProperty]
+    public BlockTemplateManager _templateManager;
+
+    public BlockDetailsViewModel(BlockTemplateManager templateManager , TypeScopeManager scopeManager )
+    {
+        TemplateManager = templateManager;
         _scopeManager = scopeManager;
     }
 
@@ -140,7 +140,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         block.Title = Title;
         block.Enabled = Enabled;
         block.Priority = Priority;
-        block.TemplateName = SelectedTemplate;
+        block.TemplateName = SelectedTemplate.Title;
         block.UseBlockTypeScope = UseScopeNames;
         foreach (RuleDetailsViewModel rule in Rules)
         {
@@ -157,13 +157,13 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         Enabled = model.Enabled;
         Priority = model.Priority;
       
-        if (model.TemplateName != null && Templates.Contains(model.TemplateName))
+        if (model.TemplateName != null && TemplateManager.HasTemplate(model.TemplateName))
         {
-            SelectedTemplate = model.TemplateName;
+            SelectedTemplate = model;
         }
         else
         {
-            SelectedTemplate = "Empty";
+            SelectedTemplate = TemplateManager.GetEmpty();
         }
     }
     public bool DeleteRule(RuleDetailsViewModel rule)
