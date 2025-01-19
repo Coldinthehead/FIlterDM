@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
+using FilterDM.ViewModels.EditPage.Events;
 using System;
 using System.Collections.ObjectModel;
 
@@ -23,6 +25,6 @@ public partial class RuleTemplateManager : ObservableRecipient
     internal RuleModel GetEmpty() => _ruleTemplateService.GetEmpty();
     public void SetTemplate(RuleDetailsViewModel rule, RuleModel selectedTemplate)
     {
-        throw new NotImplementedException();
+        Messenger.Send(new ResetRuleTemplateRequest(new ResetRuleTemplateDetails(rule, selectedTemplate)));
     }
 }
