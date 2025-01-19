@@ -228,7 +228,6 @@ public class FilterViewModelTests
 
         WeakReferenceMessenger.Default.Send(new SortBlocksRequest(block));
 
-
         Assert.That(sut.Blocks.IndexOf(block), Is.EqualTo(1));
     }
 
@@ -278,6 +277,20 @@ public class FilterViewModelTests
         Assert.That(testBlock.Rules, Has.Count.EqualTo(0));
         Assert.That(testBlock.Priority, Is.EqualTo(empty.Priority));
         Assert.That(testBlock.Enabled, Is.EqualTo(empty.Enabled));
+    }
+
+    [Test]
+    public void AddRule_ShouldCreateRuleFromModel()
+    {
+        RuleModel empty = new RuleTemplateService().BuildEmpty();
+        FilterViewModel sut = Build();
+
+        RuleDetailsViewModel result = sut.NewRule(empty);
+
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Properties.Enabled, Is.EqualTo(empty.Enabled));
+        Assert.That(result.Properties.Show, Is.EqualTo(empty.Show));
+        Assert.That(result.Properties.Priority, Is.EqualTo(empty.Priority));
     }
 
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
