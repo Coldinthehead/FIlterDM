@@ -51,13 +51,14 @@ public partial class App : Application
             container.BindService<ItemTypeService>();
             container.AddSingleton<FilesService>(new FilesService(desktop.MainWindow));
             container.BindService<ProjectRepositoryService>();
-            container.BindService<RuleTemplateService>();
+            container.BindService<RuleTemplateRepository>();
             container.BindService<DialogService>();
             container.BindService<BlockTemplateRepository>();
             container.BindService<CoreFilterService>();
             container.BindService<FilterParserService>();
             container.BindService<SaveFilterService>();
             container.BindService<BlockTemplateService>();
+            container.BindService<RuleTemplateRepository>();
             Services = container.BuildServiceProvider();
 
 

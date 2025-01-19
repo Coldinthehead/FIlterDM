@@ -104,7 +104,7 @@
                     Margin="8"
                     HorizontalAlignment="Left"
                     p1:ComboBoxAssist.Label="Preset"
-                    ItemsSource="{Binding Rule.Properties.Templates}"
+                    ItemsSource="{Binding Rule.Properties.TemplateManager.Templates}"
                     SelectedItem="{Binding Rule.Properties.SelectedTemplate}"
                     Theme="{StaticResource MaterialOutlineComboBox}" />
 

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Managers;
 using FilterDM.Models;
+using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
@@ -339,7 +340,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly TypeScopeManager _typeScopeManager;
     public RuleDetailsViewModel(RuleParentManager parentManager
         , TypeScopeManager scopeManager
-        , ObservableCollection<string> templates)
+        , RuleTemplateManager templateManager)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000, (x) => UseStackFilter = x));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100, (x) => UseItemLevelFilter = x));
@@ -359,7 +360,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
 
         _typeScopeManager = scopeManager;
-        Properties = new(this, parentManager, templates);
+        Properties = new(this, parentManager, templateManager);
         Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);
@@ -367,7 +368,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public RuleModel GetModel()
     {
-        RuleModel model = App.Current.Services.GetService<RuleTemplateService>().BuildEmpty();
+        RuleModel model = App.Current.Services.GetService<RuleTemplateRepository>().BuildEmpty();
         foreach (ModifierViewModelBase modifier in Modifiers)
         {
             modifier.Apply(model);

@@ -12,7 +12,7 @@ public class FilterViewModelTests
 
     public static FilterViewModel Build()
     {
-        return new FilterViewModel(new ItemTypeService(), new(new BlockTemplateRepository()), new RuleTemplateService());
+        return new FilterViewModel(new ItemTypeService(), new(new BlockTemplateRepository()), new RuleTemplateRepository());
     }
 
     [Test]
@@ -186,7 +186,7 @@ public class FilterViewModelTests
     [Test]
     public void NewRule_ShouldSetEmptyTemplate()
     {
-        RuleTemplateService service = new();
+        RuleTemplateRepository service = new();
         FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.GetBlocks().First();
@@ -203,7 +203,7 @@ public class FilterViewModelTests
     [Test]
     public void NewRule_ShouldRaiseRuleCreatedEvent()
     {
-        RuleTemplateService service = new();
+        RuleTemplateRepository service = new();
         FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.GetBlocks().First();
@@ -219,7 +219,7 @@ public class FilterViewModelTests
     [Test]
     public void ShouldSortBlocks_OnSortBlockRequestEvent()
     {
-        RuleTemplateService service = new();
+        RuleTemplateRepository service = new();
         FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
@@ -234,7 +234,7 @@ public class FilterViewModelTests
     [Test]
     public void SortBlocks_ShouldRaiseBlocksChanged()
     {
-        RuleTemplateService service = new();
+        RuleTemplateRepository service = new();
         FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
@@ -282,7 +282,7 @@ public class FilterViewModelTests
     [Test]
     public void AddRule_ShouldCreateRuleFromModel()
     {
-        RuleModel empty = new RuleTemplateService().BuildEmpty();
+        RuleModel empty = new RuleTemplateRepository().BuildEmpty();
         FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel testBlock = sut.GetBlocks().First();

@@ -26,15 +26,15 @@ public partial class FilterViewModel : ObservableRecipient
     private string _name;
 
     private readonly ItemTypeService _typeService;
-    private readonly RuleTemplateService _ruleTemplateService;
     private readonly BlockTemplateManager _blockTemplates;
+    private readonly RuleTemplateManager _ruleTemplates;
 
     private readonly RuleParentManager _parentManager;
 
     public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTemplateService, RuleTemplateService ruleTemplateService)
     {
         _typeService = typeService;
-        _ruleTemplateService = ruleTemplateService;
+        _ruleTemplates = new(ruleTemplateService);
         _blockTemplates = new BlockTemplateManager(blockTemplateService);
         _parentManager = new();
         RegisterEvents();
@@ -42,7 +42,7 @@ public partial class FilterViewModel : ObservableRecipient
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
         _typeService = new();
-        _ruleTemplateService = new();
+        _ruleTemplates = new(new RuleTemplateService(new RuleTemplateRepository()));
         _blockTemplates = new(new(new BlockTemplateRepository()));
         _parentManager = new();
         RegisterEvents();
@@ -112,15 +112,15 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewRule(BlockDetailsViewModel parent)
     {
-        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplateService.GetObservableNames());
-        ruleVm.SetModel(_ruleTemplateService.BuildEmpty());
+        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates);
+        ruleVm.SetModel(_ruleTemplates.GetEmpty());
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));
     }
 
     public void NewRule(RuleModel model, BlockDetailsViewModel parent)
     {
-        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplateService.GetObservableNames());
+        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates);
         ruleVm.SetModel(model);
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));

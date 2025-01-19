@@ -6,7 +6,7 @@ using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.Managers;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
 
@@ -40,19 +40,15 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     }
 
     [ObservableProperty]
-    private ObservableCollection<string> _templates;
-
-    [ObservableProperty]
-    private string _selectedTemplate;
-
-    [ObservableProperty]
     private BlockDetailsViewModel _selectedParent;
 
+    [ObservableProperty]
+    private RuleModel _selectedTemplate;
 
     [RelayCommand]
     private void ApplyProperties()
     {
-        if (_parentManager.RequireChange(Rule, SelectedParent))
+        if (ParentManager.RequireChange(Rule, SelectedParent))
         {
             ParentManager.ChangeParent(Rule, SelectedParent);
         }
@@ -64,17 +60,14 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     }
 
     [RelayCommand]
-    private void Reset()
+    private async Task Reset()
     {
-        if (SelectedTemplate != null)
+        if (Rule.Modifiers.Count > 2)
         {
-            RuleTemplateService? service = App.Current.Services.GetService<RuleTemplateService>();
-            RuleModel? nextTempate = service.GetTemplate(SelectedTemplate);
-            if (nextTempate != null)
+            bool confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to override Rule with {Rule.Modifiers.Count} modifiers?");
+            if (confirm)
             {
-                var title = Title;
-                Rule.SetModel(nextTempate);
-                Title = title;
+                OnResetConfirmed();
             }
         }
     }
@@ -84,16 +77,32 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         Messenger.Send(new SortRulesRequest(Rule));
     }
 
+    public void OnResetConfirmed()
+    {
+        /*RuleTemplateRepository? service = App.Current.Services.GetService<RuleTemplateRepository>();
+        RuleModel? nextTempate = service.GetTemplate(SelectedTemplate);
+        if (nextTempate != null)
+        {
+            var title = Title;
+            Rule.SetModel(nextTempate);
+            Title = title;
+        }*/
+        TemplateManager.SetTemplate(Rule, SelectedTemplate);
+    }
+
     [ObservableProperty]
-    private  RuleParentManager _parentManager;
+    private RuleParentManager _parentManager;
+
+    [ObservableProperty]
+    private RuleTemplateManager _templateManager;
 
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule
         , RuleParentManager parentManager
-        , ObservableCollection<string> templates) : base(rule, null)
+        , RuleTemplateManager templateManager) : base(rule, null)
     {
 
         ParentManager = parentManager;
-        Templates = templates;
+        TemplateManager = templateManager;
     }
 
     public override void Apply(RuleModel model)
@@ -102,7 +111,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         model.Enabled = Enabled;
         model.Priority = Priority;
         model.Show = Show;
-        model.TemplateName = SelectedTemplate;
+        model.TemplateName = SelectedTemplate.Title;
     }
 
     internal void SetModel(RuleModel rule)
@@ -111,14 +120,6 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         Enabled = rule.Enabled;
         Priority = rule.Priority;
         Show = rule.Show;
-
-        if (rule.TemplateName != null && Templates.Contains(rule.TemplateName))
-        {
-            SelectedTemplate = rule.TemplateName;
-        }
-        else
-        {
-            SelectedTemplate = "Empty";
-        }
+        SelectedTemplate = TemplateManager.Get(rule.TemplateName);
     }
 }
