@@ -348,17 +348,19 @@ public class FilterViewModelTests
     [Test]
     public void ShouldSortRules_WhenSortRulesRequestRaised()
     {
-        FilterViewModel sut = Build();
+        WeakReferenceMessenger messenger = new();
+        FilterViewModel sut = new FilterViewModel(messenger);
         sut.NewBlock();
-        BlockDetailsViewModel vm = sut.Blocks.First();
-        sut.NewRule(vm);
-        sut.NewRule(vm);
-        sut.NewRule(vm);
         BlockDetailsViewModel testBlock = sut.Blocks.First();
+        sut.NewRule(testBlock);
+        sut.NewRule(testBlock);
+        sut.NewRule(testBlock);
         RuleDetailsViewModel rule = testBlock.Rules.First();
-        rule.Properties.Priority = 0;
+        testBlock.Rules[1].Properties.Priority = 1000;
+        testBlock.Rules[2].Properties.Priority = 10000;
+        rule.Properties.Priority = 100;
 
-        WeakReferenceMessenger.Default.Send(new SortRulesRequest(rule));    
+        messenger.Send(new SortRulesRequest(rule));    
 
         Assert.That(testBlock.Rules, Has.Count.EqualTo(3));
         Assert.That(testBlock.Rules.IndexOf(rule), Is.EqualTo(2));

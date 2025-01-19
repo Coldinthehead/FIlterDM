@@ -329,7 +329,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     }
 
     #endregion
-    public float CalculatedPriority => Properties.Enabled ? -1 : 1 * Properties.Priority;
+    public float CalculatedPriority => (Properties.Enabled ? -1 : 1) * Properties.Priority;
 
     private readonly Dictionary<NumericFilterType, NumericFilterHelper> _numericHelpers = [];
     private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];

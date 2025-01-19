@@ -19,6 +19,7 @@ public partial class FilterViewModel : ObservableRecipient
     , IRecipient<CreateRuleRequest>
     , IRecipient<ResetTemplateRequest>
     , IRecipient<DeleteRuleRequest>
+    , IRecipient<SortRulesRequest>
 {
     [ObservableProperty]
     private string _name;
@@ -59,6 +60,7 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Register<CreateRuleRequest>(this);
         Messenger.Register<ResetTemplateRequest>(this);
         Messenger.Register<DeleteRuleRequest>(this);
+        Messenger.Register<SortRulesRequest>(this);
     }
 
     public void NewBlock()
@@ -100,6 +102,11 @@ public partial class FilterViewModel : ObservableRecipient
         List<BlockDetailsViewModel> next = Blocks.Select(x => x).OrderBy(x => x.CalculatedPriority).ToList();
         Blocks = new(next);
         Messenger.Send(new BlockCollectionInFilterChanged(Blocks));
+    }
+
+    public void SortRules(BlockDetailsViewModel block)
+    {
+        block.SortRules();
     }
 
     public void NewRule(BlockDetailsViewModel parent)
@@ -201,6 +208,17 @@ public partial class FilterViewModel : ObservableRecipient
     public void Receive(DeleteRuleRequest message)
     {
         DeleteRule(message.Value);
+    }
+
+    public void Receive(SortRulesRequest message)
+    {
+        foreach (var block in Blocks)
+        {
+            if (block.Rules.Contains(message.Value))
+            {
+                SortRules(block);
+            }
+        }
     }
     #endregion
 }
