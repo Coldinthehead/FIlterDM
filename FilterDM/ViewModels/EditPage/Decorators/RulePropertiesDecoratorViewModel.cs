@@ -64,7 +64,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
 
         if (RealParent == SelectedParent)
         {
-            SelectedParent.SortRules();
+            OnSortRules();
         }
         else
         {
@@ -90,6 +90,11 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
                 Title = title;
             }
         }
+    }
+
+    public void OnSortRules()
+    {
+        SelectedParent.SortRules();
     }
 
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule
