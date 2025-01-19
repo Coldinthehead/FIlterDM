@@ -69,7 +69,7 @@ public class BlockTemplateRepository : IBlockTemplateRepository
     }
     public BlockModel Get(string templateName)
     {
-        return _templates[templateName];
+        return _templates[templateName].Clone();
     }
 
     public List<BlockModel> GetAll() => [.. _templates.Values];
