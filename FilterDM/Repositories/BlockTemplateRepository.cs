@@ -1,4 +1,5 @@
 ﻿using FilterDM.Models;
+using FilterDM.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,9 +7,9 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FilterDM.Services;
+namespace FilterDM.Repositories;
 
-public class BlockTemplateRepository : IInit
+public class BlockTemplateRepository : IBlockTemplateRepository
 {
     private Dictionary<string, BlockModel> _templates;
 
