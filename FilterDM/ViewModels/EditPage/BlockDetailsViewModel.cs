@@ -12,6 +12,8 @@ using System.Linq;
 
 namespace FilterDM.ViewModels.EditPage;
 
+
+
 public partial class BlockDetailsViewModel : ObservableRecipient
     , IRecipient<RuleDeleteRequestEvent>
 {
