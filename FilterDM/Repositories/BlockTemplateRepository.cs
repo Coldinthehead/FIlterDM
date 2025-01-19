@@ -65,6 +65,10 @@ public class BlockTemplateRepository : IBlockTemplateRepository
     public BlockModel GetEmpty() => _empty.Clone();
     public bool Exists(string templateName)
     {
+        if (templateName == null)
+        {
+            return false;
+        }
         return _templates.ContainsKey(templateName);
     }
     public BlockModel Get(string templateName)

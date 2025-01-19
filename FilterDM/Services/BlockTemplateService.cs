@@ -23,8 +23,11 @@ public class BlockTemplateService
 
     internal BlockModel GetTemplate(string templateName)
     {
-        BlockModel template = _repository.Get(templateName);
-        return template;
+        if (_repository.Exists(templateName))
+        {
+            return _repository.Get(templateName);
+        }
+        return _repository.GetEmpty();
     }
     internal List<BlockModel> GetTemplates() => _repository.GetAll();
     internal bool HasTemplate(string templateName) => _repository.Exists(templateName);
