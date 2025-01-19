@@ -86,4 +86,13 @@ public class BlockTemplateRepository : IBlockTemplateRepository
     {
         return _templateNames;
     }
+
+    public bool Exists(string templateName)
+    {
+        return _templates.ContainsKey(templateName);
+    }
+    public BlockModel Get(string templateName)
+    {
+        return _templates[templateName];
+    }
 }
