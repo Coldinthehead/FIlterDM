@@ -74,6 +74,7 @@ public partial class FilterViewModel : ObservableRecipient
         blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
         Blocks.Add(blockVm);
+        _parentManager.AllBlocks.Add(blockVm);
         Messenger.Send(new BlockInFilterCreated(blockVm));
     }
 
@@ -81,6 +82,7 @@ public partial class FilterViewModel : ObservableRecipient
     {
         if (Blocks.Remove(vm))
         {
+            _parentManager.AllBlocks.Remove(vm);
             Messenger.Send(new BlockDeletedInFilter(vm));
         }
     }
@@ -119,7 +121,6 @@ public partial class FilterViewModel : ObservableRecipient
     {
         RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplateService.GetObservableNames());
         ruleVm.SetModel(_ruleTemplateService.BuildEmpty());
-
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));
     }
