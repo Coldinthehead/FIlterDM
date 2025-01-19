@@ -22,7 +22,7 @@ public class FilterViewModelTests
 
         sut.NewBlock();
 
-        Assert.That(sut.Blocks, Has.Count.EqualTo(1));
+        Assert.That(sut.GetBlocks(), Has.Count.EqualTo(1));
     }
 
 
@@ -33,9 +33,9 @@ public class FilterViewModelTests
         BlockModel empty = templateService.GetEmpty();
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel newBlock = sut.Blocks.First();
+        BlockDetailsViewModel newBlock = sut.GetBlocks().First();
 
-        Assert.That(newBlock.SelectedTemplate, Is.EqualTo(empty));
+        Assert.That(newBlock.SelectedTemplate.Title, Is.EqualTo(empty.Title));
         Assert.That(newBlock.Enabled, Is.EqualTo(empty.Enabled));
         Assert.That(newBlock.Priority, Is.EqualTo(empty.Priority));
         Assert.That(newBlock.Rules, Has.Count.EqualTo(empty.Rules.Count));
@@ -48,7 +48,7 @@ public class FilterViewModelTests
 
         sut.NewBlock();
 
-        Assert.That(sut.Blocks.First().Title, Is.EqualTo("Block"));
+        Assert.That(sut.GetBlocks().First().Title, Is.EqualTo("Block"));
     }
 
     [Test]
@@ -57,10 +57,10 @@ public class FilterViewModelTests
         FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
-        BlockDetailsViewModel first = sut.Blocks.First();
+        BlockDetailsViewModel first = sut.GetBlocks().First();
 
-        HashSet<string> titles = [.. sut.Blocks.Select(x => x.Title)];
-        Assert.That(titles, Has.Count.EqualTo(sut.Blocks.Count));
+        HashSet<string> titles = [.. sut.GetBlocks().Select(x => x.Title)];
+        Assert.That(titles, Has.Count.EqualTo(sut.GetBlocks().Count));
     }
 
     [Test]
@@ -70,7 +70,7 @@ public class FilterViewModelTests
         BlockCreatedListener listener = new();
 
         sut.NewBlock();
-        BlockDetailsViewModel newBlock = sut.Blocks.First();
+        BlockDetailsViewModel newBlock = sut.GetBlocks().First();
 
         Assert.That(listener.Recieved, Is.True);
         Assert.That(listener.EventModel, Is.Not.Null);
@@ -84,7 +84,7 @@ public class FilterViewModelTests
 
         WeakReferenceMessenger.Default.Send(new CreateBlockRequest(null));
 
-        Assert.That(sut.Blocks, Has.Count.EqualTo(1));
+        Assert.That(sut.GetBlocks(), Has.Count.EqualTo(1));
     }
 
     [Test]
@@ -112,7 +112,7 @@ public class FilterViewModelTests
 
         sut.SetModel(testModel);
 
-        Assert.That(sut.Blocks.Count, Is.EqualTo(testModel.Blocks.Count));
+        Assert.That(sut.GetBlocks().Count, Is.EqualTo(testModel.Blocks.Count));
         Assert.That(ModelMatchViewModel(testModel, sut), Is.True);
     }
 
@@ -142,7 +142,7 @@ public class FilterViewModelTests
         sut.SetModel(testModel);
 
         Assert.That(listener.Recieved, Is.True);
-        Assert.That(listener.Blocks, Is.EqualTo(sut.Blocks));
+        Assert.That(listener.Blocks, Is.EqualTo(sut.GetBlocks()));
     }
 
     [Test]
@@ -150,11 +150,11 @@ public class FilterViewModelTests
     {
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel block = sut.Blocks.First();
+        BlockDetailsViewModel block = sut.GetBlocks().First();
 
         WeakReferenceMessenger.Default.Send(new DeleteBlockRequest(block));
 
-        Assert.That(sut.Blocks, Does.Not.Contain(block));
+        Assert.That(sut.GetBlocks(), Does.Not.Contain(block));
     }
 
     [Test]
@@ -162,7 +162,7 @@ public class FilterViewModelTests
     {
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel block = sut.Blocks.First();
+        BlockDetailsViewModel block = sut.GetBlocks().First();
         BlockDeletedListener listener = new();
 
         sut.DeleteBlock(block);
@@ -176,7 +176,7 @@ public class FilterViewModelTests
     {
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel block = sut.Blocks.First();
+        BlockDetailsViewModel block = sut.GetBlocks().First();
 
         sut.NewRule(block);
 
@@ -189,7 +189,7 @@ public class FilterViewModelTests
         RuleTemplateService service = new();
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel block = sut.Blocks.First();
+        BlockDetailsViewModel block = sut.GetBlocks().First();
 
         sut.NewRule(block);
         RuleDetailsViewModel rule = block.Rules.First();
@@ -206,7 +206,7 @@ public class FilterViewModelTests
         RuleTemplateService service = new();
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel block = sut.Blocks.First();
+        BlockDetailsViewModel block = sut.GetBlocks().First();
         RuleCreatedListener listener = new();
 
         sut.NewRule(block);
@@ -223,12 +223,12 @@ public class FilterViewModelTests
         FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
-        BlockDetailsViewModel block = sut.Blocks.First();
+        BlockDetailsViewModel block = sut.GetBlocks().First();
         block.Priority = 100;
 
         WeakReferenceMessenger.Default.Send(new SortBlocksRequest(block));
 
-        Assert.That(sut.Blocks.IndexOf(block), Is.EqualTo(1));
+        Assert.That(sut.GetBlocks().IndexOf(block), Is.EqualTo(1));
     }
 
     [Test]
@@ -243,7 +243,7 @@ public class FilterViewModelTests
         sut.SortBlocks();
 
         Assert.That(listener.Received, Is.True);
-        Assert.That(listener.Blocks, Is.EqualTo(sut.Blocks));
+        Assert.That(listener.Blocks, Is.EqualTo(sut.GetBlocks()));
     }
 
     [Test]
@@ -252,7 +252,7 @@ public class FilterViewModelTests
         var messenger = new WeakReferenceMessenger();
         FilterViewModel sut = new(messenger);
         sut.NewBlock();
-        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        BlockDetailsViewModel testBlock = sut.GetBlocks().First();
 
         messenger.Send(new CreateRuleRequest(testBlock));
 
@@ -266,7 +266,7 @@ public class FilterViewModelTests
         var messenger = new WeakReferenceMessenger();
         FilterViewModel sut = new(messenger);
         sut.NewBlock();
-        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        BlockDetailsViewModel testBlock = sut.GetBlocks().First();
         sut.NewRule(testBlock);
         sut.NewRule(testBlock);
         sut.NewRule(testBlock);
@@ -285,7 +285,7 @@ public class FilterViewModelTests
         RuleModel empty = new RuleTemplateService().BuildEmpty();
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        BlockDetailsViewModel testBlock = sut.GetBlocks().First();
 
         sut.NewRule(empty, testBlock);
         RuleDetailsViewModel result = testBlock.Rules.First();
@@ -301,7 +301,7 @@ public class FilterViewModelTests
     {
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel vm = sut.Blocks.First();
+        BlockDetailsViewModel vm = sut.GetBlocks().First();
         sut.NewRule(vm);
         sut.NewRule(vm);
         sut.NewRule(vm);
@@ -318,9 +318,9 @@ public class FilterViewModelTests
     {
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel vm = sut.Blocks.First();
+        BlockDetailsViewModel vm = sut.GetBlocks().First();
         sut.NewRule(vm);
-        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        BlockDetailsViewModel testBlock = sut.GetBlocks().First();
         RuleDetailsViewModel testRule = testBlock.Rules.First();
 
         WeakReferenceMessenger.Default.Send(new DeleteRuleRequest(testRule));
@@ -333,9 +333,9 @@ public class FilterViewModelTests
     {
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel vm = sut.Blocks.First();
+        BlockDetailsViewModel vm = sut.GetBlocks().First();
         sut.NewRule(vm);
-        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        BlockDetailsViewModel testBlock = sut.GetBlocks().First();
         RuleDetailsViewModel testRule = testBlock.Rules.First();
         EventListener<RuleDeleteEvent, RuleDetailsViewModel> listener = new();
 
@@ -351,7 +351,7 @@ public class FilterViewModelTests
         WeakReferenceMessenger messenger = new();
         FilterViewModel sut = new FilterViewModel(messenger);
         sut.NewBlock();
-        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        BlockDetailsViewModel testBlock = sut.GetBlocks().First();
         sut.NewRule(testBlock);
         sut.NewRule(testBlock);
         sut.NewRule(testBlock);
@@ -371,7 +371,7 @@ public class FilterViewModelTests
     {
         FilterViewModel sut = Build();
         sut.NewBlock();
-        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        BlockDetailsViewModel testBlock = sut.GetBlocks().First();
         sut.NewRule(testBlock);
         RuleDetailsViewModel rule = testBlock.Rules.First();
         EventListener<SelectRuleInTreeRequest, RuleDetailsViewModel> listener = new();
@@ -388,14 +388,14 @@ public class FilterViewModelTests
         {
             return false;
         }
-        if (model.Blocks.Count != vm.Blocks.Count)
+        if (model.Blocks.Count != vm.GetBlocks().Count)
         {
             return false;
         }
         for (int i = 0; i < model.Blocks.Count; i++)
         {
             BlockModel blockModel = model.Blocks[i];
-            BlockDetailsViewModel blockVm = vm.Blocks[i];
+            BlockDetailsViewModel blockVm = vm.GetBlocks()[i];
             if (!blockModel.Title.Equals(blockVm.Title))
             {
                 return false;

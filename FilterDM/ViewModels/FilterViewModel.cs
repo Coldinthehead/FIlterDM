@@ -5,7 +5,6 @@ using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
-using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.Managers;
 using System;
@@ -26,9 +25,6 @@ public partial class FilterViewModel : ObservableRecipient
     [ObservableProperty]
     private string _name;
 
-    [ObservableProperty]
-    public ObservableCollection<BlockDetailsViewModel> _blocks;
-
     private readonly ItemTypeService _typeService;
     private readonly RuleTemplateService _ruleTemplateService;
     private readonly BlockTemplateManager _blockTemplates;
@@ -40,17 +36,15 @@ public partial class FilterViewModel : ObservableRecipient
         _typeService = typeService;
         _ruleTemplateService = ruleTemplateService;
         _blockTemplates = new BlockTemplateManager(blockTemplateService);
-        Blocks = new();
-        _parentManager = new(Blocks);
+        _parentManager = new();
         RegisterEvents();
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
         _typeService = new();
         _ruleTemplateService = new();
-        Blocks = new();
         _blockTemplates = new(new(new BlockTemplateRepository()));
-        _parentManager = new(Blocks);
+        _parentManager = new();
         RegisterEvents();
     }
 
@@ -65,22 +59,25 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Register<SortRulesRequest>(this);
     }
 
+    public ObservableCollection<BlockDetailsViewModel> GetBlocks()
+    {
+        return _parentManager.AllBlocks;
+    }
+
     public void NewBlock()
     {
         BlockDetailsViewModel blockVm = new(_blockTemplates, new TypeScopeManager(_typeService));
         BlockModel template = _blockTemplates.GetEmpty();
         blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
-        Blocks.Add(blockVm);
         _parentManager.AllBlocks.Add(blockVm);
         Messenger.Send(new BlockInFilterCreated(blockVm));
     }
 
     public void DeleteBlock(BlockDetailsViewModel vm)
     {
-        if (Blocks.Remove(vm))
+        if (_parentManager.RemoveBlock(vm))
         {
-            _parentManager.AllBlocks.Remove(vm);
             Messenger.Send(new BlockDeletedInFilter(vm));
         }
     }
@@ -101,10 +98,10 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void SortBlocks()
     {
-        List<BlockDetailsViewModel> next = Blocks.Select(x => x).OrderBy(x => x.CalculatedPriority).ToList();
-        Blocks = new(next);
-        _parentManager.SetBlocks(Blocks);
-        Messenger.Send(new BlockCollectionInFilterChanged(Blocks));
+        List<BlockDetailsViewModel> next = _parentManager.AllBlocks.Select(x => x).OrderBy(x => x.CalculatedPriority).ToList();
+        ObservableCollection<BlockDetailsViewModel> nextBlocks = new(next);
+        _parentManager.SetBlocks(nextBlocks);
+        Messenger.Send(new BlockCollectionInFilterChanged(_parentManager.AllBlocks));
     }
 
     public void SortRules(BlockDetailsViewModel block, RuleDetailsViewModel sender)
@@ -131,14 +128,9 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void DeleteRule(RuleDetailsViewModel rule)
     {
-        foreach (BlockDetailsViewModel block in Blocks)
+        if (_parentManager.DeleteRule(rule))
         {
-            if (block.Rules.Contains(rule))
-            {
-                block.DeleteRule(rule);
-                Messenger.Send(new RuleDeleteEvent(rule));
-                break;
-            }
+            Messenger.Send(new RuleDeleteEvent(rule));
         }
     }
 
@@ -152,8 +144,8 @@ public partial class FilterViewModel : ObservableRecipient
             blockVm.SetModel(blockModel);
             next.Add(blockVm);
         }
-        Blocks = next;
-        Messenger.Send(new BlockCollectionInFilterChanged(Blocks));
+        _parentManager.SetBlocks(next);
+        Messenger.Send(new BlockCollectionInFilterChanged(_parentManager.AllBlocks));
     }
 
 
@@ -170,7 +162,7 @@ public partial class FilterViewModel : ObservableRecipient
     }
 
     private bool BlockTitleTaken(string title)
-        => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
+        => _parentManager.AllBlocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
 
 
     internal FilterModel GetModel() => throw new NotImplementedException();
@@ -193,7 +185,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void Receive(CreateRuleRequest message)
     {
-        if (Blocks.Contains(message.Value))
+        if (_parentManager.AllBlocks.Contains(message.Value))
         {
             NewRule(message.Value);
         }
@@ -201,7 +193,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void Receive(ResetTemplateRequest message)
     {
-        if (Blocks.Contains(message.Value.Block))
+        if (_parentManager.AllBlocks.Contains(message.Value.Block))
         {
             ResetBlockTemplate(message.Value.Block, message.Value.Template);
         }
@@ -214,7 +206,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void Receive(SortRulesRequest message)
     {
-        foreach (var block in Blocks)
+        foreach (var block in _parentManager.AllBlocks)
         {
             if (block.Rules.Contains(message.Value))
             {

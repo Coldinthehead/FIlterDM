@@ -26,41 +26,41 @@ public class StructureTreeViewModelTests
     {
         StructureTreeViewModel sut = new();
 
-        sut.SetBlocks(_filterVm.Blocks);
+        sut.SetBlocks(_filterVm.GetBlocks());
 
-        Assert.That(sut.Blocks, Is.EqualTo(_filterVm.Blocks));
+        Assert.That(sut.Blocks, Is.EqualTo(_filterVm.GetBlocks()));
     }
 
     [Test]
     public void ShouldAddBlock_WhenNewBlockCreated()
     {
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
+        sut.SetBlocks(  _filterVm.GetBlocks());
 
         _filterVm.NewBlock();
 
-        Assert.That(sut.Blocks, Has.Count.EqualTo(_filterVm.Blocks.Count));
+        Assert.That(sut.Blocks, Has.Count.EqualTo(_filterVm.GetBlocks().Count));
     }
 
     [Test]
     public void ShouldSelectLastCreatedBlock()
     {
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
+        sut.SetBlocks(_filterVm.GetBlocks());
 
         _filterVm.NewBlock();
 
-        Assert.That(sut.SelectedNode, Is.EqualTo(_filterVm.Blocks.Last()));
+        Assert.That(sut.SelectedNode, Is.EqualTo(_filterVm.GetBlocks().Last()));
     }
 
     [Test]
     public void ShouldClearSelection_WhenSelectedBlockDeleted()
     {
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
-        sut.Select(_filterVm.Blocks.First());
+        sut.SetBlocks(_filterVm.GetBlocks());
+        sut.Select(_filterVm.GetBlocks().First());
 
-        _filterVm.DeleteBlock(_filterVm.Blocks.First());
+        _filterVm.DeleteBlock(_filterVm.GetBlocks().First());
 
         Assert.That(sut.SelectedNode, Is.Null);
     }
@@ -69,35 +69,35 @@ public class StructureTreeViewModelTests
     public void ShouldChangeBlockCollection_WhenCollectionChangedInFilter()
     {
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
+        sut.SetBlocks(_filterVm.GetBlocks());
 
 
         _filterVm.SetModel(new FilterModel());
 
-        Assert.That(sut.Blocks, Is.EqualTo(_filterVm.Blocks));
+        Assert.That(sut.Blocks, Is.EqualTo(_filterVm.GetBlocks()));
     }
 
     [Test]
     public void Select_ShouldRaiseEvent_WhenSelectionIsNotNull()
     {
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
+        sut.SetBlocks(_filterVm.GetBlocks());
         SelectLisener listener = new();
 
-        sut.Select(_filterVm.Blocks.First());
+        sut.Select(_filterVm.GetBlocks().First());
 
         Assert.That(listener.Recieved, Is.True);
-        Assert.That(listener.Selection, Is.EqualTo(_filterVm.Blocks.First()));
+        Assert.That(listener.Selection, Is.EqualTo(_filterVm.GetBlocks().First()));
     }
 
     [Test]
     public void ShouldRaiseRuleSelectedEvent_WhenRuleSelected()
     {
-        BlockDetailsViewModel block = _filterVm.Blocks.First();
+        BlockDetailsViewModel block = _filterVm.GetBlocks().First();
         _filterVm.NewRule(block);
         RuleDetailsViewModel testRule = block.Rules.First();
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
+        sut.SetBlocks(_filterVm.GetBlocks());
         RuleSelectListener listener = new();
 
         sut.Select(testRule);
@@ -111,8 +111,8 @@ public class StructureTreeViewModelTests
     public void ShouldClearSelection_WhenBlockEditorClosedEvent()
     {
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
-        BlockDetailsViewModel block = _filterVm.Blocks.First();
+        sut.SetBlocks(_filterVm.GetBlocks());
+        BlockDetailsViewModel block = _filterVm.GetBlocks().First();
         sut.Select(block);
 
         WeakReferenceMessenger.Default.Send(new EditorClosedEvent(new BlockEditorViewModel(block)));
@@ -136,8 +136,8 @@ public class StructureTreeViewModelTests
     public void SelectionShouldNotClear_WhenCollectionChanged()
     {
         StructureTreeViewModel sut = new();
-        sut.SetBlocks(_filterVm.Blocks);
-        BlockDetailsViewModel selectedBlock = _filterVm.Blocks.First();
+        sut.SetBlocks(_filterVm.GetBlocks());
+        BlockDetailsViewModel selectedBlock = _filterVm.GetBlocks().First();
         sut.Select(selectedBlock);
 
         _filterVm.SortBlocks();
@@ -149,7 +149,7 @@ public class StructureTreeViewModelTests
     public void ShouldSelectRuleInTree_WhenSelectRuleInTreeRequestRaised()
     {
         StructureTreeViewModel sut = new();
-        BlockDetailsViewModel block = _filterVm.Blocks.First();
+        BlockDetailsViewModel block = _filterVm.GetBlocks().First();
         _filterVm.NewRule(block);
         RuleDetailsViewModel rule = block.Rules.First();
         sut.ClearSelection();

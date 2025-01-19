@@ -50,7 +50,7 @@ public class EditorPanelViewModelTests
         FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new());
 
         fitlerVm.NewBlock();
-        BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
+        BlockDetailsViewModel testBlock = fitlerVm.GetBlocks().First();
 
         Assert.That(sut.Items, Has.Count.EqualTo(1));
         Assert.That(sut.Items.Select(x => x.IsPartOf(testBlock)).First(), Is.True);
@@ -64,7 +64,7 @@ public class EditorPanelViewModelTests
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
 
-        BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
+        BlockDetailsViewModel testBlock = fitlerVm.GetBlocks().First();
         fitlerVm.DeleteBlock(testBlock);
 
         Assert.That(sut.Items, Has.Count.EqualTo(1));
@@ -78,9 +78,9 @@ public class EditorPanelViewModelTests
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
         StructureTreeViewModel tree = new();
-        tree.SetBlocks(fitlerVm.Blocks);
+        tree.SetBlocks(fitlerVm.GetBlocks());
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock = fitlerVm.Blocks.First();
+        BlockDetailsViewModel testBlock = fitlerVm.GetBlocks().First();
 
         tree.Select(testBlock);
 
@@ -92,7 +92,7 @@ public class EditorPanelViewModelTests
     {
         FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new());
         fitlerVm.NewBlock();
-        BlockDetailsViewModel block = fitlerVm.Blocks.First();
+        BlockDetailsViewModel block = fitlerVm.GetBlocks().First();
         fitlerVm.NewRule(block);
         RuleDetailsViewModel testRule = block.Rules.First();
         EditorPanelViewModel sut = new();
@@ -125,7 +125,7 @@ public class EditorPanelViewModelTests
         FilterViewModel filterVm = new(new(), new(new BlockTemplateRepository()), new());
         EditorPanelViewModel sut = new();
         filterVm.NewBlock();
-        BlockDetailsViewModel testBlock = filterVm.Blocks.First();
+        BlockDetailsViewModel testBlock = filterVm.GetBlocks().First();
         filterVm.NewRule(testBlock);
         filterVm.NewRule(testBlock);
         filterVm.NewRule(testBlock);
@@ -144,7 +144,7 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenRuleDeleted()
     {
         EditorPanelViewModel sut = new();
-        RuleDetailsViewModel testModel = new(new([]), null, []);
+        RuleDetailsViewModel testModel = new(new(), null, []);
         sut.AddRule(testModel);
 
         WeakReferenceMessenger.Default.Send(new RuleDeleteEvent(testModel));

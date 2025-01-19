@@ -209,7 +209,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         _currentFilterVm = new(_typeService, _blockTemplateService, _ruleTempalateService);
         _currentFilterVm.SetModel(model);
 
-        FilterTree.SetBlocks(_currentFilterVm.Blocks);
+        FilterTree.SetBlocks(_currentFilterVm.GetBlocks());
         EditorPanel.Clear();
         Changes = false;
     }
