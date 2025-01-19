@@ -1,5 +1,4 @@
-﻿using Avalonia.Media;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
@@ -464,10 +463,5 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
 
         Messenger.Send(new FilterEditedRequestEvent(this));
-    }
-
-    internal void DeleteSafe()
-    {
-        Messenger.Send(new DeleteRuleRequest(this));
     }
 }
