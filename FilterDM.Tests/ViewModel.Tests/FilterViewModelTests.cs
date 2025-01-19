@@ -134,7 +134,7 @@ public class FilterViewModelTests
 
         sut.SetModel(testModel);
 
-        Assert.That(listener.Recieved , Is.True);
+        Assert.That(listener.Recieved, Is.True);
         Assert.That(listener.Blocks, Is.EqualTo(sut.Blocks));
     }
 
@@ -160,7 +160,7 @@ public class FilterViewModelTests
 
         sut.DeleteBlock(block);
 
-        Assert.That(listener.Recieved , Is.True);   
+        Assert.That(listener.Recieved, Is.True);
         Assert.That(listener.Block, Is.EqualTo(block));
     }
 
@@ -183,7 +183,7 @@ public class FilterViewModelTests
         FilterViewModel sut = new(new(), new(), service);
         sut.NewBlock();
         BlockDetailsViewModel block = sut.Blocks.First();
-        
+
         sut.NewRule(block);
         RuleDetailsViewModel rule = block.Rules.First();
 
@@ -221,7 +221,7 @@ public class FilterViewModelTests
 
         WeakReferenceMessenger.Default.Send(new SortBlocksRequest(block));
 
-        
+
         Assert.That(sut.Blocks.IndexOf(block), Is.EqualTo(1));
     }
 
@@ -243,11 +243,12 @@ public class FilterViewModelTests
     [Test]
     public void ShouldCreateNewRule_OnCreateRuleEvent()
     {
-        FilterViewModel sut = new(new(), new(), new());
+        var messenger = new WeakReferenceMessenger();
+        FilterViewModel sut = new(messenger);
         sut.NewBlock();
         BlockDetailsViewModel testBlock = sut.Blocks.First();
 
-        WeakReferenceMessenger.Default.Send(new CreateRuleRequest(testBlock));
+        messenger.Send(new CreateRuleRequest(testBlock));
 
         Assert.That(testBlock.Rules, Has.Count.EqualTo(1));
     }
@@ -262,7 +263,7 @@ public class FilterViewModelTests
         {
             return false;
         }
-        for (int i = 0; i <model.Blocks.Count;i++)
+        for (int i = 0; i < model.Blocks.Count; i++)
         {
             BlockModel blockModel = model.Blocks[i];
             BlockDetailsViewModel blockVm = vm.Blocks[i];

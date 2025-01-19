@@ -40,6 +40,19 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Register<SortBlocksRequest>(this);
         Messenger.Register<CreateRuleRequest>(this);
     }
+    public FilterViewModel(IMessenger messeneger) : base(messeneger)
+    {
+        _typeService = new();
+        _blockTempalteSerivice = new();
+        _ruleTemplateService = new();
+        _blocks = new();
+        _templateNames = new();
+        Messenger.Register<CreateBlockRequest>(this);
+        Messenger.Register<DeleteBlockRequest>(this);
+        Messenger.Register<SortBlocksRequest>(this);
+        Messenger.Register<CreateRuleRequest>(this);
+    }
+
     public void NewBlock()
     {
         BlockDetailsViewModel blockVm = new(Blocks, _templateNames, new TypeScopeManager(_typeService));
@@ -105,7 +118,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     private bool BlockTitleTaken(string title)
         => Blocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
-  
+
 
     internal FilterModel GetModel() => throw new NotImplementedException();
 
@@ -127,7 +140,10 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void Receive(CreateRuleRequest message)
     {
-        NewRule(message.Value);
+        if (Blocks.Contains(message.Value))
+        {
+            NewRule(message.Value);
+        }
     }
     #endregion
 }
