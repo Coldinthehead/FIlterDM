@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Tmds.DBus.Protocol;
 
 namespace FilterDM.ViewModels;
 public partial class FilterViewModel : ObservableRecipient
@@ -119,6 +120,18 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Send(new RuleCreatedInFilter(ruleVm));
     }
 
+    public void DeleteRule(RuleDetailsViewModel rule)
+    {
+        foreach (BlockDetailsViewModel block in Blocks)
+        {
+            if (block.Rules.Contains(rule))
+            {
+                block.DeleteRule(rule);
+                break;
+            }
+        }
+    }
+
     public void SetModel(FilterModel model)
     {
         Name = model.Name;
@@ -184,6 +197,9 @@ public partial class FilterViewModel : ObservableRecipient
         }
     }
 
-    public void Receive(DeleteRuleRequest message) => throw new NotImplementedException();
+    public void Receive(DeleteRuleRequest message)
+    {
+        DeleteRule(message.Value);
+    }
     #endregion
 }
