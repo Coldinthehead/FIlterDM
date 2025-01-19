@@ -126,13 +126,9 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
-    private readonly ObservableCollection<BlockDetailsViewModel> _allBlocks;
-    public BlockDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks
-        , ObservableCollection<string> templateNames
-        , TypeScopeManager scopeManager
+    public BlockDetailsViewModel(ObservableCollection<string> templateNames , TypeScopeManager scopeManager
         )
     {
-        _allBlocks = allBlocks;
         Messenger.Register<RuleDeleteRequestEvent>(this);
 
         Templates = templateNames;

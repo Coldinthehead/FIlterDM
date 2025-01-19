@@ -12,7 +12,7 @@ public class EditorPanelViewModelTests
     public void Clear_ShouldDeleteAllEditors()
     {
         EditorPanelViewModel sut = new();
-        sut.AddBlock(new BlockDetailsViewModel(new(), new(), new(new())));
+        sut.AddBlock(new BlockDetailsViewModel(new(), new(new())));
 
         sut.Clear();
 
@@ -22,7 +22,7 @@ public class EditorPanelViewModelTests
     public void AddBlock_ShouldCreateBlockEditor_WhenEditorNotExists()
     {
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock = new BlockDetailsViewModel(new(), new(), new(new()));
+        BlockDetailsViewModel testBlock = new BlockDetailsViewModel(new(), new(new()));
 
         sut.AddBlock(testBlock);
 
@@ -34,7 +34,7 @@ public class EditorPanelViewModelTests
     public void AddBlock_ShouldNotCreateBlockEditor_WhenEditorExists()
     {
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock = new BlockDetailsViewModel(new(), new(), new(new()));
+        BlockDetailsViewModel testBlock = new BlockDetailsViewModel(new(), new(new()));
         sut.AddBlock(testBlock);
 
         sut.AddBlock(testBlock);

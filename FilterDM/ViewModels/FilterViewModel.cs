@@ -60,7 +60,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewBlock()
     {
-        BlockDetailsViewModel blockVm = new(Blocks, _templateNames, new TypeScopeManager(_typeService));
+        BlockDetailsViewModel blockVm = new(_templateNames, new TypeScopeManager(_typeService));
         BlockModel template = _blockTemplateService.GetEmpty();
         blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
@@ -120,9 +120,8 @@ public partial class FilterViewModel : ObservableRecipient
         ObservableCollection<BlockDetailsViewModel> next = new();
         foreach (BlockModel blockModel in model.Blocks)
         {
-            BlockDetailsViewModel blockVm = new BlockDetailsViewModel(Blocks, _templateNames, new TypeScopeManager(_typeService));
+            BlockDetailsViewModel blockVm = new BlockDetailsViewModel(_templateNames, new TypeScopeManager(_typeService));
             blockVm.SetModel(blockModel);
-            blockVm.Title = blockModel.Title;
             next.Add(blockVm);
         }
         Blocks = next;

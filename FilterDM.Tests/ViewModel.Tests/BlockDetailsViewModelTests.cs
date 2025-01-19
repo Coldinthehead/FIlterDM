@@ -7,7 +7,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void NewRuleCommand_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(), new(), new(new()));
+        BlockDetailsViewModel sut = new(new(), new(new()));
         RuleCreateRequestListener listener = new();
 
         sut.NewRuleCommand.Execute(sut);
@@ -19,7 +19,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void OnDeleteConfirmed_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(), new(), new(new()) );
+        BlockDetailsViewModel sut = new(new(), new(new()) );
         EventListener<DeleteBlockRequest,BlockDetailsViewModel> listener = new();
 
         sut.OnDeleteConfirmed();
@@ -31,7 +31,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void OnTemplateResetConfirmed_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(), new(), new(new()));
+        BlockDetailsViewModel sut = new(new(), new(new()));
 
         EventListener<ResetTemplateRequest, TemplateChangeDetils> listener = new();
 
