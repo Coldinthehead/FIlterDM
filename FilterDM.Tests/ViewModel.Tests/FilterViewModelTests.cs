@@ -296,6 +296,23 @@ public class FilterViewModelTests
         Assert.That(result.Properties.Priority, Is.EqualTo(empty.Priority));
     }
 
+    [Test]
+    public void ResetBlockTemplate_ShouldRaiseMultipleRulesDeleted()
+    {
+        FilterViewModel sut = Build();
+        sut.NewBlock();
+        BlockDetailsViewModel vm = sut.Blocks.First();
+        sut.NewRule(vm);
+        sut.NewRule(vm);
+        sut.NewRule(vm);
+        sut.NewRule(vm);
+        EventListener<MultipleRulesDeleted, MultipleRuleDeletedDetails> listener = new();
+        sut.ResetBlockTemplate(vm, "Empty");
+
+        Assert.That(listener.Received, Is.True);
+        Assert.That(listener.Playload.Block, Is.EqualTo(vm));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
