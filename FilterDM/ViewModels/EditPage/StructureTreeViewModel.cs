@@ -12,6 +12,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
     , IRecipient<BlockDeletedInFilter>
     , IRecipient<EditorClosedEvent>
     , IRecipient<EditorSelectedEvent>
+    , IRecipient<SelectRuleInTreeRequest>
 {
     [ObservableProperty]
     private ObservableCollection<BlockDetailsViewModel> _blocks;
@@ -37,6 +38,7 @@ public partial class StructureTreeViewModel : ObservableRecipient
         Messenger.Register<BlockDeletedInFilter>(this);
         Messenger.Register<EditorClosedEvent>(this);
         Messenger.Register<EditorSelectedEvent>(this);
+        Messenger.Register<SelectRuleInTreeRequest>(this);
     }
 
     public void SetBlocks(ObservableCollection<BlockDetailsViewModel> blocks)
@@ -112,6 +114,11 @@ public partial class StructureTreeViewModel : ObservableRecipient
         {
             SelectedNode = message.Value.GetSelectedContext();
         }
+    }
+
+    public void Receive(SelectRuleInTreeRequest message)
+    {
+        Select(message.Value);
     }
 
 
