@@ -1,4 +1,6 @@
-﻿using FilterDM.ViewModels.EditPage;
+﻿using FilterDM.Models;
+using FilterDM.Repositories;
+using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 
 namespace FilterDM.Tests.ViewModel.Tests;
@@ -40,5 +42,17 @@ public class BlockDetailsViewModelTests
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Playload.Block, Is.EqualTo(sut));
         Assert.That(listener.Playload.TempalteName, Is.EqualTo(sut.SelectedTemplate));
+    }
+
+    [Test]
+    public void SetModel_ShouldChangeBlockCorrect()
+    {
+        BlockDetailsViewModel sut = new([], new(new()));
+        BlockModel empty = new BlockTemplateRepository().GetEmpty();
+
+        sut.SetModel(empty);
+
+        Assert.That(sut.Enabled, Is.EqualTo(empty.Enabled));
+        Assert.That(sut.Priority, Is.EqualTo(empty.Priority));
     }
 }
