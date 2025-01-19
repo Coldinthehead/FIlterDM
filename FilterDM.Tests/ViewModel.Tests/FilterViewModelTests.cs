@@ -313,6 +313,21 @@ public class FilterViewModelTests
         Assert.That(listener.Playload.Block, Is.EqualTo(vm));
     }
 
+    [Test]
+    public void ShouldDeleteRule_WhenRuleDeletedRequestRaised()
+    {
+        FilterViewModel sut = Build();
+        sut.NewBlock();
+        BlockDetailsViewModel vm = sut.Blocks.First();
+        sut.NewRule(vm);
+        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        RuleDetailsViewModel testRule = testBlock.Rules.First();
+
+        WeakReferenceMessenger.Default.Send(new RuleDeleteRequestEvent(testRule));
+
+        Assert.That(testBlock.Rules, Has.Count.EqualTo(0));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
