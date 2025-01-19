@@ -72,3 +72,9 @@ public class CreateRuleRequest : ValueChangedMessage<BlockDetailsViewModel>
     {
     }
 }
+public class MultipleRulesDeleted : ValueChangedMessage<MultipleRuleDeletedDetails>
+{
+    public MultipleRulesDeleted(MultipleRuleDeletedDetails value) : base(value)
+    {
+    }
+}
