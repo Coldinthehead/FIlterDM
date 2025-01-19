@@ -21,5 +21,6 @@ public partial class BlockTemplateManager : ViewModelBase
     }
 
     internal BlockModel GetEmpty() => _blockTemplateService.GetEmpty();
+    internal BlockModel GetTemplate(string templateName) => _blockTemplateService.GetTemplate(templateName);
     internal bool HasTemplate(string templateName) => _blockTemplateService.HasTemplate(templateName);
 }

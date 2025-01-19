@@ -21,6 +21,11 @@ public class BlockTemplateService
         return _repository.GetEmpty();
     }
 
+    internal BlockModel GetTemplate(string templateName)
+    {
+        BlockModel template = _repository.Get(templateName);
+        return template;
+    }
     internal List<BlockModel> GetTemplates() => _repository.GetAll();
     internal bool HasTemplate(string templateName) => _repository.Exists(templateName);
 }

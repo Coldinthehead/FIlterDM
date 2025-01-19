@@ -66,7 +66,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
     }
 
-
     [RelayCommand]
     private async void Reset()
     {
@@ -156,15 +155,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         Title = model.Title;
         Enabled = model.Enabled;
         Priority = model.Priority;
-      
-        if (model.TemplateName != null && TemplateManager.HasTemplate(model.TemplateName))
-        {
-            SelectedTemplate = model;
-        }
-        else
-        {
-            SelectedTemplate = TemplateManager.GetEmpty();
-        }
+        SelectedTemplate = TemplateManager.GetTemplate(model.TemplateName);
     }
     public bool DeleteRule(RuleDetailsViewModel rule)
     {

@@ -23,6 +23,7 @@ public class BlockTemplateRepository : IBlockTemplateRepository
             Enabled = true,
             Priority = 2000,
             TemplateName = "Empty",
+            Title = "Empty",
         };
         _templates["Empty"] = _empty;
     }
@@ -55,6 +56,7 @@ public class BlockTemplateRepository : IBlockTemplateRepository
                 Enabled = true,
                 Priority = 2000,
                 TemplateName = "Empty",
+                Title = "Empty",
             };
             _templates["Empty"] = _empty;
         }
