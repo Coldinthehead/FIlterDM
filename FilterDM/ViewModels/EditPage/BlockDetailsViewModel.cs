@@ -164,10 +164,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             rule.DeleteSafe();
         }
         UseScopeNames = model.UseBlockTypeScope;
-        foreach (var rule in model.Rules)
-        {
-            AddRule(rule);
-        }
         Title = model.Title;
         Enabled = model.Enabled;
         Priority = model.Priority;
@@ -181,16 +177,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
             SelectedTemplate = "Empty";
         }
     }
-
-    public RuleDetailsViewModel AddRule(RuleModel model)
-    {
-        var ruleVm = new RuleDetailsViewModel(_allBlocks, this, new());
-        model.Title = GetNextTitle(model.Title);
-        ruleVm.SetModel(model);
-        Rules.Add(ruleVm);
-        return ruleVm;
-    }
-
     public bool DeleteRule(RuleDetailsViewModel rule)
     {
         if (Rules.Remove(rule))

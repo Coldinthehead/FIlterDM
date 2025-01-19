@@ -82,6 +82,10 @@ public partial class FilterViewModel : ObservableRecipient
         {
             template.Title = block.Title;
             block.SetModel(template);
+            foreach (RuleModel model in template.Rules)
+            {
+                NewRule(model, block);
+            }
         }
     }
 
