@@ -11,7 +11,7 @@ public class RulePropertiesDecoratorViewModelTests
     {
         RuleDetailsViewModel rule = new([], null, new());
         RulePropertiesDecoratorViewModel sut = rule.Properties;
-        EventListener<RulesSortRequest, RuleDetailsViewModel> listener = new();
+        EventListener<SortRulesRequest, RuleDetailsViewModel> listener = new();
         sut.OnSortRules();
 
         Assert.That(listener.Received, Is.True);

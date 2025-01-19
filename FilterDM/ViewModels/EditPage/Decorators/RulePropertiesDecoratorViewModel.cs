@@ -94,7 +94,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
 
     public void OnSortRules()
     {
-        SelectedParent.SortRules();
+        Messenger.Send(new SortRulesRequest(Rule));
     }
 
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule

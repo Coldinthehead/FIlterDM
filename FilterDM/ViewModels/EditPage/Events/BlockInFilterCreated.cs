@@ -86,9 +86,9 @@ public class RuleDeleteEvent : ValueChangedMessage<RuleDetailsViewModel>
     }
 }
 
-public class RulesSortRequest : ValueChangedMessage<RuleDetailsViewModel>
+public class SortRulesRequest : ValueChangedMessage<RuleDetailsViewModel>
 {
-    public RulesSortRequest(RuleDetailsViewModel value) : base(value)
+    public SortRulesRequest(RuleDetailsViewModel value) : base(value)
     {
     }
 }
