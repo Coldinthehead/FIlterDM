@@ -99,5 +99,11 @@ public class SelectRuleInTreeRequest : ValueChangedMessage<RuleDetailsViewModel>
     {
     }
 }
+public class ResetRuleTemplateRequest : ValueChangedMessage<ResetRuleTemplateDetails>
+{
+    public ResetRuleTemplateRequest(ResetRuleTemplateDetails value) : base(value)
+    {
+    }
+}
 
 
