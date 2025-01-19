@@ -382,7 +382,6 @@ public class FilterViewModelTests
         Assert.That(listener.Playload, Is.EqualTo(rule));
     }
 
-
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))

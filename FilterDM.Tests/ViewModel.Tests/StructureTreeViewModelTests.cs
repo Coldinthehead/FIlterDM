@@ -144,4 +144,18 @@ public class StructureTreeViewModelTests
 
         Assert.That(sut.SelectedNode, Is.EqualTo(selectedBlock));
     }
+
+    [Test]
+    public void ShouldSelectRuleInTree_WhenSelectRuleInTreeRequestRaised()
+    {
+        StructureTreeViewModel sut = new();
+        BlockDetailsViewModel block = _filterVm.Blocks.First();
+        _filterVm.NewRule(block);
+        RuleDetailsViewModel rule = block.Rules.First();
+        sut.ClearSelection();
+
+        WeakReferenceMessenger.Default.Send(new SelectRuleInTreeRequest(rule));
+
+        Assert.That(sut.SelectedNode, Is.EqualTo(rule));
+    }
 }
