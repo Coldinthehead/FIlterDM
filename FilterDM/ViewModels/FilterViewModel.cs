@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Tmds.DBus.Protocol;
 
 namespace FilterDM.ViewModels;
 public partial class FilterViewModel : ObservableRecipient
@@ -41,19 +40,19 @@ public partial class FilterViewModel : ObservableRecipient
         _typeService = typeService;
         _ruleTemplateService = ruleTemplateService;
         _blockTemplateService = blockTempalteService;
-        _blocks = new();
+        Blocks = new();
         _templateNames = new();
-        _parentManager = new();
+        _parentManager = new(Blocks);
         RegisterEvents();
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
         _typeService = new();
         _ruleTemplateService = new();
-        _blocks = new();
+        Blocks = new();
         _templateNames = new();
         _blockTemplateService = new(new BlockTemplateRepository());
-        _parentManager = new();
+        _parentManager = new(Blocks);
         RegisterEvents();
     }
 
@@ -106,6 +105,7 @@ public partial class FilterViewModel : ObservableRecipient
     {
         List<BlockDetailsViewModel> next = Blocks.Select(x => x).OrderBy(x => x.CalculatedPriority).ToList();
         Blocks = new(next);
+        _parentManager.SetBlocks(Blocks);
         Messenger.Send(new BlockCollectionInFilterChanged(Blocks));
     }
 

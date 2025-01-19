@@ -61,7 +61,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
             var file = await filesService.ExportFilterFile(model.Name);
             if (file != null)
             {
-               /* App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.Blocks);*/
+               /* App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);*/
                 var str = App.Current.Services.GetService<CoreFilterService>().Build(model);
                 var path = file.Path.LocalPath;
                 if (!Path.HasExtension(path) || !Path.GetExtension(path).Equals("filter"))
@@ -96,7 +96,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
                 DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
             };
 
-         /*   App.Current?.Services?.GetService<SaveFilterService>().SaveModel(model, FilterTree.Blocks);*/
+         /*   App.Current?.Services?.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);*/
 
             JsonSerializer.Serialize(writeStream, model, options: opt);
             if (file is null)
@@ -121,7 +121,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         FilterModel model = _currentFilterVm.GetModel();
         try
         {
-/*            App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.Blocks);  
+/*            App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);  
 */            await App.Current.Services.GetService<ProjectRepositoryService>().SaveFilter(model);
             _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {model.Name} saved!");
             Changes = false;

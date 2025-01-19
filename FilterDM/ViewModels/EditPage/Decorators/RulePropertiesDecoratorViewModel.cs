@@ -45,10 +45,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     private string _selectedTemplate;
 
     [ObservableProperty]
-    private ObservableCollection<string> _allBlocks;
-
-    [ObservableProperty]
-    private string _selectedParent;
+    private BlockDetailsViewModel _selectedParent;
 
 
     [RelayCommand]
@@ -86,18 +83,16 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         Messenger.Send(new SortRulesRequest(Rule));
     }
 
-
-    private readonly RuleParentManager _parentManager;
+    [ObservableProperty]
+    private  RuleParentManager _parentManager;
 
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule
         , RuleParentManager parentManager
         , ObservableCollection<string> templates) : base(rule, null)
     {
 
-        _parentManager = parentManager;
+        ParentManager = parentManager;
         Templates = templates;
-        AllBlocks = parentManager.GetObservableNames();
-        SelectedParent = parentManager.GetMyParentName(Rule);
     }
 
     public override void Apply(RuleModel model)

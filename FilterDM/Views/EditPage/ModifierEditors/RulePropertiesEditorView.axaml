@@ -87,9 +87,15 @@
                     Margin="8"
                     HorizontalAlignment="Left"
                     p1:ComboBoxAssist.Label="Block"
-                    ItemsSource="{Binding Rule.Properties.AllBlocks}"
+                    ItemsSource="{Binding Rule.Properties.ParentManager.AllBlocks}"
                     SelectedItem="{Binding Rule.Properties.SelectedParent, Mode=TwoWay}"
-                    Theme="{StaticResource MaterialOutlineComboBox}" />
+                    Theme="{StaticResource MaterialOutlineComboBox}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
                 <ComboBox
                     Grid.Row="2"

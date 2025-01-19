@@ -141,7 +141,7 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenRuleDeleted()
     {
         EditorPanelViewModel sut = new();
-        RuleDetailsViewModel testModel = new([], null, []);
+        RuleDetailsViewModel testModel = new(new([]), null, []);
         sut.AddRule(testModel);
 
         WeakReferenceMessenger.Default.Send(new RuleDeleteEvent(testModel));
