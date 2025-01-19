@@ -7,7 +7,6 @@ using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 
-
 namespace FilterDM.ViewModels.EditPage.Decorators;
 
 public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
@@ -68,9 +67,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         }
         else
         {
-            RealParent.DeleteRule(Rule);
-            _realParent = SelectedParent;
-            SelectedParent.AddRule(Rule);
+            OnChangeParent();
         }
 
         Messenger.Send(new RuleTitleApplyEvent(Rule), Rule);
@@ -95,6 +92,13 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     public void OnSortRules()
     {
         Messenger.Send(new SortRulesRequest(Rule));
+    }
+
+    public void OnChangeParent()
+    {
+        RealParent.DeleteRule(Rule);
+        _realParent = SelectedParent;
+        SelectedParent.AddRule(Rule);
     }
 
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule

@@ -17,4 +17,5 @@ public class RulePropertiesDecoratorViewModelTests
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Playload, Is.EqualTo(rule));
     }
+
 }
