@@ -254,6 +254,26 @@ public class FilterViewModelTests
         Assert.That(testBlock.Rules, Has.Count.EqualTo(1));
     }
 
+    [Test]
+    public void ShouldChangeBlockTemplate_OnChangeTemplateRequest()
+    {
+        BlockModel empty = new BlockTemplateRepository().GetEmpty();
+        var messenger = new WeakReferenceMessenger();
+        FilterViewModel sut = new(messenger);
+        sut.NewBlock();
+        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        sut.NewRule(testBlock);
+        sut.NewRule(testBlock);
+        sut.NewRule(testBlock);
+
+        messenger.Send(new ResetTemplateRequest(new TemplateChangeDetils(testBlock, empty.TemplateName)));
+
+
+        Assert.That(testBlock.Rules, Has.Count.EqualTo(0));
+        Assert.That(testBlock.Priority, Is.EqualTo(empty.Priority));
+        Assert.That(testBlock.Enabled, Is.EqualTo(empty.Enabled));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
