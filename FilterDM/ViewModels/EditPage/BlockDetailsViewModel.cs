@@ -14,7 +14,6 @@ using System.Linq;
 namespace FilterDM.ViewModels.EditPage;
 
 public partial class BlockDetailsViewModel : ObservableRecipient
-    , IRecipient<RuleDeleteRequestEvent>
 {
     [ObservableProperty]
     private ObservableCollection<RuleDetailsViewModel> _rules = new();
@@ -126,11 +125,8 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
-    public BlockDetailsViewModel(ObservableCollection<string> templateNames , TypeScopeManager scopeManager
-        )
-    {
-        Messenger.Register<RuleDeleteRequestEvent>(this);
-
+    public BlockDetailsViewModel(ObservableCollection<string> templateNames , TypeScopeManager scopeManager )
+    { 
         Templates = templateNames;
         _scopeManager = scopeManager;
     }
@@ -192,11 +188,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         List<RuleDetailsViewModel> sorted = [.. Rules.OrderBy(x => x.CalculatedPriority)];
         Rules = new ObservableCollection<RuleDetailsViewModel>(sorted);
-    }
-
-    public void Receive(RuleDeleteRequestEvent message)
-    {
-        Rules.Remove(message.Value);
     }
 
     private string GetNextTitle(string title)
