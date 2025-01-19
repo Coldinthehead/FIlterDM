@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media;
 using FilterCore.Parser;
 using FilterDM.Models;
+using FilterDM.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

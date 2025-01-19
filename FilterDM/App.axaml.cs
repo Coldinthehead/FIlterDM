@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.Pages;
