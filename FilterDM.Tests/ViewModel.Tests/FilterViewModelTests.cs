@@ -345,6 +345,25 @@ public class FilterViewModelTests
         Assert.That(listener.Playload, Is.EqualTo(testRule));
     }
 
+    [Test]
+    public void ShouldSortRules_WhenSortRulesRequestRaised()
+    {
+        FilterViewModel sut = Build();
+        sut.NewBlock();
+        BlockDetailsViewModel vm = sut.Blocks.First();
+        sut.NewRule(vm);
+        sut.NewRule(vm);
+        sut.NewRule(vm);
+        BlockDetailsViewModel testBlock = sut.Blocks.First();
+        RuleDetailsViewModel rule = testBlock.Rules.First();
+        rule.Properties.Priority = 0;
+
+        WeakReferenceMessenger.Default.Send(new SortRulesRequest(rule));    
+
+        Assert.That(testBlock.Rules, Has.Count.EqualTo(3));
+        Assert.That(testBlock.Rules.IndexOf(rule), Is.EqualTo(2));
+    }
+
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
         if (!model.Name.Equals(vm.Name))
