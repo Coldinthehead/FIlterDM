@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.ViewModels.EditPage.Events;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FilterDM.ViewModels.EditPage;
 
@@ -12,6 +13,7 @@ public partial class EditorPanelViewModel : ObservableRecipient
     , IRecipient<BlockSelectedInTree>
     , IRecipient<RuleSelectedInTree>
     , IRecipient<EditorClosedEvent>
+    , IRecipient<MultipleRulesDeleted>
 {
     [ObservableProperty]
     private ObservableCollection<EditorBaseViewModel> _items;
@@ -102,6 +104,7 @@ public partial class EditorPanelViewModel : ObservableRecipient
         Messenger.Register<BlockSelectedInTree>(this);
         Messenger.Register<RuleSelectedInTree>(this);
         Messenger.Register<EditorClosedEvent>(this);
+        Messenger.Register<MultipleRulesDeleted>(this);
     }
 
     #region event handlers
@@ -128,6 +131,18 @@ public partial class EditorPanelViewModel : ObservableRecipient
     public void Receive(EditorClosedEvent message)
     {
         Items.Remove(message.Value);
+    }
+
+    public void Receive(MultipleRulesDeleted message)
+    {
+        foreach (RuleDetailsViewModel rule in message.Value.Rules)
+        {
+            EditorBaseViewModel? editor = Items.Where(x => x.GetSelectedContext() == rule).FirstOrDefault();
+            if (editor != null)
+            {
+                CloseTab(editor);
+            }
+        }
     }
 
 
