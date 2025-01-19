@@ -45,31 +45,23 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     private string _selectedTemplate;
 
     [ObservableProperty]
-    private ObservableCollection<BlockDetailsViewModel> _allBlocks;
+    private ObservableCollection<string> _allBlocks;
 
     [ObservableProperty]
-    private BlockDetailsViewModel _selectedParent;
+    private string _selectedParent;
 
-    public BlockDetailsViewModel RealParent => _realParent;
-    private BlockDetailsViewModel _realParent;
 
     [RelayCommand]
     private void ApplyProperties()
     {
-        if (SelectedParent == null || _realParent == null)
+        if (_parentManager.RequireChange(Rule, SelectedParent))
         {
-            return;
-        }
-
-        if (RealParent == SelectedParent)
-        {
-            OnSortRules();
+            _parentManager.ChangeParent(Rule, SelectedParent);
         }
         else
         {
-            OnChangeParent();
+            OnSortRules();
         }
-
         Messenger.Send(new RuleTitleApplyEvent(Rule), Rule);
     }
 
@@ -94,23 +86,18 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         Messenger.Send(new SortRulesRequest(Rule));
     }
 
-    public void OnChangeParent()
-    {
-        RealParent.DeleteRule(Rule);
-        _realParent = SelectedParent;
-        SelectedParent.AddRule(Rule);
-    }
+
+    private readonly RuleParentManager _parentManager;
 
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule
-        , ObservableCollection<BlockDetailsViewModel> allBlocks
-        , BlockDetailsViewModel parentBlock
+        , RuleParentManager parentManager
         , ObservableCollection<string> templates) : base(rule, null)
     {
 
+        _parentManager = parentManager;
         Templates = templates;
-        AllBlocks = allBlocks;
-        SelectedParent = parentBlock;
-        _realParent = parentBlock;
+        AllBlocks = parentManager.GetObservableNames();
+        SelectedParent = parentManager.GetMyParentName(Rule);
     }
 
     public override void Apply(RuleModel model)

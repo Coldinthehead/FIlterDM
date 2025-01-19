@@ -218,7 +218,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
 
     public override bool IsPartOf(BlockDetailsViewModel vm)
     {
-        return Rule.Properties.RealParent == vm;
+        return vm.Rules.Contains(Rule);
     }
 
     public void Receive(RuleModifierDeleteEvent message)

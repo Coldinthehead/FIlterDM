@@ -4,6 +4,7 @@ using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
+using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ public partial class FilterViewModel : ObservableRecipient
     private readonly RuleTemplateService _ruleTemplateService;
     private readonly BlockTemplateService _blockTemplateService;
 
+    private readonly RuleParentManager _parentManager;
+
     public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTempalteService, RuleTemplateService ruleTemplateService)
     {
         _typeService = typeService;
@@ -40,6 +43,7 @@ public partial class FilterViewModel : ObservableRecipient
         _blockTemplateService = blockTempalteService;
         _blocks = new();
         _templateNames = new();
+        _parentManager = new();
         RegisterEvents();
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
@@ -49,6 +53,7 @@ public partial class FilterViewModel : ObservableRecipient
         _blocks = new();
         _templateNames = new();
         _blockTemplateService = new(new BlockTemplateRepository());
+        _parentManager = new();
         RegisterEvents();
     }
 
@@ -112,7 +117,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewRule(BlockDetailsViewModel parent)
     {
-        RuleDetailsViewModel ruleVm = new(Blocks, parent, _ruleTemplateService.GetObservableNames());
+        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplateService.GetObservableNames());
         ruleVm.SetModel(_ruleTemplateService.BuildEmpty());
 
         parent.AddRule(ruleVm);
@@ -122,7 +127,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewRule(RuleModel model, BlockDetailsViewModel parent)
     {
-        RuleDetailsViewModel ruleVm = new(Blocks, parent, _ruleTemplateService.GetObservableNames());
+        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplateService.GetObservableNames());
         ruleVm.SetModel(model);
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));

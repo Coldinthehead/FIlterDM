@@ -213,7 +213,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public TypeDecoratorViewModel AddTypeFilter()
     {
-        TypeDecoratorViewModel vm = Properties.RealParent.GetTypeDecorator(this);
+        TypeDecoratorViewModel vm = _typeScopeManager.GetDecorator(this);
         UseNameFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
@@ -222,7 +222,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public void AddTypeFilter(TypeConditionModel condition)
     {
-        TypeDecoratorViewModel vm = Properties.RealParent.GetTypeDecorator(this);
+        TypeDecoratorViewModel vm = _typeScopeManager.GetDecorator(this);
         vm.SetModel(condition);
         UseNameFilter = true;
         Modifiers.Add(vm);
@@ -334,8 +334,9 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly Dictionary<NumericFilterType, NumericFilterHelper> _numericHelpers = [];
     private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];
 
-    public RuleDetailsViewModel(ObservableCollection<BlockDetailsViewModel> allBlocks
-        , BlockDetailsViewModel parentBlock
+    private readonly TypeScopeManager _typeScopeManager;
+    public RuleDetailsViewModel(RuleParentManager parentManager
+        , TypeScopeManager scopeManager
         , ObservableCollection<string> templates)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000, (x) => UseStackFilter = x));
@@ -355,7 +356,8 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             _helperFromString[value.ShortName] = value;
         }
 
-        Properties = new(this, allBlocks, parentBlock, templates);
+        _typeScopeManager = scopeManager;
+        Properties = new(this, parentManager, templates);
         Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);

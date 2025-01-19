@@ -8,7 +8,7 @@ public class RuleDetailsViewModelTests
     [Test]
     public void OnDeleteConfirmed_ShouldRaiseRuleDeleteRequest()
     {
-        RuleDetailsViewModel sut = new([], null, []);
+        RuleDetailsViewModel sut = new(new(), null, []);
         EventListener<DeleteRuleRequest, RuleDetailsViewModel> listener = new();
         sut.OnDeleteConfirmed();
 

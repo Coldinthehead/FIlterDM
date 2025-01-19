@@ -125,6 +125,8 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
+    public TypeScopeManager ScopeManager => _scopeManager;
+
     public BlockDetailsViewModel(ObservableCollection<string> templateNames , TypeScopeManager scopeManager )
     { 
         Templates = templateNames;
