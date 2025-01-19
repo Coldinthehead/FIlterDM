@@ -323,7 +323,7 @@ public class FilterViewModelTests
         BlockDetailsViewModel testBlock = sut.Blocks.First();
         RuleDetailsViewModel testRule = testBlock.Rules.First();
 
-        WeakReferenceMessenger.Default.Send(new RuleDeleteRequestEvent(testRule));
+        WeakReferenceMessenger.Default.Send(new DeleteRuleRequest(testRule));
 
         Assert.That(testBlock.Rules, Has.Count.EqualTo(0));
     }

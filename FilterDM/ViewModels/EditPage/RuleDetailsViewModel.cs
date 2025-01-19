@@ -101,7 +101,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public void OnDeleteConfirmed()
     {
-        Messenger.Send(new RuleDeleteRequestEvent(this));
+        Messenger.Send(new DeleteRuleRequest(this));
     }
 
 
@@ -467,6 +467,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     internal void DeleteSafe()
     {
-        Messenger.Send(new RuleDeleteRequestEvent(this));
+        Messenger.Send(new DeleteRuleRequest(this));
     }
 }

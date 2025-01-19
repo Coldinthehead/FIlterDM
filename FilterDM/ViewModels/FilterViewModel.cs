@@ -17,6 +17,7 @@ public partial class FilterViewModel : ObservableRecipient
     , IRecipient<SortBlocksRequest>
     , IRecipient<CreateRuleRequest>
     , IRecipient<ResetTemplateRequest>
+    , IRecipient<DeleteRuleRequest>
 {
     [ObservableProperty]
     private string _name;
@@ -56,6 +57,7 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Register<SortBlocksRequest>(this);
         Messenger.Register<CreateRuleRequest>(this);
         Messenger.Register<ResetTemplateRequest>(this);
+        Messenger.Register<DeleteRuleRequest>(this);
     }
 
     public void NewBlock()
@@ -181,5 +183,7 @@ public partial class FilterViewModel : ObservableRecipient
             ResetBlockTemplate(message.Value.Block, message.Value.TempalteName);
         }
     }
+
+    public void Receive(DeleteRuleRequest message) => throw new NotImplementedException();
     #endregion
 }
