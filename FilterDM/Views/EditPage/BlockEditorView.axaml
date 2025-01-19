@@ -95,7 +95,7 @@
                             HorizontalAlignment="Center"
                             p1:ComboBoxAssist.Label="Preset"
                             ItemsSource="{Binding Block.Templates}"
-                            SelectedItem="{Binding Block.SelectedTempalte}"
+                            SelectedItem="{Binding Block.SelectedTemplate}"
                             Theme="{StaticResource MaterialOutlineComboBox}" />
 
 

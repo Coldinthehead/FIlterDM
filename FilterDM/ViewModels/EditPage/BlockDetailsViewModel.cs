@@ -51,7 +51,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     private ObservableCollection<string> _templates;
 
     [ObservableProperty]
-    private string _selectedTempalte;
+    private string _selectedTemplate;
 
     private readonly TypeScopeManager _scopeManager;
     [ObservableProperty]
@@ -73,7 +73,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [RelayCommand]
     private async void Reset()
     {
-        if (SelectedTempalte != null)
+        if (SelectedTemplate != null)
         {
             if (Rules.Count > 0)
             {
@@ -122,7 +122,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public void OnTemplateResetConfirmed()
     {
         var service = App.Current.Services.GetService<BlockTemplateRepository>();
-        BlockModel? nextTeplate = service.GetTemplate(SelectedTempalte);
+        BlockModel? nextTeplate = service.GetTemplate(SelectedTemplate);
         if (nextTeplate != null)
         {
             nextTeplate.Title = Title;
@@ -152,7 +152,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         block.Title = Title;
         block.Enabled = Enabled;
         block.Priority = Priority;
-        block.TemplateName = SelectedTempalte;
+        block.TemplateName = SelectedTemplate;
         block.UseBlockTypeScope = UseScopeNames;
         foreach (RuleDetailsViewModel rule in Rules)
         {
@@ -181,11 +181,11 @@ public partial class BlockDetailsViewModel : ObservableRecipient
       
         if (model.TemplateName != null && Templates.Contains(model.TemplateName))
         {
-            SelectedTempalte = model.TemplateName;
+            SelectedTemplate = model.TemplateName;
         }
         else
         {
-            SelectedTempalte = "Empty";
+            SelectedTemplate = "Empty";
         }
     }
 

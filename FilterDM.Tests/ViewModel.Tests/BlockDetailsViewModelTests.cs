@@ -39,6 +39,6 @@ public class BlockDetailsViewModelTests
 
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Playload.Block, Is.EqualTo(sut));
-        Assert.That(listener.Playload.TempalteName, Is.EqualTo(sut.SelectedTempalte));
+        Assert.That(listener.Playload.TempalteName, Is.EqualTo(sut.SelectedTemplate));
     }
 }
