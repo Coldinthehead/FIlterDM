@@ -88,16 +88,22 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             var dialogResult = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete Rule with {Modifiers.Count} modifiers?");
             if (dialogResult)
             {
-                Messenger.Send(new RuleDeleteRequestEvent(this));
+                OnDeleteConfirmed();
             }
         }
         else
         {
-            Messenger.Send(new RuleDeleteRequestEvent(this));
+            OnDeleteConfirmed();
         }
 
 
     }
+
+    public void OnDeleteConfirmed()
+    {
+        Messenger.Send(new RuleDeleteRequestEvent(this));
+    }
+
 
     #region Moidifiers Methods
 
