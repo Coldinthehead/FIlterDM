@@ -37,10 +37,7 @@ public partial class FilterViewModel : ObservableRecipient
         _blockTemplateService = blockTempalteService;
         _blocks = new();
         _templateNames = new();
-        Messenger.Register<CreateBlockRequest>(this);
-        Messenger.Register<DeleteBlockRequest>(this);
-        Messenger.Register<SortBlocksRequest>(this);
-        Messenger.Register<CreateRuleRequest>(this);
+        RegisterEvents();
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
@@ -49,10 +46,16 @@ public partial class FilterViewModel : ObservableRecipient
         _blocks = new();
         _templateNames = new();
         _blockTemplateService = new(new BlockTemplateRepository());
+        RegisterEvents();
+    }
+
+    private void RegisterEvents()
+    {
         Messenger.Register<CreateBlockRequest>(this);
         Messenger.Register<DeleteBlockRequest>(this);
         Messenger.Register<SortBlocksRequest>(this);
         Messenger.Register<CreateRuleRequest>(this);
+        Messenger.Register<ResetTemplateRequest>(this);
     }
 
     public void NewBlock()
