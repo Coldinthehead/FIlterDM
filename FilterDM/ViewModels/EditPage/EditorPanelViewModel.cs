@@ -14,6 +14,7 @@ public partial class EditorPanelViewModel : ObservableRecipient
     , IRecipient<RuleSelectedInTree>
     , IRecipient<EditorClosedEvent>
     , IRecipient<MultipleRulesDeleted>
+    , IRecipient<RuleDeleteEvent>
 {
     [ObservableProperty]
     private ObservableCollection<EditorBaseViewModel> _items;
@@ -105,6 +106,7 @@ public partial class EditorPanelViewModel : ObservableRecipient
         Messenger.Register<RuleSelectedInTree>(this);
         Messenger.Register<EditorClosedEvent>(this);
         Messenger.Register<MultipleRulesDeleted>(this);
+        Messenger.Register<RuleDeleteEvent>(this);
     }
 
     #region event handlers
@@ -141,6 +143,18 @@ public partial class EditorPanelViewModel : ObservableRecipient
             if (editor != null)
             {
                 CloseTab(editor);
+            }
+        }
+    }
+
+    public void Receive(RuleDeleteEvent message)
+    {
+        foreach (EditorBaseViewModel editor in Items)
+        {
+            if (editor.GetSelectedContext() == message.Value)
+            {
+                CloseTab(editor);
+                break;
             }
         }
     }
