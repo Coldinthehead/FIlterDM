@@ -25,10 +25,10 @@ public partial class FilterViewModel : ObservableRecipient
     private ObservableCollection<string> _templateNames;
 
     private readonly ItemTypeService _typeService;
-    private readonly BlockTemplateService _blockTempalteSerivice;
+    private readonly BlockTemplateRepository _blockTempalteSerivice;
     private readonly RuleTemplateService _ruleTemplateService;
 
-    public FilterViewModel(ItemTypeService typeService, BlockTemplateService blockTempalteSerivice, RuleTemplateService ruleTemplateService)
+    public FilterViewModel(ItemTypeService typeService, BlockTemplateRepository blockTempalteSerivice, RuleTemplateService ruleTemplateService)
     {
         _typeService = typeService;
         _blockTempalteSerivice = blockTempalteSerivice;

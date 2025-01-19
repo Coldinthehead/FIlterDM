@@ -214,11 +214,11 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     }
 
     private readonly ItemTypeService _typeService;
-    private readonly BlockTemplateService _blockTemplateService;
+    private readonly BlockTemplateRepository _blockTemplateService;
     private readonly RuleTemplateService _ruleTempalateService;
 
     public ProjectEditViewModel(ItemTypeService typeService
-        , BlockTemplateService blockTempalteService
+        , BlockTemplateRepository blockTempalteService
         , RuleTemplateService ruleTempalateService)
     {
         _typeService = typeService;

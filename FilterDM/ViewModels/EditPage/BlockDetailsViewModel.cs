@@ -84,7 +84,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
                     return;
                 }
             }
-            var service = App.Current.Services.GetService<BlockTemplateService>();
+            var service = App.Current.Services.GetService<BlockTemplateRepository>();
             BlockModel? nextTeplate = service.GetTemplate(SelectedTempalte);
             if (nextTeplate != null)
             {
@@ -144,7 +144,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public BlockModel GetModel()
     {
-        BlockModel block = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
+        BlockModel block = App.Current.Services.GetService<BlockTemplateRepository>().GetEmpty();
         block.Title = Title;
         block.Enabled = Enabled;
         block.Priority = Priority;

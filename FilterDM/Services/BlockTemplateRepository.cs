@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FilterDM.Services;
 
-public class BlockTemplateService : IInit
+public class BlockTemplateRepository : IInit
 {
     private Dictionary<string, BlockModel> _templates;
 
@@ -18,7 +18,7 @@ public class BlockTemplateService : IInit
 
     private BlockModel _empty;
 
-    public BlockTemplateService()
+    public BlockTemplateRepository()
     {
         _templates = new();
         _empty = new()

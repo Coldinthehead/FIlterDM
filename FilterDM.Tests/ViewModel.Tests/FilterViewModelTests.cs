@@ -22,7 +22,7 @@ public class FilterViewModelTests
     [Test]
     public void NewBlock_ShouldApplyEmptyTemplateToNewBlock()
     {
-        BlockTemplateService templateService = new();
+        BlockTemplateRepository templateService = new();
         BlockModel empty = templateService.GetEmpty();
         FilterViewModel sut = new(new(), templateService, new());
         sut.NewBlock();

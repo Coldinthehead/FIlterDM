@@ -52,7 +52,7 @@ public partial class App : Application
             container.BindService<ProjectRepositoryService>();
             container.BindService<RuleTemplateService>();
             container.BindService<DialogService>();
-            container.BindService<BlockTemplateService>();
+            container.BindService<BlockTemplateRepository>();
             container.BindService<CoreFilterService>();
             container.BindService<FilterParserService>();
             container.BindService<SaveFilterService>();

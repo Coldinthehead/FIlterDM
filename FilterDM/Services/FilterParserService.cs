@@ -72,7 +72,7 @@ public class FilterParserService
 
             foreach (string key in blockData.Keys)
             {
-                BlockModel newBlock = App.Current.Services.GetService<BlockTemplateService>().GetEmpty();
+                BlockModel newBlock = App.Current.Services.GetService<BlockTemplateRepository>().GetEmpty();
                 newBlock.Title = key;
                 foreach (var m in blockData[key])
                 {
