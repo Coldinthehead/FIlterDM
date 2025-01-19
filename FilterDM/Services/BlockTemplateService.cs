@@ -13,6 +13,18 @@ public class BlockTemplateService
         _repository = repository;
     }
 
-    internal BlockModel GetEmpty() => throw new NotImplementedException();
-    internal bool TryGetTemplate(string tempalteName, out BlockModel template) => throw new NotImplementedException();
+    public BlockModel GetEmpty()
+    {
+        return _repository.GetEmpty();
+    }
+    public bool TryGetTemplate(string templateName, out BlockModel template)
+    {
+        if (_repository.Exists(templateName))
+        {
+            template = _repository.Get(templateName);
+            return true;
+        }
+        template = null;
+        return false;
+    }
 }
