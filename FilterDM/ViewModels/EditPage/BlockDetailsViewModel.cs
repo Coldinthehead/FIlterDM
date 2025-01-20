@@ -5,7 +5,6 @@ using FilterDM.Managers;
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
-using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
@@ -50,7 +49,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [ObservableProperty]
     private BlockModel _selectedTemplate;
 
-    private readonly TypeScopeManager _scopeManager;
     [ObservableProperty]
     private bool _useScopeNames;
     partial void OnUseScopeNamesChanged(bool oldValue, bool newValue)
@@ -123,6 +121,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     public float CalculatedPriority => (Enabled ? -1 : 1) * Priority;
 
     public TypeScopeManager ScopeManager => _scopeManager;
+    private readonly TypeScopeManager _scopeManager;
 
     [ObservableProperty]
     public BlockTemplateManager _templateManager;
@@ -150,7 +149,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
 
     public void SetModel(BlockModel model)
     {
-        var currentRules = Rules.ToArray();
         UseScopeNames = model.UseBlockTypeScope;
         Title = model.Title;
         Enabled = model.Enabled;
@@ -202,10 +200,5 @@ public partial class BlockDetailsViewModel : ObservableRecipient
                 return res;
             }
         }
-    }
-
-    internal TypeDecoratorViewModel GetTypeDecorator(RuleDetailsViewModel vm)
-    {
-        return _scopeManager.GetDecorator(vm);
     }
 }
