@@ -7,6 +7,7 @@ using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -245,4 +246,6 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
             }
         }
     }
+
+    public override ModifierEditorViewModel GetEditor() => new TypeEditorViewModel(Rule, this);
 }

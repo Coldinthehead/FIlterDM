@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FilterDM.Models;
+using FilterDM.ViewModels.Base;
 using System;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
@@ -23,6 +24,8 @@ public abstract partial class ModifierViewModelBase : ObservableRecipient
     {
         DeleteAction?.Invoke(this);
     }
+
+    public abstract ModifierEditorViewModel GetEditor();
 
     protected ModifierViewModelBase(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction)
     {

@@ -3,8 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.Managers;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
@@ -79,14 +81,6 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
 
     public void OnResetConfirmed()
     {
-        /*RuleTemplateRepository? service = App.Current.Services.GetService<RuleTemplateRepository>();
-        RuleModel? nextTempate = service.GetTemplate(SelectedTemplate);
-        if (nextTempate != null)
-        {
-            var title = Title;
-            Rule.SetModel(nextTempate);
-            Title = title;
-        }*/
         TemplateManager.SetTemplate(Rule, SelectedTemplate);
     }
 
@@ -122,4 +116,6 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         Show = rule.Show;
         SelectedTemplate = TemplateManager.Get(rule.TemplateName);
     }
+
+    public override ModifierEditorViewModel GetEditor() => new RulePropertiesEditorViewModel(Rule, this);
 }

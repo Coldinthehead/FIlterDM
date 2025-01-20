@@ -2,8 +2,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
 
@@ -148,4 +151,5 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         }
     }
 
+    public override ModifierEditorViewModel GetEditor() => new ColorEditorViewModel(Rule, this);
 }

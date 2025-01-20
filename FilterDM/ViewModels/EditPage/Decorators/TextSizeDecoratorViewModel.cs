@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
 
 
@@ -50,4 +52,6 @@ public partial class TextSizeDecoratorViewModel : ModifierViewModelBase
     {
         FontSize = rule.FontSize;
     }
+
+    public override ModifierEditorViewModel GetEditor() => new FontSizeEditorViewModel(Rule, this);
 }

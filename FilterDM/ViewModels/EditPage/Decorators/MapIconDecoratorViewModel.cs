@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
 using System.Collections.ObjectModel;
 
@@ -76,4 +78,6 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         SelectedIconColor = icon.Color;
         SelectedShape = icon.Shape;
     }
+
+    public override ModifierEditorViewModel GetEditor() => new MinimapIconEditorViewModel(Rule, this);
 }

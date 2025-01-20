@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
 using System.Collections.ObjectModel;
 
@@ -54,4 +56,5 @@ public partial class SoundDecoratorViewModel : ModifierViewModelBase
         SoundVolume = sound.Volume;
     }
 
+    public override ModifierEditorViewModel GetEditor() => new SoundEditorViewModel(Rule, this);
 }

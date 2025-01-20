@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls.Primitives;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Enums;
@@ -58,7 +57,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     {
         if (newValue != null && !newValue.Equals(oldValue))
         {
-            CurrentModifierEditor = GetEditorModelByType(newValue);
+            CurrentModifierEditor = newValue.GetEditor();
         }
     }
 
@@ -157,55 +156,6 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     private void AddTypeFilter()
     {
         SelectedModifier = Rule.AddTypeFilter();
-    }
-
-    public ViewModelBase GetEditorModelByType(ModifierViewModelBase vm)
-    {
-        Type t = vm.GetType();
-        if (vm is TextSizeDecoratorViewModel text)
-        {
-            return new FontSizeEditorViewModel(Rule, text);
-        }
-        else if (vm is ColorDecoratorViewModel color)
-        {
-            return new ColorEditorViewModel(Rule, color);
-        }
-        else if (vm is BeamDecoratorViewModel beam)
-        {
-            return new BeamEditorViewModel(Rule, beam);
-        }
-        else if (vm is MapIconDecoratorViewModel minimapIcon)
-        {
-            return new MinimapIconEditorViewModel(Rule, minimapIcon);
-        }
-        else if (vm is SoundDecoratorViewModel sound)
-        {
-            return new SoundEditorViewModel(Rule, sound);
-        }
-        else if (vm is RarityDecoratorViewModel rarity)
-        {
-            return new RarityEditorViewModel(Rule, rarity);
-        }
-        else if (vm is NumericDecoratorViewModel numeric)
-        {
-            return new NumericEditorViewModel(Rule, numeric);
-        }
-        else if (vm is RulePropertiesDecoratorViewModel properties)
-        {
-            return new RulePropertiesEditorViewModel(Rule, properties);
-        }
-        else if (vm is ClassDecoratorViewModel classDec)
-        {
-            return new ClassEditorViewModel(Rule, classDec);
-        }
-        else if (vm is TypeDecoratorViewModel typeDec)
-        {
-            return new TypeEditorViewModel(Rule, typeDec);
-        }
-        else
-        {
-            return null;
-        }
     }
 
     public override bool IsPartOf(BlockDetailsViewModel vm)

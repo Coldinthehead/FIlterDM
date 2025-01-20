@@ -47,8 +47,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         {
             OnDeleteConfirmed();
         }
-
-
     }
 
     public void OnDeleteConfirmed()

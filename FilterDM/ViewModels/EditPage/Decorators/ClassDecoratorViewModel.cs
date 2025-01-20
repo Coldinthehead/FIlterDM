@@ -6,6 +6,7 @@ using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ public partial class ClassDecoratorViewModel : ModifierViewModelBase
                 .Select(x => new ClassItemViewModel(x))
                 .ToList();
         SelectList = new(checkList);
-        
+
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
 
@@ -89,4 +90,6 @@ public partial class ClassDecoratorViewModel : ModifierViewModelBase
             }
         }
     }
+
+    public override ModifierEditorViewModel GetEditor() => new ClassEditorViewModel(Rule, this);
 }
