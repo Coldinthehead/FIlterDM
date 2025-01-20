@@ -1,7 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using FilterDM.ViewModels.EditPage;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 
 namespace FilterDM.Tests.ViewModel.Tests;

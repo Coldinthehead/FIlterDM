@@ -2,6 +2,7 @@
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.ViewModels;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 
