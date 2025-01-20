@@ -100,13 +100,14 @@
                                     <ItemsControl ItemsSource="{Binding AddModifiersList}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" />
+                                                <StackPanel Orientation="Vertical" Spacing="2" />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
 
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Button
+                                                    Margin="4,2,24,2"
                                                     Classes="accent"
                                                     Command="{Binding AddMeCommand}"
                                                     CommandParameter="FontSize"

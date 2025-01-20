@@ -158,6 +158,18 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
             AddModifierViewModel.Build("Beam"),
             AddModifierViewModel.Build("Icon"),
             AddModifierViewModel.Build("Sound"),
+            AddModifierViewModel.Build("Class"),
+            AddModifierViewModel.Build("Type"),
+            AddModifierViewModel.Build("Rarity"),
+            AddModifierViewModel.Build("Item Level"),
+            AddModifierViewModel.Build("Drop Level"),
+            AddModifierViewModel.Build("Area Level"),
+            AddModifierViewModel.Build("Quality"),
+            AddModifierViewModel.Build("Sockets"),
+            AddModifierViewModel.Build("Base Armour"),
+            AddModifierViewModel.Build("Base Evasion"),
+            AddModifierViewModel.Build("Base ES"),
+            AddModifierViewModel.Build("Waystone Tier"),
       ];
         AddModifiersList = new(modifers);
         Messenger.Register<RuleModifierDeleteEvent>(this);
