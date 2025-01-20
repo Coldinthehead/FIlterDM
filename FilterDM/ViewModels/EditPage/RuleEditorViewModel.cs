@@ -92,7 +92,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         List<AddModifierViewModel> modifers = [
             AddModifierViewModel.Build("Text Size", AddFontSizeModifier),
             AddModifierViewModel.Build("Colors", AddColorsModifier),
-            AddModifierViewModel.Build("Beam", AddFontSizeModifier),
+            AddModifierViewModel.Build("Beam", AddBeamModifier),
             AddModifierViewModel.Build("Icon", AddMinimapIconModifier),
             AddModifierViewModel.Build("Sound", AddSoundModifier),
             AddModifierViewModel.Build("Class", AddClassFilter),
