@@ -67,18 +67,15 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [RelayCommand]
     private async void Reset()
     {
-        if (SelectedTemplate != null)
+        if (Rules.Count > 0)
         {
-            if (Rules.Count > 0)
+            var confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to override {Rules.Count} rules?");
+            if (!confirm)
             {
-                var confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to override {Rules.Count} rules?");
-                if (!confirm)
-                {
-                    return;
-                }
+                return;
             }
-            OnTemplateResetConfirmed();
         }
+        OnTemplateResetConfirmed();
         Messenger.Send(new FilterEditedRequestEvent(this));
         Messenger.Send(new BlockPriorityChangedRequest(this));
     }
@@ -126,7 +123,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [ObservableProperty]
     public BlockTemplateManager _templateManager;
 
-    public BlockDetailsViewModel(BlockTemplateManager templateManager , TypeScopeManager scopeManager )
+    public BlockDetailsViewModel(BlockTemplateManager templateManager, TypeScopeManager scopeManager)
     {
         TemplateManager = templateManager;
         _scopeManager = scopeManager;
