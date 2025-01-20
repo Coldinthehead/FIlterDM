@@ -21,6 +21,7 @@ public partial class FilterViewModel : ObservableRecipient
     , IRecipient<ResetTemplateRequest>
     , IRecipient<DeleteRuleRequest>
     , IRecipient<SortRulesRequest>
+    , IRecipient<ResetRuleTemplateRequest>
 {
     [ObservableProperty]
     private string _name;
@@ -134,6 +135,13 @@ public partial class FilterViewModel : ObservableRecipient
         }
     }
 
+    public void ResetRuleTemplate(RuleDetailsViewModel rule, RuleModel template)
+    {
+        var currentTitle = rule.Properties.Title;
+        rule.SetModel(template);
+        rule.Properties.Title = currentTitle;
+    }
+
     public void SetModel(FilterModel model)
     {
         Name = model.Name;
@@ -214,5 +222,6 @@ public partial class FilterViewModel : ObservableRecipient
             }
         }
     }
+    public void Receive(ResetRuleTemplateRequest message) => ResetRuleTemplate(message.Value.Rule, message.Value.Template);
     #endregion
 }
