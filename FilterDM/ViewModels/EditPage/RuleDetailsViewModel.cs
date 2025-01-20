@@ -32,16 +32,16 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     [ObservableProperty]
     private TextSizeDecoratorViewModel _textSize;
 
-    [ObservableProperty]
+/*    [ObservableProperty]
     private bool _useBeam = false;
 
     [ObservableProperty]
     private bool _useSound = false;
 
     [ObservableProperty]
-    private bool _useMinimapIcon = false;
+    private bool _useMinimapIcon = false;*/
 
-    #region Filters
+  /*  #region Filters
 
     [ObservableProperty]
     private bool _useRarityFilter;
@@ -82,7 +82,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     [ObservableProperty]
     private bool _useWaystoneFilter;
 
-    #endregion
+    #endregion*/
 
     [RelayCommand]
     private async Task DeleteMe()
@@ -130,7 +130,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public BeamDecoratorViewModel AddBeamModifier()
     {
         BeamDecoratorViewModel vm = new(this, RemoveBeamModifier);
-        UseBeam = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -140,7 +139,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public MapIconDecoratorViewModel AddMinimapIconModifier()
     {
         MapIconDecoratorViewModel vm = new(this, RemoveMinimapIconModifier);
-        UseMinimapIcon = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -149,7 +147,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public SoundDecoratorViewModel AddSoundModifier()
     {
         SoundDecoratorViewModel vm = new(this, RemoveSoundModifier);
-        UseSound = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -158,7 +155,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public RarityDecoratorViewModel AddRarityFilter()
     {
         RarityDecoratorViewModel vm = new(this,RemoveRarityFilter);
-        UseRarityFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -168,7 +164,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         RarityDecoratorViewModel vm = new(this, RemoveRarityFilter);
         vm.SetModel(model);
-        UseRarityFilter = true;
         Messenger.Send(new FilterEditedRequestEvent(this));
         Modifiers.Add(vm);
     }
@@ -178,7 +173,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         NumericFilterHelper helper = _numericHelpers[type];
         NumericDecoratorViewModel vm = new(this, helper, RemoveNumericFilter);
         Modifiers.Add(vm);
-        helper.Add();
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
     }
@@ -192,7 +186,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             NumericDecoratorViewModel vm = new(this, helper, RemoveNumericFilter);
             vm.SetModel(condition);
             Modifiers.Add(vm);
-            helper.Add();
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -200,7 +193,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public ClassDecoratorViewModel AddClassFilter()
     {
         ClassDecoratorViewModel vm = new(this, RemoveClassFilter);
-        UseClassFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -210,7 +202,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         ClassDecoratorViewModel vm = new(this, RemoveClassFilter);
         vm.SetModel(condition);
-        UseClassFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
@@ -219,7 +210,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public TypeDecoratorViewModel AddTypeFilter()
     {
         TypeDecoratorViewModel vm = _typeScopeManager.GetDecorator(this);
-        UseNameFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -229,7 +219,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         TypeDecoratorViewModel vm = _typeScopeManager.GetDecorator(this);
         vm.SetModel(condition);
-        UseNameFilter = true;
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
@@ -238,7 +227,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier) && modifier is TypeDecoratorViewModel condition)
         {
-            UseNameFilter = false;
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -248,7 +236,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier) && modifier is ClassDecoratorViewModel condition)
         {
-            UseClassFilter = false;
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -258,7 +245,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (modifier is NumericDecoratorViewModel condition && Modifiers.Remove(modifier))
         {
-            _numericHelpers[condition.FilterType].Remove();
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -268,7 +254,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            UseRarityFilter = false;
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -278,7 +263,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            UseSound = false;
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -288,7 +272,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            UseMinimapIcon = false;
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -312,7 +295,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            UseBeam = false;
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -344,16 +326,16 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager)
     {
-        _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000, (x) => UseStackFilter = x));
-        _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100, (x) => UseItemLevelFilter = x));
-        _numericHelpers.Add(NumericFilterType.DropLevel, new NumericFilterHelper(NumericFilterType.DropLevel, "Drop Level", "DLevel", 100, (x) => UseDropLevelFilter = x));
-        _numericHelpers.Add(NumericFilterType.AreaLevel, new NumericFilterHelper(NumericFilterType.AreaLevel, "Area Level", "ALevel", 100, (x) => UseAreaLevelFilter = x));
-        _numericHelpers.Add(NumericFilterType.Quality, new NumericFilterHelper(NumericFilterType.Quality, "Quality", "Quality", 100, (x) => UseQualityFilter = x));
-        _numericHelpers.Add(NumericFilterType.Sockets, new NumericFilterHelper(NumericFilterType.Sockets, "Sockets Count", "Sockets", 4, (x) => UseSocketFilter = x));
-        _numericHelpers.Add(NumericFilterType.BaseArmour, new NumericFilterHelper(NumericFilterType.BaseArmour, "Base Armor", "Armor", 5000, (x) => UseArmorFilter = x));
-        _numericHelpers.Add(NumericFilterType.BaseEvasion, new NumericFilterHelper(NumericFilterType.BaseEvasion, "Base Evasion", "Evasion", 5000, (x) => UseEvasionFilter = x));
-        _numericHelpers.Add(NumericFilterType.BaseEnergyShield, new NumericFilterHelper(NumericFilterType.BaseEnergyShield, "Base Energy Shield", "ES", 5000, (x) => UseESFilter = x));
-        _numericHelpers.Add(NumericFilterType.WaystoneTier, new NumericFilterHelper(NumericFilterType.WaystoneTier, "WaystoneTier", "T", 16, (x) => UseWaystoneFilter = x));
+        _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000));
+        _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100));
+        _numericHelpers.Add(NumericFilterType.DropLevel, new NumericFilterHelper(NumericFilterType.DropLevel, "Drop Level", "DLevel", 100));
+        _numericHelpers.Add(NumericFilterType.AreaLevel, new NumericFilterHelper(NumericFilterType.AreaLevel, "Area Level", "ALevel", 100));
+        _numericHelpers.Add(NumericFilterType.Quality, new NumericFilterHelper(NumericFilterType.Quality, "Quality", "Quality", 100));
+        _numericHelpers.Add(NumericFilterType.Sockets, new NumericFilterHelper(NumericFilterType.Sockets, "Sockets Count", "Sockets", 4));
+        _numericHelpers.Add(NumericFilterType.BaseArmour, new NumericFilterHelper(NumericFilterType.BaseArmour, "Base Armor", "Armor", 5000));
+        _numericHelpers.Add(NumericFilterType.BaseEvasion, new NumericFilterHelper(NumericFilterType.BaseEvasion, "Base Evasion", "Evasion", 5000));
+        _numericHelpers.Add(NumericFilterType.BaseEnergyShield, new NumericFilterHelper(NumericFilterType.BaseEnergyShield, "Base Energy Shield", "ES", 5000));
+        _numericHelpers.Add(NumericFilterType.WaystoneTier, new NumericFilterHelper(NumericFilterType.WaystoneTier, "WaystoneTier", "T", 16));
 
         foreach (var value in _numericHelpers.Values)
         {
@@ -407,62 +389,32 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         {
             AddBeamModifier().SetModel(rule.Beam);
         }
-        else
-        {
-            UseBeam = false;
-        }
-
 
         if (rule.Icon != null)
         {
             AddMinimapIconModifier().SetModel(rule.Icon);
-        }
-        else
-        {
-            UseMinimapIcon = false;
         }
 
         if (rule.Sound != null)
         {
             AddSoundModifier().SetModel(rule.Sound);
         }
-        else
-        {
-            UseSound = false;
-        }
 
         if (rule.TryGetClassCondition(out var classCondition))
         {
             AddClassFilter(classCondition);
-        }
-        else
-        {
-            UseClassFilter = false;
         }
 
         if (rule.TryGetTypeCondition(out var typeCondition))
         {
             AddTypeFilter(typeCondition);
         }
-        else
-        {
-            UseNameFilter = false;
-        }
-
 
         if (rule.TryGetRarityCondition(out var rarityCondition))
         {
             AddRarityFilter(rarityCondition);
         }
-        else
-        {
-            UseRarityFilter = false;
-        }
 
-        foreach (var helper in _numericHelpers.Values)
-        {
-            helper.Remove();
-        }
 
         foreach (var item in rule.GetNumericConditions())
         {

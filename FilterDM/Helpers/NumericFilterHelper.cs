@@ -14,16 +14,11 @@ public class NumericFilterHelper
 
     public NumericFilterType Type { get; set; }
 
-    public NumericFilterHelper(NumericFilterType type, string longName, string shortName, int maxValue, Action<bool> useAction)
+    public NumericFilterHelper(NumericFilterType type, string longName, string shortName, int maxValue)
     {
         Type = type;
         Name = longName;
         ShortName = shortName;
-        _useAction = useAction;
         MaxValue = maxValue;
     }
-
-    public void Add() => _useAction.Invoke(true);
-    public void Remove() => _useAction.Invoke(false);
-
 }
