@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using FilterDM.Models;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Decorators;
-using System.Collections.ObjectModel;
 
 namespace FilterDM.ViewModels.EditPage.ModifierEditors;
 

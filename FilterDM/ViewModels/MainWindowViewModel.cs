@@ -2,6 +2,7 @@
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using System;

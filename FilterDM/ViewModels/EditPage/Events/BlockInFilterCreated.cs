@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging.Messages;
+using FilterDM.ViewModels.Base;
 using System.Collections.ObjectModel;
 
 namespace FilterDM.ViewModels.EditPage.Events;

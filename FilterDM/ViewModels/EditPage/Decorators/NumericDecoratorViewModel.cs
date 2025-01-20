@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Enums;
+using FilterDM.Helpers;
 using FilterDM.Models;
 using FilterDM.ViewModels.EditPage.Events;
 using System;

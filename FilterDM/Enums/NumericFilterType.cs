@@ -1,4 +1,4 @@
-﻿namespace FilterDM.ViewModels.EditPage;
+﻿namespace FilterDM.Enums;
 
 public enum NumericFilterType
 {

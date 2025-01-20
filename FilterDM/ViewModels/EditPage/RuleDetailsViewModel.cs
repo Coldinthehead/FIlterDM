@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Enums;
+using FilterDM.Helpers;
 using FilterDM.Managers;
 using FilterDM.Models;
 using FilterDM.Repositories;

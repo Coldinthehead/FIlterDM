@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using FilterCore.PoeData;
 using FilterDM.Models;
 using FilterDM.Services;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System;

@@ -1,7 +1,6 @@
-﻿using Avalonia.Media.Imaging;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Decorators;
-using Material.Colors;
 
 namespace FilterDM.ViewModels.EditPage.ModifierEditors;
 

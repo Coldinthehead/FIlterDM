@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 using System;
 
 
-
-namespace FilterDM.ViewModels.EditPage;
+namespace FilterDM.ViewModels.Base;
 
 public  partial class EditorBaseViewModel : ObservableRecipient
 {

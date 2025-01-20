@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FilterDM.ViewModels.EditPage;
 
-namespace FilterDM.ViewModels.EditPage.ModifierEditors;
+namespace FilterDM.ViewModels.Base;
 
 public partial class ModifierEditorViewModel : ViewModelBase
 {

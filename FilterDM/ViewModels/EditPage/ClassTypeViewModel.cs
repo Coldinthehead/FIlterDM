@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FilterDM.ViewModels.Base;
 using System;
 
 namespace FilterDM.ViewModels.EditPage.Helper;

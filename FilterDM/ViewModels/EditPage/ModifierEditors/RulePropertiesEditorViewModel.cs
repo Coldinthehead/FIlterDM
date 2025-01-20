@@ -1,9 +1,6 @@
-﻿using Avalonia;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using FilterDM.Services;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Decorators;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace FilterDM.ViewModels.EditPage.ModifierEditors;
 

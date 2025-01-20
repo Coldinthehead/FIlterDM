@@ -1,6 +1,7 @@
-﻿using System;
+﻿using FilterDM.Enums;
+using System;
 
-namespace FilterDM.ViewModels.EditPage;
+namespace FilterDM.Helpers;
 
 public class NumericFilterHelper
 {

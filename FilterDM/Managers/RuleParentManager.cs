@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FilterDM.ViewModels.Base;
 using System;
 using System.Collections.ObjectModel;
 
