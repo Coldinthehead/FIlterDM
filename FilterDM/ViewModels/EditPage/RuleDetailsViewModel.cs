@@ -32,58 +32,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     [ObservableProperty]
     private TextSizeDecoratorViewModel _textSize;
 
-/*    [ObservableProperty]
-    private bool _useBeam = false;
-
-    [ObservableProperty]
-    private bool _useSound = false;
-
-    [ObservableProperty]
-    private bool _useMinimapIcon = false;*/
-
-  /*  #region Filters
-
-    [ObservableProperty]
-    private bool _useRarityFilter;
-
-    [ObservableProperty]
-    private bool _useStackFilter;
-
-    [ObservableProperty]
-    private bool _useItemLevelFilter;
-
-    [ObservableProperty]
-    private bool _useDropLevelFilter;
-
-    [ObservableProperty]
-    private bool _useAreaLevelFilter;
-
-    [ObservableProperty]
-    private bool _useQualityFilter;
-
-    [ObservableProperty]
-    private bool _useSocketFilter;
-
-    [ObservableProperty]
-    private bool _useArmorFilter;
-
-    [ObservableProperty]
-    private bool _useEvasionFilter;
-
-    [ObservableProperty]
-    private bool _useESFilter;
-
-    [ObservableProperty]
-    private bool _useClassFilter;
-
-    [ObservableProperty]
-    private bool _useNameFilter;
-
-    [ObservableProperty]
-    private bool _useWaystoneFilter;
-
-    #endregion*/
-
     [RelayCommand]
     private async Task DeleteMe()
     {
