@@ -24,14 +24,17 @@ public partial class AddModifierViewModel : ViewModelBase
     [RelayCommand]
     public void AddMe()
     {
-
+        OnAddAction?.Invoke();
     }
 
-    public static AddModifierViewModel Build(string title)
+    public Action OnAddAction { get; set; }
+
+    public static AddModifierViewModel Build(string title, Action addAction)
     {
         return new AddModifierViewModel()
         {
             Title = title,
+            OnAddAction = addAction,
         };
     }
 }
@@ -62,72 +65,6 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     [ObservableProperty]
     private ViewModelBase _currentModifierEditor;
 
-
-    [RelayCommand]
-    private void AddModifier(string modeName)
-    {
-        switch (modeName)
-        {
-            case "FontSize":
-            AddFontSizeModifier();
-            break;
-
-            case "Colors":
-            AddColorsModifier();
-            break;
-            case "Beam":
-            AddBeamModifier();
-            break;
-            case "Icon":
-            AddMinimapIconModifier();
-            break;
-
-            case "Sound":
-            AddSoundModifier();
-            break;
-
-            case "ClassFilter":
-            AddClassFilter();
-            break;
-            case "TypeFilter":
-            AddTypeFilter();
-            break;
-            case "RarityFilter":
-            AddRarityFilter();
-            break;
-            case "StackFilter":
-            AddNumericFilter(NumericFilterType.StackSize);
-            break;
-            case "ItemLevelFilter":
-            AddNumericFilter(NumericFilterType.ItemLevel);
-            break;
-            case "DropLevelFilter":
-            AddNumericFilter(NumericFilterType.DropLevel);
-            break;
-            case "AreaLevelFilter":
-            AddNumericFilter(NumericFilterType.AreaLevel);
-            break;
-            case "QualityFilter":
-            AddNumericFilter(NumericFilterType.Quality);
-            break;
-            case "SocketFilter":
-            AddNumericFilter(NumericFilterType.Sockets);
-            break;
-            case "ArmorFilter":
-            AddNumericFilter(NumericFilterType.BaseArmour);
-            break; 
-            case "EvasionFilter":
-            AddNumericFilter(NumericFilterType.BaseEvasion);
-            break;  
-            case "ESFilter":
-            AddNumericFilter(NumericFilterType.BaseEnergyShield);
-            break;
-
-            default:
-            break;
-        }
-    }
-
     private static Dictionary<Type, Type> _editorTypesToModifierTypes = [];
 
     static RuleEditorViewModel()
@@ -153,23 +90,23 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         SelectedModifier = Rule.Modifiers[0];
 
         List<AddModifierViewModel> modifers = [
-            AddModifierViewModel.Build("Text Size"),
-            AddModifierViewModel.Build("Colors"),
-            AddModifierViewModel.Build("Beam"),
-            AddModifierViewModel.Build("Icon"),
-            AddModifierViewModel.Build("Sound"),
-            AddModifierViewModel.Build("Class"),
-            AddModifierViewModel.Build("Type"),
-            AddModifierViewModel.Build("Rarity"),
-            AddModifierViewModel.Build("Item Level"),
-            AddModifierViewModel.Build("Drop Level"),
-            AddModifierViewModel.Build("Area Level"),
-            AddModifierViewModel.Build("Quality"),
-            AddModifierViewModel.Build("Sockets"),
-            AddModifierViewModel.Build("Base Armour"),
-            AddModifierViewModel.Build("Base Evasion"),
-            AddModifierViewModel.Build("Base ES"),
-            AddModifierViewModel.Build("Waystone Tier"),
+            AddModifierViewModel.Build("Text Size", AddFontSizeModifier),
+            AddModifierViewModel.Build("Colors", AddColorsModifier),
+            AddModifierViewModel.Build("Beam", AddFontSizeModifier),
+            AddModifierViewModel.Build("Icon", AddMinimapIconModifier),
+            AddModifierViewModel.Build("Sound", AddSoundModifier),
+            AddModifierViewModel.Build("Class", AddClassFilter),
+            AddModifierViewModel.Build("Type", AddTypeFilter),
+            AddModifierViewModel.Build("Rarity", AddRarityFilter),
+            AddModifierViewModel.Build("Item Level", ()=> AddNumericFilter(NumericFilterType.ItemLevel)),
+            AddModifierViewModel.Build("Drop Level", ()=> AddNumericFilter(NumericFilterType.DropLevel)),
+            AddModifierViewModel.Build("Area Level", ()=> AddNumericFilter(NumericFilterType.AreaLevel)),
+            AddModifierViewModel.Build("Quality", ()=> AddNumericFilter(NumericFilterType.Quality)),
+            AddModifierViewModel.Build("Sockets", ()=> AddNumericFilter(NumericFilterType.Sockets)),
+            AddModifierViewModel.Build("Base Armour", ()=> AddNumericFilter(NumericFilterType.BaseArmour)),
+            AddModifierViewModel.Build("Base Evasion", ()=> AddNumericFilter(NumericFilterType.BaseEvasion)),
+            AddModifierViewModel.Build("Base ES", ()=> AddNumericFilter(NumericFilterType.BaseEnergyShield)),
+            AddModifierViewModel.Build("Waystone Tier", ()=> AddNumericFilter(NumericFilterType.BaseEnergyShield))
       ];
         AddModifiersList = new(modifers);
         Messenger.Register<RuleModifierDeleteEvent>(this);
