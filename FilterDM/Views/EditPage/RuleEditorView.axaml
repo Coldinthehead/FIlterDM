@@ -97,134 +97,26 @@
                                 Classes="ToolContainer"
                                 CornerRadius="0 12">
                                 <ScrollViewer>
-                                    <StackPanel HorizontalAlignment="Center" Spacing="3">
-                                        <Button
-                                            Classes="accent"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="FontSize"
-                                            Content="Text Size"
-                                            IsVisible="{Binding Rule.TextSize.UseFontSize, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="accent"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="Colors"
-                                            Content="Colors"
-                                            IsVisible="{Binding Rule.Colors.UseAnyColor, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                    <ItemsControl ItemsSource="{Binding AddModifiersList}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
 
-                                        <Button
-                                            Classes="accent"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="Beam"
-                                            Content="Beam"
-                                            IsVisible="{Binding Rule.UseBeam, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="accent"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="Icon"
-                                            Content="Icon"
-                                            IsVisible="{Binding Rule.UseMinimapIcon, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="accent"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="Sound"
-                                            Content="Sound "
-                                            IsVisible="{Binding Rule.UseSound, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button
+                                                    Classes="accent"
+                                                    Command="{Binding AddMeCommand}"
+                                                    CommandParameter="FontSize"
+                                                    Content="{Binding Title}"
+                                                    Theme="{StaticResource MaterialOutlineButton}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
 
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="ClassFilter"
-                                            Content="Class"
-                                            IsVisible="{Binding Rule.UseClassFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
+                                    </ItemsControl>
 
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="TypeFilter"
-                                            Content="Name"
-                                            IsVisible="{Binding Rule.UseNameFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="RarityFilter"
-                                            Content="Rarity"
-                                            IsVisible="{Binding Rule.UseRarityFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="StackFilter"
-                                            Content="Stack count"
-                                            IsVisible="{Binding Rule.UseStackFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="ItemLevelFilter"
-                                            Content="Item Level"
-                                            IsVisible="{Binding Rule.UseItemLevelFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="DropLevelFilter"
-                                            Content="Drop Level "
-                                            IsVisible="{Binding Rule.UseDropLevelFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="AreaLevelFilter"
-                                            Content="AreaLevel "
-                                            IsVisible="{Binding Rule.UseAreaLevelFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="QualityFilter"
-                                            Content="Quality"
-                                            IsVisible="{Binding Rule.UseQualityFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="SocketFilter"
-                                            Content="Sockets"
-                                            IsVisible="{Binding Rule.UseSocketFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="ArmorFilter"
-                                            Content="Base Armor"
-                                            IsVisible="{Binding Rule.UseArmorFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="EvasionFilter"
-                                            Content="Base Evasion"
-                                            IsVisible="{Binding Rule.UseEvasionFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-                                        <Button
-                                            Classes="light"
-                                            Command="{Binding AddModifierCommand}"
-                                            CommandParameter="ESFilter"
-                                            Content="Base ES"
-                                            IsVisible="{Binding Rule.UseESFilter, Converter={StaticResource negBool}}"
-                                            Theme="{StaticResource MaterialOutlineButton}" />
-
-                                    </StackPanel>
                                 </ScrollViewer>
                             </Border>
                         </Grid>

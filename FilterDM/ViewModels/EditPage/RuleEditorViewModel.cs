@@ -9,8 +9,33 @@ using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace FilterDM.ViewModels.EditPage;
+
+public partial class AddModifierViewModel : ViewModelBase
+{
+    [ObservableProperty]
+    public string _title;
+
+    [ObservableProperty]
+    public string _isApplied;
+
+    [RelayCommand]
+    public void AddMe()
+    {
+
+    }
+
+    public static AddModifierViewModel Build(string title)
+    {
+        return new AddModifierViewModel()
+        {
+            Title = title,
+        };
+    }
+}
+
 public partial class RuleEditorViewModel : EditorBaseViewModel
     , IRecipient<RuleModifierDeleteEvent>
     , IRecipient<RuleTitleApplyEvent>
@@ -18,6 +43,11 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
 
     [ObservableProperty]
     private RuleDetailsViewModel _rule;
+
+
+    [ObservableProperty]
+    private ObservableCollection<AddModifierViewModel> _addModifiersList;
+
 
     [ObservableProperty]
     private ModifierViewModelBase _selectedModifier;
@@ -111,6 +141,8 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         _editorTypesToModifierTypes.Add(typeof(NumericEditorViewModel), typeof(NumericDecoratorViewModel));
         _editorTypesToModifierTypes.Add(typeof(ClassEditorViewModel), typeof(ClassDecoratorViewModel));
         _editorTypesToModifierTypes.Add(typeof(TypeEditorViewModel), typeof(TypeDecoratorViewModel));
+
+  
     }
 
     public RuleEditorViewModel(RuleDetailsViewModel rule)
@@ -119,6 +151,15 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         Content = this;
         Title = rule.Properties.Title;
         SelectedModifier = Rule.Modifiers[0];
+
+        List<AddModifierViewModel> modifers = [
+            AddModifierViewModel.Build("Text Size"),
+            AddModifierViewModel.Build("Colors"),
+            AddModifierViewModel.Build("Beam"),
+            AddModifierViewModel.Build("Icon"),
+            AddModifierViewModel.Build("Sound"),
+      ];
+        AddModifiersList = new(modifers);
         Messenger.Register<RuleModifierDeleteEvent>(this);
         Messenger.Register<RuleTitleApplyEvent, RuleDetailsViewModel>(this, Rule);
         
