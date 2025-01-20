@@ -66,20 +66,6 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
 
     private static Dictionary<Type, Type> _editorTypesToModifierTypes = [];
 
-    static RuleEditorViewModel()
-    {
-        _editorTypesToModifierTypes.Add(typeof(FontSizeEditorViewModel), typeof(TextSizeDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(ColorEditorViewModel), typeof(ColorDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(BeamEditorViewModel), typeof(BeamDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(MinimapIconEditorViewModel), typeof(MapIconDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(SoundEditorViewModel), typeof(SoundDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(RarityEditorViewModel), typeof(RarityDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(NumericEditorViewModel), typeof(NumericDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(ClassEditorViewModel), typeof(ClassDecoratorViewModel));
-        _editorTypesToModifierTypes.Add(typeof(TypeEditorViewModel), typeof(TypeDecoratorViewModel));
-
-  
-    }
 
     public RuleEditorViewModel(RuleDetailsViewModel rule)
     {
@@ -105,7 +91,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
             AddModifierViewModel.Build("Base Armour", ()=> AddNumericFilter(NumericFilterType.BaseArmour)),
             AddModifierViewModel.Build("Base Evasion", ()=> AddNumericFilter(NumericFilterType.BaseEvasion)),
             AddModifierViewModel.Build("Base ES", ()=> AddNumericFilter(NumericFilterType.BaseEnergyShield)),
-            AddModifierViewModel.Build("Waystone Tier", ()=> AddNumericFilter(NumericFilterType.BaseEnergyShield))
+            AddModifierViewModel.Build("Waystone Tier", ()=> AddNumericFilter(NumericFilterType.WaystoneTier))
       ];
         AddModifiersList = new(modifers);
         Messenger.Register<RuleModifierDeleteEvent>(this);
