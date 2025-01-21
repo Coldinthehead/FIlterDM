@@ -398,6 +398,39 @@ public class FilterViewModelTests
         Assert.That(testModel.Blocks, Has.Count.EqualTo(sut.GetBlocks().Count)); 
     }
 
+    [Test]
+    public void GetModel_ShouldAddSameRulesToBlocks()
+    {
+        FilterViewModel sut = Build();
+        sut.NewBlock();
+        sut.NewBlock();
+        sut.NewBlock();
+        BlockDetailsViewModel first = sut.GetBlocks().First();
+        for (int i = 0; i < 1; i++)
+        {
+            sut.NewRule(first);
+        }
+        BlockDetailsViewModel second = sut.GetBlocks()[1];
+        for (int i = 0; i < 2; i++)
+        {
+            sut.NewRule(second);
+        }
+        BlockDetailsViewModel third = sut.GetBlocks()[2]; 
+        for (int i = 0; i < 3; i++)
+        {
+            sut.NewRule(third);
+        }
+
+        FilterModel result = sut.GetModel();
+        BlockModel firstModel = result.Blocks[0];
+        BlockModel secondModel = result.Blocks[1];
+        BlockModel thirdModel = result.Blocks[2];
+
+        Assert.That(firstModel.Rules, Has.Count.EqualTo(first.Rules.Count));
+        Assert.That(secondModel.Rules, Has.Count.EqualTo(second.Rules.Count));
+        Assert.That(thirdModel.Rules, Has.Count.EqualTo(third.Rules.Count));
+    }
+
 
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
     {
