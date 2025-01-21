@@ -58,6 +58,7 @@ public partial class FilterViewModel : ObservableRecipient
         Messenger.Register<ResetTemplateRequest>(this);
         Messenger.Register<DeleteRuleRequest>(this);
         Messenger.Register<SortRulesRequest>(this);
+        Messenger.Register<ResetRuleTemplateRequest>(this);
     }
 
     public ObservableCollection<BlockDetailsViewModel> GetBlocks()

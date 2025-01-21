@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FilterDM.ViewModels.EditPage;
@@ -308,7 +309,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public void SetModel(RuleModel rule)
     {
-        Modifiers = [Properties];
+        foreach(ModifierViewModelBase? modifier  in Modifiers.Skip(1).ToArray())
+        {
+            modifier.DeleteMeCommand.Execute(null);
+        }
         Properties.SetModel(rule);
       
         if (rule.FontSize != 0 && rule.FontSize != 32)
