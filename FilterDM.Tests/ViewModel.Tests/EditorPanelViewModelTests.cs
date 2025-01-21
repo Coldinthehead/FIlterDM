@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Repositories;
+using FilterDM.Services;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
+using FilterDM.ViewModels.EditPage.Managers;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class EditorPanelViewModelTests
@@ -144,7 +146,7 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenRuleDeleted()
     {
         EditorPanelViewModel sut = new();
-        RuleDetailsViewModel testModel = new(new(), null, null);
+        RuleDetailsViewModel testModel = new(new(), null, new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())));
         sut.AddRule(testModel);
 
         WeakReferenceMessenger.Default.Send(new RuleDeleteEvent(testModel));
