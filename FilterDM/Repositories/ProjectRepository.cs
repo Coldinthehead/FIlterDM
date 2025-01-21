@@ -48,6 +48,7 @@ public class ProjectRepository : IInit
     public async Task SaveFilter(FilterModel model)
     {
         model.LastSaveDate = DateTime.Now;
+        _models[model.Name] = model;
         await _fileService.Save(model, GetJsonAbsolutePath(model.Name));
     }
 

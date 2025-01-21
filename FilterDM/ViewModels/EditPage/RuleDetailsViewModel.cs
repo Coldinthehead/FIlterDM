@@ -319,20 +319,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         {
             AddFontSizeModifier().SetModel(rule);
         }
-        else
-        {
-            TextSize.UseFontSize = false;
-        }
+
         if (rule.HasAnyColor())
         {
             AddColorsModifier().SetModel(rule);
-        }
-        else
-        {
-            Colors.UseAnyColor = false;
-            Colors.UseBackColor = false;
-            Colors.UseBorderColor = false;
-            Colors.UseFontColor = false;
         }
         
         if (rule.Beam != null)
