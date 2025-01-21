@@ -171,21 +171,24 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
 
        
         List<TypeViewModel> next = [];
-        foreach (var cat in TypeList)
+        Dictionary<TypeListViewModel, int> _counts = [];
+        foreach (TypeListViewModel category in TypeList)
         {
-            foreach (TypeViewModel name in cat.Types)
+            _counts[category] = 0;
+            foreach (TypeViewModel name in category.Types)
             {
                 if (selectedName.Contains(name.Name))
                 {
                     name.IsSelected = true;
                     next.Add(name);
+                    _counts[category]++;
                 }
             }
         }
 
 
         SelectedTypes = new(next);
-        CurrentTypeList = TypeList.First();
+        CurrentTypeList = _counts.OrderByDescending(kvp => kvp.Value).FirstOrDefault().Key;
     }
 
     internal void SetScoped(List<TypeListViewModel> scopel)
@@ -208,20 +211,24 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         List<TypeViewModel> nextSelected = [];
         var selectedItems = SelectedTypes.Select(t => t.Name).ToList();
 
-        foreach (var categoty in TypeList)
+
+        Dictionary<TypeListViewModel, int> _counts = [];
+        foreach (var category in TypeList)
         {
-            foreach (TypeViewModel itemName in categoty.Types)
+            _counts[category] = 0;
+            foreach (TypeViewModel itemName in category.Types)
             {
                 if (selectedItems.Contains(itemName.Name) && itemName.IsSelected == false && itemName.TakenInScope == false)
                 {
                     nextSelected.Add(itemName);
                     itemName.IsSelected = true;
                     itemName.TakenInScope = true;
+                    _counts[category]++;
                 }
             }
         }
         SelectedTypes = new(nextSelected);
-        CurrentTypeList = TypeList.First();
+        CurrentTypeList = _counts.OrderByDescending(kvp => kvp.Value).FirstOrDefault().Key;
     }
 
    
@@ -237,33 +244,42 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
 
     public void SetModel(TypeConditionModel model)
     {
+        Dictionary<TypeListViewModel, int> _counts = [];
         foreach (TypeListViewModel category in TypeList)
         {
+            _counts[category] = 0;
             foreach (TypeViewModel item in category.Types)
             {
                 if (model.HasType(item.Name))
                 {
                     item.IsSelected = true;
                     SelectedTypes.Add(item);
+                    _counts[category]++;
                 }
             }
         }
+        CurrentTypeList = _counts.OrderByDescending(kvp => kvp.Value).FirstOrDefault().Key;
     }
 
     public void SetModelScoped(TypeConditionModel model)
     {
+        Dictionary<TypeListViewModel, int> _counts = [];
         foreach (TypeListViewModel category in TypeList)
         {
+            _counts[category] = 0;
             foreach (TypeViewModel item in category.Types)
             {
+               
                 if (model.HasType(item.Name) && item.TakenInScope == false)
                 {
                     item.IsSelected = true;
                     item.TakenInScope = true;
                     SelectedTypes.Add(item);
+                    _counts[category]++;
                 }
             }
         }
+        CurrentTypeList = _counts.OrderByDescending(kvp => kvp.Value).FirstOrDefault().Key;
     }
 
     public override ModifierEditorViewModel GetEditor() => new TypeEditorViewModel(Rule, this);
