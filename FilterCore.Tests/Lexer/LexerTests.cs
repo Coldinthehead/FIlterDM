@@ -51,17 +51,6 @@ public class LexerTests
         Assert.That(result.First().type, Is.EqualTo(TokenType.RULE_START));
     }
 
-    [Test]
-    public void BuildTokens_ShouldTreatNewLineAsNewLineToken()
-    {
-        FilterLexer sut = new FilterLexer();
-        string input = "\n\n\n";
-
-        List<Token> result = sut.BuildTokens(input);
-
-        Assert.That(result, Has.Count.EqualTo(4));
-        Assert.That(result.First().type, Is.EqualTo(TokenType.NEW_LINE));
-    }
 
     [Test]
     public void BuildToken_ShouldIgnoreHalfLineComments()
@@ -69,7 +58,7 @@ public class LexerTests
         FilterLexer sut = new FilterLexer();
         string input = "Show # sagsagsagsagasg \n \0";
         List<Token> result = sut.BuildTokens(input);
-        Assert.That(result, Has.Count.EqualTo(3));
+        Assert.That(result, Has.Count.EqualTo(2));
         Assert.That(result.First().type, Is.EqualTo(TokenType.RULE_START));
     }
 

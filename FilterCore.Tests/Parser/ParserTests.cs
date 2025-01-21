@@ -65,7 +65,6 @@ public class ParserTests
 
             new Token() { type = TokenType.RULE_START},
             new Token() { type = TokenType.STRING},
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.MODIFIER_KEYWORD },
             new Token() { type = TokenType.STRING},
             new Token() { type = TokenType.EOF }
@@ -84,13 +83,11 @@ public class ParserTests
         List<Token> input = [
 
             new Token() { type = TokenType.RULE_START},
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.MODIFIER_KEYWORD },
             new Token() { type = TokenType.STRING},
             new Token() { type = TokenType.STRING},
             new Token() { type = TokenType.STRING},
             new Token() { type = TokenType.STRING},
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.EOF }
             ];
 
@@ -106,15 +103,10 @@ public class ParserTests
         List<Token> input = [
 
             new Token() { type = TokenType.RULE_START},
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() {type = TokenType.NEW_LINE},
             new Token() { type = TokenType.EOF }
             ];
 
