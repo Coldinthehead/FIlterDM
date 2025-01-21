@@ -13,6 +13,16 @@ public enum ParameterType
     None,
 
 }
+
+public class ModifierResolver
+{
+    public bool Resolve(RuleNode node)
+    {
+
+        return true;
+    }
+}
+
 public class TypeResolver
 {
     private readonly Dictionary<string, ParameterType> _defaults = new Dictionary<string, ParameterType>()

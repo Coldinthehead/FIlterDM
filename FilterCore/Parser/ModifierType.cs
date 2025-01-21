@@ -1,0 +1,31 @@
+﻿namespace FilterCore.Parser;
+
+public enum ModifierType
+{
+    AreaLevel,
+    ItemLevel,
+    DropLevel,
+    Quality,
+    Rarity,
+    Class,
+    BaseType,
+    Sockets,
+    Height,
+    Width,
+    AnyEnchantment,
+    HasEnchantment,
+    StackSize,
+    Corrupted,
+    Mirrored,
+    SetBorderColor,
+    SetTextColor,
+    SetBackgroundColor,
+    SetFontSize,
+    PlayAlertSound,
+    PlayAlertSoundPositional,
+    DisableDropSound,
+    EnableDropSound,
+    CustomAlertSound,
+    MinimapIcon,
+    PlayEffect,
+}

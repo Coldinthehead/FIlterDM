@@ -33,7 +33,7 @@ public struct ParseResult
     }
 }
 
-    public class FilterParserService
+public class FilterParserService
 {
     public ImportResult Parse(string input)
     {

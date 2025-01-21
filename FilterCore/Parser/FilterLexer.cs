@@ -2,40 +2,6 @@
 
 namespace FilterCore.Parser;
 
-public enum TokenType
-{
-    EOF,
-    STRING,
-    RULE_START,
-    CONTINUE,
-    NEW_LINE,
-    MODIFIER_KEYWORD,
-    BOOL_OPERATOR,
-}
-
-public class Token
-{
-    public TokenType type;
-
-    public string Value;
-
-    public int Line;
-
-    public override string ToString()
-    {
-        return $"{Line} : [{type}] {Value}";
-    }
-}
-
-public class LexerError : Exception
-{
-    public LexerError(string message) : base(message)
-    {
-
-    }
-
-}
-
 public class FilterLexer
 {
     private int _currentIndex = 0;
@@ -281,28 +247,4 @@ public class FilterLexer
         }
         return _input[_currentIndex + amount];
     }
-}
-public class Rule
-{
-    public Token StartToken;
-    public List<RuleNode> Nodes = [];
-}
-
-public class RuleNode
-{
-    public Token @Operator;
-
-    public List<Token> Parameters = [];
-
-    public List<ParameterType> ParameterTypes = [];
-
-    public ParameterType GetParameterMeta(int index)
-    {
-        return ParameterTypes[index];
-    }
-}
-
-public class ParemeterMetadata
-{
-    public ParameterType ParamType;
 }
