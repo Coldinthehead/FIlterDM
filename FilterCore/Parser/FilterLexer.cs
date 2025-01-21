@@ -271,7 +271,6 @@ public class FilterLexer
         {
             _currentIndex++;
         }
-
     }
 
     private char Peek(int amount = 0)
