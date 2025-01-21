@@ -18,6 +18,8 @@ public partial class MainWindowViewModel : ViewModelBase
     private ProjectEditViewModel _editorViewModel;
     private ProjectPageViewModel _projectsPageViewModel;
 
+    private IProjectService _projectService;
+
     public MainWindowViewModel()
     {
         
@@ -28,10 +30,10 @@ public partial class MainWindowViewModel : ViewModelBase
         var typeService = services.GetService<ItemTypeService>();
         var blockTeplateService = services.GetService<BlockTemplateService>();
         var ruleTemplateService = services.GetService<RuleTemplateService>();
-        var projectService = services.GetService<IProjectService>();
+        _projectService = services.GetService<IProjectService>();
         var fileSelectionService = services.GetService<FileSelectionService>();
         var fileService = services.GetService<FileService>();
-        _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService, projectService, fileSelectionService, fileService)
+        _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService, _projectService, fileSelectionService, fileService)
         {
             BackToMenuAction = EnterProjectsPage,
         };
@@ -69,9 +71,7 @@ public partial class MainWindowViewModel : ViewModelBase
             ID = Guid.NewGuid(),
             LastSaveDate = DateTime.Now
         };
-
-        var filterRepos = App.Current.Services.GetService<ProjectRepository>();
-        filterRepos.CreateFilter(model);
+        _projectService.Add(model);
         _editorViewModel.OnEnter(model);
         CurrentPage = _editorViewModel;
     }

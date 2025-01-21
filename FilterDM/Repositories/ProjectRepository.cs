@@ -82,4 +82,20 @@ public class ProjectRepository : IInit
             return null;
         }
     }
+
+    public bool Has(string name)
+    {
+        return _models.ContainsKey(name);
+    }
+
+    internal string GetFreeName(string name)
+    {
+        int i = 1;
+        string title = $"{name}({1})";
+        while (Has(title))
+        {
+            title = $"{name}({i++})";
+        }
+        return title;
+    }
 }

@@ -19,6 +19,15 @@ public class ProjectService : IProjectService
         _dialogService = dialogService;
     }
 
+    public void Add(FilterModel model)
+    {
+        if (_repository.Has(model.Name))
+        {
+            model.Name = _repository.GetFreeName(model.Name);
+        }
+        _repository.CreateFilter(model);
+    }
+
     public async Task<bool> Save(FilterModel filterModel)
     {
         try
@@ -37,5 +46,6 @@ public class ProjectService : IProjectService
 
 public interface IProjectService
 {
+    void Add(FilterModel model);
     Task<bool> Save(FilterModel filterModel);
 }
