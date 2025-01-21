@@ -112,6 +112,7 @@
                                                     Command="{Binding AddMeCommand}"
                                                     CommandParameter="FontSize"
                                                     Content="{Binding Title}"
+                                                    IsEnabled="{Binding CanApply}"
                                                     Theme="{StaticResource MaterialOutlineButton}" />
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>

@@ -5,13 +5,29 @@ using FilterDM.Enums;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
-using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Reflection;
+using System.Linq;
 
 namespace FilterDM.ViewModels.EditPage;
+
+public partial class AddNumericModifier : AddModifierViewModel
+{
+    public NumericFilterType FilterType { get; protected set; }
+
+    public static AddNumericModifier Build(string title, int maxCount, NumericFilterType filterType, Action addAction)
+    {
+        return new AddNumericModifier()
+        {
+            Title = title,
+            OnAddAction = addAction,
+            _maxCount = maxCount,
+            ModifierType = typeof(NumericDecoratorViewModel),
+            FilterType = filterType
+        };
+    }
+}
 
 public partial class AddModifierViewModel : ViewModelBase
 {
@@ -19,22 +35,51 @@ public partial class AddModifierViewModel : ViewModelBase
     public string _title;
 
     [ObservableProperty]
-    public string _isApplied;
+    public bool _canApply = true;
 
     [RelayCommand]
     public void AddMe()
     {
+        IncrementCount();
         OnAddAction?.Invoke();
     }
 
+    protected int _maxCount;
+    protected int _count = 0;
+    public Type ModifierType { get; protected set; }
+
     public Action OnAddAction { get; set; }
 
-    public static AddModifierViewModel Build(string title, Action addAction)
+    public void IncrementCount()
+    {
+        _count++;
+        if (_count == _maxCount)
+        {
+            CanApply = false;
+        }
+    }
+
+    public void DecrementCount()
+    {
+        _count--;
+        if (_count == 0)
+        {
+            CanApply = true;
+        }
+    }
+    public static AddModifierViewModel Build<T>(string title, Action addAction) where T : ModifierViewModelBase
+    {
+        return Build<T>(title, 1, addAction);
+    }
+
+    public static AddModifierViewModel Build<T>(string title, int maxCount, Action addAction) where T : ModifierViewModelBase
     {
         return new AddModifierViewModel()
         {
             Title = title,
             OnAddAction = addAction,
+            _maxCount = maxCount,
+            ModifierType = typeof(T),
         };
     }
 }
@@ -74,28 +119,28 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         SelectedModifier = Rule.Modifiers[0];
 
         List<AddModifierViewModel> modifers = [
-            AddModifierViewModel.Build("Text Size", AddFontSizeModifier),
-            AddModifierViewModel.Build("Colors", AddColorsModifier),
-            AddModifierViewModel.Build("Beam", AddBeamModifier),
-            AddModifierViewModel.Build("Icon", AddMinimapIconModifier),
-            AddModifierViewModel.Build("Sound", AddSoundModifier),
-            AddModifierViewModel.Build("Class", AddClassFilter),
-            AddModifierViewModel.Build("Type", AddTypeFilter),
-            AddModifierViewModel.Build("Rarity", AddRarityFilter),
-            AddModifierViewModel.Build("Item Level", ()=> AddNumericFilter(NumericFilterType.ItemLevel)),
-            AddModifierViewModel.Build("Drop Level", ()=> AddNumericFilter(NumericFilterType.DropLevel)),
-            AddModifierViewModel.Build("Area Level", ()=> AddNumericFilter(NumericFilterType.AreaLevel)),
-            AddModifierViewModel.Build("Quality", ()=> AddNumericFilter(NumericFilterType.Quality)),
-            AddModifierViewModel.Build("Sockets", ()=> AddNumericFilter(NumericFilterType.Sockets)),
-            AddModifierViewModel.Build("Base Armour", ()=> AddNumericFilter(NumericFilterType.BaseArmour)),
-            AddModifierViewModel.Build("Base Evasion", ()=> AddNumericFilter(NumericFilterType.BaseEvasion)),
-            AddModifierViewModel.Build("Base ES", ()=> AddNumericFilter(NumericFilterType.BaseEnergyShield)),
-            AddModifierViewModel.Build("Waystone Tier", ()=> AddNumericFilter(NumericFilterType.WaystoneTier))
+            AddModifierViewModel.Build<TextSizeDecoratorViewModel>("Text Size", AddFontSizeModifier),
+            AddModifierViewModel.Build<ColorDecoratorViewModel>("Colors", AddColorsModifier),
+            AddModifierViewModel.Build<BeamDecoratorViewModel>("Beam", AddBeamModifier),
+            AddModifierViewModel.Build<MapIconDecoratorViewModel>("Icon", AddMinimapIconModifier),
+            AddModifierViewModel.Build<SoundDecoratorViewModel>("Sound", AddSoundModifier),
+            AddModifierViewModel.Build<ClassDecoratorViewModel>("Class", AddClassFilter),
+            AddModifierViewModel.Build<TypeDecoratorViewModel>("Type", AddTypeFilter),
+            AddModifierViewModel.Build<RarityDecoratorViewModel>("Rarity", AddRarityFilter),
+            AddNumericModifier.Build("Item Level",2,NumericFilterType.ItemLevel, ()=> AddNumericFilter(NumericFilterType.ItemLevel)),
+            AddNumericModifier.Build("Drop Level", 2, NumericFilterType.DropLevel,()=> AddNumericFilter(NumericFilterType.DropLevel)),
+            AddNumericModifier.Build("Area Level", 2, NumericFilterType.AreaLevel,() => AddNumericFilter(NumericFilterType.AreaLevel)),
+            AddNumericModifier.Build("Quality", 2, NumericFilterType.Quality,() => AddNumericFilter(NumericFilterType.Quality)),
+            AddNumericModifier.Build("Sockets", 2, NumericFilterType.Sockets,() => AddNumericFilter(NumericFilterType.Sockets)),
+            AddNumericModifier.Build("Base Armour", 2, NumericFilterType.BaseArmour,() => AddNumericFilter(NumericFilterType.BaseArmour)),
+            AddNumericModifier.Build("Base Evasion", 2, NumericFilterType.BaseEvasion,() => AddNumericFilter(NumericFilterType.BaseEvasion)),
+            AddNumericModifier.Build("Base ES", 2, NumericFilterType.BaseEnergyShield,() => AddNumericFilter(NumericFilterType.BaseEnergyShield)),
+            AddNumericModifier.Build("Waystone Tier", 2, NumericFilterType.WaystoneTier,() => AddNumericFilter(NumericFilterType.WaystoneTier))
       ];
         AddModifiersList = new(modifers);
         Messenger.Register<RuleModifierDeleteEvent>(this);
         Messenger.Register<RuleTitleApplyEvent, RuleDetailsViewModel>(this, Rule);
-        
+
     }
 
     private void AddFontSizeModifier()
@@ -153,6 +198,19 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         if (CurrentModifierEditor != null && CurrentModifierEditor.Rule == message.Value.Rule)
         {
             CurrentModifierEditor = null;
+        }
+        List<AddModifierViewModel> buttons = AddModifiersList.Where(x => x.ModifierType == message.Value.GetType()).ToList();
+        if (buttons.Count == 1)
+        {
+            buttons.First().DecrementCount();
+        }
+        else
+        {
+            AddModifierViewModel btn = buttons.Select(x => (AddNumericModifier)x).Where(x => x != null && x.FilterType == ((NumericDecoratorViewModel)message.Value).FilterType).First();
+            if (btn != null)
+            {
+                btn.DecrementCount();
+            }
         }
     }
 
