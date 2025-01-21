@@ -382,6 +382,20 @@ public class FilterViewModelTests
         Assert.That(listener.Playload, Is.EqualTo(rule));
     }
 
+    [Test]
+    public void GetModel_ShouldSetFilterDetais()
+    {
+        FilterViewModel sut = Build();
+        sut.Name = "Name";
+        sut.NewBlock();
+        sut.NewBlock();
+
+        FilterModel testModel = sut.GetModel();
+
+        Assert.That(testModel, Is.Not.Null);
+        Assert.That(testModel.Name, Is.EqualTo(sut.Name));
+        Assert.That(testModel.Blocks, Has.Count.EqualTo(sut.GetBlocks().Count)); 
+    }
 
 
     public static bool ModelMatchViewModel(FilterModel model, FilterViewModel vm)
