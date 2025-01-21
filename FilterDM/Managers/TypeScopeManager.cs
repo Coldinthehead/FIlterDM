@@ -56,7 +56,7 @@ public class TypeScopeManager
     {
         foreach (var mod in rule.Modifiers)
         {
-            if (mod is TypeDecoratorViewModel mode)
+            if (mod is TypeDecoratorViewModel mode && _decorators.Contains(mode) == false)
             {
                 _decorators.Add(mode);
                 mode.DeleteAction = RemoveDecatorator;
@@ -70,6 +70,11 @@ public class TypeScopeManager
 
     public TypeDecoratorViewModel GetDecorator(RuleDetailsViewModel vm)
     {
+        if (_decorators.Find(x => x.Rule == vm) != null)
+        {
+            return null;
+        }
+        
         TypeDecoratorViewModel decorator = new(vm, RemoveDecatorator);
         _decorators.Add(decorator);
 

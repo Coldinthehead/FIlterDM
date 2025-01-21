@@ -158,6 +158,8 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
                 SelectedTypes.Remove(vm);
             }
         };
+        //cache selected names before clear;
+        List<string> selectedName = SelectedTypes.Select(x => x.Name).ToList();
 
         foreach (var item in SelectedTypes)
         {
@@ -166,7 +168,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         }
         TypeList = new(categories);
 
-        List<string> selectedName = SelectedTypes.Select(x => x.Name).ToList();
+       
         List<TypeViewModel> next = [];
         foreach (var cat in TypeList)
         {
