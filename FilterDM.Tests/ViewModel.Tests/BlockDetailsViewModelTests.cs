@@ -42,4 +42,19 @@ public class BlockDetailsViewModelTests
         Assert.That(sut.Priority, Is.EqualTo(empty.Priority));
         Assert.That(sut.SelectedTemplate.TemplateName, Is.EqualTo(empty.TemplateName));
     }
+
+    [Test]
+    public void GetModel_ShouldSetFileds()
+    {
+        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
+
+        BlockModel testModel = sut.GetModel();
+
+        Assert.That(testModel, Is.Not.Null);
+        Assert.That(testModel.Title, Is.EqualTo(sut.Title));
+        Assert.That(testModel.Enabled, Is.EqualTo(sut.Enabled));
+        Assert.That(testModel.Priority, Is.EqualTo(sut.Priority));
+        Assert.That(testModel.TemplateName, Is.EqualTo(sut.SelectedTemplate.Title));
+        Assert.That(testModel.UseBlockTypeScope, Is.EqualTo(sut.UseScopeNames));
+    }
 }
