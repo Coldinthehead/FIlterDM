@@ -110,7 +110,6 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     [ObservableProperty]
     private ModifierEditorViewModel _currentModifierEditor;
 
-
     public RuleEditorViewModel(RuleDetailsViewModel rule)
     {
         Rule = rule;

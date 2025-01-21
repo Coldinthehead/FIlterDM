@@ -72,6 +72,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
                 OnResetConfirmed();
             }
         }
+        OnResetConfirmed();
     }
 
     public void OnSortRules()
