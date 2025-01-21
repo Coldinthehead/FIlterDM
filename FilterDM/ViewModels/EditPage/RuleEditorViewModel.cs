@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Tmds.DBus.Protocol;
 
 namespace FilterDM.ViewModels.EditPage;
 
@@ -53,7 +54,7 @@ public partial class AddModifierViewModel : ViewModelBase
     public void IncrementCount()
     {
         _count++;
-        if (_count == _maxCount)
+        if (_count >= _maxCount)
         {
             CanApply = false;
         }
@@ -62,6 +63,7 @@ public partial class AddModifierViewModel : ViewModelBase
     public void DecrementCount()
     {
         _count--;
+        _count = Math.Max(0, _count);
         if (_count == 0)
         {
             CanApply = true;
@@ -140,6 +142,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         Messenger.Register<RuleModifierDeleteEvent>(this);
         Messenger.Register<RuleTitleApplyEvent, RuleDetailsViewModel>(this, Rule);
 
+        UpdateAddModifierList();
     }
 
     private void AddFontSizeModifier()
@@ -198,20 +201,42 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         {
             CurrentModifierEditor = null;
         }
-        List<AddModifierViewModel> buttons = AddModifiersList.Where(x => x.ModifierType == message.Value.GetType()).ToList();
+        var button = FindButtonByModifier(message.Value);
+        if (button != null)
+        {
+            button.DecrementCount();
+            SelectedModifier = Rule.Modifiers.Last();
+        }
+    }
+
+    private void UpdateAddModifierList()
+    {
+        foreach (ModifierViewModelBase? modifier in Rule.Modifiers.Skip(1))
+        {
+            var button = FindButtonByModifier(modifier);
+            if (button != null)
+            {
+                button.IncrementCount();
+            }
+        }
+    }
+
+    private AddModifierViewModel? FindButtonByModifier(ModifierViewModelBase modifier)
+    {
+        List<AddModifierViewModel> buttons = AddModifiersList.Where(x => x.ModifierType == modifier.GetType()).ToList();
         if (buttons.Count == 1)
         {
-            buttons.First().DecrementCount();
+            return buttons.First();
         }
         else
         {
-            AddModifierViewModel btn = buttons.Select(x => (AddNumericModifier)x).Where(x => x != null && x.FilterType == ((NumericDecoratorViewModel)message.Value).FilterType).First();
+            AddModifierViewModel btn = buttons.Select(x => (AddNumericModifier)x).Where(x => x != null && x.FilterType == ((NumericDecoratorViewModel)modifier).FilterType).First();
             if (btn != null)
             {
-                btn.DecrementCount();
+                return btn;
             }
         }
-        SelectedModifier = Rule.Modifiers.Last();
+        return null;
     }
 
     public override void UpdateTitle()
