@@ -1,10 +1,8 @@
 ﻿using FilterDM.Models;
 using FilterDM.Services;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FilterDM.Repositories;
@@ -15,11 +13,13 @@ public class ProjectRepository : IInit
 
     private Dictionary<string, FilterModel> _models;
 
-    private JsonSerializerOptions _saveOptions = new JsonSerializerOptions()
+    private readonly FileService _fileService;
+
+    public ProjectRepository(FileService fileService)
     {
-        WriteIndented = true,
-        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
-    };
+        _fileService = fileService;
+        _models = [];
+    }
 
     public async Task Init()
     {
@@ -46,38 +46,19 @@ public class ProjectRepository : IInit
 
     public async Task SaveFilter(FilterModel model)
     {
-        var filename = GetJsonAbsolutePath(model.Name);
-        using var fs = File.Create(filename);
-        await JsonSerializer.SerializeAsync(fs, model, _saveOptions);
+        await _fileService.Save(model, GetJsonAbsolutePath(model.Name));
     }
 
-    private async Task<FilterModel> LoadModelFromFileAsync(string filePath)
+    private async Task<FilterModel?> LoadModelFromFileAsync(string filePath)
     {
-        try
-        {
-            using var fs = File.OpenRead(filePath);
-            var result = await JsonSerializer.DeserializeAsync<FilterModel>(fs);
-            if (result != null)
-            {
-                return result;
-            }
-        }
-        catch (Exception ex)
-        {
-            return null;
-        }
-        return null;
+        return await _fileService.LoadProject(filePath);
     }
 
     internal void DeleteByName(string title)
     {
         if (_models.ContainsKey(title))
         {
-            var name = GetJsonAbsolutePath(title);
-            if (File.Exists(name))
-            {
-                File.Delete(name);
-            }
+            _fileService.DeleteFile(GetJsonAbsolutePath(title));
         }
     }
 

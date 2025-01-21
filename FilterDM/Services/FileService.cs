@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FilterDM.Services;
 public class FileService
@@ -51,6 +52,38 @@ public class FileService
         {
             await _dialogService.ShowOkDialog("Error has occured! Project not loaded.");
             throw;
+        }
+    }
+
+    public async Task Save(FilterModel model, string path)
+    {
+        using var fs = File.Create(path);
+        await JsonSerializer.SerializeAsync(fs, model, _jsonOpt);
+    }
+
+    public async Task<FilterModel?> LoadProject(string filePath)
+    {
+        try
+        {
+            using var fs = File.OpenRead(filePath);
+            var result = await JsonSerializer.DeserializeAsync<FilterModel>(fs, _jsonOpt);
+            if (result != null)
+            {
+                return result;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+        return null;
+    }
+
+    public void DeleteFile(string path)
+    {
+        if (File.Exists(path))
+        {
+            File.Delete(path);
         }
     }
 }
