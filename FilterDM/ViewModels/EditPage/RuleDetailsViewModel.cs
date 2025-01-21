@@ -299,7 +299,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public RuleModel GetModel()
     {
-        RuleModel model = App.Current.Services.GetService<RuleTemplateRepository>().GetEmpty();
+        RuleModel model = Properties.TemplateManager.GetEmpty();
         foreach (ModifierViewModelBase modifier in Modifiers)
         {
             modifier.Apply(model);

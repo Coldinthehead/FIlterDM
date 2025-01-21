@@ -98,11 +98,12 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
 
         ParentManager = parentManager;
         TemplateManager = templateManager;
+        SelectedTemplate = TemplateManager.GetEmpty();
     }
 
     public override void Apply(RuleModel model)
     {
-        model.Title = Title;
+        model.Title = Title ?? SelectedTemplate.Title;
         model.Enabled = Enabled;
         model.Priority = Priority;
         model.Show = Show;
