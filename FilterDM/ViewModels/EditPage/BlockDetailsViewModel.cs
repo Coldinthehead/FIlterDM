@@ -77,7 +77,6 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         }
         OnTemplateResetConfirmed();
         Messenger.Send(new FilterEditedRequestEvent(this));
-        Messenger.Send(new BlockPriorityChangedRequest(this));
     }
 
 
