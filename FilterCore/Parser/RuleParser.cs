@@ -70,7 +70,7 @@ public class RuleParser
 
         Rule rule = new() { StartToken = start };
 
-        while (true)
+    /*    while (true)
         {
             var token = Peek();
 
@@ -267,7 +267,7 @@ public class RuleParser
             }
 
         }
-
+*/
         return rule;
     }
 
@@ -280,10 +280,10 @@ public class RuleParser
         node.Parameters.Add(Consume());
         node.Parameters.Add(Consume());
         node.Parameters.Add(Consume());
-        if (Peek().type == TokenType.NUMBER)
+/*        if (Peek().type == TokenType.NUMBER)
         {
             node.Parameters.Add(Consume());
-        }
+        }*/
         return node;
     }
 

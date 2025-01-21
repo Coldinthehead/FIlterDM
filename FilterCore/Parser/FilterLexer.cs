@@ -5,29 +5,11 @@ namespace FilterCore.Parser;
 public enum TokenType
 {
     EOF,
-    NUMBER,
-    BOOL,
     STRING,
-    BOOL_OPERATOR,
-    COLOR_DECORATOR,
-    COLOR,
-    SHAPE,
-    RARITY_DECORATOR,
-    BOOL_DECORATOR,
-    RARITY_TYPE,
     RULE_START,
-    NUMERIC_DECORATOR,
-    CLASS_DECORATOR,
-    TYPE_DECORATOR,
-    SOUND_DECORATOR,
-    SINGLE_DECORATOR,
-    MINIMAP_DECORATOR,
-    TEXT_SIZE_DECORATOR,
-    BEAM_DECORATOR,
-    TEMP,
     CONTINUE,
-
-    EXLICIT_MOD_DECORATOR,
+    NEW_LINE,
+    MODIFIER_KEYWORD,
 }
 
 public class Token
@@ -58,7 +40,6 @@ public class FilterLexer
 {
     private int _currentIndex = 0;
     private string _input;
-    private char _currentCharacter;
 
     private int _currentLine;
 
@@ -67,81 +48,34 @@ public class FilterLexer
         {"Show", TokenType.RULE_START },
         {"Hide", TokenType.RULE_START },
         {"Continue", TokenType.CONTINUE },
-
-        {"AreaLevel",  TokenType.NUMERIC_DECORATOR},
-        {"DropLevel",  TokenType.NUMERIC_DECORATOR},
-        {"ItemLevel",  TokenType.NUMERIC_DECORATOR},
-        {"Quality",  TokenType.NUMERIC_DECORATOR},
-        {"Sockets",  TokenType.NUMERIC_DECORATOR},
-        {"StackSize",  TokenType.NUMERIC_DECORATOR},
-        {"Height",  TokenType.NUMERIC_DECORATOR},
-        {"Width",  TokenType.NUMERIC_DECORATOR},
-        {"WaystoneTier",  TokenType.NUMERIC_DECORATOR},
-        {"BaseEnergyShield",  TokenType.NUMERIC_DECORATOR},
-        {"BaseArmour",  TokenType.NUMERIC_DECORATOR},
-        {"BaseEvasion",  TokenType.NUMERIC_DECORATOR},
-
-        {"Rarity",  TokenType.RARITY_DECORATOR},
-        {"Normal",  TokenType.RARITY_TYPE},
-        {"Magic",  TokenType.RARITY_TYPE},
-        {"Rare",  TokenType.RARITY_TYPE},
-        {"Unique",  TokenType.RARITY_TYPE},
-
-        {"Class", TokenType.CLASS_DECORATOR },
-
-        {"BaseType", TokenType.TYPE_DECORATOR },
-
-        {"Corrupted", TokenType.BOOL_DECORATOR },
-        {"Mirrored", TokenType.BOOL_DECORATOR },
-        {"AnyEnchantment", TokenType.BOOL_DECORATOR },
-        {"DisableDropSound", TokenType.BOOL_DECORATOR },
-
-
-        {"SetFontSize", TokenType.TEXT_SIZE_DECORATOR },
-
-        {"SetBorderColor", TokenType.COLOR_DECORATOR },
-        {"SetTextColor", TokenType.COLOR_DECORATOR },
-        {"SetBackgroundColor", TokenType.COLOR_DECORATOR },
-
-        {"PlayAlertSound", TokenType.SOUND_DECORATOR },
-        {"PlayAlertSoundPositional", TokenType.SOUND_DECORATOR },
-
-
-        {"MinimapIcon", TokenType.MINIMAP_DECORATOR },
-
-        {"PlayEffect", TokenType.BEAM_DECORATOR },
-
-
-
-        {"Red", TokenType.COLOR },
-        {"Green", TokenType.COLOR },
-        {"Blue", TokenType.COLOR },
-        {"Brown", TokenType.COLOR },
-        {"Yellow", TokenType.COLOR },
-        {"Cyan", TokenType.COLOR },
-        {"Grey", TokenType.COLOR },
-        {"Orange", TokenType.COLOR },
-        {"Pink", TokenType.COLOR },
-        {"Purple", TokenType.COLOR },
-        {"Circle", TokenType.SHAPE },
-
-        {"Diamond", TokenType.SHAPE },
-        {"Hexagon", TokenType.SHAPE },
-        {"Square", TokenType.SHAPE },
-        {"Start", TokenType.SHAPE },
-        {"Triange", TokenType.SHAPE },
-        {"Cross", TokenType.SHAPE },
-        {"Moon", TokenType.SHAPE },
-        {"Raindrop", TokenType.SHAPE },
-        {"Kite", TokenType.SHAPE },
-        {"Pentagon", TokenType.SHAPE },
-        {"UpsideDownHouse", TokenType.SHAPE },
-
-        {"True", TokenType.BOOL },
-        {"False", TokenType.BOOL },
-
-        {"Temp", TokenType.TEMP },
-        {"HasExplicitMod", TokenType.EXLICIT_MOD_DECORATOR },
+        {"AreaLevel",  TokenType.MODIFIER_KEYWORD},
+        {"DropLevel",  TokenType.MODIFIER_KEYWORD},
+        {"ItemLevel",  TokenType.MODIFIER_KEYWORD},
+        {"Quality",  TokenType.MODIFIER_KEYWORD},
+        {"Sockets",  TokenType.MODIFIER_KEYWORD},
+        {"StackSize",  TokenType.MODIFIER_KEYWORD},
+        {"Height",  TokenType.MODIFIER_KEYWORD},
+        {"Width",  TokenType.MODIFIER_KEYWORD},
+        {"WaystoneTier",  TokenType.MODIFIER_KEYWORD},
+        {"BaseEnergyShield",  TokenType.MODIFIER_KEYWORD},
+        {"BaseArmour",  TokenType.MODIFIER_KEYWORD},
+        {"BaseEvasion",  TokenType.MODIFIER_KEYWORD },
+        {"Rarity", TokenType.MODIFIER_KEYWORD},
+        {"Class", TokenType.MODIFIER_KEYWORD },
+        {"BaseType", TokenType.MODIFIER_KEYWORD },
+        {"Corrupted", TokenType.MODIFIER_KEYWORD},
+        {"Mirrored", TokenType.MODIFIER_KEYWORD },
+        {"AnyEnchantment", TokenType.MODIFIER_KEYWORD },
+        {"DisableDropSound", TokenType.MODIFIER_KEYWORD},
+        {"SetFontSize", TokenType.MODIFIER_KEYWORD },
+        {"SetBorderColor", TokenType.MODIFIER_KEYWORD },
+        {"SetTextColor", TokenType.MODIFIER_KEYWORD },
+        {"SetBackgroundColor", TokenType.MODIFIER_KEYWORD },
+        {"PlayAlertSound", TokenType.MODIFIER_KEYWORD },
+        {"PlayAlertSoundPositional", TokenType.MODIFIER_KEYWORD },
+        {"MinimapIcon", TokenType.MODIFIER_KEYWORD },
+        {"PlayEffect", TokenType.MODIFIER_KEYWORD },
+        {"HasExplicitMod", TokenType.MODIFIER_KEYWORD },
     };
 
     public List<Token> BuildTokens(string input)
@@ -155,181 +89,86 @@ public class FilterLexer
     {
         List<Token> result = [];
         _currentLine = 1;
-        _currentCharacter = Peek();
-        while (Peek() != '\0' || _currentIndex < _input.Length)
+
+        while (Peek() != '\0' && _currentIndex < _input.Length)
         {
-            switch (_currentCharacter)
+            switch (Peek())
             {
                 case '#':
-                //line comment;
                 {
-                    while (_currentCharacter != '\n')
+                    while (Peek() != '\0' && Peek() != '\n')
                     {
                         Advance();
-                    }
-                    Advance();
-                }
-                break;
-                case '>':
-                {
-                    if (Peek(1) == '=')
-                    {
-                        result.Add(new Token() { type = TokenType.BOOL_OPERATOR, Line = _currentLine, Value = ">=" });
-                        Advance();
-                    }
-                    else
-                    {
-                        result.Add(new Token() { type = TokenType.BOOL_OPERATOR, Line = _currentLine, Value = ">" });
-                    }
-                    Advance();
-                }
-                break;
-                case '<':
-                {
-                    if (Peek(1) == '=')
-                    {
-                        result.Add(new Token() { type = TokenType.BOOL_OPERATOR, Line = _currentLine, Value = "<=" });
-                        Advance();
-                    }
-                    else
-                    {
-                        result.Add(new Token() { type = TokenType.BOOL_OPERATOR, Line = _currentLine, Value="<" });
-                    }
-                    Advance();
-                }
-                //less
-                break;
-                case '=':
-                {
-                    if (Peek(1) == '=')
-                    {
-                        result.Add(new Token() { type = TokenType.BOOL_OPERATOR, Line = _currentLine , Value="=="});
-                        Advance();
-                    }
-                    else
-                    {
-                        result.Add(new Token() { type = TokenType.BOOL_OPERATOR, Line = _currentLine, Value = "=" });
-                    }
-                    Advance();
-                }
-                //equals
-                break;
-                case '"':
-                {
-                    Advance();
-                    List<char> word = [];
-                    while (_currentCharacter != '"')
-                    {
-                        if (_currentCharacter == '\n')
-                        {
-                            throw new LexerError($"multiline string : {_currentLine}");
-                        }
-                        word.Add(_currentCharacter);
-                        Advance();
-                    }
-
-                    var _word = string.Join("", word);
-                    if (_keywordsMap.ContainsKey(_word))
-                    {
-                        result.Add(new Token()
-                        {
-                            type = _keywordsMap[_word],
-                            Value = _word,
-                            Line = _currentLine
-                        });
-                    }
-                    else
-                    {
-                    result.Add(new Token { type = TokenType.STRING, Value = string.Join("",_word), Line = _currentLine });
-
-                    }
-                    Advance();
-                }
-                break;
-                case '!':
-                {
-                    if (Peek(1) == '=')
-                    {
-                        result.Add(new Token()
-                        {
-                            type = TokenType.BOOL_OPERATOR,
-                            Line = _currentLine,
-                            Value = "!="
-                        });
-                        Advance();
-                        Advance();
-                    }
-                    else
-                    {
-                        throw new LexerError($"unknow character: {_currentLine}  at {_currentCharacter}");
                     }
                 }
                 break;
-                case '\0':
-                result.Add(new Token() { type = TokenType.EOF, Line = _currentLine });
-                Advance();
+                case '\n':
+                {
+                    result.Add(new Token()
+                    {
+                        type = TokenType.NEW_LINE,
+                    });
+                    Advance();
+                }
+                break;
+                case ' ':
+                {
+                    Advance();
+                }
                 break;
                 default:
-                if (char.IsNumber(_currentCharacter))
                 {
-                    List<char> numbers = [_currentCharacter];
-                    Advance();
-                    while (char.IsNumber(_currentCharacter))
+                    List<char> chars = new List<char>();
+                    while (IsStringCharacter(Peek()))
                     {
-                        numbers.Add(_currentCharacter);
+                        chars.Add(Peek());
                         Advance();
                     }
-                    string number = string.Join("", numbers);
-                    result.Add(new Token() { type = TokenType.NUMBER, Value = number, Line = _currentLine });
-
-                }
-                else if (char.IsWhiteSpace(_currentCharacter))
-                {
-                    Advance();
-                }
-                else
-                {
-                    List<char> word = [_currentCharacter];
-                    Advance();
-                    while (char.IsLetter(_currentCharacter))
+                    string word = string.Join("", chars);
+                    if (_keywordsMap.ContainsKey(word))
                     {
-                        word.Add(_currentCharacter);
-                        Advance();
-                    }
-                    string keyword = string.Join("", word);
-                    if (_keywordsMap.ContainsKey(keyword))
-                    {
-                        result.Add(new Token() { type = _keywordsMap[keyword], Value = keyword, Line = _currentLine });
+                        result.Add(new Token()
+                        {
+                            type = _keywordsMap[word],
+                            Line = _currentLine,
+                            Value = word,
+                        });
                     }
                     else
                     {
-                        result.Add(new Token() { type = TokenType.STRING, Value = keyword, Line = _currentLine });
+                        result.Add(new Token()
+                        {
+                            type = TokenType.STRING,
+                            Line = _currentLine,
+                            Value = word,
+                        });
                     }
                 }
                 break;
             }
         }
 
-        result.Add(new Token() { type = TokenType.EOF, Line = _currentLine +1 });
+
+        result.Add(new Token() { type = TokenType.EOF });
         return result;
+    }
+
+    private bool IsStringCharacter(char currentCharacter)
+    {
+        return char.IsLetter(currentCharacter);
     }
 
     private void Advance()
     {
-        _currentIndex++;
-        if (_currentIndex + 1 >= _input.Length)
-        {
-            _currentCharacter = '\0';
-            return;
-        }
-
-        if (_input[_currentIndex] == '\n')
+        if (Peek() == '\n')
         {
             _currentLine++;
         }
-    
+        if (_currentIndex + 1 <= _input.Length)
+        {
+            _currentIndex++;
+        }
         
-        _currentCharacter = _input[_currentIndex];
     }
 
     private char Peek(int amount = 0)
