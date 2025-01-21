@@ -38,12 +38,11 @@ public class RuleParser
                         Errors.Add(e.Message);
                         Advance();
                     }
-
                 }
                 break;
                 default:
                 {
-                    Errors.Add($"expect Rule start token at {Peek().Line} : {Peek().Value}");
+                    Errors.Add($"Xxpect Rule start token at {Peek().Line} : {Peek().Value}");
                     while (true)
                     {
                         if (Peek().type == TokenType.RULE_START)
@@ -70,221 +69,32 @@ public class RuleParser
 
         Rule rule = new() { StartToken = start };
 
-    /*    while (true)
+        List<TokenType> stopTokens = [TokenType.EOF, TokenType.RULE_START, TokenType.CONTINUE];
+        while (!stopTokens.Contains(Peek().type))
         {
-            var token = Peek();
-
-            if (token.type == TokenType.EOF || token.type == TokenType.RULE_START)
+            Token current = Consume();
+            if (current.type == TokenType.MODIFIER_KEYWORD)
             {
-                break;
+                RuleNode node = new()
+                {
+                    Operator = current
+                };
+                while (Peek().type != TokenType.NEW_LINE && Peek().type != TokenType.EOF)
+                {
+                    node.Parameters.Add(Consume());
+                }
             }
-            if (token.type == TokenType.CONTINUE)
+            else
             {
-                Consume();
-                break;
+                Errors.Add($"Expect MODIFIER_KEYWORD but got {current.type} at {current.Line}");
+                while (Peek().type != TokenType.NEW_LINE)
+                {
+                    Advance();
+                }
             }
-
-
-            switch (token.type)
-            {
-                case TokenType.COLOR_DECORATOR:
-                {
-                    RuleNode node = ParseColor();
-                    rule.Nodes.Add(node);
-                }
-                break;
-                case TokenType.TEXT_SIZE_DECORATOR:
-                {
-                    // parse font size
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    node.Parameters.Add(Consume());
-                    rule.Nodes.Add(node);
-                }
-                break;
-
-                case TokenType.BEAM_DECORATOR:
-                {
-                    //parse beam
-                    RuleNode node = new RuleNode()
-                    {
-                        Operator = Consume()
-                    };
-                    node.Parameters.Add(Consume());
-                    if (Peek().type == TokenType.TEMP)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    rule.Nodes.Add(node);
-                }
-                break;
-                case TokenType.MINIMAP_DECORATOR:
-                {
-                    //minimap 
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    node.Parameters.Add(Consume());
-                    node.Parameters.Add(Consume());
-                    node.Parameters.Add(Consume());
-                    rule.Nodes.Add(node);
-                }
-                break;
-
-                case TokenType.SOUND_DECORATOR:
-                {
-                    //sound
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    node.Parameters.Add(Consume());
-                    if (Peek().type == TokenType.NUMBER)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    rule.Nodes.Add(node);
-                }
-                break;
-
-                case TokenType.NUMERIC_DECORATOR:
-                {
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    if (Peek().type == TokenType.BOOL_OPERATOR)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    node.Parameters.Add(Consume());
-                    rule.Nodes.Add(node);
-                }
-                break;
-
-                case TokenType.CLASS_DECORATOR:
-                {
-                    //class 
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    if (Peek().type == TokenType.BOOL_OPERATOR)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    while (Peek().type == TokenType.STRING)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    rule.Nodes.Add(node);
-
-                }
-                break;
-                case TokenType.TYPE_DECORATOR:
-                {
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-
-
-                    if (Peek().type == TokenType.BOOL_OPERATOR)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    while (Peek().type == TokenType.STRING || Peek().type == TokenType.SHAPE )
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    rule.Nodes.Add(node);
-                }
-                break;
-
-                case TokenType.SINGLE_DECORATOR:
-                {
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    rule.Nodes.Add(node);
-                }
-                break;
-
-                case TokenType.RARITY_DECORATOR:
-                {
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    if (Peek().type == TokenType.BOOL_OPERATOR)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    
-                    while (Peek().type == TokenType.RARITY_TYPE)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                   
-                    rule.Nodes.Add(node);
-                }
-                break;
-                case TokenType.BOOL_DECORATOR:
-                {
-                   RuleNode node = new()
-                   {
-                        Operator = Consume() 
-                   };
-                    node.Parameters.Add(Consume());
-                    rule.Nodes.Add(node);
-                }
-                break;
-                case TokenType.EXLICIT_MOD_DECORATOR:
-                {
-                    RuleNode node = new()
-                    {
-                        Operator = Consume()
-                    };
-                    if (Peek().type == TokenType.BOOL_OPERATOR)
-                    {
-                        node.Parameters.Add(Consume());
-                        node.Parameters.Add(Consume());
-                    }
-                    while (Peek().type == TokenType.STRING)
-                    {
-                        node.Parameters.Add(Consume());
-                    }
-                    rule.Nodes.Add(node); 
-                }
-                break;
-                default:
-                throw new ParseException($"unexpected token : {token.type} at {token.Line}");
-                break;
-            }
-
+            Advance();
         }
-*/
         return rule;
-    }
-
-    private RuleNode ParseColor()
-    {
-        RuleNode node = new RuleNode()
-        {
-            Operator = Consume()
-        };
-        node.Parameters.Add(Consume());
-        node.Parameters.Add(Consume());
-        node.Parameters.Add(Consume());
-/*        if (Peek().type == TokenType.NUMBER)
-        {
-            node.Parameters.Add(Consume());
-        }*/
-        return node;
     }
 
     private void Advance()
