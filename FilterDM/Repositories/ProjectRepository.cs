@@ -1,5 +1,6 @@
 ﻿using FilterDM.Models;
 using FilterDM.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -46,6 +47,7 @@ public class ProjectRepository : IInit
 
     public async Task SaveFilter(FilterModel model)
     {
+        model.LastSaveDate = DateTime.Now;
         await _fileService.Save(model, GetJsonAbsolutePath(model.Name));
     }
 
