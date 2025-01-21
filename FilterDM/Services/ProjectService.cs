@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace FilterDM.Services;
 public class ProjectService : IProjectService
@@ -28,6 +29,9 @@ public class ProjectService : IProjectService
         _repository.CreateFilter(model);
     }
 
+    public FilterModel Get(string filterName) => _repository.GetProjectModel(filterName);
+    public List<string> Names() => _repository.GetProjectNames;
+
     public async Task<bool> Save(FilterModel filterModel)
     {
         try
@@ -47,5 +51,7 @@ public class ProjectService : IProjectService
 public interface IProjectService
 {
     void Add(FilterModel model);
+    FilterModel Get(string filterName);
+    List<string> Names();
     Task<bool> Save(FilterModel filterModel);
 }

@@ -6,6 +6,7 @@ using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 
 namespace FilterDM.ViewModels;
 
@@ -48,14 +49,14 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void EnterProjectsPage()
     {
-        var projectsList = App.Current.Services.GetService<ProjectRepository>().GetProjectNames;
+        List<string> projectsList = _projectService.Names();
         _projectsPageViewModel.OnEnter(projectsList);
         CurrentPage = _projectsPageViewModel;
     }
 
     private void FilterSelected(string filterName)
     {
-        var filter = App.Current.Services.GetService<ProjectRepository>().GetProjectModel(filterName);
+        var filter = _projectService.Get(filterName);
         if (filter != null)
         {
             _editorViewModel.OnEnter(filter);
