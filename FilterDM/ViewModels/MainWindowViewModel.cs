@@ -28,8 +28,8 @@ public partial class MainWindowViewModel : ViewModelBase
         var typeService = services.GetService<ItemTypeService>();
         var blockTeplateService = services.GetService<BlockTemplateService>();
         var ruleTemplateService = services.GetService<RuleTemplateService>();
-        var projectRepository = services.GetService<ProjectRepository>();
-        _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService, projectRepository)
+        var projectService = services.GetService<IProjectService>();
+        _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService, projectService)
         {
             BackToMenuAction = EnterProjectsPage,
         };

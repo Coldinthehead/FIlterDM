@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
@@ -116,18 +117,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     [RelayCommand]
     private async Task SaveCurrent()
     {
-        FilterModel model = _currentFilterVm.GetModel();
-        try
-        {
-            await _projectRepository.SaveFilter(model);
-            _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {model.Name} saved!");
-            Changes = false;
-        }
-        catch (Exception ex)
-        {
-
-        }
-
+        await _projectService.Save(_currentFilterVm.GetModel());
     }
 
     [RelayCommand]
@@ -214,12 +204,12 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     private readonly ItemTypeService _typeService;
     private readonly BlockTemplateService _blockTemplateService;
     private readonly RuleTemplateService _ruleTemplateService;
-    private readonly ProjectRepository _projectRepository;
+    private readonly IProjectService _projectService;
 
     public ProjectEditViewModel(ItemTypeService typeService
         , BlockTemplateService blockTempalteService
         , RuleTemplateService ruleTempalateService
-        , ProjectRepository projectRepository)
+        , IProjectService projectService)
     {
         _typeService = typeService;
         _blockTemplateService = blockTempalteService;
@@ -227,7 +217,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         EditorPanel = new();
         Messenger.Register<FilterEditedRequestEvent>(this);
         _ruleTemplateService = ruleTempalateService;
-        _projectRepository = projectRepository;
+        _projectService = projectService;
     }
 
     public void Receive(FilterEditedRequestEvent message)
