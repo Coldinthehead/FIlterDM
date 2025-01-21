@@ -23,15 +23,15 @@ public class ParserTests
         List<Rule> result = sut.Parse(input);
 
         Assert.That(result, Is.Empty);
-        Assert.That(sut.Errors, Has.Count.EqualTo(1));  
+        Assert.That(sut.Errors, Has.Count.EqualTo(1));
     }
 
     [Test]
     public void Parse_ShouldParseKeywords()
     {
         RuleParser sut = new();
-        List<Token> input = [new Token() { type = TokenType.RULE_START}, 
-            new Token() { type = TokenType.MODIFIER_KEYWORD }, 
+        List<Token> input = [new Token() { type = TokenType.RULE_START},
+            new Token() { type = TokenType.MODIFIER_KEYWORD },
             new Token() { type = TokenType.EOF }];
 
         List<Rule> result = sut.Parse(input);
@@ -75,5 +75,51 @@ public class ParserTests
 
         Assert.That(result, Has.Count.EqualTo(1));
         Assert.That(sut.Errors, Has.Count.EqualTo(1));
+    }
+
+    [Test]
+    public void Parse_ShouldHandleMultipleArguments()
+    {
+        RuleParser sut = new();
+        List<Token> input = [
+
+            new Token() { type = TokenType.RULE_START},
+            new Token() {type = TokenType.NEW_LINE},
+            new Token() { type = TokenType.MODIFIER_KEYWORD },
+            new Token() { type = TokenType.STRING},
+            new Token() { type = TokenType.STRING},
+            new Token() { type = TokenType.STRING},
+            new Token() { type = TokenType.STRING},
+            new Token() {type = TokenType.NEW_LINE},
+            new Token() { type = TokenType.EOF }
+            ];
+
+        List<Rule> result = sut.Parse(input);
+
+        Assert.That(result.First().Nodes.First().Parameters, Has.Count.EqualTo(4));
+    }
+
+    [Test]
+    public void Parse_ShouldHandleEmptyArguments()
+    {
+        RuleParser sut = new();
+        List<Token> input = [
+
+            new Token() { type = TokenType.RULE_START},
+            new Token() {type = TokenType.NEW_LINE},
+            new Token() { type = TokenType.MODIFIER_KEYWORD },
+            new Token() {type = TokenType.NEW_LINE},
+            new Token() { type = TokenType.MODIFIER_KEYWORD },
+            new Token() {type = TokenType.NEW_LINE},
+            new Token() { type = TokenType.MODIFIER_KEYWORD },
+            new Token() {type = TokenType.NEW_LINE},
+            new Token() { type = TokenType.MODIFIER_KEYWORD },
+            new Token() {type = TokenType.NEW_LINE},
+            new Token() { type = TokenType.EOF }
+            ];
+
+        List<Rule> result = sut.Parse(input);
+
+        Assert.That(result.First().Nodes, Has.Count.EqualTo(4));
     }
 }

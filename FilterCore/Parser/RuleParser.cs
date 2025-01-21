@@ -66,6 +66,7 @@ public class RuleParser
     private Rule BuildRule()
     {
         Token start = Consume();
+        Advance();
 
         Rule rule = new() { StartToken = start };
 
@@ -83,6 +84,7 @@ public class RuleParser
                 {
                     node.Parameters.Add(Consume());
                 }
+                rule.Nodes.Add(node);
             }
             else
             {
