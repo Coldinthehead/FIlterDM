@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FilterDM.Services;
 
-public class ProjectRepositoryService : IInit
+public class ProjectRepository : IInit
 {
     private const string RepositoryPath = "./data/filters";
 

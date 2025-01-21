@@ -43,14 +43,14 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void EnterProjectsPage()
     {
-        var projectsList = App.Current.Services.GetService<ProjectRepositoryService>().GetProjectNames;
+        var projectsList = App.Current.Services.GetService<ProjectRepository>().GetProjectNames;
         _projectsPageViewModel.OnEnter(projectsList);
         CurrentPage = _projectsPageViewModel;
     }
 
     private void FilterSelected(string filterName)
     {
-        var filter = App.Current.Services.GetService<ProjectRepositoryService>().GetProjectModel(filterName);
+        var filter = App.Current.Services.GetService<ProjectRepository>().GetProjectModel(filterName);
         if (filter != null)
         {
             _editorViewModel.OnEnter(filter);
@@ -67,7 +67,7 @@ public partial class MainWindowViewModel : ViewModelBase
             LastSaveDate = DateTime.Now
         };
 
-        var filterRepos = App.Current.Services.GetService<ProjectRepositoryService>();
+        var filterRepos = App.Current.Services.GetService<ProjectRepository>();
         filterRepos.CreateFilter(model);
         _editorViewModel.OnEnter(model);
         CurrentPage = _editorViewModel;

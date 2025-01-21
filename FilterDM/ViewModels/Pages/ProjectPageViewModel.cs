@@ -99,7 +99,7 @@ partial class ProjectPageViewModel : ViewModelBase
         var confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete {project.Title}?");
         if (confirm)
         {
-            App.Current.Services.GetService<ProjectRepositoryService>().DeleteByName(project.Title);
+            App.Current.Services.GetService<ProjectRepository>().DeleteByName(project.Title);
             if (SelectedProject == project)
             {
                 SelectedProject = null;

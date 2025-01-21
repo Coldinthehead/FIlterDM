@@ -50,7 +50,7 @@ public partial class App : Application
             container.BindService<ItemClassesService>();
             container.BindService<ItemTypeService>();
             container.AddSingleton<FilesService>(new FilesService(desktop.MainWindow));
-            container.BindService<ProjectRepositoryService>();
+            container.BindService<ProjectRepository>();
             container.BindService<RuleTemplateRepository>();
             container.BindService<DialogService>();
             container.BindService<BlockTemplateRepository>();
