@@ -26,6 +26,8 @@ public partial class FilterViewModel : ObservableRecipient
     [ObservableProperty]
     private string _name;
 
+    public Guid Guid { get; set; }
+
     private readonly ItemTypeService _typeService;
     private readonly BlockTemplateManager _blockTemplates;
     private readonly RuleTemplateManager _ruleTemplates;
@@ -146,6 +148,7 @@ public partial class FilterViewModel : ObservableRecipient
     public void SetModel(FilterModel model)
     {
         Name = model.Name;
+        Guid = model.ID;
         ObservableCollection<BlockDetailsViewModel> next = new();
         foreach (BlockModel blockModel in model.Blocks)
         {
@@ -178,7 +181,8 @@ public partial class FilterViewModel : ObservableRecipient
     {
         FilterModel result = new()
         {
-
+            Name = Name,
+            ID = Guid,
         };
         foreach (BlockDetailsViewModel block in _parentManager.AllBlocks)
         {
