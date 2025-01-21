@@ -394,6 +394,7 @@ public class FilterViewModelTests
 
         Assert.That(testModel, Is.Not.Null);
         Assert.That(testModel.Name, Is.EqualTo(sut.Name));
+        Assert.That(testModel.ID, Is.EqualTo(sut.Guid));
         Assert.That(testModel.Blocks, Has.Count.EqualTo(sut.GetBlocks().Count)); 
     }
 
