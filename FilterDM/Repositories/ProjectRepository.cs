@@ -46,7 +46,7 @@ public class ProjectRepository : IInit
 
     public async Task SaveFilter(FilterModel model)
     {
-        var filename = GetFullName(model.Name);
+        var filename = GetJsonAbsolutePath(model.Name);
         using var fs = File.Create(filename);
         await JsonSerializer.SerializeAsync(fs, model, _saveOptions);
     }
@@ -73,7 +73,7 @@ public class ProjectRepository : IInit
     {
         if (_models.ContainsKey(title))
         {
-            var name = GetFullName(title);
+            var name = GetJsonAbsolutePath(title);
             if (File.Exists(name))
             {
                 File.Delete(name);
@@ -81,7 +81,7 @@ public class ProjectRepository : IInit
         }
     }
 
-    private string GetFullName(string filterName)
+    private string GetJsonAbsolutePath(string filterName)
     {
         var filename = Path.Combine(RepositoryPath, filterName);
         filename = Path.ChangeExtension(filename, "json");

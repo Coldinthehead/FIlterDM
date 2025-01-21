@@ -117,7 +117,8 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     [RelayCommand]
     private async Task SaveCurrent()
     {
-        await _projectService.Save(_currentFilterVm.GetModel());
+        bool result =  await _projectService.Save(_currentFilterVm.GetModel());
+        Changes = !result;
     }
 
     [RelayCommand]
