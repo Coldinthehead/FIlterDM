@@ -1,5 +1,4 @@
-﻿using Avalonia.Media;
-using FilterCore.Parser;
+﻿using FilterCore.Parser;
 using FilterDM.Models;
 using FilterDM.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,87 +10,71 @@ namespace FilterDM.Services;
 
 public struct ImportResult
 {
-    public readonly string ErorrMessage;
-    public readonly ParseReuslt ParseResult;
+    public List<string> Errors { get; set; } = [];
     public FilterModel Model { get; set;  }
 
-    public ImportResult(string erorrMessage, ParseReuslt parseResult)
+    public int TotalRules;
+
+    public ImportResult(string erorrMessage,FilterModel model)
     {
-        ErorrMessage = erorrMessage;
-        ParseResult = parseResult;
+
     }
 }
 
-public class FilterParserService
+public struct ParseResult
 {
-    
+    public readonly List<string> Errors;
+    public readonly List<Rule> Rules;
+
+    public ParseResult()
+    {
+        Errors = [];
+        Rules = [];
+    }
+}
+
+    public class FilterParserService
+{
     public ImportResult Parse(string input)
     {
         FilterModel model = new FilterModel();
 
-        ImportResult result = ParseRules(input);
-
+        ParseResult parseResult = ParseRules(input);
+        ImportResult importResult = new();
+        importResult.Errors.AddRange(parseResult.Errors);
         List<RuleModel> models = [];
-        if (result.ParseResult.Result.Count > 0)
+
+        if (parseResult.Rules.Count > 0)
         {
-            int i = 2000 +  result.ParseResult.Result.Count * 100;
-            foreach (var rule in result.ParseResult.Result)
+            int priority = 2000 * parseResult.Rules.Count;
+            foreach (Rule rule in parseResult.Rules)
             {
                 try
                 {
-                    RuleModel rm = ParseSingleRule(rule, i);
-                    models.Add(rm);
+                    RuleModel ruleModel = ParseSingleRule(rule, priority);
+                    models.Add(ruleModel);
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    int index = result.ParseResult.Result.IndexOf(rule);
+                    importResult.Errors.Add(e.Message);
                 }
-              
-                i -= 100;
+                priority -= 2000;
             }
-
-            Dictionary<string, List<RuleModel>> blockData = [];
-            blockData.Add("unknown", []);
-            foreach (RuleModel pModel in models)
-            {
-                string nameIdentifier = pModel.Title.Split('|').First();
-                if (nameIdentifier != null && nameIdentifier.Length > 1)
-                {
-                    List<RuleModel> selectedList = blockData.GetValueOrDefault(nameIdentifier, []);
-                    selectedList.Add(pModel);
-                    blockData[nameIdentifier] = selectedList;
-                }
-                else
-                {
-                    blockData["unknown"].Add(pModel);
-                }
-            }
-            if (blockData["unknown"].Count == 0)
-            {
-                blockData.Remove("unknown");
-            }
-
-            foreach (string key in blockData.Keys)
-            {
-                BlockModel newBlock = App.Current.Services.GetService<BlockTemplateRepository>().GetEmpty();
-                newBlock.Title = key;
-                foreach (var m in blockData[key])
-                {
-                    newBlock.AddRule(m);
-                    newBlock.Priority += m.Priority;
-                }
-                model.AddBlock(newBlock);
-            }
-
-            result.Model = model;
-
         }
+        importResult.TotalRules = parseResult.Rules.Count;
+        BlockModel rootBlock = model.AddBlock("rules");
+        foreach (var r in models)
+        {
+            rootBlock.AddRule(r);
+        }
+        importResult.Model = model;
 
-        return result;
+        return importResult;
     }
 
-    private ImportResult ParseRules(string input)
+    private ParseResult ParseRules(string input)
     {
+        ParseResult result = new();
         var lexer = new FilterLexer();
         List<Token> tokens;
         try
@@ -101,12 +84,23 @@ public class FilterParserService
         }
         catch (LexerError e)
         {
-            return new ImportResult(e.Message, new ParseReuslt(1, []));
+            result.Errors.Add(e.Message);
+            return result;
         }
-        var parser = new RuleParser();
+        RuleParser parser = new RuleParser();
         List<Rule> rules = parser.Parse(tokens);
-        ParseReuslt res = new ParseReuslt(parser.Errors.Count, rules);
-        return new ImportResult(parser.Errors.Count > 0 ? parser.Errors[0] : "", res);
+        TypeResolver resolver = new TypeResolver();
+        foreach (Rule rule in rules)
+        {
+            foreach (RuleNode node in rule.Nodes)
+            {
+                resolver.Resolve(node);
+            }
+        }
+
+        result.Rules.AddRange(rules);
+
+        return result;
     }
 
     private RuleModel ParseSingleRule(Rule rule, int priority)
@@ -115,7 +109,7 @@ public class FilterParserService
         model.Show = rule.StartToken.Value.Equals("Show") ? true : false;
         model.Priority = priority;
 
-/*
+
         foreach (var node in rule.Nodes)
         {
             switch (node.Operator.type)
@@ -155,7 +149,7 @@ public class FilterParserService
                         }
                         condition.AddRange(resultValues);
                     }
-                    
+
                     model.ClassCondition = condition;
 
                 }
@@ -196,8 +190,8 @@ public class FilterParserService
                         }
                         condition.AddRange(resultValues);
                     }
-                   
-                    
+
+
                     model.TypeCondition = condition;
                 }
                 break;
@@ -307,7 +301,7 @@ public class FilterParserService
                 case TokenType.MINIMAP_DECORATOR:
                 {
                     MinimapIconDetails icon = new MinimapIconDetails();
-                    int size  = int.Parse(node.Parameters[0].Value);
+                    int size = int.Parse(node.Parameters[0].Value);
                     if (size == 0)
                     {
                         icon.Size = "Small";
@@ -340,7 +334,7 @@ public class FilterParserService
                 }
                 break;
 
-             
+
 
                 case TokenType.SINGLE_DECORATOR:
                 break;
@@ -417,9 +411,9 @@ public class FilterParserService
         {
             title += $"{model.ClassCondition.SelectedClasses[0]}|";
         }
-        if (model.TypeCondition != null )
+        if (model.TypeCondition != null)
         {
-            if (model.TypeCondition.SelectedTypes.Count >4)
+            if (model.TypeCondition.SelectedTypes.Count > 4)
             {
                 title += $"{model.TypeCondition.SelectedTypes.Count} types|";
             }
@@ -434,7 +428,7 @@ public class FilterParserService
         }
         if (model.GetNumericConditions().Count > 0)
         {
-            NumericCondition n= model.GetNumericConditions()[0];
+            NumericCondition n = model.GetNumericConditions()[0];
 
             string sign;
             if (n.UseEquals == NumericConditionSign.Less)
@@ -452,8 +446,8 @@ public class FilterParserService
 
             title += $"{n.ValueName} {sign}|";
         }
-        model.Title = title ;
-        if (rule.Nodes.Select(x=> x.Operator.type == TokenType.CONTINUE).First())
+        model.Title = title;
+        if (rule.Nodes.Select(x => x.Operator.type == TokenType.CONTINUE).First())
         {
             model.Title = "decorator";
         }
@@ -461,20 +455,8 @@ public class FilterParserService
         if (model.Title == "")
         {
             model.Title = "unknown";
-        }*/
+        }
 
         return model;
-    }
-}
-
-public readonly struct ParseReuslt
-{
-    public readonly int ErrCount;
-    public readonly List<Rule> Result;
-
-    public ParseReuslt(int errCount, List<Rule> result)
-    {
-        ErrCount = errCount;
-        Result = result;
     }
 }

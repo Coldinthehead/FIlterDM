@@ -9,6 +9,7 @@ using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FilterDM.ViewModels.Pages;
@@ -110,15 +111,6 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     {
         try
         {
-            /* var filesService = App.Current?.Services?.GetService<FileSelectionService>();
-             if (filesService is null)
-                 throw new NullReferenceException("Missing File Service instance.");
-
-             var file = await filesService.OpenProjectFile();
-             if (file is null)
-                 return;
- */
-
             IStorageFile? file = await _fileSelectionService.OpenPoeFile();
             if (file == null)
             {
@@ -127,21 +119,14 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
 
             string input = File.ReadAllText(file.Path.LocalPath);
             var result = App.Current.Services.GetService<FilterParserService>().Parse(input);
-            if (result.ErorrMessage != "")
+            if (result.Errors.Count  > 0)
             {
-                await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Import Error: {result.ErorrMessage}");
+                await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Import Error: {result.Errors.First()}");
             }
-            if (result.ParseResult.Result != null)
-            {
-                var model = result.Model;
-                model.Name = Path.GetFileNameWithoutExtension(file.Path.LocalPath);
-                OnEnter(model);
-                await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter imported with {result.ParseResult.Result.Count} Rules");
-            }
-            else
-            {
-                await App.Current.Services.GetService<DialogService>().ShowOkDialog("Unable to recognize filter file.");
-            }
+            var model = result.Model;
+            model.Name = Path.GetFileNameWithoutExtension(file.Path.LocalPath);
+            OnEnter(model);
+            await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter imported with {result.TotalRules} Rules");
         }
         catch (Exception e)
         {
