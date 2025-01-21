@@ -9,6 +9,7 @@ using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace FilterDM.ViewModels.EditPage;
 
@@ -62,9 +63,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     }
 
     [ObservableProperty]
-    private ViewModelBase _currentModifierEditor;
-
-    private static Dictionary<Type, Type> _editorTypesToModifierTypes = [];
+    private ModifierEditorViewModel _currentModifierEditor;
 
 
     public RuleEditorViewModel(RuleDetailsViewModel rule)
@@ -151,19 +150,10 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
 
     public void Receive(RuleModifierDeleteEvent message)
     {
-        if (CurrentModifierEditor != null && MatchEditorType(CurrentModifierEditor.GetType(), message.Value.GetType()))
+        if (CurrentModifierEditor != null && CurrentModifierEditor.Rule == message.Value.Rule)
         {
             CurrentModifierEditor = null;
         }
-    }
-
-    private bool MatchEditorType(Type editor, Type modifier)
-    {
-        if (!_editorTypesToModifierTypes.ContainsKey(editor))
-        {
-            return false;
-        }
-        return _editorTypesToModifierTypes[editor] == modifier;
     }
 
     public override void UpdateTitle()
