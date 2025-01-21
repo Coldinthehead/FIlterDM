@@ -126,20 +126,17 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         TemplateManager = templateManager;
         _scopeManager = scopeManager;
+        SelectedTemplate = _templateManager.GetEmpty();
     }
 
     public BlockModel GetModel()
     {
-        BlockModel block = App.Current.Services.GetService<BlockTemplateRepository>().GetEmpty();
-        block.Title = Title;
+        BlockModel block = TemplateManager.GetEmpty();
+        block.Title = Title ?? block.Title;
         block.Enabled = Enabled;
         block.Priority = Priority;
         block.TemplateName = SelectedTemplate.Title;
         block.UseBlockTypeScope = UseScopeNames;
-        foreach (RuleDetailsViewModel rule in Rules)
-        {
-            block.AddRule(rule.GetModel());
-        }
         return block;
     }
 
