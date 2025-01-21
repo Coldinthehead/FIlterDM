@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
-using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
@@ -13,7 +12,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FilterDM.ViewModels.Pages;
-
 
 public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<FilterEditedRequestEvent>
 {
@@ -26,7 +24,6 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     [ObservableProperty]
     private string _name;
 
-
     [ObservableProperty]
     private bool _changes = false;
 
@@ -34,8 +31,14 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
 
     private FilterViewModel _currentFilterVm;
 
+    private JsonSerializerOptions _jsonOpt = new()
+    {
+        WriteIndented = true,
+        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+    };
+
     [RelayCommand]
-    private async void NewFilter()
+    private async Task NewFilter()
     {
         if (Changes)
         {
@@ -52,7 +55,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     }
 
     [RelayCommand]
-    private async void Export()
+    private async Task Export()
     {
         FilterModel model = _currentFilterVm.GetModel();
         try
@@ -81,7 +84,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
 
     }
     [RelayCommand]
-    private async void SaveAs()
+    private async Task SaveAs()
     {
         FilterModel model = _currentFilterVm.GetModel();
         try
@@ -90,15 +93,10 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
             var file = await filesService.SaveFilterProjectFile(model.Name);
 
             await using var writeStream = File.Create(file.Path.LocalPath);
-            var opt = new JsonSerializerOptions()
-            {
-                WriteIndented = true,
-                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
-            };
 
          /*   App.Current?.Services?.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);*/
 
-            JsonSerializer.Serialize(writeStream, model, options: opt);
+            JsonSerializer.Serialize(writeStream, model, options: _jsonOpt);
             if (file is null)
                 return;
             else
@@ -116,7 +114,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     }
 
     [RelayCommand]
-    private async void SaveCurrent()
+    private async Task SaveCurrent()
     {
         FilterModel model = _currentFilterVm.GetModel();
         try
@@ -134,7 +132,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     }
 
     [RelayCommand]
-    private async void Load()
+    private async Task Load()
     {
         if (Changes)
         {
@@ -155,7 +153,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
                 return;
 
             await using var readStream = await file.OpenReadAsync();
-            FilterModel? m = await JsonSerializer.DeserializeAsync<FilterModel>(readStream);
+            FilterModel? m = await JsonSerializer.DeserializeAsync<FilterModel>(readStream, _jsonOpt);
             if (m != null)
             {
                 OnEnter(m);
@@ -198,9 +196,9 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
                 await App.Current.Services.GetService<DialogService>().ShowOkDialog("Unable to recognize filter file.");
             }
         }
-       catch (Exception e)
-       {
-       }
+        catch (Exception e)
+        {
+        }
     }
 
     public void OnEnter(FilterModel model)
