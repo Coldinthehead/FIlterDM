@@ -51,10 +51,20 @@ public class BlockDetailsViewModelTests
         BlockModel testModel = sut.GetModel();
 
         Assert.That(testModel, Is.Not.Null);
-        Assert.That(testModel.Title, Is.EqualTo(sut.Title));
         Assert.That(testModel.Enabled, Is.EqualTo(sut.Enabled));
         Assert.That(testModel.Priority, Is.EqualTo(sut.Priority));
         Assert.That(testModel.TemplateName, Is.EqualTo(sut.SelectedTemplate.Title));
         Assert.That(testModel.UseBlockTypeScope, Is.EqualTo(sut.UseScopeNames));
+    }
+
+    [Test]
+    public void GetModel_ShouldSetModelTitleAsEmpty_WhenTitleIsNull()
+    {
+        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
+        sut.Title = null;
+        BlockModel testModel = sut.GetModel();
+
+        Assert.That(testModel.Title, Is.Not.Null);
+        Assert.That(testModel.Title, Is.EqualTo("Empty"));
     }
 }
