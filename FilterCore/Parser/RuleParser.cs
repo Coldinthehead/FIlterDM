@@ -69,10 +69,16 @@ public class RuleParser
 
         Rule rule = new() { StartToken = start };
 
-        List<TokenType> stopTokens = [TokenType.EOF, TokenType.RULE_START, TokenType.CONTINUE];
+        List<TokenType> stopTokens = [TokenType.EOF, TokenType.RULE_START];
         while (!stopTokens.Contains(Peek().type))
         {
+
             Token current = Peek();
+            if (current.type == TokenType.CONTINUE)
+            {
+                Consume();
+                continue;
+            }
             if (current.type == TokenType.MODIFIER_KEYWORD)
             {
                 RuleNode node = new()
