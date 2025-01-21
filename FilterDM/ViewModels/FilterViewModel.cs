@@ -174,7 +174,24 @@ public partial class FilterViewModel : ObservableRecipient
         => _parentManager.AllBlocks.Select(x => x.Title).Any((t) => string.Equals(title, t));
 
 
-    internal FilterModel GetModel() => throw new NotImplementedException();
+    public FilterModel GetModel()
+    {
+        FilterModel result = new()
+        {
+
+        };
+        foreach (BlockDetailsViewModel block in _parentManager.AllBlocks)
+        {
+            BlockModel resultBlock = block.GetModel();
+            foreach (RuleDetailsViewModel rule in block.Rules)
+            {
+                RuleModel resultRule = rule.GetModel();
+                resultBlock.AddRule(resultRule);
+            }
+            result.AddBlock(resultBlock);
+        }
+        return result;
+    }
 
     #region event hadlers
     public void Receive(CreateBlockRequest message)
