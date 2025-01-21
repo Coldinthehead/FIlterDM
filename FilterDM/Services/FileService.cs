@@ -41,6 +41,22 @@ public class FileService
         return true;
     }
 
+
+    public async Task SavePoeFile(IStorageFile file, string output)
+    {
+        try
+        {
+            using var fs = File.Create(file.Path.LocalPath);
+            using var sr = new StreamWriter(fs);
+            await sr.WriteAsync(output);
+            await _dialogService.ShowOkDialog($"Filter {Path.GetFileNameWithoutExtension(file.Name)} saved!");
+        }
+        catch (Exception ex)
+        {
+            await _dialogService.ShowOkDialog("Error has occured! Project not exported.");
+        }
+    }
+
     public async Task<FilterModel> LoadProject(IStorageFile file)
     {
         try

@@ -1,13 +1,11 @@
 ﻿using FilterDM.Models;
-using FilterDM.ViewModels.EditPage;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace FilterDM.Services;
 
-public class CoreFilterService
+public class FilterExportService
 {
 
     public string Build(FilterModel model)
@@ -131,20 +129,6 @@ public class CoreFilterService
         }
         return sb.ToString();
     }
-
-
-/*    private readonly Dictionary<string, string> _nameToOperator = new Dictionary<string, string>()
-    {
-        {"StackSize", "StackSize" },
-        {"ItemLevel", "ItemLevel" },
-        {"AreaLevel", "AreaLevel" },
-        {"DropLevel", "DropLevel" },
-        {"Quality", "Quality" },
-        {"Sockets Count", "Sockets" } ,
-        {"Bas Armor", "BaseArmour" } ,
-        {"Base Evasion", "BaseEvasion" } ,
-        {"Base Energy Shield", "BaseEnergyShield" } ,
-    };*/
 
     private readonly Dictionary<NumericConditionSign, string> _operatorTypeToString = new()
     {

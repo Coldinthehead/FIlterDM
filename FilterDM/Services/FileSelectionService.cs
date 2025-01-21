@@ -8,11 +8,18 @@ public class FileSelectionService
 {
     private readonly Window _target;
 
-    public static FilePickerFileType JsonFileChoice { get; } = new FilePickerFileType("JSON File")
+    private static FilePickerFileType JsonFileChoice { get; } = new FilePickerFileType("JSON File")
     {
         Patterns = new[] { "*.json" },
         AppleUniformTypeIdentifiers = new[] { "public.json" },
         MimeTypes = new[] { "application/json" }
+    };
+
+    private static FilePickerFileType FilterFileChoice { get; } = new FilePickerFileType("Filter File")
+    {
+        Patterns = new[] { "*.filter" },
+        AppleUniformTypeIdentifiers = new[] { "public.filter" },
+        MimeTypes = new[] { "PathOfExileFilter/filter" }
     };
 
 
@@ -56,7 +63,7 @@ public class FileSelectionService
 
             Title = "Export Filter File",
             SuggestedFileName = $"{name}.filter",
-            FileTypeChoices = [FilePickerFileTypes.All],
+            FileTypeChoices = [FilterFileChoice],
         });
     }
 

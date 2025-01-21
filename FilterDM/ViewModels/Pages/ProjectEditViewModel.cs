@@ -53,15 +53,21 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     [RelayCommand]
     private async Task Export()
     {
-        FilterModel model = _currentFilterVm.GetModel();
-        try
+        IStorageFile? outFile = await _fileSelectionService.ExportFilterFile(_currentFilterVm.Name);
+        if (outFile != null)
+        {
+            FilterModel model = _currentFilterVm.GetModel();
+            string output = _exportService.Build(model);
+            await _fileService.SavePoeFile(outFile, output);
+        }
+       /* try
         {
             var filesService = App.Current?.Services?.GetService<FileSelectionService>();
             var file = await filesService.ExportFilterFile(model.Name);
             if (file != null)
             {
-               /* App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);*/
-                var str = App.Current.Services.GetService<CoreFilterService>().Build(model);
+               *//* App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);*//*
+                var str = App.Current.Services.GetService<FilterExportService>().Build(model);
                 var path = file.Path.LocalPath;
                 if (!Path.HasExtension(path) || !Path.GetExtension(path).Equals("filter"))
                 {
@@ -76,7 +82,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         catch (Exception ex)
         {
 
-        }
+        }*/
 
     }
     [RelayCommand]
@@ -180,13 +186,15 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     private readonly IProjectService _projectService;
     private readonly FileSelectionService _fileSelectionService;
     private readonly FileService _fileService;
+    private readonly FilterExportService _exportService;
 
     public ProjectEditViewModel(ItemTypeService typeService
         , BlockTemplateService blockTempalteService
         , RuleTemplateService ruleTempalateService
         , IProjectService projectService
         , FileSelectionService fileSelectionService
-        , FileService fileService)
+        , FileService fileService
+        , FilterExportService exportService)
     {
         _typeService = typeService;
         _blockTemplateService = blockTempalteService;
@@ -197,6 +205,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         _projectService = projectService;
         _fileSelectionService = fileSelectionService;
         _fileService = fileService;
+        _exportService = exportService;
     }
 
     public void Receive(FilterEditedRequestEvent message)

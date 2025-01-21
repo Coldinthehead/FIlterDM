@@ -54,7 +54,7 @@ public partial class App : Application
             container.BindService<RuleTemplateRepository>();
             container.BindService<DialogService>();
             container.BindService<BlockTemplateRepository>();
-            container.BindService<CoreFilterService>();
+            container.BindService<FilterExportService>();
             container.BindService<FilterParserService>();
             container.BindService<BlockTemplateService>();
             container.BindService<RuleTemplateService>();
