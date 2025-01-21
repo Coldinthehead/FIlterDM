@@ -155,6 +155,10 @@ public partial class FilterViewModel : ObservableRecipient
             BlockDetailsViewModel blockVm = new BlockDetailsViewModel(_blockTemplates, new TypeScopeManager(_typeService));
             blockVm.SetModel(blockModel);
             next.Add(blockVm);
+            foreach (RuleModel rule in blockModel.Rules)
+            {
+                NewRule(rule, blockVm);
+            }
         }
         _parentManager.SetBlocks(next);
         Messenger.Send(new BlockCollectionInFilterChanged(_parentManager.AllBlocks));
