@@ -1,25 +1,16 @@
 ﻿
 namespace FilterCore.Parser;
 
-public enum ParameterType
-{
-    Name,
-    Color,
-    Shape,
-    Number,
-    Bool_literal,
-    Bool_operator,
-    Temp,
-    None,
-
-}
-
 public class ModifierResolver
 {
     public bool Resolve(RuleNode node)
     {
-
-        return true;
+        if (Enum.TryParse(typeof(ModifierType), node.Operator.Value, out var result))
+        {
+            node.ModType = (ModifierType)result;
+            return true;
+        }
+        return false;
     }
 }
 
