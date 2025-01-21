@@ -29,8 +29,9 @@ public class FileService
         try
         {
             using var fs = File.Create(file.Path.LocalPath);
+            filterModel.Name = Path.GetFileNameWithoutExtension(file.Name);
             await JsonSerializer.SerializeAsync(fs, filterModel, _jsonOpt);
-            await _dialogService.ShowOkDialog($"Project {filterModel} saved!");
+            await _dialogService.ShowOkDialog($"Project {filterModel.Name} saved!");
         }
         catch (Exception ex)
         {
