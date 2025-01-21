@@ -3,15 +3,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
-using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
-using System.Reflection;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FilterDM.ViewModels.Pages;
@@ -60,30 +57,6 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
             string output = _exportService.Build(model);
             await _fileService.SavePoeFile(outFile, output);
         }
-       /* try
-        {
-            var filesService = App.Current?.Services?.GetService<FileSelectionService>();
-            var file = await filesService.ExportFilterFile(model.Name);
-            if (file != null)
-            {
-               *//* App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);*//*
-                var str = App.Current.Services.GetService<FilterExportService>().Build(model);
-                var path = file.Path.LocalPath;
-                if (!Path.HasExtension(path) || !Path.GetExtension(path).Equals("filter"))
-                {
-                    path = Path.ChangeExtension(path, "filter");
-                }
-                using var fs = File.Create(path);
-                using var sr = new StreamWriter(fs);
-                sr.Write(str);
-                await App.Current.Services.GetService<DialogService>().ShowOkDialog("Filter Exported!");
-            }
-        }
-        catch (Exception ex)
-        {
-
-        }*/
-
     }
     [RelayCommand]
     private async Task SaveAs()
