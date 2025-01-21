@@ -119,8 +119,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         FilterModel model = _currentFilterVm.GetModel();
         try
         {
-/*            App.Current.Services.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);  
-*/            await App.Current.Services.GetService<ProjectRepositoryService>().SaveFilter(model);
+            await App.Current.Services.GetService<ProjectRepositoryService>().SaveFilter(model);
             _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {model.Name} saved!");
             Changes = false;
         }
