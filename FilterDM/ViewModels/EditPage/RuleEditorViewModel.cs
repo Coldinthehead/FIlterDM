@@ -211,6 +211,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
                 btn.DecrementCount();
             }
         }
+        SelectedModifier = Rule.Modifiers.Last();
     }
 
     public override void UpdateTitle()
