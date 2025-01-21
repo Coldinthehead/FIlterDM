@@ -1,54 +1,56 @@
-﻿using Avalonia.Controls;
+﻿
 using Avalonia.Platform.Storage;
+using FilterDM.Models;
+using System;
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FilterDM.Services;
-
-public class FilesService 
+public class FileService
 {
-    private readonly Window _target;
-
-    public FilesService(Window target)
+    private JsonSerializerOptions _jsonOpt = new()
     {
-        _target = target;
+        WriteIndented = true,
+        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+    };
+
+
+    private readonly DialogService _dialogService;
+
+    public FileService(DialogService dialogService)
+    {
+        _dialogService = dialogService;
     }
 
-    public async Task<IStorageFile?> OpenFilterProjectFile()
+    public async Task<bool> Save(IStorageFile file, FilterModel filterModel)
     {
-        IStorageFolder? storageFolder = await _target.StorageProvider.TryGetFolderFromPathAsync("./data/filters");
-        var files = await _target.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
+        try
         {
-            Title = "Open Filter File",
-            AllowMultiple = false,
-            SuggestedStartLocation = storageFolder,
-        });
-
-        return files.Count >= 1 ? files[0] : null;
-    }
-
-    public async Task<IStorageFile?> SaveFilterProjectFile(string filterName)
-    {
-        IStorageFolder? storageFolder = await _target.StorageProvider.TryGetFolderFromPathAsync("./data/filters");
-        return await _target.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
+            using var fs = File.Create(file.Path.LocalPath);
+            await JsonSerializer.SerializeAsync(fs, filterModel, _jsonOpt);
+            await _dialogService.ShowOkDialog($"Project {filterModel} saved!");
+        }
+        catch (Exception ex)
         {
-            
-            Title = "Save Filter File",
-            DefaultExtension =".json",
-            SuggestedFileName = $"{filterName}.json",
-            FileTypeChoices = [FilePickerFileTypes.All],
-            SuggestedStartLocation = storageFolder
-        });
+            await _dialogService.ShowOkDialog("Error has occured! Project not saved.");
+            return false;
+        }
+        return true;
     }
 
-    public async Task<IStorageFile?> ExportFilterFile(string name)
+    public async Task<FilterModel> LoadProject(IStorageFile file)
     {
-        return await _target.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
+        try
         {
-
-            Title = "Export Filter File",
-            SuggestedFileName = $"{name}.filter",
-            FileTypeChoices = [FilePickerFileTypes.All],
-        });
+            using var fs = File.OpenRead(file.Path.LocalPath);
+            FilterModel? model = await JsonSerializer.DeserializeAsync<FilterModel>(fs, _jsonOpt);
+            return model ?? throw new ArgumentNullException($"Failed to parse {file.Path.LocalPath} file");
+        }
+        catch
+        {
+            await _dialogService.ShowOkDialog("Error has occured! Project not loaded.");
+            throw;
+        }
     }
-
 }

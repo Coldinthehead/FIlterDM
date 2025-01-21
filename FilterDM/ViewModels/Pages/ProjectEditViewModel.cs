@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Platform.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
@@ -9,6 +10,7 @@ using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -31,13 +33,6 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     public Action BackToMenuAction { get; set; }
 
     private FilterViewModel _currentFilterVm;
-
-    private JsonSerializerOptions _jsonOpt = new()
-    {
-        WriteIndented = true,
-        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
-    };
-
     [RelayCommand]
     private async Task NewFilter()
     {
@@ -61,7 +56,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         FilterModel model = _currentFilterVm.GetModel();
         try
         {
-            var filesService = App.Current?.Services?.GetService<FilesService>();
+            var filesService = App.Current?.Services?.GetService<FileSelectionService>();
             var file = await filesService.ExportFilterFile(model.Name);
             if (file != null)
             {
@@ -87,31 +82,12 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     [RelayCommand]
     private async Task SaveAs()
     {
-        FilterModel model = _currentFilterVm.GetModel();
-        try
+        var file = await _fileSelectionService.SaveProjectFile(Name);
+        if (file != null)
         {
-            var filesService = App.Current?.Services?.GetService<FilesService>();
-            var file = await filesService.SaveFilterProjectFile(model.Name);
-
-            await using var writeStream = File.Create(file.Path.LocalPath);
-
-         /*   App.Current?.Services?.GetService<SaveFilterService>().SaveModel(model, FilterTree.AllBlocks);*/
-
-            JsonSerializer.Serialize(writeStream, model, options: _jsonOpt);
-            if (file is null)
-                return;
-            else
-            {
-                Name = Path.GetFileNameWithoutExtension(file.Name);
-                model.Name = Name;
-            }
-            Changes = false;
-
+            var result = await _fileService.Save(file, _currentFilterVm.GetModel());
         }
-        catch (Exception e)
-        {
 
-        }
     }
 
     [RelayCommand]
@@ -132,26 +108,22 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
                 return;
             }
         }
+
         try
         {
-            var filesService = App.Current?.Services?.GetService<FilesService>();
-            if (filesService is null)
-                throw new NullReferenceException("Missing File Service instance.");
-
-            var file = await filesService.OpenFilterProjectFile();
-            if (file is null)
-                return;
-
-            await using var readStream = await file.OpenReadAsync();
-            FilterModel? m = await JsonSerializer.DeserializeAsync<FilterModel>(readStream, _jsonOpt);
-            if (m != null)
+            IStorageFile? file = await _fileSelectionService.OpenProjectFile();
+            if (file == null)
             {
-                OnEnter(m);
+                return;
             }
+            FilterModel model = await _fileService.LoadProject(file);
+            OnEnter(model);
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
+
         }
+
     }
 
     [RelayCommand]
@@ -159,11 +131,11 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     {
         try
         {
-            var filesService = App.Current?.Services?.GetService<FilesService>();
+            var filesService = App.Current?.Services?.GetService<FileSelectionService>();
             if (filesService is null)
                 throw new NullReferenceException("Missing File Service instance.");
 
-            var file = await filesService.OpenFilterProjectFile();
+            var file = await filesService.OpenProjectFile();
             if (file is null)
                 return;
 
@@ -206,11 +178,15 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     private readonly BlockTemplateService _blockTemplateService;
     private readonly RuleTemplateService _ruleTemplateService;
     private readonly IProjectService _projectService;
+    private readonly FileSelectionService _fileSelectionService;
+    private readonly FileService _fileService;
 
     public ProjectEditViewModel(ItemTypeService typeService
         , BlockTemplateService blockTempalteService
         , RuleTemplateService ruleTempalateService
-        , IProjectService projectService)
+        , IProjectService projectService
+        , FileSelectionService fileSelectionService
+        , FileService fileService)
     {
         _typeService = typeService;
         _blockTemplateService = blockTempalteService;
@@ -219,6 +195,8 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         Messenger.Register<FilterEditedRequestEvent>(this);
         _ruleTemplateService = ruleTempalateService;
         _projectService = projectService;
+        _fileSelectionService = fileSelectionService;
+        _fileService = fileService;
     }
 
     public void Receive(FilterEditedRequestEvent message)

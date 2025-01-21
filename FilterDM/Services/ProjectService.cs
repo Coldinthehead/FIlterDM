@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Threading.Channels;
 using System;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Xml.Linq;
 
 namespace FilterDM.Services;
 public class ProjectService : IProjectService
