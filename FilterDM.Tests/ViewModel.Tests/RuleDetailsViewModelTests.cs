@@ -28,9 +28,20 @@ public class RuleDetailsViewModelTests
         RuleModel testModel = sut.GetModel();
 
         Assert.That(testModel, Is.Not.Null);
-        Assert.That(testModel.Title, Is.Not.Null);
         Assert.That(testModel.Enabled, Is.EqualTo(sut.Properties.Enabled));
         Assert.That(testModel.Priority, Is.EqualTo(sut.Properties.Priority));
         Assert.That(testModel.Show, Is.EqualTo(sut.Properties.Show));
+    }
+
+    [Test]
+    public void GetModel_ShouldSetNameAsEmpty_WhenTitleIsNull()
+    {
+        RuleDetailsViewModel sut = new(new(), new(new ItemTypeService()), new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())));
+        sut.Properties.Title = null;
+
+        RuleModel testModel = sut.GetModel();
+
+        Assert.That(testModel.Title, Is.Not.Null);
+        Assert.That(testModel.Title, Is.EqualTo("Empty"));
     }
 }
