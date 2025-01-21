@@ -7,7 +7,6 @@ namespace FilterDM.Services;
 
 public class FilterExportService
 {
-
     public string Build(FilterModel model)
     {
         var sb = new StringBuilder();
@@ -49,11 +48,11 @@ public class FilterExportService
 
         if (rule.ClassCondition != null && rule.ClassCondition.SelectedClasses.Count > 0)
         {
-            sb.AppendLine($"\tClass {string.Join(" ", rule.ClassCondition.SelectedClasses.Select(x => $"\"{x}\"").ToList())}");
+            sb.AppendLine($"\tClass == {string.Join(" ", rule.ClassCondition.SelectedClasses.Select(x => $"\"{x}\"").ToList())}");
         }
         if (rule.TypeCondition != null && rule.TypeCondition.SelectedTypes.Count > 0)
         {
-            sb.AppendLine($"\tBaseType {string.Join(" ", rule.TypeCondition.SelectedTypes.Select(x => $"\"{x}\"").ToList())}");
+            sb.AppendLine($"\tBaseType == {string.Join(" ", rule.TypeCondition.SelectedTypes.Select(x => $"\"{x}\"").ToList())}");
         }
         if (rule.RarityCondition != null)
         {
@@ -76,7 +75,7 @@ public class FilterExportService
             }
             if (rarity.Count != 0)
             {
-                sb.AppendLine($"\tRarity {string.Join(" ", rarity.Select(x => $"\"{x}\"").ToList())}");
+                sb.AppendLine($"\tRarity == {string.Join(" ", rarity.Select(x => $"\"{x}\"").ToList())}");
 
             }
         }
