@@ -56,25 +56,28 @@ public class FilterLexer
         List<Token> result = [];
         _currentLine = 1;
 
-        while (Peek() != '\0' && _currentIndex < _input.Length)
+        while (_currentIndex < _input.Length)
         {
             switch (Peek())
             {
                 case '#':
                 {
-                    while (Peek() != '\0' && Peek() != '\n')
+                    while (true)
                     {
+                        if (Peek() == '\0')
+                        {
+                            break;
+                        }
+                        if (Peek() == '\n')
+                        {
+                            break;
+                        }
                         Advance();
                     }
                 }
                 break;
                 case '\n':
-                {
-                    result.Add(new Token()
-                    {
-                        type = TokenType.NEW_LINE,
-                    });
-                }
+                case ' ':
                 break;
                 case '"':
                 {
@@ -192,24 +195,27 @@ public class FilterLexer
                             Advance();
                         }
                     }
-                    string word = string.Join("", chars);
-                    if (_keywordsMap.ContainsKey(word))
+                    if (chars.Count != 0)
                     {
-                        result.Add(new Token()
+                        string word = string.Join("", chars);
+                        if (_keywordsMap.ContainsKey(word))
                         {
-                            type = _keywordsMap[word],
-                            Line = _currentLine,
-                            Value = word,
-                        });
-                    }
-                    else
-                    {
-                        result.Add(new Token()
+                            result.Add(new Token()
+                            {
+                                type = _keywordsMap[word],
+                                Line = _currentLine,
+                                Value = word,
+                            });
+                        }
+                        else
                         {
-                            type = TokenType.STRING,
-                            Line = _currentLine,
-                            Value = word,
-                        });
+                            result.Add(new Token()
+                            {
+                                type = TokenType.STRING,
+                                Line = _currentLine,
+                                Value = word,
+                            });
+                        }
                     }
                 }
                 break;
@@ -233,7 +239,7 @@ public class FilterLexer
         {
             _currentLine++;
         }
-        if (_currentIndex + 1 <= _input.Length)
+        if (_currentIndex < _input.Length)
         {
             _currentIndex++;
         }

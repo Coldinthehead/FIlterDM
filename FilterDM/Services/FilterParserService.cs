@@ -1,4 +1,5 @@
-﻿using FilterCore.Parser;
+﻿using Avalonia.Media;
+using FilterCore.Parser;
 using FilterDM.Models;
 using FilterDM.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,14 +11,14 @@ namespace FilterDM.Services;
 
 public struct ImportResult
 {
-    public List<string> Errors { get; set; } = [];
+    public List<string> Errors { get; set; }
     public FilterModel Model { get; set;  }
 
     public int TotalRules;
 
-    public ImportResult(string erorrMessage,FilterModel model)
+    public ImportResult()
     {
-
+        Errors = [];
     }
 }
 
@@ -89,12 +90,15 @@ public class FilterParserService
         }
         RuleParser parser = new RuleParser();
         List<Rule> rules = parser.Parse(tokens);
-        TypeResolver resolver = new TypeResolver();
+        result.Errors.AddRange(parser.Errors);
+        TypeResolver argTypeResolver = new TypeResolver();
+        ModifierResolver modResolver = new();
         foreach (Rule rule in rules)
         {
             foreach (RuleNode node in rule.Nodes)
             {
-                resolver.Resolve(node);
+                argTypeResolver.Resolve(node);
+                modResolver.Resolve(node);
             }
         }
 
@@ -112,9 +116,9 @@ public class FilterParserService
 
         foreach (var node in rule.Nodes)
         {
-            switch (node.Operator.type)
+            switch (node.GetOperatorMetaType())
             {
-                case TokenType.CLASS_DECORATOR:
+                case ModifierType.Class:
                 {
                     ClassConditionModel condition = new();
                     var classService = App.Current.Services.GetService<ItemClassesService>();
@@ -154,7 +158,7 @@ public class FilterParserService
 
                 }
                 break;
-                case TokenType.TYPE_DECORATOR:
+                case ModifierType.BaseType:
                 {
                     TypeConditionModel condition = new();
 
@@ -196,7 +200,17 @@ public class FilterParserService
                 }
                 break;
 
-                case TokenType.NUMERIC_DECORATOR:
+                case ModifierType.AreaLevel:
+                case ModifierType.DropLevel:
+                case ModifierType.Quality:
+                case ModifierType.ItemLevel:
+                case ModifierType.Height:
+                case ModifierType.Width:
+                case ModifierType.WaystoneTier:
+                case ModifierType.BaseAmrmour:
+                case ModifierType.BaseEvasion:
+                case ModifierType.BaseEnergyShield:
+                case ModifierType.Sockets:
                 {
                     NumericCondition condition = new();
                     string name = node.Operator.Value;
@@ -214,8 +228,6 @@ public class FilterParserService
                     }
 
                     condition.ValueName = name;
-                    condition.Number = number;
-
 
                     if (sign.Equals("==") || sign == "=")
                     {
@@ -243,12 +255,16 @@ public class FilterParserService
                     {
                         break;
                     }
+                    condition.Number = number;
+
                     model.AddNumericCondition(condition);
 
                 }
                 break;
 
-                case TokenType.COLOR_DECORATOR:
+                case ModifierType.SetBackgroundColor:
+                case ModifierType.SetBorderColor:
+                case ModifierType.SetTextColor:
                 {
                     var value = node.Operator.Value;
                     if (value.Equals("SetBorderColor"))
@@ -281,14 +297,14 @@ public class FilterParserService
                     }
                 }
                 break;
-                case TokenType.TEXT_SIZE_DECORATOR:
+                case ModifierType.SetFontSize:
                 {
                     int size = Math.Clamp(int.Parse(node.Parameters[0].Value), 12, 45);
                     model.FontSize = size;
                 }
                 break;
 
-                case TokenType.BEAM_DECORATOR:
+                case ModifierType.PlayEffect:
                 {
                     BeamDetails beam = new BeamDetails();
                     beam.Color = node.Parameters[0].Value;
@@ -298,7 +314,7 @@ public class FilterParserService
 
                 }
                 break;
-                case TokenType.MINIMAP_DECORATOR:
+                case ModifierType.MinimapIcon:
                 {
                     MinimapIconDetails icon = new MinimapIconDetails();
                     int size = int.Parse(node.Parameters[0].Value);
@@ -325,7 +341,8 @@ public class FilterParserService
                 }
                 break;
 
-                case TokenType.SOUND_DECORATOR:
+                case ModifierType.PlayAlertSound:
+                case ModifierType.PlayAlertSoundPositional:
                 {
                     SoundDetails sound = new SoundDetails();
                     sound.Sample = int.Parse(node.Parameters[0].Value);
@@ -336,10 +353,11 @@ public class FilterParserService
 
 
 
-                case TokenType.SINGLE_DECORATOR:
+                case ModifierType.DisableDropSound:
+                case ModifierType.EnableDropSound:
                 break;
 
-                case TokenType.RARITY_DECORATOR:
+                case ModifierType.Rarity:
                 {
                     RarityConditionModel condition = new();
                     List<string> rarityMap = ["Normal", "Magic", "Rare", "Unique"];

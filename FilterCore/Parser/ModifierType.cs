@@ -28,4 +28,8 @@ public enum ModifierType
     CustomAlertSound,
     MinimapIcon,
     PlayEffect,
+    WaystoneTier,
+    BaseAmrmour,
+    BaseEvasion,
+    BaseEnergyShield
 }

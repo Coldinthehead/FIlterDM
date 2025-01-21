@@ -6,6 +6,7 @@ using FilterCore.Decorations.Builder;
 using FilterCore.Enums;
 using FilterCore.Parser;
 using FilterCore.PoeData;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Text.Json;
 
@@ -18,6 +19,328 @@ namespace Poe2FilterConsole
         static void Main(string[] args)
         {
             var input = @"
+#===============================================================================================================
+# NeverSink's Indepth Loot Filter - for Path of Exile
+#===============================================================================================================
+# VERSION:  0.1.1
+# AUTHOR:   NeverSink
+#
+# This is a mini-filter designed for early PoE2 EA gameplay. I will eventually replace it with a full-fledged filter
+# With FilterBlade.xyz support. This filter focuses more on highlighting loot, rather than hiding
+#
+# TWITTER: @NeverSinkDev
+# DISCORD: https://discord.gg/mye6xhF
+# TWITCH:  https://www.twitch.tv/neversink
+# PATREON: https://www.patreon.com/Neversink
+
+#--------------------------
+# Overrides - Uniques, Valuables
+#--------------------------
+
+Show # Quaterstufersa
+	BaseType ""Expert Slicing Quarterstaff"" ""Expert Barrier Quarterstaff"" ""Expert Long Quarterstaff"" ""Expert Gothic Quarterstaff""
+	SetFontSize 45
+	SetBorderColor 163 75 144 255 
+
+Show # amour
+	BaseType ""Expert Spiral Wraps"" ""Expert Linen Wraps"" ""Expert Gauze Wraps""  
+	SetFontSize 45
+	SetBorderColor 163 75 144 255 
+	
+Show #boots
+	BaseType ""Expert Hunting Shoes"" ""Expert Threaded Shoes"" ""Expert Frayed Shoes""
+	SetFontSize 45
+	SetBorderColor 163 75 144 255 
+	
+Show #body
+	BaseType  ""Expert Wayfarer Jacket"" ""Expert Scalper's Jacket"" ""Expert Waxed Jacket""
+	SetFontSize 45
+	SetBorderColor 163 75 144 255 
+	
+Show # helm
+	BaseType ""Expert Feathered Tiara"" ""Expert Chain Tiara"" ""Expert Wicker Tiara""
+	SetFontSize 45
+	SetBorderColor 163 75 144 255 
+	
+
+Show
+Rarity Unique
+SetTextColor 175 96 37 255
+SetBorderColor 175 96 37 255
+SetBackgroundColor 53 13 13 255
+PlayAlertSound 3 300
+PlayEffect Brown
+MinimapIcon 2 Brown Star
+SetFontSize 40
+
+## Divine Orb Style
+Show
+Class ""Currency""
+BaseType ""Mirror"" ""Divine"" ""Perfect Jeweller's Orb"" ""Exalted Orb""
+SetFontSize 45
+SetTextColor 255 0 0 255
+SetBorderColor 255 0 0 255
+SetBackgroundColor 255 255 255 255
+PlayAlertSound 6 300
+PlayEffect Red
+MinimapIcon 0 Red Star
+
+#--------------------------
+# Gold
+#--------------------------
+
+Show
+StackSize >= 500
+BaseType == ""Gold""
+SetTextColor 255 255 255
+SetBorderColor 255 255 255
+PlayEffect Orange Temp
+
+Show
+BaseType == ""Gold""
+SetTextColor 180 180 180
+SetBorderColor 0 0 0 255
+SetBackgroundColor 0 0 0 180
+
+#--------------------------
+# Uncut Gems
+#--------------------------
+
+Show
+BaseType ""Uncut ""
+SetTextColor 20 240 240
+SetBorderColor 20 240 240
+PlayAlertSound 2 300
+PlayEffect Cyan
+MinimapIcon 1 Cyan Triangle
+
+#--------------------------
+# Socketables and Special Character Equipment
+#--------------------------
+
+# Special A Tier - League specific socketables and jewels
+Show 
+BaseType ""Soul Core"" ""Timeless""
+SetTextColor 0 240 190
+SetBorderColor 0 240 190
+SetFontSize 40
+MinimapIcon 2 Cyan Triangle
+PlayEffect Cyan
+
+# Special A Tier - Sanctum Relics
+Show 
+Class ""Relic""
+SetTextColor 0 240 190
+SetBorderColor 0 240 190
+SetFontSize 40
+MinimapIcon 2 Cyan Triangle
+PlayEffect Cyan
+
+# Special A Tier - Rare Jewels
+Show
+Class ""Jewel""
+Rarity Rare
+SetTextColor 0 240 190
+SetBorderColor 0 240 190
+SetFontSize 40
+MinimapIcon 2 Cyan Triangle
+PlayEffect Cyan
+
+# Special B Tier - Any Jewels
+Show
+Class ""Jewel""
+Rarity Magic
+SetTextColor 0 240 190
+SetBorderColor 0 240 190
+SetFontSize 40
+PlayEffect Cyan Temp
+
+# Special B Tier - Any Runes and Charms
+Show 
+BaseType "" Rune"" "" Charm""
+SetTextColor 0 240 190
+PlayEffect Cyan Temp
+
+#--------------------------
+# Socketables and Special Character Equipment
+#--------------------------
+
+# Currency Tier A: Gemcutter, Annullment
+Show
+Class ""Currency""
+BaseType ""Gemcutter's Prism"" ""Orb of Annulment"" ""Orb of Chance""
+SetTextColor 255 255 255 255
+SetBorderColor 255 255 255 255
+SetBackgroundColor 240 90 35
+PlayAlertSound 1 300
+PlayEffect White
+MinimapIcon 1 White Circle
+SetFontSize 40
+
+# Currency Tier B: Vaal, Chaos, Exalt, Exotic
+Show
+Class ""Currency""
+BaseType ""Vaal Orb"" ""Greater Jeweller's Orb"" ""Chaos Orb"" ""Lesser Jeweller's Orb"" ""Exotic"" ""Regal Orb"" ""Artificer's Orb"" ""Glassblower's Bauble"" ""Orb of Alchemy"" 
+SetTextColor 255 207 132
+SetBorderColor 255 207 132
+SetBackgroundColor 76 51 12
+PlayAlertSound 2 300
+PlayEffect White
+MinimapIcon 1 White Circle
+SetFontSize 40
+
+Show
+Class ""Currency""
+BaseType ""Distilled"" ""Catalyst"" ""Essence of"" ""Omen of""
+SetTextColor 255 207 132
+SetBorderColor 255 207 132
+SetBackgroundColor 76 51 12
+PlayAlertSound 2 300
+PlayEffect White
+MinimapIcon 1 White Circle
+
+# Currency Tier C: Vaal, Chaos, Exalt, Exotic
+Show
+Class ""Currency""
+BaseType ""Arcanist's Etcher"" ""Armourer's Scrap"" ""Blacksmith's Whetstone"" ""Orb of Augmentation"" ""Orb of Transmutation"" ""Regal Shard""
+SetTextColor 255 207 132
+SetBorderColor 255 207 132
+MinimapIcon 2 Grey Circle
+
+Show
+Class ""Currency""
+BaseType ""Simulacrum Splinter"" ""Breach Splinter"" "" Artifact""
+SetTextColor 255 207 132
+SetBorderColor 255 207 132
+MinimapIcon 2 Grey Circle
+
+Show
+Class ""Currency""
+BaseType ""Wisdom"" ""Shard""
+
+# Unknown currency
+Show
+Class ""Currency""
+SetTextColor 255 207 132
+SetBorderColor 255 207 132
+SetBackgroundColor 76 51 12
+PlayAlertSound 2 300
+PlayEffect Pink
+MinimapIcon 1 White Circle
+
+# Fragments
+Show
+BaseType ""Simulacrum"" "" Tablet"" ""Breachstone"" ""Barya"" ""Ultimatum"" "" Fragment"" ""Cowardly Fate"" ""Deadly Fate"" ""Victorious Fate""
+SetTextColor 255 207 255
+SetBorderColor 255 207 255
+SetBackgroundColor 65 20 80
+PlayAlertSound 2 300
+PlayEffect White
+MinimapIcon 1 White Square
+SetFontSize 40
+
+Show
+BaseType ""Waystone""
+Rarity <= Rare
+SetTextColor 255 255 255
+SetBorderColor 255 255 255
+PlayAlertSound 4 300
+PlayEffect White
+MinimapIcon 1 White Square
+SetFontSize 40
+
+#--------------------------
+# Value Rares
+#--------------------------
+
+Show
+Class ""Rings"" ""Amulets"" ""Belts""
+Rarity Rare
+SetFontSize 40
+SetTextColor 233 206 75
+SetBorderColor 233 206 75
+PlayEffect Yellow
+MinimapIcon 1 Yellow Diamond
+
+#--------------------------
+# Rings, Amulets, Belts
+#--------------------------
+
+Show
+Rarity Normal
+Class ""Rings"" ""Amulets"" ""Belts""
+SetFontSize 40
+
+Show
+Class ""Rings"" ""Amulets"" ""Belts""
+Rarity Magic
+SetFontSize 40
+
+Hide
+	Rarity Normal
+
+#--------------------------
+# Salvagable Items
+#--------------------------
+
+# Not working!
+Show
+Sockets > 0
+Rarity Normal
+SetBorderColor 200 200 200
+SetFontSize 35
+
+Show
+Quality > 10
+Rarity Normal
+SetBorderColor 200 200 200
+SetFontSize 35
+
+# Not working!
+Show
+Sockets > 0
+Rarity Magic
+SetBorderColor 0 0 200
+SetFontSize 35
+
+Show
+Quality > 10
+Rarity Magic
+SetBorderColor 0 0 200
+SetFontSize 35
+
+#--------------------------
+# OPTIONAL RULES
+#--------------------------
+# TO ENABLE RULES, REMOVE THE # AT THE START OF THE LINE
+
+### OPTIONAL RULE: Hide random bases
+# REMOVE THE BASES YOU --DO-- WANT TO SEE BEFORE SETTING TO HIDE
+
+# Hide
+# Rarity <= Magic
+# Class ""Flask"" ""Body"" ""Helmet"" ""Boots"" ""Gloves"" ""Shields"" ""Quiver"" ""Mace"" ""Staff"" ""Quarter"" ""Bow"" ""Crossbow"" ""Wand"" ""Sceptre""
+# AreaLevel >= 65
+
+### OPTIONAL RULE: REDUCES BACKGROUND ON LOW LEVEL BASES
+
+# Show
+# Rarity <= Magic
+# Class ""Flask"" ""Body"" ""Helmet"" ""Boots"" ""Gloves"" ""Shields"" ""Quiver"" ""Mace"" ""Staff"" ""Quarter"" ""Bow"" ""Crossbow"" ""Wand"" ""Sceptre""
+# AreaLevel >= 65
+# DropLevel <= 50
+# SetBackgroundColor 0 0 0 125
+
+#--------------------------
+# Meta
+#--------------------------
+
+# If this thing crashes, time to update your filter!
+# This is here to prevent people to use this filter for AGES. Expert items will get removed eventually
+# Get a new filter from www.filterblade.xyz
+
+Show
+BaseType == ""Expert Laced Boots""
 
 	
     ";
@@ -27,15 +350,24 @@ namespace Poe2FilterConsole
             var tokens = lexer.BuildTokens(input);
 
             var rules = parser.Parse(tokens);
+            var resolver = new TypeResolver();
+            var operatorResolver = new ModifierResolver();
+
             foreach (var rule in rules )
             {
+                foreach (var n in rule.Nodes)
+                {
+                    resolver.Resolve(n);
+                    operatorResolver.Resolve(n);
+                }
+                
                 Console.WriteLine($"{rule.StartToken} ");
                 foreach (var node in rule.Nodes)
                 {
-                    Console.WriteLine($"\t{node.Operator}");
+                    Console.WriteLine($"\t{node.Operator} :{node.Operator.Value}");
                     foreach (var pn in node.Parameters)
                     {
-                        Console.WriteLine($"\t\t{pn}");
+                        Console.WriteLine($"\t\t{pn} : {pn.Value}");
                     }
                 }
             }

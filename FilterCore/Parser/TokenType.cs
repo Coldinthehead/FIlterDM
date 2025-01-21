@@ -6,7 +6,6 @@ public enum TokenType
     STRING,
     RULE_START,
     CONTINUE,
-    NEW_LINE,
     MODIFIER_KEYWORD,
     BOOL_OPERATOR,
 }

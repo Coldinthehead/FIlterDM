@@ -42,10 +42,10 @@ public class RuleParser
                 break;
                 default:
                 {
-                    Errors.Add($"Xxpect Rule start token at {Peek().Line} : {Peek().Value}");
+                    Errors.Add($"Expect Rule start token at {Peek().Line} : {Peek().Value}");
                     while (true)
                     {
-                        if (Peek().type == TokenType.RULE_START)
+                        if (Peek().type == TokenType.RULE_START || Peek().type == TokenType.CONTINUE|| Peek().type == TokenType.MODIFIER_KEYWORD)
                         {
                             break;
                         }
@@ -66,21 +66,26 @@ public class RuleParser
     private Rule BuildRule()
     {
         Token start = Consume();
-        Advance();
 
         Rule rule = new() { StartToken = start };
 
         List<TokenType> stopTokens = [TokenType.EOF, TokenType.RULE_START, TokenType.CONTINUE];
         while (!stopTokens.Contains(Peek().type))
         {
-            Token current = Consume();
+            Token current = Peek();
             if (current.type == TokenType.MODIFIER_KEYWORD)
             {
                 RuleNode node = new()
                 {
-                    Operator = current
+                    Operator = Consume()
                 };
-                while (Peek().type != TokenType.NEW_LINE && Peek().type != TokenType.EOF)
+
+                if (Peek().type == TokenType.BOOL_OPERATOR)
+                {
+                    node.Parameters.Add(Consume());
+                }
+
+                while (Peek().type == TokenType.STRING)
                 {
                     node.Parameters.Add(Consume());
                 }
@@ -89,12 +94,12 @@ public class RuleParser
             else
             {
                 Errors.Add($"Expect MODIFIER_KEYWORD but got {current.type} at {current.Line}");
-                while (Peek().type != TokenType.NEW_LINE)
+                List<TokenType> set = [TokenType.RULE_START, TokenType.CONTINUE, TokenType.EOF];
+                while (set.Contains(Peek().type) == false)
                 {
                     Advance();
                 }
             }
-            Advance();
         }
         return rule;
     }
