@@ -293,4 +293,16 @@ public class RuleNode
     public Token @Operator;
 
     public List<Token> Parameters = [];
+
+    public List<ParameterType> ParameterTypes = [];
+
+    public ParameterType GetParameterMeta(int index)
+    {
+        return ParameterTypes[index];
+    }
+}
+
+public class ParemeterMetadata
+{
+    public ParameterType ParamType;
 }
