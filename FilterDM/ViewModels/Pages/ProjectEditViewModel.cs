@@ -110,14 +110,20 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     {
         try
         {
-            var filesService = App.Current?.Services?.GetService<FileSelectionService>();
-            if (filesService is null)
-                throw new NullReferenceException("Missing File Service instance.");
+            /* var filesService = App.Current?.Services?.GetService<FileSelectionService>();
+             if (filesService is null)
+                 throw new NullReferenceException("Missing File Service instance.");
 
-            var file = await filesService.OpenProjectFile();
-            if (file is null)
+             var file = await filesService.OpenProjectFile();
+             if (file is null)
+                 return;
+ */
+
+            IStorageFile? file = await _fileSelectionService.OpenPoeFile();
+            if (file == null)
+            {
                 return;
-
+            }
 
             string input = File.ReadAllText(file.Path.LocalPath);
             var result = App.Current.Services.GetService<FilterParserService>().Parse(input);

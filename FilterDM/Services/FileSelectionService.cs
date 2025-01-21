@@ -1,5 +1,8 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Platform.Storage;
+using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace FilterDM.Services;
@@ -65,6 +68,21 @@ public class FileSelectionService
             SuggestedFileName = $"{name}.filter",
             FileTypeChoices = [FilterFileChoice],
         });
+    }
+
+    public async Task<IStorageFile?> OpenPoeFile()
+    {
+        string poeFilterPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Path of Exile 2");
+        IStorageFolder? storageFolder = await _target.StorageProvider.TryGetFolderFromPathAsync(poeFilterPath);
+        var files = await _target.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
+        {
+            Title = "Open Filter File",
+            AllowMultiple = false,
+            FileTypeFilter = [FilterFileChoice],
+            SuggestedStartLocation = storageFolder,
+        });
+
+        return files.Count >= 1 ? files[0] : null;
     }
 
 }
