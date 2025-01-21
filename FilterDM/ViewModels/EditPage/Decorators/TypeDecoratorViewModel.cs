@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
 
@@ -249,5 +250,22 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         }
     }
 
+    public void SetModelScoped(TypeConditionModel model)
+    {
+        foreach (TypeListViewModel category in TypeList)
+        {
+            foreach (TypeViewModel item in category.Types)
+            {
+                if (model.HasType(item.Name) && item.TakenInScope == false)
+                {
+                    item.IsSelected = true;
+                    item.TakenInScope = true;
+                    SelectedTypes.Add(item);
+                }
+            }
+        }
+    }
+
     public override ModifierEditorViewModel GetEditor() => new TypeEditorViewModel(Rule, this);
+  
 }

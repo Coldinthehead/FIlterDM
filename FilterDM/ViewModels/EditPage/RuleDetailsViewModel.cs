@@ -165,7 +165,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public void AddTypeFilter(TypeConditionModel condition)
     {
         TypeDecoratorViewModel vm = _typeScopeManager.GetDecorator(this);
-        vm.SetModel(condition);
+        _typeScopeManager.SetModel(vm, condition);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
     }

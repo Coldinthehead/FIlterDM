@@ -1,6 +1,8 @@
-﻿using FilterDM.Services;
+﻿using FilterDM.Models;
+using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Decorators;
+using System;
 using System.Collections.Generic;
 
 namespace FilterDM.Managers;
@@ -96,5 +98,18 @@ public class TypeScopeManager
                 model.ReleaseScope(_typeService.BuildEmptyList());
             }
         }
+    }
+
+    public void SetModel(TypeDecoratorViewModel vm, TypeConditionModel condition)
+    {
+        if (_useScope)
+        {
+            vm.SetModelScoped(condition);
+        }
+        else
+        {
+            vm.SetModel(condition);
+        }
+
     }
 }
