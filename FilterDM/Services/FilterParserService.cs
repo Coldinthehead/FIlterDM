@@ -115,7 +115,7 @@ public class FilterParserService
         model.Show = rule.StartToken.Value.Equals("Show") ? true : false;
         model.Priority = priority;
 
-
+/*
         foreach (var node in rule.Nodes)
         {
             switch (node.Operator.type)
@@ -461,7 +461,7 @@ public class FilterParserService
         if (model.Title == "")
         {
             model.Title = "unknown";
-        }
+        }*/
 
         return model;
     }

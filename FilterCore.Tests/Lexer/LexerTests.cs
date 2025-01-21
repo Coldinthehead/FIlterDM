@@ -110,4 +110,51 @@ public class LexerTests
 
         Assert.That(result.First().type, Is.EqualTo(TokenType.MODIFIER_KEYWORD));
     }
+
+    [Test]
+    public void BuildToken_ShouldRecognizeQuotedString()
+    {
+        FilterLexer sut = new();
+        string input = "\"Hello world\"";
+        List<Token> result = sut.BuildTokens(input);
+
+        Assert.That(result.First().type, Is.EqualTo(TokenType.STRING));
+    }
+
+    [Test]
+    public void BuildToken_ShouldRecognizeSpaceSpaperatedValuesAsString()
+    {
+        FilterLexer sut = new();
+        string input = "foo bar bazz";
+        List<Token> result = sut.BuildTokens(input);
+
+        Assert.That(result, Has.Count.EqualTo(4));
+        Assert.That(result.First().type, Is.EqualTo(TokenType.STRING));
+    }
+
+    [Test]
+    public void BuildToken_ShouldRecogrnizeNumbersAsStrings()
+    {
+        FilterLexer sut = new();
+        string input = "231 123 32 ";
+        List<Token> result = sut.BuildTokens(input);
+
+        Assert.That(result, Has.Count.EqualTo(4));
+        Assert.That(result.First().type, Is.EqualTo(TokenType.STRING));
+    }
+
+    [Test]
+    [TestCase("=")]
+    [TestCase("==")]
+    [TestCase(">=")]
+    [TestCase("<=")]
+    [TestCase("<")]
+    [TestCase(">")]
+    public void BuildToken_ShouldRecogrnieBoolOperators(string input)
+    {
+        FilterLexer sut = new();
+        List<Token> result = sut.BuildTokens(input);
+        Assert.That(result.First().type, Is.EqualTo(TokenType.BOOL_OPERATOR));
+    }
+
 }

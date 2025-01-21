@@ -10,6 +10,7 @@ public enum TokenType
     CONTINUE,
     NEW_LINE,
     MODIFIER_KEYWORD,
+    BOOL_OPERATOR,
 }
 
 public class Token
@@ -34,7 +35,6 @@ public class LexerError : Exception
     }
 
 }
-
 
 public class FilterLexer
 {
@@ -108,21 +108,123 @@ public class FilterLexer
                     {
                         type = TokenType.NEW_LINE,
                     });
-                    Advance();
                 }
                 break;
-                case ' ':
+                case '"':
                 {
                     Advance();
+                    List<char> chars = [];
+                    int line = _currentLine;
+                    while (Peek() != '"')
+                    {
+                        if (Peek() == '\n')
+                        {
+                            throw new LexerError($"Multipline string at {line}!");
+                        }
+                        if (Peek() == '\0')
+                        {
+                            throw new LexerError($"Unterminated string at {line}");
+                        }
+
+                        chars.Add(Peek());
+                        Advance();
+                    }
+                    string word = string.Join("", chars);
+                    result.Add(new Token()
+                    {
+                        type = TokenType.STRING,
+                        Line = _currentLine,
+                        Value = word
+                    });
+                }
+                break;
+                case '=':
+                {
+                    if (Peek(1) == '=')
+                    {
+                        Advance();
+                        result.Add(new Token()
+                        {
+                            type = TokenType.BOOL_OPERATOR,
+                            Value = "==",
+                            Line = _currentLine,
+                        });
+                    }
+                    else
+                    {
+                        result.Add(new Token()
+                        {
+                            type = TokenType.BOOL_OPERATOR,
+                            Value = "=",
+                            Line = _currentLine,
+                        });
+                    }
+                }
+                break;
+                case '>':
+                {
+                    if (Peek(1) == '=')
+                    {
+                        Advance();
+                        result.Add(new Token()
+                        {
+                            type = TokenType.BOOL_OPERATOR,
+                            Value = ">=",
+                            Line = _currentLine,
+                        });
+                    }
+                    else
+                    {
+                        result.Add(new Token()
+                        {
+                            type = TokenType.BOOL_OPERATOR,
+                            Value = ">",
+                            Line = _currentLine,
+                        });
+                    }
+                }
+                break;
+                case '<':
+                {
+                    if (Peek(1) == '=')
+                    {
+                        Advance();
+                        result.Add(new Token()
+                        {
+                            type = TokenType.BOOL_OPERATOR,
+                            Value = "<=",
+                            Line = _currentLine,
+                        });
+                    }
+                    else
+                    {
+                        result.Add(new Token()
+                        {
+                            type = TokenType.BOOL_OPERATOR,
+                            Value = "<",
+                            Line = _currentLine,
+                        });
+                    }
                 }
                 break;
                 default:
                 {
                     List<char> chars = new List<char>();
-                    while (IsStringCharacter(Peek()))
+                    if (char.IsDigit(Peek()))
                     {
-                        chars.Add(Peek());
-                        Advance();
+                        while (char.IsDigit(Peek()))
+                        {
+                            chars.Add(Peek());
+                            Advance();
+                        }
+                    }
+                    else
+                    {
+                        while (IsStringCharacter(Peek()))
+                        {
+                            chars.Add(Peek());
+                            Advance();
+                        }
                     }
                     string word = string.Join("", chars);
                     if (_keywordsMap.ContainsKey(word))
@@ -146,6 +248,7 @@ public class FilterLexer
                 }
                 break;
             }
+            Advance();
         }
 
 
@@ -168,7 +271,7 @@ public class FilterLexer
         {
             _currentIndex++;
         }
-        
+
     }
 
     private char Peek(int amount = 0)
