@@ -69,7 +69,7 @@ public partial class App : Application
             }
             await Task.WhenAll(tasts);
 
-            mainVm.Initialize();
+            mainVm.Initialize(Services);
             mainVm.EnterProjectsPage();
 
         }

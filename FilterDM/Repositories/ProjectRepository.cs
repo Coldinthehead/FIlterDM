@@ -1,13 +1,13 @@
 ﻿using FilterDM.Models;
+using FilterDM.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FilterDM.Services;
+namespace FilterDM.Repositories;
 
 public class ProjectRepository : IInit
 {
@@ -30,7 +30,7 @@ public class ProjectRepository : IInit
             FilterModel? model = await LoadModelFromFileAsync(fname);
             if (model != null)
             {
-                _models[model.Name]=  model;
+                _models[model.Name] = model;
             }
         });
         await Task.WhenAll(tasks);
@@ -41,14 +41,14 @@ public class ProjectRepository : IInit
     internal void CreateFilter(FilterModel model)
     {
         _models.Add(model.Name, model);
-        Task.Run(()=>SaveFilter(model));
+        Task.Run(() => SaveFilter(model));
     }
 
     public async Task SaveFilter(FilterModel model)
     {
         var filename = GetFullName(model.Name);
         using var fs = File.Create(filename);
-        await JsonSerializer.SerializeAsync<FilterModel>(fs, model, _saveOptions);
+        await JsonSerializer.SerializeAsync(fs, model, _saveOptions);
     }
 
     private async Task<FilterModel> LoadModelFromFileAsync(string filePath)

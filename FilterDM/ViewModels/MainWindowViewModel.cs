@@ -23,12 +23,13 @@ public partial class MainWindowViewModel : ViewModelBase
         
     }
 
-    public void Initialize()
+    public void Initialize(IServiceProvider services)
     {
-        var typeService = App.Current.Services.GetService<ItemTypeService>();
-        var blockTeplateService = App.Current.Services.GetService<BlockTemplateService>();
-        var ruleTemplateService = App.Current.Services.GetService<RuleTemplateService>();
-        _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService)
+        var typeService = services.GetService<ItemTypeService>();
+        var blockTeplateService = services.GetService<BlockTemplateService>();
+        var ruleTemplateService = services.GetService<RuleTemplateService>();
+        var projectRepository = services.GetService<ProjectRepository>();
+        _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService, projectRepository)
         {
             BackToMenuAction = EnterProjectsPage,
         };

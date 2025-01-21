@@ -119,7 +119,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         FilterModel model = _currentFilterVm.GetModel();
         try
         {
-            await App.Current.Services.GetService<ProjectRepository>().SaveFilter(model);
+            await _projectRepository.SaveFilter(model);
             _ = await App.Current.Services.GetService<DialogService>().ShowOkDialog($"Filter {model.Name} saved!");
             Changes = false;
         }
@@ -218,7 +218,8 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
 
     public ProjectEditViewModel(ItemTypeService typeService
         , BlockTemplateService blockTempalteService
-        , RuleTemplateService ruleTempalateService)
+        , RuleTemplateService ruleTempalateService
+        , ProjectRepository projectRepository)
     {
         _typeService = typeService;
         _blockTemplateService = blockTempalteService;
@@ -226,6 +227,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         EditorPanel = new();
         Messenger.Register<FilterEditedRequestEvent>(this);
         _ruleTemplateService = ruleTempalateService;
+        _projectRepository = projectRepository;
     }
 
     public void Receive(FilterEditedRequestEvent message)
