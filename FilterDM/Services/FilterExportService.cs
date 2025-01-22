@@ -109,8 +109,9 @@ public class FilterExportService
         }
         if (rule.Beam != null)
         {
-            var tempStr = rule.Beam.IsPermanent ? "" : "Temp";
-            sb.AppendLine($"\tPlayEffect {rule.Beam.Color} {tempStr}");
+            var tempStr = rule.Beam.IsPermanent ? "" : " Temp";
+            string result = $"\tPlayEffect {rule.Beam.Color} {tempStr}";
+            sb.AppendLine(result);
         }
         if (rule.Icon != null)
         {

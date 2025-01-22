@@ -87,7 +87,14 @@ public partial class BeamDecoratorViewModel : ModifierViewModelBase
 
     internal void SetModel(BeamDetails beam)
     {
+        if (_staticBeamColors.Contains(beam.Color))
+        {
         SelectedBeamColor = beam.Color;
+        }
+        else
+        {
+            SelectedBeamColor = _staticBeamColors[0];
+        }
         IsBeamPermanent = beam.IsPermanent;
     }
 
