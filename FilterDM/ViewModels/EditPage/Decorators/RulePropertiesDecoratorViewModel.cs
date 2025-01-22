@@ -68,9 +68,9 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         if (Rule.Modifiers.Count > 2)
         {
             bool confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to override Rule with {Rule.Modifiers.Count} modifiers?");
-            if (confirm)
+            if (!confirm)
             {
-                OnResetConfirmed();
+                return;
             }
         }
         OnResetConfirmed();
