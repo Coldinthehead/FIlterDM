@@ -207,12 +207,12 @@
                                                 Padding="8,4"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Background="{Binding Colors.BackColor, Converter={StaticResource rgbToB}}"
-                                                BorderBrush="{Binding Colors.BorderColor, Converter={StaticResource rgbToB}}"
+                                                Background="{Binding Colors.BackColor.Color, Converter={StaticResource rgbToB}}"
+                                                BorderBrush="{Binding Colors.BorderColor.Color, Converter={StaticResource rgbToB}}"
                                                 BorderThickness="3">
                                                 <TextBlock
                                                     FontSize="{Binding TextSize.FontSize, Converter={StaticResource halfSize}}"
-                                                    Foreground="{Binding Colors.TextColor, Converter={StaticResource rgbToB}}"
+                                                    Foreground="{Binding Colors.TextColor.Color, Converter={StaticResource rgbToB}}"
                                                     Text="Item preview" />
 
                                             </Border>

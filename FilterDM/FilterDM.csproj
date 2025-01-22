@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\ColorSelectorView.axaml.cs">
+      <DependentUpon>ColorSelectorView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\EditPage\Decorators\TextSizeDecoratorView.axaml.cs">
       <DependentUpon>TextSizeDecoratorView.axaml</DependentUpon>
     </Compile>

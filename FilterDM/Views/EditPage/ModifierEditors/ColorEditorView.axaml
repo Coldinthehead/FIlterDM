@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI"
+    xmlns:controls="using:FilterDM.Views"
     xmlns:conv="clr-namespace:FilterDM.Convertors;assembly=FilterDM"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -53,10 +54,10 @@
                     Grid.Column="1"
                     Classes="DecoratorItem"
                     IsVisible="{Binding Rule.Colors.UseFontColor}">
-                    <colorPicker:PortableColorPicker
+                    <ContentControl
                         Width="52"
                         Height="52"
-                        SelectedColor="{Binding Rule.Colors.TextColor, Mode=TwoWay}" />
+                        Content="{Binding FontColorSelector}" />
                 </Border>
 
 

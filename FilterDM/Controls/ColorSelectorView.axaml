@@ -1,0 +1,106 @@
+<UserControl
+    x:Class="FilterDM.Views.ColorSelectorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI"
+    xmlns:conv="using:FilterDM.Convertors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FilterDM.ViewModels"
+    x:Name="Root"
+    d:DesignHeight="450"
+    d:DesignWidth="450"
+    x:DataType="vm:ColorSelectorViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:SolidRGBConvertor x:Key="rgb" />
+    </UserControl.Resources>
+
+
+    <ToggleButton
+        Width="50"
+        Height="50"
+        BorderBrush="Black"
+        BorderThickness="1">
+        <ToggleButton.Content>
+            <Rectangle
+                Width="50"
+                Height="50"
+                Fill="{Binding CurrentColor.Color, Converter={StaticResource rgb}}" />
+        </ToggleButton.Content>
+        <ToggleButton.Flyout>
+            <Flyout>
+                <Grid RowDefinitions="* * ">
+                    <Border
+                        Grid.Row="1"
+                        Width="420"
+                        Height="370"
+                        Padding="8,4"
+                        Background="{DynamicResource MaterialPaperBrush}"
+                        Classes="ToolContainer">
+                        <Grid ColumnDefinitions="* *">
+                            <colorPicker:StandardColorPicker
+                                x:Name="col"
+                                Grid.Column="0"
+                                Width="200"
+                                SelectedColor="{Binding CurrentColor.Color, Mode=TwoWay}">
+                                <colorPicker:StandardColorPicker.Styles>
+                                    <Style Selector="TabItem">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </Style>
+                                    <Style Selector="ComboBox">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </Style>
+                                </colorPicker:StandardColorPicker.Styles>
+                            </colorPicker:StandardColorPicker>
+                            <Border
+                                Grid.Column="1"
+                                Background="{DynamicResource MaterialToolBarBackgroundBrush}"
+                                Classes="ToolContainer">
+                                <Grid RowDefinitions="auto *">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Classes="headline5"
+                                        Text="Pallete" />
+
+                                    <ScrollViewer
+                                        Grid.Row="1"
+                                        Padding="0,0,12,0"
+                                        Classes="Container"
+                                        HorizontalScrollBarVisibility="Disabled">
+                                        <ItemsControl ItemsSource="{Binding Pallete}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Orientation="Horizontal" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Rectangle
+                                                        Width="25"
+                                                        Height="25"
+                                                        Margin="8"
+                                                        Fill="Red" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                    </Border>
+                </Grid>
+            </Flyout>
+        </ToggleButton.Flyout>
+    </ToggleButton>
+
+
+</UserControl>

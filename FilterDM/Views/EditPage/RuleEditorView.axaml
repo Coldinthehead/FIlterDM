@@ -64,12 +64,12 @@
                             Padding="8,4"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Background="{Binding Rule.Colors.BackColor, Converter={StaticResource rgbToB}}"
-                            BorderBrush="{Binding Rule.Colors.BorderColor, Converter={StaticResource rgbToB}}"
+                            Background="{Binding Rule.Colors.BackColor.Color, Converter={StaticResource rgbToB}}"
+                            BorderBrush="{Binding Rule.Colors.BorderColor.Color, Converter={StaticResource rgbToB}}"
                             BorderThickness="3">
                             <TextBlock
                                 FontSize="{Binding Rule.TextSize.FontSize}"
-                                Foreground="{Binding Rule.Colors.TextColor, Converter={StaticResource rgbToB}}"
+                                Foreground="{Binding Rule.Colors.TextColor.Color, Converter={StaticResource rgbToB}}"
                                 Text="Item preview" />
 
                         </Border>

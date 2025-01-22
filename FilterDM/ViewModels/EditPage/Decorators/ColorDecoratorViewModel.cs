@@ -6,9 +6,33 @@ using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
-using System.Reflection.Metadata.Ecma335;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
+
+public partial class ColorWrapper : ObservableRecipient
+{
+    [ObservableProperty]
+    private Color _color;
+
+    partial void OnColorChanged(Color value)
+    {
+        Messenger.Send(new FilterEditedRequestEvent(this));
+    }
+
+    public Color CachedColor;
+    public Color DefaultColor;
+
+    public void UseTrue()
+    {
+        Color = CachedColor;
+    }
+
+    public void UseFalse()
+    {
+        CachedColor = Color;
+        Color = DefaultColor;
+    }
+}
 
 public partial class ColorDecoratorViewModel : ModifierViewModelBase
 {
@@ -22,28 +46,18 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
     {
         if (value == true)
         {
-            TextColor = _cachedFontColor;
+            TextColor.UseTrue();
             UseAnyColor = true;
         }
         else
         {
-            _cachedFontColor = TextColor;
-            TextColor = DEFAULT_FONT_COLOR;
+            TextColor.UseFalse();
         }
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
     [ObservableProperty]
-    private Color _textColor = DEFAULT_FONT_COLOR;
-    partial void OnTextColorChanged(Color value)
-    {
-        Messenger.Send(new FilterEditedRequestEvent(this));
-    }
-
-    private Color _cachedFontColor = DEFAULT_FONT_COLOR;
-    private static Color DEFAULT_FONT_COLOR = new Color(255, 100, 97, 87);
-
-
+    private ColorWrapper _textColor;
     [ObservableProperty]
     private bool _useBorderColor = false;
     partial void OnUseBorderColorChanged(bool value)
@@ -51,25 +65,16 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         if (value == true)
         {
             UseAnyColor = true;
-            BorderColor = _cachedBorderColor;
+            BorderColor.UseTrue();
         }
         else
         {
-            _cachedBorderColor = BorderColor;
-            BorderColor = DEFAULT_BORDER_COLOR;
+            BorderColor.UseFalse();
         }
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
     [ObservableProperty]
-    private Color _borderColor = DEFAULT_BORDER_COLOR;
-    partial void OnBorderColorChanged(Color value)
-    {
-        Messenger.Send(new FilterEditedRequestEvent(this));
-    }
-    private Color _cachedBorderColor = DEFAULT_BORDER_COLOR;
-
-    private static Color DEFAULT_BORDER_COLOR = Colors.Black;
-
+    private ColorWrapper _borderColor;
 
     [ObservableProperty]
     private bool _useBackColor = false;
@@ -78,44 +83,55 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         if (value == true)
         {
             UseAnyColor = true;
-            BackColor = _cachedBackColor;
+            BackColor.UseTrue();
         }
         else
         {
-            _cachedBackColor = BackColor;
-            BackColor = DEFAULT_BACK_COLOR;
+            BackColor.UseFalse();
         }
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
     [ObservableProperty]
-    private Color _backColor = DEFAULT_BACK_COLOR;
-    partial void OnBackColorChanged(Color value)
-    {
-        Messenger.Send(new FilterEditedRequestEvent(this));
-    }
+    private ColorWrapper _backColor;
 
- 
-    private Color _cachedBackColor = DEFAULT_BACK_COLOR;
-
-    private static Color DEFAULT_BACK_COLOR = Colors.Black;
 
     public ColorDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
+        TextColor = new()
+        {
+            DefaultColor = new Color(255, 100, 97, 87),
+            CachedColor = new Color(255, 100, 97, 87),
+        };
+        TextColor.Color = TextColor.DefaultColor;
+
+        BorderColor = new()
+        {
+            DefaultColor = Colors.Black,
+            CachedColor = Colors.Black,
+        };
+        BorderColor.Color = BorderColor.DefaultColor;
+
+        BackColor = new()
+        {
+            DefaultColor = Colors.Black,
+            CachedColor = Colors.Black,
+        };
+        BackColor.Color = BackColor.DefaultColor;
     }
 
     public override void Apply(RuleModel model)
     {
         if (UseFontColor)
         {
-            model.AddTextColor(TextColor);
+            model.AddTextColor(TextColor.Color);
         }
         if (UseBackColor)
         {
-            model.AddBackgroundColor(BackColor);
+            model.AddBackgroundColor(BackColor.Color);
         }
         if (UseBorderColor)
         {
-            model.AddBorderColor(BorderColor);
+            model.AddBorderColor(BorderColor.Color);
         }
     }
 
@@ -124,7 +140,7 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         if (rule.TryGetTextColor(out Color textColor))
         {
             UseFontColor = true;
-            TextColor = textColor;
+            TextColor.Color = textColor;
         }
         else
         {
@@ -134,7 +150,7 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         if (rule.TryGetBorderColor(out Color borderColor))
         {
             UseBorderColor = true;
-            BorderColor = borderColor;
+            BorderColor.Color = borderColor;
         }
         else
         {
@@ -143,7 +159,7 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         if (rule.TryGetBackgroundColor(out Color backgroundColor))
         {
             UseBackColor = true;
-            BackColor = backgroundColor;
+            BackColor.Color = backgroundColor;
         }
         else
         {
