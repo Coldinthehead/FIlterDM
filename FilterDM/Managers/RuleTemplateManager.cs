@@ -5,6 +5,7 @@ using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FilterDM.ViewModels.EditPage.Managers;
 
@@ -26,5 +27,11 @@ public partial class RuleTemplateManager : ObservableRecipient
     public void SetTemplate(RuleDetailsViewModel rule, RuleModel selectedTemplate)
     {
         Messenger.Send(new ResetRuleTemplateRequest(new ResetRuleTemplateDetails(rule, selectedTemplate)));
+    }
+
+    internal int GetIndex(string templateName)
+    {
+        RuleModel? model = Templates.First(x => x.Title.Equals(templateName));
+        return model == null? 0 : Templates.IndexOf(model);
     }
 }

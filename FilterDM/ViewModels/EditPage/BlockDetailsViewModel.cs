@@ -126,7 +126,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         TemplateManager = templateManager;
         _scopeManager = scopeManager;
-        SelectedTemplate = _templateManager.GetEmpty();
+        SelectedTemplate = _templateManager.Templates.First();
     }
 
     public BlockModel GetModel()
@@ -146,7 +146,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         Title = model.Title;
         Enabled = model.Enabled;
         Priority = model.Priority;
-        SelectedTemplate = TemplateManager.GetTemplate(model.TemplateName);
+        SelectedTemplate = TemplateManager.Templates[TemplateManager.GetSelectionIndex(model.TemplateName)];
     }
     public bool DeleteRule(RuleDetailsViewModel rule)
     {

@@ -8,6 +8,7 @@ using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.Managers;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
@@ -98,7 +99,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
 
         ParentManager = parentManager;
         TemplateManager = templateManager;
-        SelectedTemplate = TemplateManager.GetEmpty();
+        SelectedTemplate = TemplateManager.Templates.First();
     }
 
     public override void Apply(RuleModel model)
@@ -116,7 +117,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         Enabled = rule.Enabled;
         Priority = rule.Priority;
         Show = rule.Show;
-        SelectedTemplate = TemplateManager.Get(rule.TemplateName);
+        SelectedTemplate = TemplateManager.Templates[TemplateManager.GetIndex(rule.TemplateName)];
     }
 
     public override ModifierEditorViewModel GetEditor() => new RulePropertiesEditorViewModel(Rule, this);
