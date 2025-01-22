@@ -2,6 +2,7 @@
 
 public enum ModifierType
 {
+    None,
     AreaLevel,
     ItemLevel,
     DropLevel,

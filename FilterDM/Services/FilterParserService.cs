@@ -91,13 +91,11 @@ public class FilterParserService
         RuleParser parser = new RuleParser();
         List<Rule> rules = parser.Parse(tokens);
         result.Errors.AddRange(parser.Errors);
-        TypeResolver argTypeResolver = new TypeResolver();
         ModifierResolver modResolver = new();
         foreach (Rule rule in rules)
         {
             foreach (RuleNode node in rule.Nodes)
             {
-                argTypeResolver.Resolve(node);
                 modResolver.Resolve(node);
             }
         }

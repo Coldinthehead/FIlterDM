@@ -1,6 +1,14 @@
 ﻿
 namespace FilterCore.Parser;
 
+public class TypeResolveException : Exception
+{
+    public TypeResolveException(string message) : base(message)
+    {
+        
+    }
+}
+
 public class ModifierResolver
 {
     public bool Resolve(RuleNode node)
@@ -8,9 +16,91 @@ public class ModifierResolver
         if (Enum.TryParse(typeof(ModifierType), node.Operator.Value, out var result))
         {
             node.ModType = (ModifierType)result;
+
+            if (node.ModType == ModifierType.None)
+            {
+                throw new Exception($"Unknows Modifier Type at {node.Operator} at {node.Operator.Line}");
+            }
             return true;
         }
         return false;
+    }
+
+    public Dictionary<string,object> ResolveAgrTypes(List<Token> parameters , ModifierType type)
+    {
+        Dictionary<string, object> res = [];
+        switch (type)
+        {
+            case ModifierType.None:
+            break;
+            case ModifierType.AreaLevel:
+            case ModifierType.ItemLevel:
+            case ModifierType.DropLevel:
+            case ModifierType.Quality:
+            case ModifierType.Height:
+            case ModifierType.Width:
+            case ModifierType.StackSize:
+            case ModifierType.BaseAmrmour:
+            case ModifierType.BaseEvasion:
+            case ModifierType.BaseEnergyShield:
+            {
+                if (parameters.Count == 1)
+                {
+                    res["op"] = "=";
+                    res["value"] = int.Parse(parameters[1].Value);
+                }
+                else
+                {
+                    res["op"] = parameters[0].Value;
+                    res["value"] = int.Parse(parameters[1].Value);
+                }
+            }
+            break;
+            case ModifierType.Rarity:
+            break;
+            case ModifierType.Class:
+            break;
+            case ModifierType.BaseType:
+            break;
+            case ModifierType.Sockets:
+            case ModifierType.WaystoneTier:
+            break;
+            break;
+            break;
+            case ModifierType.AnyEnchantment:
+            break;
+            case ModifierType.HasEnchantment:
+            break;
+            break;
+            case ModifierType.Corrupted:
+            break;
+            case ModifierType.Mirrored:
+            break;
+            case ModifierType.SetBorderColor:
+            break;
+            case ModifierType.SetTextColor:
+            break;
+            case ModifierType.SetBackgroundColor:
+            break;
+            case ModifierType.SetFontSize:
+            break;
+            case ModifierType.PlayAlertSound:
+            break;
+            case ModifierType.PlayAlertSoundPositional:
+            break;
+            case ModifierType.DisableDropSound:
+            break;
+            case ModifierType.EnableDropSound:
+            break;
+            case ModifierType.CustomAlertSound:
+            break;
+            case ModifierType.MinimapIcon:
+            break;
+            case ModifierType.PlayEffect:
+            break;
+        }
+
+        return res;
     }
 }
 

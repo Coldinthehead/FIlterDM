@@ -96,18 +96,14 @@ public class RuleParser
                     {
                         Operator = stream[index++]
                     };
-                    Token param = stream[index];
-                    if (param.type == TokenType.BOOL_OPERATOR)
+                    if (index < stream.Count && stream[index].type == TokenType.BOOL_OPERATOR)
                     {
-                        node.Parameters.Add(param);
-                        param = stream[index];
+                        node.Parameters.Add(stream[index]);
                         index++;
                     }
-                    param = stream[index];
                     while (index < stream.Count && stream[index].type == TokenType.STRING)
                     {
-                        node.Parameters.Add(param);
-                        param = stream[index];
+                        node.Parameters.Add(stream[index]);
                         index++;
                     }
                     result.Nodes.Add(node);

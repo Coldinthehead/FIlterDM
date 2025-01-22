@@ -10,6 +10,8 @@ public class RuleNode
 
     public List<ParameterType> ParameterTypes = [];
 
+    public Dictionary<string, object> TypedParameters { get; internal set; }
+
     public ParameterType GetParameterMeta(int index)
     {
         return ParameterTypes[index];

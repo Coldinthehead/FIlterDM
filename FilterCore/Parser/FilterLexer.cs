@@ -60,7 +60,7 @@ public class FilterLexer
         {
             result.AddRange(_lineParser.Parse(details));
         }
-        result.Add(new Token()
+        result.Add(new Token("null")
         {
             type = TokenType.EOF,
         });
@@ -135,11 +135,10 @@ public class LineParser
                     {
                         if (Peek(1) == '=')
                         {
-                            Token t = new Token()
+                            Token t = new Token($"{Peek()}=")
                             {
                                 type = TokenType.BOOL_OPERATOR,
                                 Line = details.Number,
-                                Value = $"{Peek()}="
                             };
                             res.Add(t);
                             Advance();
@@ -147,11 +146,10 @@ public class LineParser
                         }
                         else
                         {
-                            Token t = new Token()
+                            Token t = new Token($"{Peek()}")
                             {
                                 type = TokenType.BOOL_OPERATOR,
                                 Line = details.Number,
-                                Value = $"{Peek()}"
                             };
                             res.Add(t);
                             Advance();
@@ -172,10 +170,9 @@ public class LineParser
                             chars.Add(Peek());
                             Advance();
                         }
-                        Token t = new()
+                        Token t = new(string.Join("", chars))
                         {
                             type = TokenType.STRING,
-                            Value = string.Join("", chars),
                             Line = details.Number,
                         };
                         res.Add(t);
@@ -192,10 +189,9 @@ public class LineParser
                                 chars.Add(Peek());
                                 Advance();
                             }
-                            Token t = new()
+                            Token t = new(string.Join("", chars))
                             {
                                 type = TokenType.STRING,
-                                Value = string.Join("", chars),
                                 Line = details.Number,
                             };
                             res.Add(t);
@@ -211,20 +207,18 @@ public class LineParser
                             string word = string.Join("", chars);
                             if (_keywordsMap.ContainsKey(word))
                             {
-                                Token t = new()
+                                Token t = new(word)
                                 {
                                     type = _keywordsMap[word],
-                                    Value = word,
                                     Line = details.Number,
                                 };
                                 res.Add(t);
                             }
                             else
                             {
-                                Token t = new()
+                                Token t = new(word)
                                 {
                                     type = TokenType.STRING,
-                                    Value = word,
                                     Line = details.Number,
                                 };
                                 res.Add(t);
