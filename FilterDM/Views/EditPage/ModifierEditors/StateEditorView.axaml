@@ -9,5 +9,33 @@
     d:DesignWidth="800"
     x:DataType="vm:StateEditorViewModel"
     mc:Ignorable="d">
-    Welcome to Avalonia!
+    <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
+        <Grid HorizontalAlignment="Center" RowDefinitions="auto *">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Classes="headline4"
+                Text="Item State" />
+
+            <StackPanel
+                Grid.Row="1"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="24">
+
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Classes="headline5" Text="Corrupted" />
+                    <CheckBox IsChecked="{Binding Decorator.Corrupted, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Classes="headline5" Text="Mirrored" />
+                    <CheckBox IsChecked="{Binding Decorator.Mirrored, Mode=TwoWay}" />
+                </StackPanel>
+
+
+
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
