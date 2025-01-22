@@ -46,6 +46,14 @@ public class FilterExportService
             sb.AppendLine("Hide");
         }
 
+        if (rule.StateModifiers != null)
+        {
+            var state = rule.StateModifiers.Corrupted ? "True" : "False";
+            sb.AppendLine($"\tCorrupted {state}");
+            state = rule.StateModifiers.Mirrored ? "True" : "False";  
+            sb.AppendLine($"\tMirrored {state}");
+        }
+
         if (rule.ClassCondition != null && rule.ClassCondition.SelectedClasses.Count > 0)
         {
             sb.AppendLine($"\tClass == {string.Join(" ", rule.ClassCondition.SelectedClasses.Select(x => $"\"{x}\"").ToList())}");
