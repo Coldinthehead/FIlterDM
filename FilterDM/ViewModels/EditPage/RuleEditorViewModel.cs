@@ -128,6 +128,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
             AddModifierViewModel.Build<ClassDecoratorViewModel>("Class", AddClassFilter),
             AddModifierViewModel.Build<TypeDecoratorViewModel>("Type", AddTypeFilter),
             AddModifierViewModel.Build<RarityDecoratorViewModel>("Rarity", AddRarityFilter),
+            AddModifierViewModel.Build<ItemStateDecoratorViewModel>("State", AddStateFilter),
             AddNumericModifier.Build("Item Level",2,NumericFilterType.ItemLevel, ()=> AddNumericFilter(NumericFilterType.ItemLevel)),
             AddNumericModifier.Build("Drop Level", 2, NumericFilterType.DropLevel,()=> AddNumericFilter(NumericFilterType.DropLevel)),
             AddNumericModifier.Build("Area Level", 2, NumericFilterType.AreaLevel,() => AddNumericFilter(NumericFilterType.AreaLevel)),
@@ -143,6 +144,11 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
         Messenger.Register<RuleTitleApplyEvent, RuleDetailsViewModel>(this, Rule);
 
         UpdateAddModifierList();
+    }
+
+    private void AddStateFilter()
+    {
+        SelectedModifier = Rule.AddStateModifier();
     }
 
     private void AddFontSizeModifier()

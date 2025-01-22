@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FilterDM.Models;
 using FilterDM.ViewModels.Base;
+using FilterDM.ViewModels.EditPage.ModifierEditors;
 using System;
 using System.Collections.Generic;
 
@@ -44,5 +45,5 @@ public partial class ItemStateDecoratorViewModel : ModifierViewModelBase
     }
 
     public override void Apply(RuleModel model) => throw new NotImplementedException();
-    public override ModifierEditorViewModel GetEditor() => throw new NotImplementedException();
+    public override ModifierEditorViewModel GetEditor() => new StateEditorViewModel(Rule, this);
 }

@@ -169,6 +169,24 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
+
+    public ModifierViewModelBase AddStateModifier()
+    {
+        ItemStateDecoratorViewModel vm = new(this, RemoveStateModifier);
+        Modifiers.Add(vm);
+        Messenger.Send(new FilterEditedRequestEvent(this));
+        return vm;
+    }
+
+    private void RemoveStateModifier(ModifierViewModelBase modifier)
+    {
+        if (Modifiers.Remove(modifier))
+        {
+            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new FilterEditedRequestEvent(this));
+        }
+    }
+
     public void RemoveTypeFilter(ModifierViewModelBase modifier)
     {
         if (Modifiers.Remove(modifier) && modifier is TypeDecoratorViewModel condition)
@@ -362,4 +380,5 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
+
 }
