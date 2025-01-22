@@ -153,6 +153,7 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         {
             UseFontColor = true;
             TextColor.Color = textColor;
+            _palleteManager.OnAdd(textColor);
         }
         else
         {
@@ -163,6 +164,7 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         {
             UseBorderColor = true;
             BorderColor.Color = borderColor;
+            _palleteManager.OnAdd(borderColor);
         }
         else
         {
@@ -172,6 +174,7 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         {
             UseBackColor = true;
             BackColor.Color = backgroundColor;
+            _palleteManager.OnAdd(backgroundColor);
         }
         else
         {

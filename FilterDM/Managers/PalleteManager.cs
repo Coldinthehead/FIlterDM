@@ -2,13 +2,17 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.ViewModels.Base;
+using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace FilterDM.Managers;
-public partial class PalleteManager : ObservableRecipient, IRecipient<RuleDeleteEvent>
+public partial class PalleteManager : ObservableRecipient
+    , IRecipient<RuleDeleteEvent>
+    , IRecipient<BlockDeletedInFilter>
+    , IRecipient<MultipleRulesDeleted>
 {
     [ObservableProperty]
     public ObservableCollection<Color> _usedColors;
@@ -65,10 +69,37 @@ public partial class PalleteManager : ObservableRecipient, IRecipient<RuleDelete
         OnRemove(message.Value.Colors.BackColor.Color);
     }
 
+    public void Receive(BlockDeletedInFilter message)
+    {
+        foreach (RuleDetailsViewModel rule in message.Value.Rules)
+        {
+            if (rule.Colors.UseAnyColor)
+            {
+                OnRemove(rule.Colors.TextColor.Color);
+                OnRemove(rule.Colors.BorderColor.Color);
+                OnRemove(rule.Colors.BackColor.Color);
+            }
+        }
+    }
+    public void Receive(MultipleRulesDeleted message)
+    {
+        foreach (RuleDetailsViewModel rule in message.Value.Rules)
+        {
+            if (rule.Colors.UseAnyColor)
+            {
+                OnRemove(rule.Colors.TextColor.Color);
+                OnRemove(rule.Colors.BorderColor.Color);
+                OnRemove(rule.Colors.BackColor.Color);
+            }
+        }
+    }
+
     public PalleteManager()
     {
         UsedColors = new();
         _colorsMap = new();
-        Messenger.Register(this);
+        Messenger.Register<RuleDeleteEvent>(this);
+        Messenger.Register<BlockDeletedInFilter>(this);
+        Messenger.Register<MultipleRulesDeleted>(this);
     }
 }
