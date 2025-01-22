@@ -47,11 +47,13 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
     {
         if (value == true)
         {
-            TextColor.UseTrue();
             UseAnyColor = true;
+            TextColor.UseTrue();
+            _palleteManager.OnAdd(TextColor.Color);
         }
         else
         {
+            _palleteManager.OnRemove(TextColor.Color);
             TextColor.UseFalse();
         }
         Messenger.Send(new FilterEditedRequestEvent(this));
@@ -67,9 +69,11 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         {
             UseAnyColor = true;
             BorderColor.UseTrue();
+            _palleteManager.OnAdd(BorderColor.Color);
         }
         else
         {
+            _palleteManager.OnRemove(BorderColor.Color);
             BorderColor.UseFalse();
         }
         Messenger.Send(new FilterEditedRequestEvent(this));
@@ -85,9 +89,11 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         {
             UseAnyColor = true;
             BackColor.UseTrue();
+            _palleteManager.OnAdd(BackColor.Color);
         }
         else
         {
+            _palleteManager.OnRemove(BackColor.Color);
             BackColor.UseFalse();
         }
         Messenger.Send(new FilterEditedRequestEvent(this));
