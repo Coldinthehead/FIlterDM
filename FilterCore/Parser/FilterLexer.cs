@@ -2,6 +2,18 @@
 
 namespace FilterCore.Parser;
 
+public readonly struct LineDetails
+{
+    public readonly string Line;
+    public readonly int Number;
+
+    public LineDetails(string line, int number)
+    {
+        Line = line;
+        Number = number;
+    }
+}
+
 public class FilterLexer
 {
     private int _currentIndex = 0;
@@ -9,6 +21,52 @@ public class FilterLexer
 
     private int _currentLine;
 
+    private LineParser _lineParser = new();
+
+    public List<Token> BuildTokens(string input)
+    {
+        _input = input;
+        _currentIndex = 0;
+
+        List<LineDetails> cleaned = [];
+
+        string[] lines = input.Split("\n");
+        int index = 0;
+        foreach (string line in lines)
+        {
+            string? data = line.Split("#").FirstOrDefault();
+            if (data != null)
+            {
+                data = data.Replace("\r", "").Replace("\t", "");
+                if (data.Length > 0)
+                {
+                    cleaned.Add(new LineDetails(data, index));
+                }
+            }
+
+            index++;
+        }
+        foreach (var item in cleaned)
+        {
+            Console.WriteLine($"{item.Number} : {item.Line}");
+        }
+        return Parse(cleaned);
+    }
+
+    private List<Token> Parse(List<LineDetails> lines)
+    {
+        List<Token> result = [];
+        foreach (LineDetails details in lines)
+        {
+            result.AddRange(_lineParser.Parse(details));
+        }
+
+        return result;
+    }
+}
+
+public class LineParser
+{
     private Dictionary<string, TokenType> _keywordsMap = new Dictionary<string, TokenType>()
     {
         {"Show", TokenType.RULE_START },
@@ -44,213 +102,157 @@ public class FilterLexer
         {"HasExplicitMod", TokenType.MODIFIER_KEYWORD },
     };
 
-    public List<Token> BuildTokens(string input)
-    {
-        _input = input;
-        _currentIndex = 0;
-        return Parse();
-    }
+    private int _i = 0;
 
-    private List<Token> Parse()
-    {
-        List<Token> result = [];
-        _currentLine = 1;
+    private string _input;
 
-        while (_currentIndex < _input.Length)
+    public List<Token> Parse(LineDetails details)
+    {
+        _i = 0;
+        if (details.Line.Length == 0)
         {
-            switch (Peek())
+            return [];
+        }
+        else
+        {
+            _input = details.Line;
+            List<Token> res = [];
+            while (Peek() != '\0')
             {
-                case '#':
+                switch (Peek())
                 {
-                    while (true)
+                    case ' ':
                     {
-                        if (Peek() == '\0')
-                        {
-                            break;
-                        }
-                        if (Peek() == '\n')
-                        {
-                            break;
-                        }
                         Advance();
                     }
-                }
-                break;
-                case '\n':
-                case ' ':
-                break;
-                case '"':
-                {
-                    Advance();
-                    List<char> chars = [];
-                    int line = _currentLine;
-                    while (Peek() != '"')
+                    break;
+                    case '>':
+                    case '<':
+                    case '=':
                     {
-                        if (Peek() == '\n')
+                        if (Peek(1) == '=')
                         {
-                            throw new LexerError($"Multipline string at {line}!");
-                        }
-                        if (Peek() == '\0')
-                        {
-                            throw new LexerError($"Unterminated string at {line}");
-                        }
-
-                        chars.Add(Peek());
-                        Advance();
-                    }
-                    string word = string.Join("", chars);
-                    result.Add(new Token()
-                    {
-                        type = TokenType.STRING,
-                        Line = _currentLine,
-                        Value = word
-                    });
-                }
-                break;
-                case '=':
-                {
-                    if (Peek(1) == '=')
-                    {
-                        Advance();
-                        result.Add(new Token()
-                        {
-                            type = TokenType.BOOL_OPERATOR,
-                            Value = "==",
-                            Line = _currentLine,
-                        });
-                    }
-                    else
-                    {
-                        result.Add(new Token()
-                        {
-                            type = TokenType.BOOL_OPERATOR,
-                            Value = "=",
-                            Line = _currentLine,
-                        });
-                    }
-                }
-                break;
-                case '>':
-                {
-                    if (Peek(1) == '=')
-                    {
-                        Advance();
-                        result.Add(new Token()
-                        {
-                            type = TokenType.BOOL_OPERATOR,
-                            Value = ">=",
-                            Line = _currentLine,
-                        });
-                    }
-                    else
-                    {
-                        result.Add(new Token()
-                        {
-                            type = TokenType.BOOL_OPERATOR,
-                            Value = ">",
-                            Line = _currentLine,
-                        });
-                    }
-                }
-                break;
-                case '<':
-                {
-                    if (Peek(1) == '=')
-                    {
-                        Advance();
-                        result.Add(new Token()
-                        {
-                            type = TokenType.BOOL_OPERATOR,
-                            Value = "<=",
-                            Line = _currentLine,
-                        });
-                    }
-                    else
-                    {
-                        result.Add(new Token()
-                        {
-                            type = TokenType.BOOL_OPERATOR,
-                            Value = "<",
-                            Line = _currentLine,
-                        });
-                    }
-                }
-                break;
-                default:
-                {
-                    List<char> chars = new List<char>();
-                    if (char.IsDigit(Peek()))
-                    {
-                        while (char.IsDigit(Peek()))
-                        {
-                            chars.Add(Peek());
-                            Advance();
-                        }
-                    }
-                    else
-                    {
-                        while (IsStringCharacter(Peek()))
-                        {
-                            chars.Add(Peek());
-                            Advance();
-                        }
-                    }
-                    if (chars.Count != 0)
-                    {
-                        string word = string.Join("", chars);
-                        if (_keywordsMap.ContainsKey(word))
-                        {
-                            result.Add(new Token()
+                            Token t = new Token()
                             {
-                                type = _keywordsMap[word],
-                                Line = _currentLine,
-                                Value = word,
-                            });
+                                type = TokenType.BOOL_OPERATOR,
+                                Line = details.Number,
+                                Value = $"{Peek()}="
+                            };
+                            res.Add(t);
+                            Advance();
                         }
                         else
                         {
-                            result.Add(new Token()
+                            Token t = new Token()
+                            {
+                                type = TokenType.BOOL_OPERATOR,
+                                Line = details.Number,
+                                Value = $"{Peek()}"
+                            };
+                            res.Add(t);
+                        }
+                        Advance();
+                    }
+                    break;
+                    case '"':
+                    {
+                        Advance();
+                        List<char> chars = [];
+                        while (Peek() != '"')
+                        {
+                            if (Peek() == '\0')
+                            {
+                                throw new LexerError($"Unterminated string at {details.Line} : {_i}");
+                            }
+                            chars.Add(Peek());
+                            Advance();
+                        }
+                        Token t = new()
+                        {
+                            type = TokenType.STRING,
+                            Value = string.Join("", chars),
+                            Line = details.Number,
+                        };
+                        res.Add(t);
+                        Advance();
+                    }
+                    break;
+                    default:
+                    {
+                        if (char.IsDigit(Peek()))
+                        {
+                            List<char> chars = [];
+                            while (char.IsDigit(Peek()))
+                            {
+                                chars.Add(Peek());
+                                Advance();
+                            }
+                            Token t = new()
                             {
                                 type = TokenType.STRING,
-                                Line = _currentLine,
-                                Value = word,
-                            });
+                                Value = string.Join("", chars),
+                                Line = details.Number,
+                            };
+                            res.Add(t);
+                        }
+                        else if (char.IsLetter(Peek()))
+                        {
+                            List<char> chars = [];
+                            while (char.IsLetter(Peek()))
+                            {
+                                chars.Add(Peek());
+                                Advance();
+                            }
+                            string word = string.Join("", chars);
+                            if (_keywordsMap.ContainsKey(word))
+                            {
+                                Token t = new()
+                                {
+                                    type = _keywordsMap[word],
+                                    Value = word,
+                                    Line = details.Number,
+                                };
+                                res.Add(t);
+                            }
+                            else
+                            {
+                                Token t = new()
+                                {
+                                    type = TokenType.STRING,
+                                    Value = word,
+                                    Line = details.Number,
+                                };
+                                res.Add(t);
+                            }
+                        }
+                        else
+                        {
+                            throw new LexerError($"Unknown character at {details.Line} : {_i}");
                         }
                     }
+                    break;
                 }
-                break;
             }
-            Advance();
+
+
+            return res;
         }
-
-
-        result.Add(new Token() { type = TokenType.EOF });
-        return result;
     }
 
-    private bool IsStringCharacter(char currentCharacter)
+    private char Peek(int ahead = 0)
     {
-        return char.IsLetter(currentCharacter);
+        if (_i + ahead >= _input.Length)
+        {
+            return '\0';
+        }
+        else
+        {
+            return _input[_i];
+        }
     }
 
     private void Advance()
     {
-        if (Peek() == '\n')
-        {
-            _currentLine++;
-        }
-        if (_currentIndex < _input.Length)
-        {
-            _currentIndex++;
-        }
-    }
-
-    private char Peek(int amount = 0)
-    {
-        if (_currentIndex + amount >= _input.Length)
-        {
-            return '\0';
-        }
-        return _input[_currentIndex + amount];
+        _i++;
     }
 }
