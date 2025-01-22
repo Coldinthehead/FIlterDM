@@ -12,7 +12,7 @@ namespace FilterDM.Services;
 public struct ImportResult
 {
     public List<string> Errors { get; set; }
-    public FilterModel Model { get; set;  }
+    public FilterModel Model { get; set; }
 
     public int TotalRules;
 
@@ -36,6 +36,14 @@ public struct ParseResult
 
 public class FilterParserService
 {
+    private readonly BlockTemplateService _blockTempaltes;
+    private readonly RuleTemplateService _ruleTemplates;
+    public FilterParserService(BlockTemplateService blockTempaltes, RuleTemplateService ruleTemplates)
+    {
+        _blockTempaltes = blockTempaltes;
+        _ruleTemplates = ruleTemplates;
+    }
+
     public ImportResult Parse(string input)
     {
         FilterModel model = new FilterModel();
@@ -63,11 +71,12 @@ public class FilterParserService
             }
         }
         importResult.TotalRules = parseResult.Rules.Count;
-        BlockModel rootBlock = model.AddBlock("rules");
+        BlockModel rootBlock = _blockTempaltes.GetEmpty();
         foreach (var r in models)
         {
             rootBlock.AddRule(r);
         }
+        model.AddBlock(rootBlock);
         importResult.Model = model;
 
         return importResult;
@@ -99,7 +108,7 @@ public class FilterParserService
             {
                 try
                 {
-                modResolver.Resolve(node);
+                    modResolver.Resolve(node);
 
                 }
                 catch (TypeResolveException ex)
@@ -118,7 +127,7 @@ public class FilterParserService
 
     private RuleModel ParseSingleRule(Rule rule, int priority)
     {
-        RuleModel model = App.Current.Services.GetService<RuleTemplateRepository>().GetEmpty();
+        RuleModel model = _ruleTemplates.GetEmpty();
         model.Show = rule.StartToken.Value.Equals("Show") ? true : false;
         model.Priority = priority;
 
