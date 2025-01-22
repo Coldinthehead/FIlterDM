@@ -430,6 +430,34 @@ public class FilterParserService
                     model.RarityCondition = condition;
                 }
                 break;
+                case ModifierType.None:
+                break;
+                case ModifierType.AnyEnchantment:
+                break;
+                case ModifierType.HasEnchantment:
+                break;
+                case ModifierType.StackSize:
+                break;
+                case ModifierType.Corrupted:
+                {
+                    if (model.StateModifiers == null)
+                    {
+                        model.AddStateModifiers(false, false);
+                    }
+                    model.StateModifiers!.Corrupted = bool.Parse(node.Parameters[0].Value);
+                }
+                break;
+                case ModifierType.Mirrored:
+                {
+                    if (model.StateModifiers == null)
+                    {
+                        model.AddStateModifiers(false, false);
+                    }
+                    model.StateModifiers!.Mirrored = bool.Parse(node.Parameters[0].Value);
+                }
+                break;
+                case ModifierType.CustomAlertSound:
+                break;
             }
         }
 
