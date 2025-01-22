@@ -1,4 +1,5 @@
 ﻿using FilterCore.Parser;
+using System.Security;
 
 namespace FilterCore.Tests.Parser;
 public class ParserTests
@@ -113,5 +114,32 @@ public class ParserTests
         List<Rule> result = sut.Parse(input);
 
         Assert.That(result.First().Nodes, Has.Count.EqualTo(4));
+    }
+
+    [Test]
+    public void ShouldParseEdgeCaseCorrect()
+    {
+        FilterLexer lexer = new();
+        string input = @"
+        Show # block : T0
+        BaseType  ""Mirror of Kalandra"" ""Divine Orb"" ""Albino Rhoa Feather"" ""Orb of Transmutation""
+        SetFontSize 45
+        SetBackgroundColor 255 255 255 255
+        SetTextColor 255 0 0 255
+        SetBorderColor 255 0 0 255
+        MinimapIcon 0 Red Diamond
+        PlayEffect Red
+        PlayAlertSound 1 300
+";
+
+        RuleParser sut = new();
+
+        List<Rule> rules = sut.Parse(lexer.BuildTokens(input));
+
+        Rule result = rules[0];
+
+        Assert.That(rules, Has.Count.EqualTo(1));
+        Assert.That(sut.Errors, Is.Empty);
+        Assert.That(result.Nodes , Has.Count.EqualTo(8));
     }
 }

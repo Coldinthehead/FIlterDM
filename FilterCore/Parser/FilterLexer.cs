@@ -60,7 +60,10 @@ public class FilterLexer
         {
             result.AddRange(_lineParser.Parse(details));
         }
-
+        result.Add(new Token()
+        {
+            type = TokenType.EOF,
+        });
         return result;
     }
 }
@@ -140,6 +143,7 @@ public class LineParser
                             };
                             res.Add(t);
                             Advance();
+                            Advance();
                         }
                         else
                         {
@@ -150,6 +154,7 @@ public class LineParser
                                 Value = $"{Peek()}"
                             };
                             res.Add(t);
+                            Advance();
                         }
                         Advance();
                     }
@@ -247,7 +252,7 @@ public class LineParser
         }
         else
         {
-            return _input[_i];
+            return _input[_i + ahead];
         }
     }
 

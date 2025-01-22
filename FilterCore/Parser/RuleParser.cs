@@ -22,45 +22,105 @@ public class RuleParser
         _tokens = tokens;
         _currentIndex = 0;
 
-        while (Peek().type != TokenType.EOF)
+        Errors.Clear();
+        int start = 0;
+        if (tokens.Count > 0 && tokens.First().type != TokenType.RULE_START)
         {
-            switch (Peek().type)
+             Errors.Add($"Expect Show/Hide but got {tokens.First()}");
+             while (tokens[start].type != TokenType.RULE_START)
             {
-                case TokenType.RULE_START:
+                start++;
+                if (start >= tokens.Count)
                 {
-                    try
-                    {
-                        Rule rule = BuildRule();
-                        rules.Add(rule);
-                    }
-                    catch (Exception e)
-                    {
-                        Errors.Add(e.Message);
-                        Advance();
-                    }
-                }
-                break;
-                default:
-                {
-                    Errors.Add($"Expect Rule start token at {Peek().Line} : {Peek().Value}");
-                    while (true)
-                    {
-                        if (Peek().type == TokenType.RULE_START || Peek().type == TokenType.CONTINUE|| Peek().type == TokenType.MODIFIER_KEYWORD)
-                        {
-                            break;
-                        }
-                        if (Peek().type == TokenType.EOF)
-                        {
-                            break;
-                        }
-                        Advance();
-                    }
                     break;
                 }
             }
         }
 
+        for (int i = start; i < tokens.Count;i++)
+        {
+            Token token = tokens[i];
+            switch (token.type)
+            {
+                case TokenType.RULE_START:
+                {
+                    try
+                    {
+                        Rule r = BuildRule(tokens, i);
+                        rules.Add(r);
+                    }
+                    catch (ParseException ex)
+                    {
+                        Errors.Add(ex.Message);
+                    }
+                }
+                break;
+                default:
+                continue;
+            }
+        }   
+
         return rules;
+    }
+
+    private Rule BuildRule(List<Token> stream, int index)
+    {
+        Rule result = new()
+        {
+            StartToken = stream[index]
+        };
+        index++;
+        bool finish = false;
+        while (index < stream.Count )
+        {
+            Token current = stream[index];
+            switch (current.type)
+            {
+                case TokenType.BOOL_OPERATOR:
+                case TokenType.STRING:
+                {
+                    Errors.Add($"Expect RuleModifier but got {current} at {current.Line}");
+                    index++;
+                    continue;
+                }
+                case TokenType.EOF:
+                case TokenType.RULE_START:
+                case TokenType.CONTINUE:
+                {
+                    finish = true;
+                }
+                break;
+                case TokenType.MODIFIER_KEYWORD:
+                {
+                    RuleNode node = new RuleNode()
+                    {
+                        Operator = stream[index++]
+                    };
+                    Token param = stream[index];
+                    if (param.type == TokenType.BOOL_OPERATOR)
+                    {
+                        node.Parameters.Add(param);
+                        param = stream[index];
+                        index++;
+                    }
+                    param = stream[index];
+                    while (index < stream.Count && stream[index].type == TokenType.STRING)
+                    {
+                        node.Parameters.Add(param);
+                        param = stream[index];
+                        index++;
+                    }
+                    result.Nodes.Add(node);
+                }
+                break;
+ 
+            }
+            if (finish)
+            {
+                break;
+            }
+        }
+        return result;
     }
 
     private Rule BuildRule()
