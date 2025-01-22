@@ -12,38 +12,6 @@ using Tmds.DBus.Protocol;
 
 namespace FilterDM.Models;
 
-public class SerializableColor
-{
-    public int Red { get; set; }
-    public int Green { get; set; }
-    public int Blue { get; set; }
-    public int Alpha { get; set; }
-
-    public static SerializableColor FromAvalonia(Color color)
-    {
-        return new SerializableColor()
-        {
-            Red = color.R,
-            Green = color.G,
-            Blue = color.B,
-            Alpha = color.A,
-        };
-    }
-
-
-    internal Color ToAvalonia() => Color.FromArgb((byte)Alpha, (byte)Red, (byte)Green, (byte)Blue);
-    internal SerializableColor Clone()
-    {
-        return new SerializableColor()
-        {
-            Red = Red,
-            Green = Green,
-            Blue = Blue,
-            Alpha = Alpha,
-        };
-    }
-}
-
 public class RuleModel : IEquatable<RuleModel>
 {
     public string Title { get; set; }
@@ -66,7 +34,7 @@ public class RuleModel : IEquatable<RuleModel>
     public MinimapIconDetails? Icon { get; set; }
 
     public SoundDetails? Sound { get; set; }
-
+    public StateModifiers StateModifiers { get; internal set; }
 
     public RuleModel()
     {
@@ -368,6 +336,20 @@ public class RuleModel : IEquatable<RuleModel>
     public void RemoveTypeCondition()
     {
         TypeCondition = null;
+    }
+
+    internal void AddStateModifiers(bool mirrored, bool corrupted)
+    {
+        StateModifiers = new()
+        {
+            Mirrored = mirrored,
+            Corrupted = corrupted
+        };
+    }
+
+    public void RemoveStateModifiers()
+    {
+        StateModifiers = null;
     }
 }
 

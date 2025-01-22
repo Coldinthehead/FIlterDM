@@ -44,6 +44,14 @@ public partial class ItemStateDecoratorViewModel : ModifierViewModelBase
     {
     }
 
-    public override void Apply(RuleModel model) => throw new NotImplementedException();
+    public override void Apply(RuleModel model)
+    {
+        model.AddStateModifiers(Mirrored, Corrupted);
+    }
     public override ModifierEditorViewModel GetEditor() => new StateEditorViewModel(Rule, this);
+    internal void SetModel(StateModifiers stateModifiers)
+    {
+        Mirrored = stateModifiers.Mirrored;
+        Corrupted = stateModifiers.Corrupted;
+    }
 }

@@ -170,7 +170,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     }
 
 
-    public ModifierViewModelBase AddStateModifier()
+    public ItemStateDecoratorViewModel AddStateModifier()
     {
         ItemStateDecoratorViewModel vm = new(this, RemoveStateModifier);
         Modifiers.Add(vm);
@@ -355,6 +355,11 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         if (rule.Sound != null)
         {
             AddSoundModifier().SetModel(rule.Sound);
+        }
+
+        if (rule.StateModifiers != null)
+        {
+            AddStateModifier().SetModel(rule.StateModifiers);
         }
 
         if (rule.TryGetClassCondition(out var classCondition))
