@@ -29,7 +29,7 @@ public partial class BlockTemplateManager : ObservableRecipient
 
     public int GetSelectionIndex(string name)
     {
-        BlockModel? model = Templates.First(x => x.Title.Equals(name));
+        BlockModel? model = Templates.FirstOrDefault(x => x.Title.Equals(name));
         if (model != null)
         {
             return Templates.IndexOf(model);

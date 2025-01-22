@@ -31,7 +31,7 @@ public partial class RuleTemplateManager : ObservableRecipient
 
     internal int GetIndex(string templateName)
     {
-        RuleModel? model = Templates.First(x => x.Title.Equals(templateName));
+        RuleModel? model = Templates.FirstOrDefault(x => x.Title.Equals(templateName));
         return model == null? 0 : Templates.IndexOf(model);
     }
 }
