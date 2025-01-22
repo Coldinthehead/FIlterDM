@@ -30,7 +30,7 @@
                 Fill="{Binding CurrentColor.Color, Converter={StaticResource rgb}}" />
         </ToggleButton.Content>
         <ToggleButton.Flyout>
-            <Flyout>
+            <Flyout IsOpen="{Binding IsOpen, Mode=TwoWay}" Placement="RightEdgeAlignedBottom">
                 <Grid RowDefinitions="* * ">
                     <Border
                         Grid.Row="1"
@@ -38,6 +38,8 @@
                         Height="370"
                         Padding="8,4"
                         Background="{DynamicResource MaterialPaperBrush}"
+                        BorderBrush="{DynamicResource MaterialPrimaryMidBrush}"
+                        BorderThickness="1"
                         Classes="ToolContainer">
                         <Grid ColumnDefinitions="* *">
                             <colorPicker:StandardColorPicker
@@ -67,26 +69,29 @@
 
                                     <ScrollViewer
                                         Grid.Row="1"
-                                        Padding="0,0,12,0"
+                                        Padding="4,4,12,4"
                                         Classes="Container"
                                         HorizontalScrollBarVisibility="Disabled">
-                                        <ItemsControl ItemsSource="{Binding Pallete}">
+                                        <ItemsControl ItemsSource="{Binding PalleteManager.UsedColors}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <WrapPanel
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Top"
                                                         Orientation="Horizontal" />
                                                 </ItemsPanelTemplate>
                                             </ItemsControl.ItemsPanel>
 
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Rectangle
-                                                        Width="25"
-                                                        Height="25"
-                                                        Margin="8"
-                                                        Fill="Red" />
+                                                    <Button Command="{Binding #Root.((vm:ColorSelectorViewModel)DataContext).ChoseColorCommand}" CommandParameter="{Binding}">
+                                                        <Rectangle
+                                                            Width="25"
+                                                            Height="25"
+                                                            Fill="{Binding, Converter={StaticResource rgb}}"
+                                                            Stroke="Black"
+                                                            StrokeThickness="1" />
+                                                    </Button>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>

@@ -271,7 +271,8 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly TypeScopeManager _typeScopeManager;
     public RuleDetailsViewModel(RuleParentManager parentManager
         , TypeScopeManager scopeManager
-        , RuleTemplateManager templateManager)
+        , RuleTemplateManager templateManager
+        , PalleteManager palleteManager)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100));
@@ -289,10 +290,9 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             _helperFromString[value.Name.Replace(" ", "")] = value;
             _helperFromString[value.ShortName] = value;
         }
-
         _typeScopeManager = scopeManager;
         Properties = new(this, parentManager, templateManager);
-        Colors = new ColorDecoratorViewModel(this, RemoveColorModifier);
+        Colors = new ColorDecoratorViewModel(this,palleteManager, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);
     }

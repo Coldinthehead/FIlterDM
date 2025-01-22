@@ -27,7 +27,7 @@ public class ViewLocator : IDataTemplate
             //}
 
             var control = (Control)Activator.CreateInstance(type)!;
-            //_cachedViews.Add(type, control);
+            //_cachedViews.Update(type, control);
             control.DataContext = param;
             return control;
         }

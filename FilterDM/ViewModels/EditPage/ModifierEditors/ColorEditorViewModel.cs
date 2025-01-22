@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
+using FilterDM.Managers;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Decorators;
 
@@ -11,10 +13,17 @@ public partial class ColorEditorViewModel : ModifierEditorViewModel
 
     [ObservableProperty]
     private ColorSelectorViewModel _fontColorSelector;
-    public ColorEditorViewModel(RuleDetailsViewModel rule, ColorDecoratorViewModel decorator) : base(rule)
+
+    [ObservableProperty]
+    private ColorSelectorViewModel _borderColorSelector;
+    [ObservableProperty]
+    private ColorSelectorViewModel _backColorSelector;
+    public ColorEditorViewModel(RuleDetailsViewModel rule, ColorDecoratorViewModel decorator, PalleteManager palleteManager) : base(rule)
     {
         _decorator = decorator;
-        FontColorSelector = new(decorator, decorator.TextColor);
+        FontColorSelector = new(decorator.TextColor, palleteManager);
+        BorderColorSelector = new(decorator.BorderColor, palleteManager);
+        BackColorSelector = new(decorator.BackColor, palleteManager);
     }
 }
      

@@ -77,10 +77,10 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     IsVisible="{Binding Rule.Colors.UseBackColor}">
-                    <colorPicker:PortableColorPicker
+                    <ContentControl
                         Width="52"
                         Height="52"
-                        SelectedColor="{Binding Rule.Colors.BackColor, Mode=TwoWay}" />
+                        Content="{Binding BackColorSelector}" />
                 </Border>
 
 
@@ -103,10 +103,10 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     IsVisible="{Binding Rule.Colors.UseBorderColor}">
-                    <colorPicker:PortableColorPicker
+                    <ContentControl
                         Width="52"
                         Height="52"
-                        SelectedColor="{Binding Rule.Colors.BorderColor, Mode=TwoWay}" />
+                        Content="{Binding BorderColorSelector}" />
                 </Border>
             </Grid>
         </Grid>

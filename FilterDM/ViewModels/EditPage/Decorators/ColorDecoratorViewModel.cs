@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Managers;
 using FilterDM.Models;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
@@ -94,9 +95,14 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
     [ObservableProperty]
     private ColorWrapper _backColor;
 
+    private readonly PalleteManager _palleteManager;
 
-    public ColorDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public ColorDecoratorViewModel(
+        RuleDetailsViewModel rule,
+        PalleteManager palleteManager,
+        Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
+        _palleteManager = palleteManager;
         TextColor = new()
         {
             DefaultColor = new Color(255, 100, 97, 87),
@@ -167,5 +173,5 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
         }
     }
 
-    public override ModifierEditorViewModel GetEditor() => new ColorEditorViewModel(Rule, this);
+    public override ModifierEditorViewModel GetEditor() => new ColorEditorViewModel(Rule,this, _palleteManager);
 }
