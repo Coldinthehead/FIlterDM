@@ -92,13 +92,24 @@ public class FilterParserService
         List<Rule> rules = parser.Parse(tokens);
         result.Errors.AddRange(parser.Errors);
         ModifierResolver modResolver = new();
+        List<Rule> torm = [];
         foreach (Rule rule in rules)
         {
             foreach (RuleNode node in rule.Nodes)
             {
+                try
+                {
                 modResolver.Resolve(node);
+
+                }
+                catch (TypeResolveException ex)
+                {
+                    torm.Add(rule);
+                    result.Errors.Add(ex.Message);
+                }
             }
         }
+        rules.RemoveAll(x => torm.Contains(x));
 
         result.Rules.AddRange(rules);
 
