@@ -19,6 +19,10 @@ internal class SoundService : IDisposable
         string uri = $"avares://FilterDM/Assets/Sounds/{fname}";
 
         using var stream = AssetLoader.Open(new Uri(uri));
+        if (stream == null)
+        {
+            return;
+        }
         _outDevice = new WaveOutEvent();
         _audioFileReader = new Mp3FileReader(stream);
         _outDevice.Init(_audioFileReader);
