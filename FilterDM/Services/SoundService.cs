@@ -1,11 +1,9 @@
 ﻿using Avalonia.Platform;
 using NAudio.Wave;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace FilterDM.Services;
-internal class SoundService : IDisposable
+public class SoundService : IDisposable
 {
     private IWavePlayer? _outDevice;
     private WaveStream? _audioFileReader;

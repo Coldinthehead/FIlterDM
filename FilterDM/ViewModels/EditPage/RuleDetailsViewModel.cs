@@ -95,7 +95,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public SoundDecoratorViewModel AddSoundModifier()
     {
-        SoundDecoratorViewModel vm = new(this, RemoveSoundModifier);
+        SoundDecoratorViewModel vm = new(this,_soundService, RemoveSoundModifier);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -291,11 +291,13 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     private readonly TypeScopeManager _typeScopeManager;
     private readonly MinimapIconsService _iconService;
+    private readonly SoundService _soundService;
     public RuleDetailsViewModel(RuleParentManager parentManager
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager
         , PalleteManager palleteManager
-        , MinimapIconsService iconService)
+        , MinimapIconsService iconService
+        , SoundService soundService)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100));
@@ -315,6 +317,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
         _typeScopeManager = scopeManager;
         _iconService = iconService;
+        _soundService = soundService;
         Properties = new(this, parentManager, templateManager);
         Colors = new ColorDecoratorViewModel(this, palleteManager, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);

@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.Services;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
@@ -36,11 +38,22 @@ public partial class SoundDecoratorViewModel : ModifierViewModelBase
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
-    public SoundDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    [RelayCommand]
+    private void Play()
+    {
+        _soundService.Play($"AlertSound{SelectedSound}.mp3");
+    }
+
+    private readonly SoundService _soundService;
+
+    public SoundDecoratorViewModel(RuleDetailsViewModel rule
+        , SoundService soundService
+        ,Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
         Sounds = new([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
         SelectedSound = Sounds[0];
         SoundVolume = 300;
+        _soundService = soundService;
     }
 
     public override void Apply(RuleModel model)

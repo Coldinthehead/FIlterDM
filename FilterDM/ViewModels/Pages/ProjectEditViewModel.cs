@@ -136,7 +136,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     public void OnEnter(FilterModel model)
     {
         Name = model.Name;
-        _currentFilterVm = new(_typeService, _blockTemplateService, _ruleTemplateService, _iconService);
+        _currentFilterVm = new(_typeService, _blockTemplateService, _ruleTemplateService, _iconService, _soundService);
         _currentFilterVm.SetModel(model);
 
         FilterTree.SetBlocks(_currentFilterVm.GetBlocks());
@@ -152,6 +152,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     private readonly FileService _fileService;
     private readonly FilterExportService _exportService;
     private readonly MinimapIconsService _iconService;
+    private readonly SoundService _soundService;
 
     public ProjectEditViewModel(ItemTypeService typeService
         , BlockTemplateService blockTempalteService
@@ -160,7 +161,8 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         , FileSelectionService fileSelectionService
         , FileService fileService
         , FilterExportService exportService
-        , MinimapIconsService iconService)
+        , MinimapIconsService iconService
+        , SoundService soundService)
     {
         _typeService = typeService;
         _blockTemplateService = blockTempalteService;
@@ -173,6 +175,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         _fileService = fileService;
         _exportService = exportService;
         _iconService = iconService;
+        _soundService = soundService;
     }
 
     public void Receive(FilterEditedRequestEvent message)

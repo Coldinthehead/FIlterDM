@@ -61,6 +61,7 @@ public partial class App : Application
             container.BindService<ProjectService>();
             container.BindService<FileService>();
             container.BindService<MinimapIconsService>();
+            container.BindService<SoundService>();
             Services = container.BuildServiceProvider();
 
 
