@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
     xmlns:vm="using:FilterDM.ViewModels.EditPage.ModifierEditors"
@@ -11,11 +12,13 @@
     x:DataType="vm:SoundEditorViewModel"
     mc:Ignorable="d">
     <Border Background="{DynamicResource MaterialPaperBrush}" Classes="ToolContainer">
-        <Grid RowDefinitions="auto *">
+        <Grid RowDefinitions="auto * ">
             <TextBlock
                 HorizontalAlignment="Center"
                 Classes="headline4"
                 Text="Drop Sound" />
+
+
 
 
             <StackPanel
@@ -35,9 +38,11 @@
                 <StackPanel
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    Spacing="4">
                     <TextBlock
                         Margin="12,0,12,0"
+                        VerticalAlignment="Center"
                         Classes="headline5"
                         Text="Volume" />
                     <Slider
@@ -56,6 +61,17 @@
                         Margin="12,0,0,0"
                         Classes="headline5"
                         Text="{Binding Decorator.SoundVolume}" />
+
+
+                    <Button Classes="Icon" Command="">
+                        <Button.Content>
+                            <materialIcons:MaterialIcon
+                                Width="48"
+                                Height="48"
+                                Foreground="{DynamicResource MaterialPrimaryMidBrush}"
+                                Kind="Play" />
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
             </StackPanel>
 
