@@ -32,6 +32,9 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     [ObservableProperty]
     private TextSizeDecoratorViewModel _textSize;
 
+    [ObservableProperty]
+    private MapIconDecoratorViewModel _mapIcon;
+
     [RelayCommand]
     private async Task DeleteMe()
     {
@@ -84,10 +87,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public MapIconDecoratorViewModel AddMinimapIconModifier()
     {
-        MapIconDecoratorViewModel vm = new(this,_iconService, RemoveMinimapIconModifier);
-        Modifiers.Add(vm);
+        MapIcon.UseMinimapIcon = true;
+        Modifiers.Add(MapIcon);
         Messenger.Send(new FilterEditedRequestEvent(this));
-        return vm;
+        return MapIcon;
     }
 
     public SoundDecoratorViewModel AddSoundModifier()
@@ -236,6 +239,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
+            MapIcon.UseMinimapIcon = false;
             Messenger.Send(new RuleModifierDeleteEvent(modifier));
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
@@ -310,11 +314,12 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             _helperFromString[value.ShortName] = value;
         }
         _typeScopeManager = scopeManager;
+        _iconService = iconService;
         Properties = new(this, parentManager, templateManager);
         Colors = new ColorDecoratorViewModel(this, palleteManager, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);
-        _iconService = iconService;
+        MapIcon = new(this, _iconService, RemoveMinimapIconModifier);
     }
 
     public RuleModel GetModel()

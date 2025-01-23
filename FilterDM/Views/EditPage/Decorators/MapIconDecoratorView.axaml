@@ -28,7 +28,6 @@
             Height="32"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            IsVisible="{Binding UseMinimapIcon, Converter={StaticResource negBool}}"
             Source="{Binding CurrentIconImage}" />
 
         <Button

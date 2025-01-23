@@ -202,7 +202,11 @@
                                                 Padding="2,2"
                                                 Classes="headline6"
                                                 Text="{Binding Properties.Title}" />
-
+                                            <Image
+                                                Width="32"
+                                                Height="32"
+                                                IsVisible="{Binding MapIcon.UseMinimapIcon}"
+                                                Source="{Binding MapIcon.CurrentIconImage}" />
                                             <Border
                                                 Padding="8,4"
                                                 HorizontalAlignment="Center"
