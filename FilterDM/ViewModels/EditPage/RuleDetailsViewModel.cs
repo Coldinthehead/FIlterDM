@@ -84,7 +84,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public MapIconDecoratorViewModel AddMinimapIconModifier()
     {
-        MapIconDecoratorViewModel vm = new(this, RemoveMinimapIconModifier);
+        MapIconDecoratorViewModel vm = new(this,_iconService, RemoveMinimapIconModifier);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -286,10 +286,12 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];
 
     private readonly TypeScopeManager _typeScopeManager;
+    private readonly MinimapIconsService _iconService;
     public RuleDetailsViewModel(RuleParentManager parentManager
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager
-        , PalleteManager palleteManager)
+        , PalleteManager palleteManager
+        , MinimapIconsService iconService)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100));
@@ -309,9 +311,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
         _typeScopeManager = scopeManager;
         Properties = new(this, parentManager, templateManager);
-        Colors = new ColorDecoratorViewModel(this,palleteManager, RemoveColorModifier);
+        Colors = new ColorDecoratorViewModel(this, palleteManager, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);
+        _iconService = iconService;
     }
 
     public RuleModel GetModel()

@@ -60,6 +60,7 @@ public partial class App : Application
             container.BindService<RuleTemplateService>();
             container.BindService<ProjectService>();
             container.BindService<FileService>();
+            container.BindService<MinimapIconsService>();
             Services = container.BuildServiceProvider();
 
 

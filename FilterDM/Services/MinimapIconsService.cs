@@ -49,11 +49,11 @@ public class MinimapIconsService : IInit
             small.AddRange(icons.Where((icon, index) => index % 3 == 2));
 
             _iconsMap["Large"] = new();
-            _iconsMap["Med"] = new();
+            _iconsMap["Medium"] = new();
             _iconsMap["Small"] = new();
 
             BuildShapes(_iconsMap["Large"], large);
-            BuildShapes(_iconsMap["Med"], med);
+            BuildShapes(_iconsMap["Medium"], med);
             BuildShapes(_iconsMap["Small"], small);
 
         });
@@ -66,7 +66,7 @@ public class MinimapIconsService : IInit
         map["Diamond"] = [.. src.Slice(6, 6), .. src.Slice(6 * 6 + 5, 5)];
         map["Hexagon"] = [.. src.Slice(6 * 2, 6), .. src.Slice(6 * 7 + 4, 5)];
         map["Square"] = [.. src.Slice(6 * 3, 6), .. src.Slice(6 * 8 + 3, 5)];
-        map["Stat"] = [.. src.Slice(6 * 4, 6), .. src.Slice(6 * 9 + 2, 5)];
+        map["Star"] = [.. src.Slice(6 * 4, 6), .. src.Slice(6 * 9 + 2, 5)];
         map["Triangle"] = [.. src.Slice(6 * 5, 6), .. src.Slice(6 * 10 + 1, 5)];
         map["Cross"] = src.Slice(6 * 11, 11);
         map["Moon"] = src.Slice(6 * 12 + 5, 11);

@@ -35,7 +35,15 @@ public partial class MainWindowViewModel : ViewModelBase
         var fileSelectionService = services.GetService<FileSelectionService>();
         var fileService = services.GetService<FileService>();
         var exportService = services.GetService<FilterExportService>();
-        _editorViewModel = new(typeService, blockTeplateService, ruleTemplateService, _projectService, fileSelectionService, fileService, exportService)
+        var iconService = services.GetService<MinimapIconsService>();
+        _editorViewModel = new(typeService
+            , blockTeplateService
+            , ruleTemplateService
+            , _projectService
+            , fileSelectionService
+            , fileService
+            , exportService
+            , iconService)
         {
             BackToMenuAction = EnterProjectsPage,
         };
