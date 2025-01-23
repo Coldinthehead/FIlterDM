@@ -9,7 +9,7 @@ public class ParserTests
     public void Parse_ShouldParseEmptyTokensCorrect()
     {
         RuleParser sut = new();
-        List<Token> input = [new Token() { type = TokenType.EOF }];
+        List<Token> input = [new Token("\0") { type = TokenType.EOF }];
         List<Rule> result = sut.Parse(input);
 
         Assert.That(result, Is.Empty);
@@ -19,7 +19,7 @@ public class ParserTests
     public void Parse_ShouldAddError()
     {
         RuleParser sut = new();
-        List<Token> input = [new Token() { type = TokenType.MODIFIER_KEYWORD }, new Token() { type = TokenType.EOF }];
+        List<Token> input = [new Token(null) { type = TokenType.MODIFIER_KEYWORD }, new Token("\0") { type = TokenType.EOF }];
 
         List<Rule> result = sut.Parse(input);
 
@@ -31,9 +31,9 @@ public class ParserTests
     public void Parse_ShouldParseKeywords()
     {
         RuleParser sut = new();
-        List<Token> input = [new Token() { type = TokenType.RULE_START},
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.EOF }];
+        List<Token> input = [new Token("Show") { type = TokenType.RULE_START},
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token("\0") { type = TokenType.EOF }];
 
         List<Rule> result = sut.Parse(input);
 
@@ -46,10 +46,10 @@ public class ParserTests
     {
         RuleParser sut = new();
         List<Token> input = [
-            new Token() { type = TokenType.STRING},
-            new Token() { type = TokenType.RULE_START},
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.EOF }
+            new Token("test") { type = TokenType.STRING},
+            new Token("Hide") { type = TokenType.RULE_START},
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token("\0") { type = TokenType.EOF }
             ];
 
         List<Rule> result = sut.Parse(input);
@@ -64,11 +64,11 @@ public class ParserTests
         RuleParser sut = new();
         List<Token> input = [
 
-            new Token() { type = TokenType.RULE_START},
-            new Token() { type = TokenType.STRING},
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.STRING},
-            new Token() { type = TokenType.EOF }
+            new Token("Show") { type = TokenType.RULE_START},
+            new Token(null) { type = TokenType.STRING},
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token(null) { type = TokenType.STRING},
+            new Token("\0") { type = TokenType.EOF }
             ];
 
         List<Rule> result = sut.Parse(input);
@@ -83,13 +83,13 @@ public class ParserTests
         RuleParser sut = new();
         List<Token> input = [
 
-            new Token() { type = TokenType.RULE_START},
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.STRING},
-            new Token() { type = TokenType.STRING},
-            new Token() { type = TokenType.STRING},
-            new Token() { type = TokenType.STRING},
-            new Token() { type = TokenType.EOF }
+            new Token("Show") { type = TokenType.RULE_START},
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token(null) { type = TokenType.STRING},
+            new Token(null) { type = TokenType.STRING},
+            new Token(null) { type = TokenType.STRING},
+            new Token(null) { type = TokenType.STRING},
+            new Token("\0") { type = TokenType.EOF }
             ];
 
         List<Rule> result = sut.Parse(input);
@@ -103,12 +103,12 @@ public class ParserTests
         RuleParser sut = new();
         List<Token> input = [
 
-            new Token() { type = TokenType.RULE_START},
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.MODIFIER_KEYWORD },
-            new Token() { type = TokenType.EOF }
+            new Token("Show") { type = TokenType.RULE_START},
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token(null) { type = TokenType.MODIFIER_KEYWORD },
+            new Token("\0") { type = TokenType.EOF }
             ];
 
         List<Rule> result = sut.Parse(input);

@@ -10,9 +10,9 @@ public class TypeResolverTests
         RuleNode input = new RuleNode();
 
         input.Parameters.AddRange([
-            new Token() {type = TokenType.STRING, Value = "255",},
-            new Token() {type = TokenType.STRING, Value = "13",},
-            new Token() {type = TokenType.STRING, Value = "25",},
+            new Token("255") {type = TokenType.STRING,},
+            new Token("13") {type = TokenType.STRING,},
+            new Token("24") {type = TokenType.STRING,},
             
             ]);
 
