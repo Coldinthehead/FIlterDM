@@ -119,7 +119,7 @@ public class FilterExportService
             int s = 0;
             if (size.Equals("small"))
             {
-                s = 0;
+                s = 2;
             }
             else if (size.Equals("medium"))
             {
@@ -127,7 +127,7 @@ public class FilterExportService
             }
             else if (size.Equals("large"))
             {
-                s = 2;
+                s = 0;
             }
             sb.AppendLine($"\tMinimapIcon {s} {rule.Icon.Color} {rule.Icon.Shape}");
         }
