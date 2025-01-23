@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
+using FilterDM.Services;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
@@ -26,11 +28,15 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
     private ObservableCollection<string> _iconShapes;
 
     [ObservableProperty]
+    private Image _currentIconImage;
+
+    [ObservableProperty]
     private string _selectedIconSize;
     partial void OnSelectedIconSizeChanged(string value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
         _currentSizeIndex = IconSizes.IndexOf(value);
+        UpdateImage();
     }
     [ObservableProperty]
     private string _selectedIconColor;
@@ -38,6 +44,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
         _currentColorIndex = Colors.IndexOf(value);
+        UpdateImage();
     }
 
     [ObservableProperty]
@@ -46,6 +53,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
         _currentShapeIndex = IconShapes.IndexOf(value);
+        UpdateImage();
     }
 
     partial void OnUseMinimapIconChanged(bool value)
@@ -106,7 +114,21 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         SelectedIconColor = Colors[_currentColorIndex];
     }
 
-    public MapIconDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    private void UpdateImage()
+    {
+        CurrentIconImage = new Image()
+        {
+            Width = 64,
+            Height = 64,
+            Source = _iconService.Get(SelectedIconSize, SelectedShape, Colors.IndexOf(SelectedIconColor))
+        };
+    }
+
+    private readonly MinimapIconsService _iconService;
+
+    public MapIconDecoratorViewModel(RuleDetailsViewModel rule
+        , MinimapIconsService iconService
+        , Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
         IconSizes = new ObservableCollection<string>(["Small", "Medium", "Large"]);
         IconShapes = new(["Circle", "Diamond", "Hexagon", "Square", "Star", "Triangle", "Cross", "Moon", "Raindrop", "Kite"
@@ -115,9 +137,13 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         _currentColorIndex = 0;
         _currentShapeIndex = 0;
         _currentColorIndex = 0;
+        _selectedIconColor = Colors[0];
+        _selectedShape = IconShapes[0];
+        _selectedIconSize = IconSizes[0];
         SelectedIconColor = Colors[_currentColorIndex];
         SelectedIconSize = IconSizes[_currentSizeIndex];
         SelectedShape = IconShapes[_currentShapeIndex];
+        _iconService = iconService;
     }
 
     public override void Apply(RuleModel model)
