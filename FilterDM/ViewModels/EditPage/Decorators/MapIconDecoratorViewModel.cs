@@ -1,7 +1,9 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Constants;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.Base;
@@ -28,7 +30,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
     private ObservableCollection<string> _iconShapes;
 
     [ObservableProperty]
-    private Image _currentIconImage;
+    private CroppedBitmap _currentIconImage;
 
     [ObservableProperty]
     private string _selectedIconSize;
@@ -61,8 +63,37 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
-    private static ObservableCollection<string> _staticColors = new(["Red", "Green", "Blue", "Brown", "White", "Yellow", "Cyan", "Gray", "Orange", "Pink", "Purple"]);
+    private static ObservableCollection<string> _staticColors = new([
+        ColorConstants.BLUE,
+        ColorConstants.GREEN,
+        ColorConstants.BROWN,
+        ColorConstants.RED,
+        ColorConstants.WHITE,
+        ColorConstants.YELLOW,
+        ColorConstants.CYAN,
+        ColorConstants.GRAY,
+        ColorConstants.ORANGE,
+        ColorConstants.PINK,
+        ColorConstants.PURPLE]);
 
+    private static ObservableCollection<string> _staticSizes = new([
+        IconSize.LARGE,
+        IconSize.MEDIUM,
+        IconSize.SMALL
+        ]);
+    private static ObservableCollection<string> _staticShapes = new([
+      IconShapeConstants.CIRCLE,
+        IconShapeConstants.DIAMOND,
+        IconShapeConstants.HEXAGON,
+        IconShapeConstants.SQUARE,
+        IconShapeConstants.STAR,
+        IconShapeConstants.TRIANGLE,
+        IconShapeConstants.CROSS,
+        IconShapeConstants.MOON,
+        IconShapeConstants.RAINDROP,
+        IconShapeConstants.KITE,
+        IconShapeConstants.PENTAGON,
+        IconShapeConstants.HOUSE,]);
 
     private int _currentSizeIndex;
     private int _currentShapeIndex;
@@ -116,12 +147,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
 
     private void UpdateImage()
     {
-        CurrentIconImage = new Image()
-        {
-            Width = 64,
-            Height = 64,
-            Source = _iconService.Get(SelectedIconSize, SelectedShape, Colors.IndexOf(SelectedIconColor))
-        };
+        CurrentIconImage = _iconService.Get(SelectedIconSize, SelectedShape, Colors.IndexOf(SelectedIconColor));
     }
 
     private readonly MinimapIconsService _iconService;
@@ -130,9 +156,8 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         , MinimapIconsService iconService
         , Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
-        IconSizes = new ObservableCollection<string>(["Small", "Medium", "Large"]);
-        IconShapes = new(["Circle", "Diamond", "Hexagon", "Square", "Star", "Triangle", "Cross", "Moon", "Raindrop", "Kite"
-            , "Pentagon", "UpsideDownHouse"]);
+        IconSizes = _staticSizes;
+        IconShapes = _staticShapes;
         Colors = _staticColors;
         _currentColorIndex = 0;
         _currentShapeIndex = 0;
@@ -144,6 +169,8 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         SelectedIconSize = IconSizes[_currentSizeIndex];
         SelectedShape = IconShapes[_currentShapeIndex];
         _iconService = iconService;
+
+        UpdateImage();
     }
 
     public override void Apply(RuleModel model)

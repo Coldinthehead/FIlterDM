@@ -2,6 +2,7 @@
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using FilterDM.Constants;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -48,13 +49,13 @@ public class MinimapIconsService : IInit
             med.AddRange(icons.Where((icon, index) => index % 3 == 1));
             small.AddRange(icons.Where((icon, index) => index % 3 == 2));
 
-            _iconsMap["Large"] = new();
-            _iconsMap["Medium"] = new();
-            _iconsMap["Small"] = new();
+            _iconsMap[IconSize.LARGE] = new();
+            _iconsMap[IconSize.MEDIUM] = new();
+            _iconsMap[IconSize.SMALL] = new();
 
-            BuildShapes(_iconsMap["Large"], large);
-            BuildShapes(_iconsMap["Medium"], med);
-            BuildShapes(_iconsMap["Small"], small);
+            BuildShapes(_iconsMap[IconSize.LARGE], large);
+            BuildShapes(_iconsMap[IconSize.MEDIUM], med);
+            BuildShapes(_iconsMap[IconSize.SMALL], small);
 
         });
         return Task.CompletedTask;
@@ -62,18 +63,18 @@ public class MinimapIconsService : IInit
 
     private void BuildShapes(Dictionary<string, List<CroppedBitmap>> map, List<CroppedBitmap> src)
     {
-        map["Circle"] = [.. src.Slice(0, 6), .. src.Slice(6 * 6, 5)];
-        map["Diamond"] = [.. src.Slice(6, 6), .. src.Slice(6 * 6 + 5, 5)];
-        map["Hexagon"] = [.. src.Slice(6 * 2, 6), .. src.Slice(6 * 7 + 4, 5)];
-        map["Square"] = [.. src.Slice(6 * 3, 6), .. src.Slice(6 * 8 + 3, 5)];
-        map["Star"] = [.. src.Slice(6 * 4, 6), .. src.Slice(6 * 9 + 2, 5)];
-        map["Triangle"] = [.. src.Slice(6 * 5, 6), .. src.Slice(6 * 10 + 1, 5)];
-        map["Cross"] = src.Slice(6 * 11, 11);
-        map["Moon"] = src.Slice(6 * 12 + 5, 11);
-        map["RainDrop"] = src.Slice(6 * 14 + 4, 11);
-        map["Kite"] = src.Slice(6 * 16 + 3, 11);
-        map["Pentagon"] = src.Slice(6 * 18 + 2, 11);
-        map["UpsideDownHouse"] = src.Slice(6 * 20 + 1, 11);
+        map[IconShapeConstants.CIRCLE] = [.. src.Slice(0, 6), .. src.Slice(6 * 6, 5)];
+        map[IconShapeConstants.DIAMOND] = [.. src.Slice(6, 6), .. src.Slice(6 * 6 + 5, 5)];
+        map[IconShapeConstants.HEXAGON] = [.. src.Slice(6 * 2, 6), .. src.Slice(6 * 7 + 4, 5)];
+        map[IconShapeConstants.SQUARE] = [.. src.Slice(6 * 3, 6), .. src.Slice(6 * 8 + 3, 5)];
+        map[IconShapeConstants.STAR] = [.. src.Slice(6 * 4, 6), .. src.Slice(6 * 9 + 2, 5)];
+        map[IconShapeConstants.TRIANGLE] = [.. src.Slice(6 * 5, 6), .. src.Slice(6 * 10 + 1, 5)];
+        map[IconShapeConstants.CROSS] = src.Slice(6 * 11, 11);
+        map[IconShapeConstants.MOON] = src.Slice(6 * 12 + 5, 11);
+        map[IconShapeConstants.RAINDROP] = src.Slice(6 * 14 + 4, 11);
+        map[IconShapeConstants.KITE] = src.Slice(6 * 16 + 3, 11);
+        map[IconShapeConstants.PENTAGON] = src.Slice(6 * 18 + 2, 11);
+        map[IconShapeConstants.HOUSE] = src.Slice(6 * 20 + 1, 11);
     }
 
     public List<CroppedBitmap> GetIcons() => _icons;
@@ -85,7 +86,7 @@ public class MinimapIconsService : IInit
     public List<CroppedBitmap> GetLarge()
     {
         List<CroppedBitmap> res = [];
-        foreach (KeyValuePair<string, List<CroppedBitmap>> icon in _iconsMap["Large"])
+        foreach (KeyValuePair<string, List<CroppedBitmap>> icon in _iconsMap[IconSize.LARGE])
         {
             res.AddRange(icon.Value);
         }
@@ -95,7 +96,7 @@ public class MinimapIconsService : IInit
     public List<CroppedBitmap> GetMed()
     {
         List<CroppedBitmap> res = [];
-        foreach (KeyValuePair<string, List<CroppedBitmap>> icon in _iconsMap["Med"])
+        foreach (KeyValuePair<string, List<CroppedBitmap>> icon in _iconsMap[IconSize.MEDIUM])
         {
             res.AddRange(icon.Value);
         }
@@ -104,7 +105,7 @@ public class MinimapIconsService : IInit
     public List<CroppedBitmap> GetSmall()
     {
         List<CroppedBitmap> res = [];
-        foreach (KeyValuePair<string, List<CroppedBitmap>> icon in _iconsMap["Small"])
+        foreach (KeyValuePair<string, List<CroppedBitmap>> icon in _iconsMap[IconSize.SMALL])
         {
             res.AddRange(icon.Value);
         }

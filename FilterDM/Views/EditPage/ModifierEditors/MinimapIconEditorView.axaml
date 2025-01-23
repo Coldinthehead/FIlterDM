@@ -116,15 +116,16 @@
                     </Button.Content>
                 </Button>
 
-                <Rectangle
+                <Image
                     Grid.Row="0"
                     Grid.RowSpan="3"
                     Grid.Column="1"
                     Width="64"
                     Height="64"
                     Margin="8"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Fill="White" />
+                    Source="{Binding Decorator.CurrentIconImage}" />
 
             </Grid>
 
