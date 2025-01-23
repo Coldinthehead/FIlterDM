@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.ViewModels.Base;
@@ -29,21 +30,22 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
     partial void OnSelectedIconSizeChanged(string value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
+        _currentSizeIndex = IconShapes.IndexOf(value);
     }
     [ObservableProperty]
     private string _selectedIconColor;
     partial void OnSelectedIconColorChanged(string value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
+        _currentColorIndex = Colors.IndexOf(value);
     }
-
-    
 
     [ObservableProperty]
     private string _selectedShape;
     partial void OnSelectedShapeChanged(string value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
+        _currentShapeIndex = IconShapes.IndexOf(value);
     }
 
     partial void OnUseMinimapIconChanged(bool value)
@@ -54,15 +56,68 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
     private static ObservableCollection<string> _staticColors = new(["Red", "Green", "Blue", "Brown", "White", "Yellow", "Cyan", "Gray", "Orange", "Pink", "Purple"]);
 
 
+    private int _currentSizeIndex;
+    private int _currentShapeIndex;
+    private int _currentColorIndex;
+    [RelayCommand]
+    private void UpdateSize(bool value)
+    {
+        if (value == true)
+        {
+            _currentSizeIndex++;
+            _currentSizeIndex %= IconSizes.Count;
+        }
+        else
+        {
+            _currentSizeIndex--;
+            _currentSizeIndex = _currentSizeIndex <= 0 ? IconSizes.Count - 1 : _currentSizeIndex;
+        }
+        SelectedIconSize = IconSizes[_currentSizeIndex];
+    }
+
+    [RelayCommand]
+    private void UpdateShape(bool value)
+    {
+        if (value == true)
+        {
+            _currentShapeIndex++;
+            _currentShapeIndex %= IconShapes.Count;
+        }
+        else
+        {
+            _currentShapeIndex--;
+            _currentShapeIndex = _currentShapeIndex <= 0 ? IconShapes.Count - 1 : _currentShapeIndex;
+        }
+        SelectedShape = IconShapes[_currentShapeIndex];
+    }
+    [RelayCommand]
+    private void UpdateColor(bool value)
+    {
+        if (value == true)
+        {
+            _currentColorIndex++;
+            _currentColorIndex %= Colors.Count;
+        }
+        else
+        {
+            _currentColorIndex--;
+            _currentColorIndex = _currentColorIndex <= 0 ? Colors.Count - 1 : _currentColorIndex;
+        }
+        SelectedIconColor = Colors[_currentColorIndex];
+    }
+
     public MapIconDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
     {
         IconSizes = new ObservableCollection<string>(["Small", "Medium", "Large"]);
         IconShapes = new(["Circle", "Diamond", "Hexagon", "Square", "Star", "Triangle", "Cross", "Moon", "Raindrop", "Kite"
             , "Pentagon", "UpsideDownHouse"]);
         Colors = _staticColors;
-        SelectedIconColor = Colors[0];
-        SelectedIconSize = IconSizes[0];
-        SelectedShape = IconShapes[0];
+        _currentColorIndex = 0;
+        _currentShapeIndex = 0;
+        _currentColorIndex = 0;
+        SelectedIconColor = Colors[_currentColorIndex];
+        SelectedIconSize = IconSizes[_currentShapeIndex];
+        SelectedShape = IconShapes[_currentSizeIndex];
     }
 
     public override void Apply(RuleModel model)
