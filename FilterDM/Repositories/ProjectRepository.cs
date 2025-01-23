@@ -37,7 +37,7 @@ public class ProjectRepository : IInit
         await Task.WhenAll(tasks);
     }
 
-    public List<string> GetProjectNames => [.. _models.Keys];
+    public List<string> GetProjectNames => [.. _models.Keys.OrderByDescending(x=> _models[x].LastSaveDate)];
 
     internal void CreateFilter(FilterModel model)
     {
