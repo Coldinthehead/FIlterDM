@@ -30,7 +30,7 @@ public static class IconShapeConstants
     public const string DIAMOND = "Diamond";
     public const string HEXAGON = "Hexagon";
     public const string SQUARE = "Square";
-    public const string TRIANGLE = "TRIANGLE";
+    public const string TRIANGLE = "Triangle";
     public const string STAR = "Star";
     public const string CROSS = "Cross";
     public const string MOON = "Moon";
