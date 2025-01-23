@@ -338,15 +338,15 @@ public class FilterParserService
                     int size = int.Parse(node.Parameters[0].Value);
                     if (size == 0)
                     {
-                        icon.Size = "Small";
+                        icon.Size = Constants.IconSize.LARGE;
                     }
                     else if (size == 1)
                     {
-                        icon.Size = "Medium";
+                        icon.Size = Constants.IconSize.MEDIUM;
                     }
                     else if (size == 2)
                     {
-                        icon.Size = "Large";
+                        icon.Size = Constants.IconSize.LARGE;
                     }
                     else
                     {
