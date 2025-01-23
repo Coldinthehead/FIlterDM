@@ -30,7 +30,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
     partial void OnSelectedIconSizeChanged(string value)
     {
         Messenger.Send(new FilterEditedRequestEvent(this));
-        _currentSizeIndex = IconShapes.IndexOf(value);
+        _currentSizeIndex = IconSizes.IndexOf(value);
     }
     [ObservableProperty]
     private string _selectedIconColor;
@@ -70,7 +70,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         else
         {
             _currentSizeIndex--;
-            _currentSizeIndex = _currentSizeIndex <= 0 ? IconSizes.Count - 1 : _currentSizeIndex;
+            _currentSizeIndex = _currentSizeIndex < 0 ? IconSizes.Count - 1 : _currentSizeIndex;
         }
         SelectedIconSize = IconSizes[_currentSizeIndex];
     }
@@ -86,7 +86,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         else
         {
             _currentShapeIndex--;
-            _currentShapeIndex = _currentShapeIndex <= 0 ? IconShapes.Count - 1 : _currentShapeIndex;
+            _currentShapeIndex = _currentShapeIndex < 0 ? IconShapes.Count - 1 : _currentShapeIndex;
         }
         SelectedShape = IconShapes[_currentShapeIndex];
     }
@@ -101,7 +101,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         else
         {
             _currentColorIndex--;
-            _currentColorIndex = _currentColorIndex <= 0 ? Colors.Count - 1 : _currentColorIndex;
+            _currentColorIndex = _currentColorIndex < 0 ? Colors.Count - 1 : _currentColorIndex;
         }
         SelectedIconColor = Colors[_currentColorIndex];
     }
@@ -116,8 +116,8 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
         _currentShapeIndex = 0;
         _currentColorIndex = 0;
         SelectedIconColor = Colors[_currentColorIndex];
-        SelectedIconSize = IconSizes[_currentShapeIndex];
-        SelectedShape = IconShapes[_currentSizeIndex];
+        SelectedIconSize = IconSizes[_currentSizeIndex];
+        SelectedShape = IconShapes[_currentShapeIndex];
     }
 
     public override void Apply(RuleModel model)

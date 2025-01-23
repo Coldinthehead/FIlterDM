@@ -29,7 +29,8 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Classes="Icon"
-                    Command="">
+                    Command="{Binding Decorator.UpdateSizeCommand}"
+                    CommandParameter="{x:False}">
                     <Button.Content>
                         <materialIcons:MaterialIcon
                             Width="32"
@@ -43,7 +44,8 @@
                     Grid.Row="0"
                     Grid.Column="2"
                     Classes="Icon"
-                    Command="">
+                    Command="{Binding Decorator.UpdateSizeCommand}"
+                    CommandParameter="{x:True}">
                     <Button.Content>
                         <materialIcons:MaterialIcon
                             Width="32"
@@ -58,7 +60,8 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Classes="Icon"
-                    Command="">
+                    Command="{Binding Decorator.UpdateColorCommand}"
+                    CommandParameter="{x:False}">
                     <Button.Content>
                         <materialIcons:MaterialIcon
                             Width="32"
@@ -72,7 +75,8 @@
                     Grid.Row="1"
                     Grid.Column="2"
                     Classes="Icon"
-                    Command="">
+                    Command="{Binding Decorator.UpdateColorCommand}"
+                    CommandParameter="{x:True}">
                     <Button.Content>
                         <materialIcons:MaterialIcon
                             Width="32"
@@ -86,7 +90,8 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     Classes="Icon"
-                    Command="">
+                    Command="{Binding Decorator.UpdateShapeCommand}"
+                    CommandParameter="{x:False}">
                     <Button.Content>
                         <materialIcons:MaterialIcon
                             Width="32"
@@ -100,7 +105,8 @@
                     Grid.Row="2"
                     Grid.Column="2"
                     Classes="Icon"
-                    Command="">
+                    Command="{Binding Decorator.UpdateShapeCommand}"
+                    CommandParameter="{x:True}">
                     <Button.Content>
                         <materialIcons:MaterialIcon
                             Width="32"
