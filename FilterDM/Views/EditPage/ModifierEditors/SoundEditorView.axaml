@@ -63,7 +63,7 @@
                         Text="{Binding Decorator.SoundVolume}" />
 
 
-                    <Button Classes="Icon" Command="">
+                    <Button Classes="Icon" Command="{Binding Decorator.PlayCommand}">
                         <Button.Content>
                             <materialIcons:MaterialIcon
                                 Width="48"

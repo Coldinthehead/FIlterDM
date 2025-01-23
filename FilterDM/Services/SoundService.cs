@@ -1,32 +1,51 @@
 ﻿using Avalonia.Platform;
 using NAudio.Wave;
 using System;
+using System.IO;
 
 namespace FilterDM.Services;
 public class SoundService : IDisposable
 {
     private IWavePlayer? _outDevice;
     private WaveStream? _audioFileReader;
+    private Stream? _currentSteam;
 
     public void Dispose() => Stop();
 
-    public void Play(string fname)
+    private float _curVol;
+
+    public void Play(string fname, int volume)
     {
         Stop();
 
         string uri = $"avares://FilterDM/Assets/Sounds/{fname}";
-
-        using var stream = AssetLoader.Open(new Uri(uri));
-        if (stream == null)
+        Uri u = new Uri(uri);
+        if (!AssetLoader.Exists(u))
         {
             return;
         }
-        _outDevice = new WaveOutEvent();
-        _audioFileReader = new Mp3FileReader(stream);
-        _outDevice.Init(_audioFileReader);
-        _outDevice.Volume = 0.5f;
-        _outDevice.Play();
-        _outDevice.PlaybackStopped += (sender, e) => Stop();
+        try
+        {
+            float vol = volume / 300.0f;
+            _currentSteam = AssetLoader.Open(u);
+            _outDevice = new WaveOutEvent();
+            _audioFileReader = new Mp3FileReader(_currentSteam);
+            _outDevice.Init(_audioFileReader);
+            _outDevice.Volume = vol / 2;
+            _outDevice.Play();
+            _outDevice.PlaybackStopped += (sender, e) =>
+            {
+                if (e != null)
+                {
+
+                }
+                Stop();
+            };
+        }
+        catch (Exception ex)
+        {
+            Stop();
+        }
     }
 
     private void Stop()
@@ -34,7 +53,9 @@ public class SoundService : IDisposable
         _outDevice?.Stop();
         _outDevice?.Dispose();
         _audioFileReader?.Dispose();
+        _currentSteam?.Close();
         _outDevice = null;
         _audioFileReader = null;
+        _currentSteam = null;
     }
 }

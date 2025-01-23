@@ -41,7 +41,8 @@ public partial class SoundDecoratorViewModel : ModifierViewModelBase
     [RelayCommand]
     private void Play()
     {
-        _soundService.Play($"AlertSound{SelectedSound}.mp3");
+        //                                  AlertSound1.mp3
+        _soundService.Play($"AlertSound1.mp3", SoundVolume);
     }
 
     private readonly SoundService _soundService;
