@@ -42,7 +42,7 @@ public partial class SoundDecoratorViewModel : ModifierViewModelBase
     private void Play()
     {
         //                                  AlertSound1.mp3
-        _soundService.Play($"AlertSound1.mp3", SoundVolume);
+        _soundService.Play(SelectedSound, SoundVolume);
     }
 
     private readonly SoundService _soundService;

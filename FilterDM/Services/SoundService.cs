@@ -14,10 +14,12 @@ public class SoundService : IDisposable
 
     private float _curVol;
 
-    public void Play(string fname, int volume)
+    public void Play(int sample, int volume)
     {
         Stop();
-
+        if (sample < 1 && sample > 16)
+            return;
+        string fname = "AlertSound" + sample + ".mp3";
         string uri = $"avares://FilterDM/Assets/Sounds/{fname}";
         Uri u = new Uri(uri);
         if (!AssetLoader.Exists(u))
