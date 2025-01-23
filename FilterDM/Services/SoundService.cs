@@ -1,22 +1,40 @@
 ﻿using Avalonia.Platform;
 using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using System;
 using System.IO;
 
 namespace FilterDM.Services;
 public class SoundService : IDisposable
 {
-    private IWavePlayer? _outDevice;
-    private WaveStream? _audioFileReader;
-    private Stream? _currentSteam;
+    private readonly IWavePlayer _outDevice = new WaveOutEvent()
+    {
+        Volume = 0.5f
+    };
+    private readonly MixingSampleProvider mixer;
 
-    public void Dispose() => Stop();
 
-    private float _curVol;
+    private DateTime _lastStartTime;
+
+
+    public void Dispose() => _outDevice?.Dispose();
+
+    public SoundService()
+    {
+        mixer = new MixingSampleProvider(WaveFormat.CreateIeeeFloatWaveFormat(44100, 2));
+        mixer.ReadFully = true;
+        _outDevice.Init(mixer);
+        _outDevice.Play();
+        _lastStartTime = DateTime.Now;
+    }
 
     public void Play(int sample, int volume)
     {
-        Stop();
+        if (DateTime.Now - _lastStartTime < TimeSpan.FromSeconds(1))
+        {
+            return;
+        }
+        _lastStartTime = DateTime.Now;
         if (sample < 1 && sample > 16)
             return;
         string fname = "AlertSound" + sample + ".mp3";
@@ -26,38 +44,15 @@ public class SoundService : IDisposable
         {
             return;
         }
-        try
+        float vol = volume / 300.0f;
+        var stream = AssetLoader.Open(u);
+        var reader = new Mp3FileReader(stream);
+        var volumeC = new WaveChannel32(reader)
         {
-            float vol = volume / 300.0f;
-            _currentSteam = AssetLoader.Open(u);
-            _outDevice = new WaveOutEvent();
-            _audioFileReader = new Mp3FileReader(_currentSteam);
-            _outDevice.Init(_audioFileReader);
-            _outDevice.Volume = vol / 2;
-            _outDevice.Play();
-            _outDevice.PlaybackStopped += (sender, e) =>
-            {
-                if (e != null)
-                {
+            Volume = vol,
+        };
+        mixer.AddMixerInput(volumeC);
 
-                }
-                Stop();
-            };
-        }
-        catch (Exception ex)
-        {
-            Stop();
-        }
-    }
-
-    private void Stop()
-    {
-        _outDevice?.Stop();
-        _outDevice?.Dispose();
-        _audioFileReader?.Dispose();
-        _currentSteam?.Close();
-        _outDevice = null;
-        _audioFileReader = null;
-        _currentSteam = null;
     }
 }
+
