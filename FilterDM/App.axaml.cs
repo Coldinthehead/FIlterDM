@@ -5,6 +5,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using FilterDM.Factories;
+using FilterDM.Managers;
 using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels;
@@ -64,6 +65,7 @@ public partial class App : Application
             container.BindService<MinimapIconsService>();
             container.BindService<SoundService>();
             container.BindService<FilterViewModelFactory>();
+            container.BindService<BlockTemplateManager>();
             Services = container.BuildServiceProvider();
 
 

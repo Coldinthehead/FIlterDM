@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Factories;
 using FilterDM.Managers;
 using FilterDM.Models;
 using FilterDM.Repositories;
@@ -27,7 +28,6 @@ public partial class FilterViewModel : ObservableRecipient
 
     public Guid Guid { get; set; }
 
-    private readonly ItemTypeService _typeService;
     private readonly BlockTemplateManager _blockTemplates;
     private readonly RuleTemplateManager _ruleTemplates;
     private readonly PalleteManager _palleteManager;
@@ -35,26 +35,27 @@ public partial class FilterViewModel : ObservableRecipient
     private readonly SoundService _soundService;
     private readonly RuleParentManager _parentManager;
 
-    public FilterViewModel(ItemTypeService typeService
-        , BlockTemplateManager blockTemplates
+    private readonly IBlockViewModelFactory _blockFactory;
+
+    public FilterViewModel(BlockTemplateManager blockTemplates
         , RuleTemplateManager ruleTemplates
         , PalleteManager palleteManager
         , MinimapIconsService minimapIconsService
         , SoundService soundService
-        , RuleParentManager parentManager)
+        , RuleParentManager parentManager
+        , IBlockViewModelFactory blockFactory)
     {
         RegisterEvents();
-        _typeService = typeService;
         _blockTemplates = blockTemplates;
         _ruleTemplates = ruleTemplates;
         _palleteManager = palleteManager;
         _minimapIconsService = minimapIconsService;
         _soundService = soundService;
         _parentManager = parentManager;
+        _blockFactory = blockFactory;
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
-        _typeService = new();
         _ruleTemplates = new(new RuleTemplateService(new RuleTemplateRepository()));
         _blockTemplates = new(new(new BlockTemplateRepository()));
         _parentManager = new();
@@ -83,7 +84,7 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewBlock()
     {
-        BlockDetailsViewModel blockVm = new(_blockTemplates, new TypeScopeManager(_typeService));
+        BlockDetailsViewModel blockVm = _blockFactory.BuildBlockViewModel();
         BlockModel template = _blockTemplates.GetEmpty();
         blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
@@ -165,7 +166,7 @@ public partial class FilterViewModel : ObservableRecipient
         ObservableCollection<BlockDetailsViewModel> next = new();
         foreach (BlockModel blockModel in model.Blocks)
         {
-            BlockDetailsViewModel blockVm = new BlockDetailsViewModel(_blockTemplates, new TypeScopeManager(_typeService));
+            BlockDetailsViewModel blockVm = _blockFactory.BuildBlockViewModel();
             blockVm.SetModel(blockModel);
             next.Add(blockVm);
             foreach (RuleModel rule in blockModel.Rules)
