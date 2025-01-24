@@ -30,7 +30,7 @@ public class MinimapIconsService : IInit
             Bitmap atlas = new Bitmap(AssetLoader.Open(new Uri(uri)));
             int countX = 14;
             int spriteSize = (int)atlas.Size.Width / countX;
-            
+
             for (int y = 0; y < atlas.Size.Height; y += spriteSize)
             {
                 for (int x = 0; x < atlas.Size.Width; x += spriteSize)
@@ -84,7 +84,17 @@ public class MinimapIconsService : IInit
 
     public CroppedBitmap Get(string size, string shape, int color)
     {
-        return _iconsMap[size][shape][color];
+        if (_iconsMap.TryGetValue(size, out var items)
+            && items.TryGetValue(shape, out var iconsList)
+            && color < iconsList.Count)
+        {
+
+            return iconsList[color];
+        }
+        else
+        {
+            return _fallback;
+        }
     }
     public List<CroppedBitmap> GetLarge()
     {
