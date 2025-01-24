@@ -67,6 +67,7 @@ public partial class App : Application
             container.BindService<FilterViewModelFactory>();
             container.BindService<BlockTemplateManager>();
             container.BindService<RuleTemplateManager>();
+            container.BindService<ModifiersFactory>();
             Services = container.BuildServiceProvider();
 
 
