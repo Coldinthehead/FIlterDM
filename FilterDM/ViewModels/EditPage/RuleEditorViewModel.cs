@@ -205,14 +205,14 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
     {
         if (CurrentModifierEditor != null && CurrentModifierEditor.Rule == message.Value.Rule)
         {
-            CurrentModifierEditor = null;
+            var button = FindButtonByModifier(message.Value);
+            if (button != null)
+            {
+                button.DecrementCount();
+                SelectedModifier = Rule.Modifiers.Last();
+            }
         }
-        var button = FindButtonByModifier(message.Value);
-        if (button != null)
-        {
-            button.DecrementCount();
-            SelectedModifier = Rule.Modifiers.Last();
-        }
+       
     }
 
     private void UpdateAddModifierList()
