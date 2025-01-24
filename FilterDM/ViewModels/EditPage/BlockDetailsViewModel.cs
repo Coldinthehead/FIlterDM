@@ -3,13 +3,13 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Managers;
 using FilterDM.Models;
-using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FilterDM.ViewModels.EditPage;
 
@@ -65,7 +65,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     }
 
     [RelayCommand]
-    private async void Reset()
+    private async Task Reset()
     {
         if (Rules.Count > 0)
         {
@@ -79,9 +79,8 @@ public partial class BlockDetailsViewModel : ObservableRecipient
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
-
     [RelayCommand]
-    public async void DeleteBlock()
+    public async Task DeleteBlock()
     {
         if (Rules.Count > 0)
         {
