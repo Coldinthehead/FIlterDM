@@ -92,7 +92,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public SoundDecoratorViewModel AddSoundModifier()
     {
-        SoundDecoratorViewModel vm = _modifiersFactory.BuildDecorator<SoundDecoratorViewModel>(this, RemoveSoundModifier);
+        SoundDecoratorViewModel vm = _modifiersFactory.BuildSoundDecorator(this, RemoveSoundModifier);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -116,7 +116,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public NumericDecoratorViewModel AddNumericFilter(NumericFilterType type)
     {
-        NumericFilterHelper helper = _numericHelpers[type];
         NumericDecoratorViewModel vm = _modifiersFactory.BuildNumericDecorator(this, type);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
@@ -126,10 +125,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public void AddNumericFilter(NumericCondition condition)
     {
         string name = condition.ValueName.Replace(" ", "");
-
-        if (_helperFromString.TryGetValue(name, out NumericFilterHelper? helper))
+        if (Enum.TryParse(typeof(NumericFilterType), name, out object? result))
         {
-            NumericDecoratorViewModel vm = _modifiersFactory.BuildNumericDecorator(this, helper.Type);
+            var numericType = (NumericFilterType)result;
+            NumericDecoratorViewModel vm = _modifiersFactory.BuildNumericDecorator(this, numericType);
             vm.SetModel(condition);
             Modifiers.Add(vm);
             Messenger.Send(new FilterEditedRequestEvent(this));
@@ -283,9 +282,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     #endregion
     public float CalculatedPriority => (Properties.Enabled ? -1 : 1) * Properties.Priority;
 
-    private readonly Dictionary<NumericFilterType, NumericFilterHelper> _numericHelpers = [];
-    private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];
-
     private readonly TypeScopeManager _typeScopeManager;
     private readonly DialogService _dialogService;
     private readonly IModifiersFacotry _modifiersFactory;
@@ -297,22 +293,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         , DialogService dialogService
         , IModifiersFacotry modifiersFactory)
     {
-        _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000));
-        _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100));
-        _numericHelpers.Add(NumericFilterType.DropLevel, new NumericFilterHelper(NumericFilterType.DropLevel, "Drop Level", "DLevel", 100));
-        _numericHelpers.Add(NumericFilterType.AreaLevel, new NumericFilterHelper(NumericFilterType.AreaLevel, "Area Level", "ALevel", 100));
-        _numericHelpers.Add(NumericFilterType.Quality, new NumericFilterHelper(NumericFilterType.Quality, "Quality", "Quality", 100));
-        _numericHelpers.Add(NumericFilterType.Sockets, new NumericFilterHelper(NumericFilterType.Sockets, "Sockets Count", "Sockets", 4));
-        _numericHelpers.Add(NumericFilterType.BaseArmour, new NumericFilterHelper(NumericFilterType.BaseArmour, "Base Armor", "Armor", 5000));
-        _numericHelpers.Add(NumericFilterType.BaseEvasion, new NumericFilterHelper(NumericFilterType.BaseEvasion, "Base Evasion", "Evasion", 5000));
-        _numericHelpers.Add(NumericFilterType.BaseEnergyShield, new NumericFilterHelper(NumericFilterType.BaseEnergyShield, "Base Energy Shield", "ES", 5000));
-        _numericHelpers.Add(NumericFilterType.WaystoneTier, new NumericFilterHelper(NumericFilterType.WaystoneTier, "WaystoneTier", "T", 16));
 
-        foreach (var value in _numericHelpers.Values)
-        {
-            _helperFromString[value.Name.Replace(" ", "")] = value;
-            _helperFromString[value.ShortName] = value;
-        }
         _typeScopeManager = scopeManager;
         Properties = new(this, parentManager, templateManager, dialogService);
         Colors = modifiersFactory.BuildColorDecorator(this, palleteManager, RemoveColorModifier);

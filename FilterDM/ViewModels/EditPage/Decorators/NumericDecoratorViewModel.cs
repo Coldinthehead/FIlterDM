@@ -61,9 +61,7 @@ public partial class NumericDecoratorViewModel : ModifierViewModelBase
 
     public NumericFilterType FilterType => _type;
     private NumericFilterType _type;
-    public NumericDecoratorViewModel(RuleDetailsViewModel rule
-        , NumericFilterHelper helper
-        , Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public NumericDecoratorViewModel(NumericFilterHelper helper)
     {
         _type = helper.Type;
         ShortTitle = helper.ShortName;

@@ -77,7 +77,7 @@ public partial class BeamDecoratorViewModel : ModifierViewModelBase
     private static ObservableCollection<string> _staticBeamColors = new(["Red", "Green", "Blue", "Brown", "White", "Yellow", "Cyan", "Gray", "Orange", "Pink", "Purple"]);
 
 
-    public BeamDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public BeamDecoratorViewModel()
     {
         BeamColors = _staticBeamColors;
         SelectedBeamColor = BeamColors[0];

@@ -41,15 +41,12 @@ public partial class SoundDecoratorViewModel : ModifierViewModelBase
     [RelayCommand]
     private void Play()
     {
-        //                                  AlertSound1.mp3
         _soundService.Play(SelectedSound, SoundVolume);
     }
 
     private readonly SoundService _soundService;
 
-    public SoundDecoratorViewModel(RuleDetailsViewModel rule
-        , SoundService soundService
-        ,Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public SoundDecoratorViewModel(SoundService soundService)
     {
         Sounds = new([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
         SelectedSound = Sounds[0];

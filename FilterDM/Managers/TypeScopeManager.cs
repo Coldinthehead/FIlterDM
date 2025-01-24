@@ -2,7 +2,6 @@
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Decorators;
-using System;
 using System.Collections.Generic;
 
 namespace FilterDM.Managers;
@@ -72,7 +71,11 @@ public class TypeScopeManager
 
     public TypeDecoratorViewModel GetDecorator(RuleDetailsViewModel vm)
     {        
-        TypeDecoratorViewModel decorator = new(vm, RemoveDecatorator);
+        TypeDecoratorViewModel decorator = new()
+        {
+            Rule = vm,
+            DeleteAction = RemoveDecatorator
+        };
         _decorators.Add(decorator);
 
         if (_useScope)

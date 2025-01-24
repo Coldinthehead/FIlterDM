@@ -103,10 +103,7 @@ public partial class ColorDecoratorViewModel : ModifierViewModelBase
 
     private readonly PalleteManager _palleteManager;
 
-    public ColorDecoratorViewModel(
-        RuleDetailsViewModel rule,
-        PalleteManager palleteManager,
-        Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public ColorDecoratorViewModel(PalleteManager palleteManager) 
     {
         _palleteManager = palleteManager;
         TextColor = new()

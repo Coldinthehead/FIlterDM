@@ -54,8 +54,7 @@ public partial class ClassDecoratorViewModel : ModifierViewModelBase
         WeakReferenceMessenger.Default.Send(new FilterEditedRequestEvent(this));
     }
 
-    public ClassDecoratorViewModel(RuleDetailsViewModel rule
-        , Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public ClassDecoratorViewModel() 
     {
         IEnumerable<ItemClassDetails> details = App.Current!.Services!.GetRequiredService<ItemClassesService>().GetItemClasses();
         List<ClassItemViewModel> checkList

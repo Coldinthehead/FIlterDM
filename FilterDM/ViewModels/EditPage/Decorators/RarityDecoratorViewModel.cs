@@ -73,7 +73,7 @@ public partial class RarityDecoratorViewModel : ModifierViewModelBase
     }
 
 
-    public RarityDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public RarityDecoratorViewModel()
     {
         GenerateDescription();
     }

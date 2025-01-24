@@ -152,9 +152,7 @@ public partial class MapIconDecoratorViewModel : ModifierViewModelBase
 
     private readonly MinimapIconsService _iconService;
 
-    public MapIconDecoratorViewModel(RuleDetailsViewModel rule
-        , MinimapIconsService iconService
-        , Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public MapIconDecoratorViewModel(MinimapIconsService iconService)
     {
         IconSizes = _staticSizes;
         IconShapes = _staticShapes;

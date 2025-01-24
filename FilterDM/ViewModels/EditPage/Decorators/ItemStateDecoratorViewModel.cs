@@ -40,10 +40,6 @@ public partial class ItemStateDecoratorViewModel : ModifierViewModelBase
         Repr = string.Join(",", next);
     }
     
-    public ItemStateDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
-    {
-    }
-
     public override void Apply(RuleModel model)
     {
         model.AddStateModifiers(Mirrored, Corrupted);

@@ -12,4 +12,6 @@ public enum NumericFilterType
     BaseEvasion,
     BaseEnergyShield,
     WaystoneTier,
+    Width,
+    Height,
 }

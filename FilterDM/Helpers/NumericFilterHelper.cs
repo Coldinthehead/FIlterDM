@@ -5,8 +5,6 @@ namespace FilterDM.Helpers;
 
 public class NumericFilterHelper
 {
-    private readonly Action<bool> _useAction;
-
     public string Name { get; private set; }
     public string ShortName { get; private set; }
 

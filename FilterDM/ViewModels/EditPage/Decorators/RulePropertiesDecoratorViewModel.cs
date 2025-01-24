@@ -96,7 +96,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule
         , RuleParentManager parentManager
         , RuleTemplateManager templateManager
-        , DialogService dialogService) : base(rule, null)
+        , DialogService dialogService)
     {
 
         ParentManager = parentManager;

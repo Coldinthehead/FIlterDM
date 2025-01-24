@@ -27,9 +27,4 @@ public abstract partial class ModifierViewModelBase : ObservableRecipient
 
     public abstract ModifierEditorViewModel GetEditor();
 
-    protected ModifierViewModelBase(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction)
-    {
-        DeleteAction = deleteAction;
-        Rule = rule;
-    }
 }

@@ -35,14 +35,7 @@ public partial class TextSizeDecoratorViewModel : ModifierViewModelBase
         Messenger.Send(new FilterEditedRequestEvent(this));
     }
 
-
-
     private float _cachedFontSize = DEFAULT_FONT_SIZE;
-
-    public TextSizeDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
-    {
-    }
-
     public override void Apply(RuleModel model)
     {
         model.FontSize = (int)FontSize;

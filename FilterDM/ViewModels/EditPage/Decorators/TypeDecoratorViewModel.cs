@@ -106,7 +106,7 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
 
     public Action<TypeViewModel> TypeSelector { get; set; }
 
-    public TypeDecoratorViewModel(RuleDetailsViewModel rule, Action<ModifierViewModelBase> deleteAction) : base(rule, deleteAction)
+    public TypeDecoratorViewModel()
     {
         SelectedTypes = new();
         TypeSelector = (vm) =>
