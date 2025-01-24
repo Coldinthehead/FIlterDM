@@ -29,18 +29,21 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
     private readonly SoundService _soundService;
     private readonly BlockTemplateManager _blockTemplateManager;
     private readonly RuleTemplateManager _ruleTempalteManager;
+    private readonly DialogService _dialogSevice;
 
     public FilterViewModelFactory(ItemTypeService itemTypeService
         , MinimapIconsService minimapIconService
         , SoundService soundService
         , BlockTemplateManager blockTemplateManager
-        , RuleTemplateManager ruleTempalteManager)
+        , RuleTemplateManager ruleTempalteManager
+        , DialogService dialogSevice)
     {
         _itemTypeService = itemTypeService;
         _minimapIconService = minimapIconService;
         _soundService = soundService;
         _blockTemplateManager = blockTemplateManager;
         _ruleTempalteManager = ruleTempalteManager;
+        _dialogSevice = dialogSevice;
     }
 
     public FilterViewModel BuildFilterViewModel()
@@ -54,7 +57,7 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
 
     public BlockDetailsViewModel BuildBlockViewModel()
     {
-        BlockDetailsViewModel block = new(_blockTemplateManager, new TypeScopeManager(_itemTypeService));
+        BlockDetailsViewModel block = new(_blockTemplateManager, new TypeScopeManager(_itemTypeService), _dialogSevice);
         BlockModel template = _blockTemplateManager.GetEmpty();
         block.SetModel(template);
         return block;

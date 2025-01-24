@@ -69,7 +69,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         if (Rules.Count > 0)
         {
-            var confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to override {Rules.Count} rules?");
+            var confirm = await _dialogService.ShowConfirmDialog($"Are you sure to override {Rules.Count} rules?");
             if (!confirm)
             {
                 return;
@@ -84,7 +84,7 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     {
         if (Rules.Count > 0)
         {
-            var dialogResult = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete {Rules.Count} rules?");
+            var dialogResult = await _dialogService.ShowConfirmDialog($"Are you sure to delete {Rules.Count} rules?");
             if (dialogResult)
             {
                 OnDeleteConfirmed();
@@ -121,11 +121,16 @@ public partial class BlockDetailsViewModel : ObservableRecipient
     [ObservableProperty]
     public BlockTemplateManager _templateManager;
 
-    public BlockDetailsViewModel(BlockTemplateManager templateManager, TypeScopeManager scopeManager)
+    private readonly DialogService _dialogService;
+
+    public BlockDetailsViewModel(BlockTemplateManager templateManager
+        , TypeScopeManager scopeManager
+        , DialogService dialogService)
     {
         TemplateManager = templateManager;
         _scopeManager = scopeManager;
         SelectedTemplate = _templateManager.Templates.First();
+        _dialogService = dialogService;
     }
 
     public BlockModel GetModel()
