@@ -10,8 +10,7 @@ public class UserPrefrences
 {
     public Dictionary<string, string> Preferences { get; set; }
 }
-
-public class PersistentDataService
+public class PersistentDataService : IPersistentDataService
 {
     private UserPrefrences _prefs;
 
@@ -19,11 +18,11 @@ public class PersistentDataService
     public string FiltersPath { get; private set; }
     public string TemplatesPath { get; private set; }
 
-    public const string TempaltesFolderName = "templates";
-    public const string FiltersFolderName = "filters";
-    public const string PreferenceFolderName = "preferences";
-    public const string PreferenceFileName = "preferences.json";
-    public const string StorageFolderName = "FilterDM";
+    public string TempaltesFolderName { get; private set; } = "templates";
+    public string FiltersFolderName { get; private set; } = "filters";
+    public string PreferenceFolderName { get; private set; } = "preferences";
+    public string PreferenceFileName { get; private set; } = "preferences.json";
+    public string StorageFolderName { get; private set; } = "FilterDM";
     public string? GetPreference(string key)
     {
         if (_prefs.Preferences.TryGetValue(key, out string? value))
@@ -35,7 +34,7 @@ public class PersistentDataService
 
     public void SetPreference(string key, string value)
     {
-        _prefs.Preferences[key] = value;    
+        _prefs.Preferences[key] = value;
     }
 
     public async Task InitFolders()
