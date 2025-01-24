@@ -3,13 +3,13 @@ using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using FilterDM.ViewModels.EditPage;
 
-namespace FilterDM.ViewModels.EditPage.Managers;
+namespace FilterDM.Managers;
 
-public partial class RuleTemplateManager : ObservableRecipient
+public partial class RuleTemplateManager :ObservableRecipient
 {
     [ObservableProperty]
     private ObservableCollection<RuleModel> _templates;

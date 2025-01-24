@@ -2,7 +2,6 @@
 using FilterDM.Services;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
-using FilterDM.ViewModels.EditPage.Managers;
 
 namespace FilterDM.Factories;
 

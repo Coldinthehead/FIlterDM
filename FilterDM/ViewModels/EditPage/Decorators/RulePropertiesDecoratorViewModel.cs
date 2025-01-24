@@ -5,7 +5,7 @@ using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
-using FilterDM.ViewModels.EditPage.Managers;
+using FilterDM.Managers;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
@@ -87,7 +87,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     }
 
     [ObservableProperty]
-    private RuleParentManager _parentManager;
+    private Managers.RuleParentManager _parentManager;
 
     [ObservableProperty]
     private RuleTemplateManager _templateManager;

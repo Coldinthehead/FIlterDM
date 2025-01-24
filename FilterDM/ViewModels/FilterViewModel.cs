@@ -6,7 +6,6 @@ using FilterDM.Repositories;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
-using FilterDM.ViewModels.EditPage.Managers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

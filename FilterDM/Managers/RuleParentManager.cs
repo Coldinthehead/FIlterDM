@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FilterDM.ViewModels.Base;
+using FilterDM.ViewModels.EditPage;
 using System;
 using System.Collections.ObjectModel;
 
-namespace FilterDM.ViewModels.EditPage.Managers;
+namespace FilterDM.Managers;
 
 public partial class RuleParentManager : ViewModelBase
 {
