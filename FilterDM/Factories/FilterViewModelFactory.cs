@@ -6,22 +6,6 @@ using FilterDM.ViewModels.EditPage;
 
 namespace FilterDM.Factories;
 
-public interface IFilterViewModelFactory
-{
-    public FilterViewModel BuildFilterViewModel();
-}
-
-public interface IBlockViewModelFactory
-{
-    public BlockDetailsViewModel BuildBlockViewModel();
-}
-
-public interface IRuleViewModelFactory
-{
-    public RuleDetailsViewModel BuildRuleViewModel(BlockDetailsViewModel parent, RuleParentManager parentManager, PalleteManager pallateManager);
-    public RuleDetailsViewModel BuildRuleViewModel(BlockDetailsViewModel parent, RuleParentManager parentManager, PalleteManager pallateManager, RuleModel model);
-}
-
 public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFactory, IRuleViewModelFactory
 {
     private readonly ItemTypeService _itemTypeService;
