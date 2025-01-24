@@ -34,23 +34,24 @@ public partial class FilterViewModel : ObservableRecipient
     private readonly PalleteManager _palleteManager;
     private readonly MinimapIconsService _minimapIconsService;
     private readonly SoundService _soundService;
-
     private readonly RuleParentManager _parentManager;
 
     public FilterViewModel(ItemTypeService typeService
-        , BlockTemplateService blockTemplateService
-        , RuleTemplateService ruleTemplateService
+        , BlockTemplateManager blockTemplates
+        , RuleTemplateManager ruleTemplates
+        , PalleteManager palleteManager
         , MinimapIconsService minimapIconsService
-        , SoundService soundService)
+        , SoundService soundService
+        , RuleParentManager parentManager)
     {
-        _typeService = typeService;
-        _ruleTemplates = new(ruleTemplateService);
-        _blockTemplates = new BlockTemplateManager(blockTemplateService);
-        _parentManager = new();
-        _palleteManager = new();
-        _soundService = soundService;
         RegisterEvents();
+        _typeService = typeService;
+        _blockTemplates = blockTemplates;
+        _ruleTemplates = ruleTemplates;
+        _palleteManager = palleteManager;
         _minimapIconsService = minimapIconsService;
+        _soundService = soundService;
+        _parentManager = parentManager;
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
