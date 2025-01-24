@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using FilterDM.Factories;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage;
@@ -136,7 +137,7 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
     public void OnEnter(FilterModel model)
     {
         Name = model.Name;
-        _currentFilterVm = new(_typeService, _blockTemplateService, _ruleTemplateService, _iconService, _soundService);
+        _currentFilterVm = _filterViewModelFactory.BuildFilterViewModel();
         _currentFilterVm.SetModel(model);
 
         FilterTree.SetBlocks(_currentFilterVm.GetBlocks());
@@ -144,38 +145,30 @@ public partial class ProjectEditViewModel : ObservableRecipient, IRecipient<Filt
         Changes = false;
     }
 
-    private readonly ItemTypeService _typeService;
-    private readonly BlockTemplateService _blockTemplateService;
-    private readonly RuleTemplateService _ruleTemplateService;
+
     private readonly IProjectService _projectService;
     private readonly FileSelectionService _fileSelectionService;
     private readonly FileService _fileService;
     private readonly FilterExportService _exportService;
-    private readonly MinimapIconsService _iconService;
-    private readonly SoundService _soundService;
+
+    private readonly IFilterViewModelFactory _filterViewModelFactory;
 
     public ProjectEditViewModel(ItemTypeService typeService
-        , BlockTemplateService blockTempalteService
-        , RuleTemplateService ruleTempalateService
         , IProjectService projectService
         , FileSelectionService fileSelectionService
         , FileService fileService
         , FilterExportService exportService
-        , MinimapIconsService iconService
-        , SoundService soundService)
+        , IFilterViewModelFactory filterViewModelFactory)
     {
-        _typeService = typeService;
-        _blockTemplateService = blockTempalteService;
+
         FilterTree = new();
         EditorPanel = new();
         Messenger.Register<FilterEditedRequestEvent>(this);
-        _ruleTemplateService = ruleTempalateService;
         _projectService = projectService;
         _fileSelectionService = fileSelectionService;
         _fileService = fileService;
         _exportService = exportService;
-        _iconService = iconService;
-        _soundService = soundService;
+        _filterViewModelFactory = filterViewModelFactory;
     }
 
     public void Receive(FilterEditedRequestEvent message)

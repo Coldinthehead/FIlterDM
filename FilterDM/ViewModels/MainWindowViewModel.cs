@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FilterDM.Factories;
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
@@ -37,15 +38,14 @@ public partial class MainWindowViewModel : ViewModelBase
         var exportService = services.GetService<FilterExportService>();
         var iconService = services.GetService<MinimapIconsService>();
         var soundService = services.GetService<SoundService>();
-        _editorViewModel = new(typeService
-            , blockTeplateService
-            , ruleTemplateService
-            , _projectService
-            , fileSelectionService
-            , fileService
-            , exportService
-            , iconService
-            , soundService)
+        IFilterViewModelFactory? filterVmFactory = services.GetService<IFilterViewModelFactory>();
+        _editorViewModel = new ProjectEditViewModel(
+            typeService, 
+            _projectService,
+            fileSelectionService, 
+            fileService, 
+            exportService,
+            filterVmFactory)
         {
             BackToMenuAction = EnterProjectsPage,
         };
