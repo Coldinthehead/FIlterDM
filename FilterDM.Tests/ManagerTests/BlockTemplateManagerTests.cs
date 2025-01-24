@@ -3,9 +3,8 @@ using FilterDM.Tests.ViewModel.Tests;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.Managers;
-using FilterDM.Services;
 using FilterDM.Models;
-using FilterDM.ViewModels.EditPage.Managers;
+using FilterDM.Tests.Helpers;
 
 namespace FilterDM.Tests.ManagerTests;
 public class BlockTemplateManagerTests
@@ -15,15 +14,8 @@ public class BlockTemplateManagerTests
     {
         BlockTemplateManager sut = new(new Services.BlockTemplateService(new BlockTemplateRepository()));
         EventListener<ResetTemplateRequest, TemplateChangeDetils> listener = new();
-        TypeScopeManager scopeManager = new TypeScopeManager(new ItemTypeService());
-        BlockDetailsViewModel testBlock = new(sut, scopeManager);
-        testBlock.AddRule(new RuleDetailsViewModel(
-            new()
-            , scopeManager
-            , new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository()))
-            ,new PalleteManager()
-            , new MinimapIconsService()
-            ,new SoundService()));
+        BlockDetailsViewModel testBlock = HelperFactory.GetBlock();
+        testBlock.AddRule(HelperFactory.GetRule(testBlock));
         BlockModel template = new BlockTemplateRepository().GetEmpty();
 
         sut.SetTempalte(testBlock, template);

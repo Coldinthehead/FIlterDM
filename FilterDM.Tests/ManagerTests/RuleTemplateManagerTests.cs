@@ -1,10 +1,11 @@
-﻿using FilterDM.Models;
+﻿using FilterDM.Managers;
+using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
+using FilterDM.Tests.Helpers;
 using FilterDM.Tests.ViewModel.Tests;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
-using FilterDM.ViewModels.EditPage.Managers;
 
 namespace FilterDM.Tests.ManagerTests;
 public class RuleTemplateManagerTests
@@ -13,9 +14,7 @@ public class RuleTemplateManagerTests
     public void SetTemplate_ShouldRaiseResetRuleTemplateRequest()
     {
         RuleTemplateManager sut = new(new RuleTemplateService(new RuleTemplateRepository()));
-        RuleDetailsViewModel testRule = new RuleDetailsViewModel(new()
-            , new(new Services.ItemTypeService())
-            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
+        RuleDetailsViewModel testRule = HelperFactory.GetRule(HelperFactory.GetBlock());
         EventListener<ResetRuleTemplateRequest, ResetRuleTemplateDetails> listener = new();
         RuleModel template = new RuleTemplateRepository().GetEmpty();
 

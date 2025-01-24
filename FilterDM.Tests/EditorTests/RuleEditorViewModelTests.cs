@@ -1,5 +1,4 @@
-﻿using FilterDM.Repositories;
-using FilterDM.Services;
+﻿using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels.EditPage;
 
 namespace FilterDM.Tests.EditorTests;
@@ -19,9 +18,7 @@ public class RuleEditorViewModelTests
 
     public static RuleDetailsViewModel WithEmptyModel()
     {
-        return new RuleDetailsViewModel(new()
-            , new(new Services.ItemTypeService())
-            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(),new());
+        return HelperFactory.GetRule(HelperFactory.GetBlock());
 
     }
 }

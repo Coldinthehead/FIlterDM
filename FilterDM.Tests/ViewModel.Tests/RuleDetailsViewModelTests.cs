@@ -2,9 +2,9 @@
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
+using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
-using FilterDM.ViewModels.EditPage.Managers;
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class RuleDetailsViewModelTests
@@ -12,9 +12,7 @@ public class RuleDetailsViewModelTests
     [Test]
     public void OnDeleteConfirmed_ShouldRaiseRuleDeleteRequest()
     {
-        RuleDetailsViewModel sut = new RuleDetailsViewModel(new()
-            , new(new Services.ItemTypeService())
-            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
+        RuleDetailsViewModel sut = HelperFactory.GetRule(HelperFactory.GetBlock());
         EventListener<DeleteRuleRequest, RuleDetailsViewModel> listener = new();
         sut.OnDeleteConfirmed();
 
@@ -25,9 +23,7 @@ public class RuleDetailsViewModelTests
     [Test]
     public void GetModel_ShouldSetProperties()
     {
-        RuleDetailsViewModel sut = new RuleDetailsViewModel(new()
-            , new(new Services.ItemTypeService())
-            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
+        RuleDetailsViewModel sut = HelperFactory.GetRule(HelperFactory.GetBlock());
         RuleModel testModel = sut.GetModel();
 
         Assert.That(testModel, Is.Not.Null);
@@ -39,10 +35,7 @@ public class RuleDetailsViewModelTests
     [Test]
     public void GetModel_ShouldSetNameAsEmpty_WhenTitleIsNull()
     {
-        RuleDetailsViewModel sut =
-            new RuleDetailsViewModel(new()
-            , new(new Services.ItemTypeService())
-            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
+        RuleDetailsViewModel sut = HelperFactory.GetRule(HelperFactory.GetBlock());
         sut.Properties.Title = null;
 
         RuleModel testModel = sut.GetModel();

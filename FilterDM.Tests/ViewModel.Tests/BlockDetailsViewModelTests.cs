@@ -1,5 +1,6 @@
 ﻿using FilterDM.Models;
 using FilterDM.Repositories;
+using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
 
@@ -9,7 +10,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void NewRuleCommand_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
+        BlockDetailsViewModel sut = HelperFactory.GetBlock();
         RuleCreateRequestListener listener = new();
 
         sut.NewRuleCommand.Execute(sut);
@@ -21,7 +22,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void OnDeleteConfirmed_ShouldRaiseEvent()
     {
-        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()) );
+        BlockDetailsViewModel sut = HelperFactory.GetBlock();
         EventListener<DeleteBlockRequest,BlockDetailsViewModel> listener = new();
 
         sut.OnDeleteConfirmed();
@@ -33,7 +34,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void SetModel_ShouldChangeBlockCorrect()
     {
-        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
+        BlockDetailsViewModel sut = HelperFactory.GetBlock();
         BlockModel empty = new BlockTemplateRepository().GetEmpty();
 
         sut.SetModel(empty);
@@ -46,7 +47,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void GetModel_ShouldSetFileds()
     {
-        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
+        BlockDetailsViewModel sut = HelperFactory.GetBlock();
 
         BlockModel testModel = sut.GetModel();
 
@@ -60,7 +61,7 @@ public class BlockDetailsViewModelTests
     [Test]
     public void GetModel_ShouldSetModelTitleAsEmpty_WhenTitleIsNull()
     {
-        BlockDetailsViewModel sut = new(new(new(new BlockTemplateRepository())), new(new()));
+        BlockDetailsViewModel sut = HelperFactory.GetBlock();
         sut.Title = null;
         BlockModel testModel = sut.GetModel();
 

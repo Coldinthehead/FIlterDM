@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Models;
 using FilterDM.Repositories;
+using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
@@ -15,7 +16,7 @@ public class StructureTreeViewModelTests
     [SetUp]
     public void SetUp()
     {
-        _filterVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
+        _filterVm = HelperFactory.GetFilter();
         _filterVm.NewBlock();
         _filterVm.NewBlock();
     }

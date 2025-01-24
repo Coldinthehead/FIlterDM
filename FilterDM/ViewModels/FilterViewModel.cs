@@ -45,11 +45,18 @@ public partial class FilterViewModel : ObservableRecipient
         _blockFactory = blockFactory;
         _ruleFactory = ruleFactory;
     }
-    public FilterViewModel(IMessenger messeneger) : base(messeneger)
+    public FilterViewModel(IMessenger messeneger
+        , PalleteManager palleteManager
+        , RuleParentManager parentManager
+        , IBlockViewModelFactory blockFactory
+        , IRuleViewModelFactory ruleFactory) : base(messeneger)
     {
-        _parentManager = new();
-        _palleteManager = new();
+
         RegisterEvents();
+        _palleteManager = palleteManager;
+        _parentManager = parentManager;
+        _blockFactory = blockFactory;
+        _ruleFactory = ruleFactory;
     }
 
     private void RegisterEvents()

@@ -2,11 +2,12 @@
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
+using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
-using FilterDM.ViewModels.EditPage.Managers;
+
 
 namespace FilterDM.Tests.ViewModel.Tests;
 public class EditorPanelViewModelTests
@@ -15,7 +16,7 @@ public class EditorPanelViewModelTests
     public void Clear_ShouldDeleteAllEditors()
     {
         EditorPanelViewModel sut = new();
-        sut.AddBlock(new(new(new(new BlockTemplateRepository())), new(new())));
+        sut.AddBlock(HelperFactory.GetBlock());
 
         sut.Clear();
 
@@ -25,7 +26,7 @@ public class EditorPanelViewModelTests
     public void AddBlock_ShouldCreateBlockEditor_WhenEditorNotExists()
     {
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock =  new(new(new(new BlockTemplateRepository())), new(new()));
+        BlockDetailsViewModel testBlock = HelperFactory.GetBlock();
 
         sut.AddBlock(testBlock);
 
@@ -37,7 +38,7 @@ public class EditorPanelViewModelTests
     public void AddBlock_ShouldNotCreateBlockEditor_WhenEditorExists()
     {
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock = new(new(new(new BlockTemplateRepository())), new(new()));
+        BlockDetailsViewModel testBlock = HelperFactory.GetBlock();
         sut.AddBlock(testBlock);
 
         sut.AddBlock(testBlock);
@@ -49,10 +50,9 @@ public class EditorPanelViewModelTests
     public void ShouldOpenEditor_WhenBlockCreated()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(),new());
-
-        fitlerVm.NewBlock();
-        BlockDetailsViewModel testBlock = fitlerVm.GetBlocks().First();
+        FilterViewModel vm = HelperFactory.GetFilter();
+        vm.NewBlock();
+        BlockDetailsViewModel testBlock = vm.GetBlocks().First();
 
         Assert.That(sut.Items, Has.Count.EqualTo(1));
         Assert.That(sut.Items.Select(x => x.IsPartOf(testBlock)).First(), Is.True);
@@ -62,12 +62,12 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenBlockDeleted()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
-        fitlerVm.NewBlock();
-        fitlerVm.NewBlock();
+        FilterViewModel vm = HelperFactory.GetFilter();
+        vm.NewBlock();
+        vm.NewBlock();
 
-        BlockDetailsViewModel testBlock = fitlerVm.GetBlocks().First();
-        fitlerVm.DeleteBlock(testBlock);
+        BlockDetailsViewModel testBlock = vm.GetBlocks().First();
+        vm.DeleteBlock(testBlock);
 
         Assert.That(sut.Items, Has.Count.EqualTo(1));
         Assert.That(sut.Items.Select(x=>x.IsPartOf(testBlock)).First(), Is.False);
@@ -76,13 +76,13 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldOpenTab_WhenBlockSelectedInTree()
     {
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
-        fitlerVm.NewBlock();
-        fitlerVm.NewBlock();
+        FilterViewModel vm = HelperFactory.GetFilter();
+        vm.NewBlock();
+        vm.NewBlock();
         StructureTreeViewModel tree = new();
-        tree.SetBlocks(fitlerVm.GetBlocks());
+        tree.SetBlocks(vm.GetBlocks());
         EditorPanelViewModel sut = new();
-        BlockDetailsViewModel testBlock = fitlerVm.GetBlocks().First();
+        BlockDetailsViewModel testBlock = vm.GetBlocks().First();
 
         tree.Select(testBlock);
 
@@ -92,10 +92,10 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldOpenEditor_WhenRuleSelectedEvent()
     {
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
-        fitlerVm.NewBlock();
-        BlockDetailsViewModel block = fitlerVm.GetBlocks().First();
-        fitlerVm.NewRule(block);
+        FilterViewModel vm = HelperFactory.GetFilter();
+        vm.NewBlock();
+        BlockDetailsViewModel block = vm.GetBlocks().First();
+        vm.NewRule(block);
         RuleDetailsViewModel testRule = block.Rules.First();
         EditorPanelViewModel sut = new();
 
@@ -110,9 +110,9 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldCloseBlockEditor_WhenEventRaised()
     {
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
+        FilterViewModel vm = HelperFactory.GetFilter();
         EditorPanelViewModel sut = new();
-        fitlerVm.NewBlock();
+        vm.NewBlock();
         EditorBaseViewModel editor = sut.Items.First();
         
         WeakReferenceMessenger.Default.Send(new EditorClosedEvent(editor));
@@ -124,20 +124,20 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldCloseOpenedRules_WhenBlockTempalteChanged()
     {
-        FilterViewModel filterVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
+        FilterViewModel vm = HelperFactory.GetFilter();
         EditorPanelViewModel sut = new();
-        filterVm.NewBlock();
-        BlockDetailsViewModel testBlock = filterVm.GetBlocks().First();
-        filterVm.NewRule(testBlock);
-        filterVm.NewRule(testBlock);
-        filterVm.NewRule(testBlock);
+        vm.NewBlock();
+        BlockDetailsViewModel testBlock = vm.GetBlocks().First();
+        vm.NewRule(testBlock);
+        vm.NewRule(testBlock);
+        vm.NewRule(testBlock);
         foreach (var rule in testBlock.Rules)
         {
             sut.AddRule(rule);
         }
         BlockModel empty = new BlockTemplateRepository().GetEmpty();
 
-        filterVm.ResetBlockTemplate(testBlock, empty);
+        vm.ResetBlockTemplate(testBlock, empty);
 
         Assert.That(sut.Items.Count, Is.EqualTo(1));
     }
@@ -146,9 +146,7 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenRuleDeleted()
     {
         EditorPanelViewModel sut = new();
-        RuleDetailsViewModel testModel = new RuleDetailsViewModel(new()
-            , new(new Services.ItemTypeService())
-            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
+        RuleDetailsViewModel testModel = HelperFactory.GetRule(HelperFactory.GetBlock());
         sut.AddRule(testModel);
 
         WeakReferenceMessenger.Default.Send(new RuleDeleteEvent(testModel));

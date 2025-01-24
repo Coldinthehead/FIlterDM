@@ -2,6 +2,7 @@
 using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
+using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
@@ -12,7 +13,7 @@ public class FilterViewModelTests
 
     public static FilterViewModel Build()
     {
-        return new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
+        return HelperFactory.GetFilter();
     }
 
     [Test]
@@ -250,7 +251,7 @@ public class FilterViewModelTests
     public void ShouldCreateNewRule_OnCreateRuleEvent()
     {
         var messenger = new WeakReferenceMessenger();
-        FilterViewModel sut = new(messenger);
+        FilterViewModel sut = HelperFactory.GetFilter(messenger);
         sut.NewBlock();
         BlockDetailsViewModel testBlock = sut.GetBlocks().First();
 
@@ -264,7 +265,7 @@ public class FilterViewModelTests
     {
         BlockModel empty = new BlockTemplateRepository().GetEmpty();
         var messenger = new WeakReferenceMessenger();
-        FilterViewModel sut = new(messenger);
+        FilterViewModel sut = HelperFactory.GetFilter(messenger);
         sut.NewBlock();
         BlockDetailsViewModel testBlock = sut.GetBlocks().First();
         sut.NewRule(testBlock);
@@ -349,7 +350,7 @@ public class FilterViewModelTests
     public void ShouldSortRules_WhenSortRulesRequestRaised()
     {
         WeakReferenceMessenger messenger = new();
-        FilterViewModel sut = new FilterViewModel(messenger);
+        FilterViewModel sut = HelperFactory.GetFilter(messenger);
         sut.NewBlock();
         BlockDetailsViewModel testBlock = sut.GetBlocks().First();
         sut.NewRule(testBlock);

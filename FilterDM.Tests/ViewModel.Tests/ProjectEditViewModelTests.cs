@@ -1,6 +1,7 @@
 ﻿using FilterDM.Models;
 using FilterDM.Repositories;
 using FilterDM.Services;
+using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels.Pages;
 
 namespace FilterDM.Tests.ViewModel.Tests;
@@ -21,15 +22,7 @@ public class ProjectEditViewModelTests
         {
             Title = "block1",
         });
-        _sut = new (
-            new ItemTypeService(), new BlockTemplateService(new BlockTemplateRepository())
-            , new RuleTemplateService(new RuleTemplateRepository())
-            , new ProjectService(new ProjectRepository(null), new DialogService(null))
-            , new FileSelectionService(null)
-            , new FileService(new DialogService(null))
-            , new FilterExportService()
-            , new MinimapIconsService()
-            , new SoundService());
+        _sut = HelperFactory.GetProject();
     }
 
     [Test]
