@@ -140,7 +140,7 @@ public partial class RuleEditorViewModel : EditorBaseViewModel
             AddNumericModifier.Build("Waystone Tier", 2, NumericFilterType.WaystoneTier,() => AddNumericFilter(NumericFilterType.WaystoneTier))
       ];
         AddModifiersList = new(modifers);
-        Messenger.Register<RuleModifierDeleteEvent>(this);
+        Messenger.Register<RuleModifierDeleteEvent,RuleDetailsViewModel>(this, Rule);
         Messenger.Register<RuleTitleApplyEvent, RuleDetailsViewModel>(this, Rule);
 
         UpdateAddModifierList();

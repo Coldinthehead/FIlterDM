@@ -181,7 +181,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -190,7 +190,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier) && modifier is TypeDecoratorViewModel condition)
         {
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -199,7 +199,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier) && modifier is ClassDecoratorViewModel condition)
         {
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -208,7 +208,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (modifier is NumericDecoratorViewModel condition && Modifiers.Remove(modifier))
         {
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -217,7 +217,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -226,7 +226,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -236,7 +236,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         if (Modifiers.Remove(modifier))
         {
             MapIcon.UseMinimapIcon = false;
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -249,7 +249,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             Colors.UseFontColor = false;
             Colors.UseBorderColor = false;
             Colors.UseBackColor = false;
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
 
@@ -259,7 +259,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Remove(modifier))
         {
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
@@ -269,7 +269,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         if (Modifiers.Remove(modifier))
         {
             TextSize.UseFontSize = false;
-            Messenger.Send(new RuleModifierDeleteEvent(modifier));
+            Messenger.Send(new RuleModifierDeleteEvent(modifier), this);
             Messenger.Send(new FilterEditedRequestEvent(this));
         }
     }
