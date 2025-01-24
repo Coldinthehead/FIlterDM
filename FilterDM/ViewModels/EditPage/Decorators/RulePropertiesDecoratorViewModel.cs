@@ -99,6 +99,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         , DialogService dialogService)
     {
 
+        Rule = rule;
         ParentManager = parentManager;
         TemplateManager = templateManager;
         SelectedTemplate = TemplateManager.Templates.First();
