@@ -1,4 +1,5 @@
 ﻿using FilterDM.Managers;
+using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels;
 using FilterDM.ViewModels.EditPage;
@@ -17,7 +18,8 @@ public interface IBlockViewModelFactory
 
 public interface IRuleViewModelFactory
 {
-    public RuleDetailsViewModel BuildRuleViewModel(RuleParentManager parentManager, TypeScopeManager scopeManager, PalleteManager pallateManager);
+    public RuleDetailsViewModel BuildRuleViewModel(BlockDetailsViewModel parent, RuleParentManager parentManager, PalleteManager pallateManager);
+    public RuleDetailsViewModel BuildRuleViewModel(BlockDetailsViewModel parent, RuleParentManager parentManager, PalleteManager pallateManager, RuleModel model);
 }
 
 public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFactory, IRuleViewModelFactory
@@ -43,11 +45,9 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
 
     public FilterViewModel BuildFilterViewModel()
     {
-        FilterViewModel vm = new(_blockTemplateManager
-            , _ruleTempalteManager
+        FilterViewModel vm = new(
+            _blockTemplateManager
             , new PalleteManager()
-            , _minimapIconService
-            , _soundService
             , new RuleParentManager()
             , this
             , this);
@@ -60,18 +60,28 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
         return block;
     }
 
-    public RuleDetailsViewModel BuildRuleViewModel(RuleParentManager parentManager
-        , TypeScopeManager scopeManager
+    public RuleDetailsViewModel BuildRuleViewModel(
+        BlockDetailsViewModel parent
+        , RuleParentManager parentManager
         , PalleteManager palleteManager)
+    {
+        return BuildRuleViewModel(parent, parentManager, palleteManager, _ruleTempalteManager.GetEmpty());
+    }
+
+    public RuleDetailsViewModel BuildRuleViewModel(
+      BlockDetailsViewModel parent
+      , RuleParentManager parentManager
+      , PalleteManager palleteManager
+      , RuleModel model)
     {
         RuleDetailsViewModel vm = new(
             parentManager
-            ,  scopeManager
+            , parent.ScopeManager
             , _ruleTempalteManager
             , palleteManager
             , _minimapIconService
             , _soundService);
-
+        vm.SetModel(model);
         return vm;
     }
 }

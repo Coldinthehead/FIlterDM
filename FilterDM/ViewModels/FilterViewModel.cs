@@ -29,42 +29,30 @@ public partial class FilterViewModel : ObservableRecipient
     public Guid Guid { get; set; }
 
     private readonly BlockTemplateManager _blockTemplates;
-    private readonly RuleTemplateManager _ruleTemplates;
     private readonly PalleteManager _palleteManager;
-    private readonly MinimapIconsService _minimapIconsService;
-    private readonly SoundService _soundService;
     private readonly RuleParentManager _parentManager;
 
     private readonly IBlockViewModelFactory _blockFactory;
     private readonly IRuleViewModelFactory _ruleFactory;
 
     public FilterViewModel(BlockTemplateManager blockTemplates
-        , RuleTemplateManager ruleTemplates
         , PalleteManager palleteManager
-        , MinimapIconsService minimapIconsService
-        , SoundService soundService
         , RuleParentManager parentManager
         , IBlockViewModelFactory blockFactory
         , IRuleViewModelFactory ruleFactory)
     {
         RegisterEvents();
         _blockTemplates = blockTemplates;
-        _ruleTemplates = ruleTemplates;
         _palleteManager = palleteManager;
-        _minimapIconsService = minimapIconsService;
-        _soundService = soundService;
         _parentManager = parentManager;
         _blockFactory = blockFactory;
         _ruleFactory = ruleFactory;
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
-        _ruleTemplates = new(new RuleTemplateService(new RuleTemplateRepository()));
         _blockTemplates = new(new(new BlockTemplateRepository()));
         _parentManager = new();
         _palleteManager = new();
-        _minimapIconsService = new();
-        _soundService = new();
         RegisterEvents();
     }
 
@@ -133,20 +121,14 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewRule(BlockDetailsViewModel parent)
     {
-        /*RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates, _palleteManager, _minimapIconsService, _soundService);
-        */
-        RuleDetailsViewModel ruleVm = _ruleFactory.BuildRuleViewModel(_parentManager, parent.ScopeManager, _palleteManager);
-        ruleVm.SetModel(_ruleTemplates.GetEmpty());
+        RuleDetailsViewModel ruleVm = _ruleFactory.BuildRuleViewModel(parent, _parentManager, _palleteManager);
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));
     }
 
     public void NewRule(RuleModel model, BlockDetailsViewModel parent)
     {
-        /*        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates, _palleteManager, _minimapIconsService, _soundService);
-        */
-        RuleDetailsViewModel ruleVm = _ruleFactory.BuildRuleViewModel(_parentManager,parent.ScopeManager, _palleteManager);
-        ruleVm.SetModel(model);
+        RuleDetailsViewModel ruleVm = _ruleFactory.BuildRuleViewModel(parent, _parentManager, _palleteManager, model);
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));
     }
