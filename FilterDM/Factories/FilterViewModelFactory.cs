@@ -83,7 +83,8 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
             , _ruleTempalteManager
             , palleteManager
             , _minimapIconService
-            , _soundService);
+            , _soundService
+            , _dialogSevice);
         vm.SetModel(model);
         return vm;
     }

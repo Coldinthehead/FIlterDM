@@ -318,7 +318,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         _typeScopeManager = scopeManager;
         _iconService = iconService;
         _soundService = soundService;
-        Properties = new(this, parentManager, templateManager);
+        Properties = new(this, parentManager, templateManager, dialogService);
         Colors = new ColorDecoratorViewModel(this, palleteManager, RemoveColorModifier);
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);
