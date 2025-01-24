@@ -68,9 +68,11 @@ public partial class App : Application
             container.BindService<BlockTemplateManager>();
             container.BindService<RuleTemplateManager>();
             container.BindService<ModifiersFactory>();
+            container.BindService<PersistentDataService>();
             Services = container.BuildServiceProvider();
 
-
+            PersistentDataService data = Services.GetService<PersistentDataService>();
+            await data!.InitFolders();
             IEnumerable<IInit> initialiable = Services.GetServices<IInit>();
             List<Task> tasts = new();
             foreach (var i in initialiable)

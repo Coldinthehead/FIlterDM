@@ -14,6 +14,16 @@ public class UserPrefrences
 public class PersistentDataService
 {
     private UserPrefrences _prefs;
+
+    public string BaseReporsitoryPath { get; private set; }
+    public string FiltersPath { get; private set; }
+    public string TemplatesPath { get; private set; }
+
+    public const string TempaltesFolderName = "templates";
+    public const string FiltersFolderName = "filters";
+    public const string PreferenceFolderName = "preferences";
+    public const string PreferenceFileName = "preferences.json";
+    public const string StorageFolderName = "FilterDM";
     public string? GetPreference(string key)
     {
         if (_prefs.Preferences.TryGetValue(key, out string? value))
@@ -30,24 +40,23 @@ public class PersistentDataService
 
     public async Task InitFolders()
     {
-        string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "FilterDM");
-        if (Directory.Exists(basePath))
+        BaseReporsitoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), StorageFolderName);
+        if (!Directory.Exists(BaseReporsitoryPath))
         {
-            DirectoryInfo info = Directory.CreateDirectory(basePath);
-            info.CreateSubdirectory("filters");
-            info.CreateSubdirectory("templates");
-            info.CreateSubdirectory("prefrences");
+            DirectoryInfo info = Directory.CreateDirectory(BaseReporsitoryPath);
+            info.CreateSubdirectory(FiltersFolderName);
+            info.CreateSubdirectory(TempaltesFolderName);
+            info.CreateSubdirectory(PreferenceFolderName);
             UserPrefrences empty = new();
-            using var fs = File.Create(Path.Combine(info.FullName, "prefrences", "prefrences.json"));
+            using var fs = File.Create(Path.Combine(info.FullName, PreferenceFolderName, PreferenceFileName));
             await JsonSerializer.SerializeAsync(fs, empty);
         }
-        string prefsPath = Path.Combine(basePath, "prefrences", "prefrences.json");
+        string prefsPath = Path.Combine(BaseReporsitoryPath, PreferenceFolderName, PreferenceFileName);
         using var readStream = File.Open(prefsPath, FileMode.Open);
         _prefs = await JsonSerializer.DeserializeAsync<UserPrefrences>(readStream);
         if (_prefs == null)
         {
             throw new FileNotFoundException($"Cannot found play preferences file at '{prefsPath}'");
         }
-
     }
 }
