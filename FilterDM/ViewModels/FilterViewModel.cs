@@ -36,6 +36,7 @@ public partial class FilterViewModel : ObservableRecipient
     private readonly RuleParentManager _parentManager;
 
     private readonly IBlockViewModelFactory _blockFactory;
+    private readonly IRuleViewModelFactory _ruleFactory;
 
     public FilterViewModel(BlockTemplateManager blockTemplates
         , RuleTemplateManager ruleTemplates
@@ -43,7 +44,8 @@ public partial class FilterViewModel : ObservableRecipient
         , MinimapIconsService minimapIconsService
         , SoundService soundService
         , RuleParentManager parentManager
-        , IBlockViewModelFactory blockFactory)
+        , IBlockViewModelFactory blockFactory
+        , IRuleViewModelFactory ruleFactory)
     {
         RegisterEvents();
         _blockTemplates = blockTemplates;
@@ -53,6 +55,7 @@ public partial class FilterViewModel : ObservableRecipient
         _soundService = soundService;
         _parentManager = parentManager;
         _blockFactory = blockFactory;
+        _ruleFactory = ruleFactory;
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
@@ -130,7 +133,9 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewRule(BlockDetailsViewModel parent)
     {
-        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates, _palleteManager, _minimapIconsService, _soundService);
+        /*RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates, _palleteManager, _minimapIconsService, _soundService);
+        */
+        RuleDetailsViewModel ruleVm = _ruleFactory.BuildRuleViewModel(_parentManager, parent.ScopeManager, _palleteManager);
         ruleVm.SetModel(_ruleTemplates.GetEmpty());
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));
@@ -138,7 +143,9 @@ public partial class FilterViewModel : ObservableRecipient
 
     public void NewRule(RuleModel model, BlockDetailsViewModel parent)
     {
-        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates, _palleteManager, _minimapIconsService, _soundService);
+        /*        RuleDetailsViewModel ruleVm = new(_parentManager, parent.ScopeManager, _ruleTemplates, _palleteManager, _minimapIconsService, _soundService);
+        */
+        RuleDetailsViewModel ruleVm = _ruleFactory.BuildRuleViewModel(_parentManager,parent.ScopeManager, _palleteManager);
         ruleVm.SetModel(model);
         parent.AddRule(ruleVm);
         Messenger.Send(new RuleCreatedInFilter(ruleVm));

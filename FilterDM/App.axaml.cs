@@ -66,6 +66,7 @@ public partial class App : Application
             container.BindService<SoundService>();
             container.BindService<FilterViewModelFactory>();
             container.BindService<BlockTemplateManager>();
+            container.BindService<RuleTemplateManager>();
             Services = container.BuildServiceProvider();
 
 
