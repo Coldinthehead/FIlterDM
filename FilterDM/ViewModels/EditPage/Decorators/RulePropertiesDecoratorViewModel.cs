@@ -64,7 +64,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     [RelayCommand]
     private async Task Reset()
     {
-        if (Rule.Modifiers.Count > 2)
+        if (Rule.Modifiers.Count > 1)
         {
             bool confirm = await _dialogService.ShowConfirmDialog($"Are you sure to override Rule with {Rule.Modifiers.Count} modifiers?");
             if (!confirm)
