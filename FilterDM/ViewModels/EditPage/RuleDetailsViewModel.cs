@@ -187,7 +187,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
     }
 
-    private void RemoveTypeFilter(ModifierViewModelBase modifier)
+    public void RemoveTypeFilter(ModifierViewModelBase modifier)
     {
         if (Modifiers.Remove(modifier) && modifier is TypeDecoratorViewModel condition)
         {
@@ -294,7 +294,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager
         , PalleteManager palleteManager
-        , MinimapIconsService iconService
         , DialogService dialogService
         , IModifiersFacotry modifiersFactory)
     {

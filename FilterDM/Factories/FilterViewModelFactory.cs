@@ -14,13 +14,15 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
     private readonly BlockTemplateManager _blockTemplateManager;
     private readonly RuleTemplateManager _ruleTempalteManager;
     private readonly DialogService _dialogSevice;
+    private readonly IModifiersFacotry _modifiersFactory;
 
     public FilterViewModelFactory(ItemTypeService itemTypeService
         , MinimapIconsService minimapIconService
         , SoundService soundService
         , BlockTemplateManager blockTemplateManager
         , RuleTemplateManager ruleTempalteManager
-        , DialogService dialogSevice)
+        , DialogService dialogSevice
+        , IModifiersFacotry modifierFactory)
     {
         _itemTypeService = itemTypeService;
         _minimapIconService = minimapIconService;
@@ -28,6 +30,7 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
         _blockTemplateManager = blockTemplateManager;
         _ruleTempalteManager = ruleTempalteManager;
         _dialogSevice = dialogSevice;
+        _modifiersFactory = modifierFactory;
     }
 
     public FilterViewModel BuildFilterViewModel()
@@ -61,14 +64,12 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
       , PalleteManager palleteManager
       , RuleModel model)
     {
-        RuleDetailsViewModel vm = new(
-            parentManager
+        RuleDetailsViewModel vm = new(parentManager
             , parent.ScopeManager
             , _ruleTempalteManager
             , palleteManager
-            , _minimapIconService
-            , _soundService
-            , _dialogSevice);
+            , _dialogSevice
+            , _modifiersFactory);
         vm.SetModel(model);
         return vm;
     }
