@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FilterDM.Enums;
+using FilterDM.Factories;
 using FilterDM.Helpers;
 using FilterDM.Managers;
 using FilterDM.Models;
@@ -75,11 +76,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public BeamDecoratorViewModel AddBeamModifier()
     {
-        BeamDecoratorViewModel vm = new(this, RemoveBeamModifier);
+        BeamDecoratorViewModel vm = _modifiersFactory.BuildDecorator<BeamDecoratorViewModel>(this, RemoveBeamModifier);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
-
     }
 
     public MapIconDecoratorViewModel AddMinimapIconModifier()
@@ -92,7 +92,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public SoundDecoratorViewModel AddSoundModifier()
     {
-        SoundDecoratorViewModel vm = new(this,_soundService, RemoveSoundModifier);
+        SoundDecoratorViewModel vm = _modifiersFactory.BuildDecorator<SoundDecoratorViewModel>(this, RemoveSoundModifier);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -100,7 +100,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public RarityDecoratorViewModel AddRarityFilter()
     {
-        RarityDecoratorViewModel vm = new(this,RemoveRarityFilter);
+        RarityDecoratorViewModel vm = _modifiersFactory.BuildDecorator<RarityDecoratorViewModel>(this, RemoveRarityFilter);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -108,7 +108,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public void AddRarityFilter(RarityConditionModel model)
     {
-        RarityDecoratorViewModel vm = new(this, RemoveRarityFilter);
+        RarityDecoratorViewModel vm = _modifiersFactory.BuildDecorator<RarityDecoratorViewModel>(this, RemoveRarityFilter);
         vm.SetModel(model);
         Messenger.Send(new FilterEditedRequestEvent(this));
         Modifiers.Add(vm);
@@ -117,19 +117,19 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     public NumericDecoratorViewModel AddNumericFilter(NumericFilterType type)
     {
         NumericFilterHelper helper = _numericHelpers[type];
-        NumericDecoratorViewModel vm = new(this, helper, RemoveNumericFilter);
+        NumericDecoratorViewModel vm = _modifiersFactory.BuildNumericDecorator(this, type);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
     }
 
-    private void AddNumericFilter(NumericCondition condition)
+    public void AddNumericFilter(NumericCondition condition)
     {
         string name = condition.ValueName.Replace(" ", "");
 
         if (_helperFromString.TryGetValue(name, out NumericFilterHelper? helper))
         {
-            NumericDecoratorViewModel vm = new(this, helper, RemoveNumericFilter);
+            NumericDecoratorViewModel vm = _modifiersFactory.BuildNumericDecorator(this, helper.Type);
             vm.SetModel(condition);
             Modifiers.Add(vm);
             Messenger.Send(new FilterEditedRequestEvent(this));
@@ -138,7 +138,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public ClassDecoratorViewModel AddClassFilter()
     {
-        ClassDecoratorViewModel vm = new(this, RemoveClassFilter);
+        ClassDecoratorViewModel vm = _modifiersFactory.BuildDecorator<ClassDecoratorViewModel>(this, RemoveClassFilter);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -146,7 +146,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public void AddClassFilter(ClassConditionModel condition)
     {
-        ClassDecoratorViewModel vm = new(this, RemoveClassFilter);
+        ClassDecoratorViewModel vm = _modifiersFactory.BuildDecorator<ClassDecoratorViewModel>(this, RemoveClassFilter);
         vm.SetModel(condition);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
@@ -155,7 +155,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public TypeDecoratorViewModel AddTypeFilter()
     {
-        TypeDecoratorViewModel vm = _typeScopeManager.GetDecorator(this);
+        TypeDecoratorViewModel vm = _modifiersFactory.BuildTypeDecorator(this, _typeScopeManager);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -172,7 +172,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     public ItemStateDecoratorViewModel AddStateModifier()
     {
-        ItemStateDecoratorViewModel vm = new(this, RemoveStateModifier);
+        ItemStateDecoratorViewModel vm = _modifiersFactory.BuildDecorator<ItemStateDecoratorViewModel>(this, RemoveStateModifier);
         Modifiers.Add(vm);
         Messenger.Send(new FilterEditedRequestEvent(this));
         return vm;
@@ -187,7 +187,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
     }
 
-    public void RemoveTypeFilter(ModifierViewModelBase modifier)
+    private void RemoveTypeFilter(ModifierViewModelBase modifier)
     {
         if (Modifiers.Remove(modifier) && modifier is TypeDecoratorViewModel condition)
         {
@@ -205,7 +205,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         }
     }
 
-    private void RemoveNumericFilter(ModifierViewModelBase modifier)
+    public void RemoveNumericFilter(ModifierViewModelBase modifier)
     {
         if (modifier is NumericDecoratorViewModel condition && Modifiers.Remove(modifier))
         {
@@ -287,17 +287,16 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly Dictionary<string, NumericFilterHelper> _helperFromString = [];
 
     private readonly TypeScopeManager _typeScopeManager;
-    private readonly MinimapIconsService _iconService;
-    private readonly SoundService _soundService;
     private readonly DialogService _dialogService;
+    private readonly IModifiersFacotry _modifiersFactory;
     public RuleDetailsViewModel(
         RuleParentManager parentManager
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager
         , PalleteManager palleteManager
         , MinimapIconsService iconService
-        , SoundService soundService
-        , DialogService dialogService)
+        , DialogService dialogService
+        , IModifiersFacotry modifiersFactory)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100));
@@ -316,14 +315,13 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
             _helperFromString[value.ShortName] = value;
         }
         _typeScopeManager = scopeManager;
-        _iconService = iconService;
-        _soundService = soundService;
         Properties = new(this, parentManager, templateManager, dialogService);
-        Colors = new ColorDecoratorViewModel(this, palleteManager, RemoveColorModifier);
-        TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
+        Colors = modifiersFactory.BuildColorDecorator(this, palleteManager, RemoveColorModifier);
+        TextSize = modifiersFactory.BuildDecorator<TextSizeDecoratorViewModel>(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);
-        MapIcon = new(this, _iconService, RemoveMinimapIconModifier);
+        MapIcon = modifiersFactory.BuildMinimapIconDecorator(this, RemoveMinimapIconModifier);
         _dialogService = dialogService;
+        _modifiersFactory = modifiersFactory;
     }
 
     public RuleModel GetModel()
