@@ -6,7 +6,7 @@ using System;
 
 namespace FilterDM.Factories;
 
-public interface IModifiersFacotry
+public interface IModifiersFactory
 {
     ColorDecoratorViewModel BuildColorDecorator(RuleDetailsViewModel ruleDetailsViewModel, PalleteManager palleteManager, Action<ModifierViewModelBase> removeColorModifier);
     T BuildDecorator<T>(RuleDetailsViewModel ruleDetailsViewModel, Action<ModifierViewModelBase> deleteCallback) where T : ModifierViewModelBase, new();

@@ -14,7 +14,7 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
     private readonly BlockTemplateManager _blockTemplateManager;
     private readonly RuleTemplateManager _ruleTempalteManager;
     private readonly DialogService _dialogSevice;
-    private readonly IModifiersFacotry _modifiersFactory;
+    private readonly IModifiersFactory _modifiersFactory;
 
     public FilterViewModelFactory(ItemTypeService itemTypeService
         , MinimapIconsService minimapIconService
@@ -22,7 +22,7 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
         , BlockTemplateManager blockTemplateManager
         , RuleTemplateManager ruleTempalteManager
         , DialogService dialogSevice
-        , IModifiersFacotry modifierFactory)
+        , IModifiersFactory modifierFactory)
     {
         _itemTypeService = itemTypeService;
         _minimapIconService = minimapIconService;

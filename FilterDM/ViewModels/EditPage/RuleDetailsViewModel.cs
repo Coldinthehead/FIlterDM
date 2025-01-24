@@ -284,14 +284,14 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
 
     private readonly TypeScopeManager _typeScopeManager;
     private readonly DialogService _dialogService;
-    private readonly IModifiersFacotry _modifiersFactory;
+    private readonly IModifiersFactory _modifiersFactory;
     public RuleDetailsViewModel(
         RuleParentManager parentManager
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager
         , PalleteManager palleteManager
         , DialogService dialogService
-        , IModifiersFacotry modifiersFactory)
+        , IModifiersFactory modifiersFactory)
     {
 
         _typeScopeManager = scopeManager;

@@ -7,7 +7,7 @@ using FilterDM.ViewModels.EditPage.Decorators;
 using System;
 
 namespace FilterDM.Factories;
-public class ModifiersFactory : IModifiersFacotry
+public class ModifiersFactory : IModifiersFactory
 {
     private readonly MinimapIconsService _iconService;
     private readonly SoundService _soundService;
