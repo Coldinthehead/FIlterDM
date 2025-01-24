@@ -18,6 +18,7 @@ public abstract partial class ModifierViewModelBase : ObservableRecipient
         DeleteCallback();
     }
 
+
     public abstract void Apply(RuleModel model);
 
     protected virtual void DeleteCallback()

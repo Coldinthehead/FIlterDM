@@ -88,22 +88,6 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
         SelectedTypes.Clear();
     }
 
-    protected override async void DeleteCallback()
-    {
-        if (SelectedTypes.Count > 1)
-        {
-            var confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete Type Filter with {SelectedTypes.Count} selected names?");
-            if (confirm)
-            {
-                DeleteAction.Invoke(this);
-            }
-        }
-        else
-        {
-            DeleteAction.Invoke(this);
-        }
-    }
-
     public Action<TypeViewModel> TypeSelector { get; set; }
 
     public TypeDecoratorViewModel()
