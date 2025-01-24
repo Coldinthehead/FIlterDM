@@ -8,7 +8,6 @@ using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Decorators;
 using FilterDM.ViewModels.EditPage.Events;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,10 +38,10 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         if (Modifiers.Count > 1)
         {
-            var dialogResult = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to delete Rule with {Modifiers.Count} modifiers?");
-            if (dialogResult)
+            var dialogResult = await _dialogService.ShowConfirmDialog($"Are you sure to delete Rule with {Modifiers.Count} modifiers?");
+            if (!dialogResult)
             {
-                OnDeleteConfirmed();
+                return;
             }
         }
         else
@@ -55,7 +54,6 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     {
         Messenger.Send(new DeleteRuleRequest(this));
     }
-
 
     #region Moidifiers Methods
 
@@ -291,13 +289,15 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly TypeScopeManager _typeScopeManager;
     private readonly MinimapIconsService _iconService;
     private readonly SoundService _soundService;
+    private readonly DialogService _dialogService;
     public RuleDetailsViewModel(
         RuleParentManager parentManager
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager
         , PalleteManager palleteManager
         , MinimapIconsService iconService
-        , SoundService soundService)
+        , SoundService soundService
+        , DialogService dialogService)
     {
         _numericHelpers.Add(NumericFilterType.StackSize, new NumericFilterHelper(NumericFilterType.StackSize, "Stack Size", "Stack", 5000));
         _numericHelpers.Add(NumericFilterType.ItemLevel, new NumericFilterHelper(NumericFilterType.ItemLevel, "Item Level", "ILevel", 100));
@@ -323,6 +323,7 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
         TextSize = new TextSizeDecoratorViewModel(this, RemoveFontSizeModifier);
         Modifiers = new([Properties]);
         MapIcon = new(this, _iconService, RemoveMinimapIconModifier);
+        _dialogService = dialogService;
     }
 
     public RuleModel GetModel()

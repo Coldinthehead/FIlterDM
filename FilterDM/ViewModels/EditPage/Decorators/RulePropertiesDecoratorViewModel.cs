@@ -7,7 +7,6 @@ using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.Managers;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
-using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -67,7 +66,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     {
         if (Rule.Modifiers.Count > 2)
         {
-            bool confirm = await App.Current.Services.GetService<DialogService>().ShowConfirmDialog($"Are you sure to override Rule with {Rule.Modifiers.Count} modifiers?");
+            bool confirm = await _dialogService.ShowConfirmDialog($"Are you sure to override Rule with {Rule.Modifiers.Count} modifiers?");
             if (!confirm)
             {
                 return;
@@ -87,19 +86,23 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
     }
 
     [ObservableProperty]
-    private Managers.RuleParentManager _parentManager;
+    private RuleParentManager _parentManager;
 
     [ObservableProperty]
     private RuleTemplateManager _templateManager;
 
+    private readonly DialogService _dialogService;
+
     public RulePropertiesDecoratorViewModel(RuleDetailsViewModel rule
         , RuleParentManager parentManager
-        , RuleTemplateManager templateManager) : base(rule, null)
+        , RuleTemplateManager templateManager
+        , DialogService dialogService) : base(rule, null)
     {
 
         ParentManager = parentManager;
         TemplateManager = templateManager;
         SelectedTemplate = TemplateManager.Templates.First();
+        _dialogService = dialogService;
     }
 
     public override void Apply(RuleModel model)
@@ -111,7 +114,7 @@ public partial class RulePropertiesDecoratorViewModel : ModifierViewModelBase
         model.TemplateName = SelectedTemplate.Title;
     }
 
-    internal void SetModel(RuleModel rule)
+    public void SetModel(RuleModel rule)
     {
         Title = rule.Title;
         Enabled = rule.Enabled;
