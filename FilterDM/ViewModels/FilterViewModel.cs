@@ -28,21 +28,18 @@ public partial class FilterViewModel : ObservableRecipient
 
     public Guid Guid { get; set; }
 
-    private readonly BlockTemplateManager _blockTemplates;
     private readonly PalleteManager _palleteManager;
     private readonly RuleParentManager _parentManager;
 
     private readonly IBlockViewModelFactory _blockFactory;
     private readonly IRuleViewModelFactory _ruleFactory;
 
-    public FilterViewModel(BlockTemplateManager blockTemplates
-        , PalleteManager palleteManager
+    public FilterViewModel(PalleteManager palleteManager
         , RuleParentManager parentManager
         , IBlockViewModelFactory blockFactory
         , IRuleViewModelFactory ruleFactory)
     {
         RegisterEvents();
-        _blockTemplates = blockTemplates;
         _palleteManager = palleteManager;
         _parentManager = parentManager;
         _blockFactory = blockFactory;
@@ -50,7 +47,6 @@ public partial class FilterViewModel : ObservableRecipient
     }
     public FilterViewModel(IMessenger messeneger) : base(messeneger)
     {
-        _blockTemplates = new(new(new BlockTemplateRepository()));
         _parentManager = new();
         _palleteManager = new();
         RegisterEvents();
@@ -76,8 +72,6 @@ public partial class FilterViewModel : ObservableRecipient
     public void NewBlock()
     {
         BlockDetailsViewModel blockVm = _blockFactory.BuildBlockViewModel();
-        BlockModel template = _blockTemplates.GetEmpty();
-        blockVm.SetModel(template);
         blockVm.Title = GetGenericBlockTitle();
         _parentManager.AllBlocks.Add(blockVm);
         Messenger.Send(new BlockInFilterCreated(blockVm));

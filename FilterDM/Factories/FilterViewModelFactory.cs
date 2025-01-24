@@ -45,9 +45,7 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
 
     public FilterViewModel BuildFilterViewModel()
     {
-        FilterViewModel vm = new(
-            _blockTemplateManager
-            , new PalleteManager()
+        FilterViewModel vm = new(new PalleteManager()
             , new RuleParentManager()
             , this
             , this);
@@ -57,6 +55,8 @@ public class FilterViewModelFactory : IFilterViewModelFactory, IBlockViewModelFa
     public BlockDetailsViewModel BuildBlockViewModel()
     {
         BlockDetailsViewModel block = new(_blockTemplateManager, new TypeScopeManager(_itemTypeService));
+        BlockModel template = _blockTemplateManager.GetEmpty();
+        block.SetModel(template);
         return block;
     }
 
