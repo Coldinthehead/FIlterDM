@@ -5,7 +5,6 @@ using FilterDM.Managers;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.EditPage.Events;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
