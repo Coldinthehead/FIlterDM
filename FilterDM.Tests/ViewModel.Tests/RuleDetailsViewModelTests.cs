@@ -12,7 +12,9 @@ public class RuleDetailsViewModelTests
     [Test]
     public void OnDeleteConfirmed_ShouldRaiseRuleDeleteRequest()
     {
-        RuleDetailsViewModel sut = new(new(), null, new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())), new());
+        RuleDetailsViewModel sut = new RuleDetailsViewModel(new()
+            , new(new Services.ItemTypeService())
+            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
         EventListener<DeleteRuleRequest, RuleDetailsViewModel> listener = new();
         sut.OnDeleteConfirmed();
 
@@ -23,8 +25,9 @@ public class RuleDetailsViewModelTests
     [Test]
     public void GetModel_ShouldSetProperties()
     {
-        RuleDetailsViewModel sut = new(new(), new(new ItemTypeService()), new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())), new());
-
+        RuleDetailsViewModel sut = new RuleDetailsViewModel(new()
+            , new(new Services.ItemTypeService())
+            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
         RuleModel testModel = sut.GetModel();
 
         Assert.That(testModel, Is.Not.Null);
@@ -36,7 +39,10 @@ public class RuleDetailsViewModelTests
     [Test]
     public void GetModel_ShouldSetNameAsEmpty_WhenTitleIsNull()
     {
-        RuleDetailsViewModel sut = new(new(), new(new ItemTypeService()), new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())), new());
+        RuleDetailsViewModel sut =
+            new RuleDetailsViewModel(new()
+            , new(new Services.ItemTypeService())
+            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
         sut.Properties.Title = null;
 
         RuleModel testModel = sut.GetModel();

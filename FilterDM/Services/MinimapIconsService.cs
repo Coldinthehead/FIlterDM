@@ -17,7 +17,10 @@ public class MinimapIconsService : IInit
 
     private readonly Dictionary<string, Dictionary<string, List<CroppedBitmap>>> _iconsMap = [];
 
+    private static CroppedBitmap _fallback = new CroppedBitmap()
+    {
 
+    };
     public Task Init()
     {
 

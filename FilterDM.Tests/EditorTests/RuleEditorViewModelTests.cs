@@ -19,7 +19,9 @@ public class RuleEditorViewModelTests
 
     public static RuleDetailsViewModel WithEmptyModel()
     {
-        return new RuleDetailsViewModel(new(), new(new Services.ItemTypeService()), new(new RuleTemplateService(new RuleTemplateRepository())), new());
+        return new RuleDetailsViewModel(new()
+            , new(new Services.ItemTypeService())
+            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(),new());
 
     }
 }

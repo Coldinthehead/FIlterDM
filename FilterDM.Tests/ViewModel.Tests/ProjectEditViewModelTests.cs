@@ -21,12 +21,15 @@ public class ProjectEditViewModelTests
         {
             Title = "block1",
         });
-        _sut = new(
-            new ItemTypeService()
-            , new BlockTemplateService(new BlockTemplateRepository())
+        _sut = new (
+            new ItemTypeService(), new BlockTemplateService(new BlockTemplateRepository())
             , new RuleTemplateService(new RuleTemplateRepository())
-            , new ProjectService(new ProjectRepository(new FileService(null)), null)
-            , new FileSelectionService(null), new FileService(null), new());
+            , new ProjectService(new ProjectRepository(null), new DialogService(null))
+            , new FileSelectionService(null)
+            , new FileService(new DialogService(null))
+            , new FilterExportService()
+            , new MinimapIconsService()
+            , new SoundService());
     }
 
     [Test]

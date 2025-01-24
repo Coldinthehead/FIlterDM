@@ -292,7 +292,8 @@ public partial class RuleDetailsViewModel : ObservableRecipient , IEquatable<Rul
     private readonly TypeScopeManager _typeScopeManager;
     private readonly MinimapIconsService _iconService;
     private readonly SoundService _soundService;
-    public RuleDetailsViewModel(RuleParentManager parentManager
+    public RuleDetailsViewModel(
+        RuleParentManager parentManager
         , TypeScopeManager scopeManager
         , RuleTemplateManager templateManager
         , PalleteManager palleteManager

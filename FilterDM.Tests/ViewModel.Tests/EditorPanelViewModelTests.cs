@@ -49,7 +49,7 @@ public class EditorPanelViewModelTests
     public void ShouldOpenEditor_WhenBlockCreated()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(),new());
 
         fitlerVm.NewBlock();
         BlockDetailsViewModel testBlock = fitlerVm.GetBlocks().First();
@@ -62,7 +62,7 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenBlockDeleted()
     {
         EditorPanelViewModel sut = new();
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
 
@@ -76,7 +76,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldOpenTab_WhenBlockSelectedInTree()
     {
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
         fitlerVm.NewBlock();
         fitlerVm.NewBlock();
         StructureTreeViewModel tree = new();
@@ -92,7 +92,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldOpenEditor_WhenRuleSelectedEvent()
     {
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()),new(new RuleTemplateRepository()));
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
         fitlerVm.NewBlock();
         BlockDetailsViewModel block = fitlerVm.GetBlocks().First();
         fitlerVm.NewRule(block);
@@ -110,7 +110,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldCloseBlockEditor_WhenEventRaised()
     {
-        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
+        FilterViewModel fitlerVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
         EditorPanelViewModel sut = new();
         fitlerVm.NewBlock();
         EditorBaseViewModel editor = sut.Items.First();
@@ -124,7 +124,7 @@ public class EditorPanelViewModelTests
     [Test]
     public void ShouldCloseOpenedRules_WhenBlockTempalteChanged()
     {
-        FilterViewModel filterVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
+        FilterViewModel filterVm = new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
         EditorPanelViewModel sut = new();
         filterVm.NewBlock();
         BlockDetailsViewModel testBlock = filterVm.GetBlocks().First();
@@ -146,7 +146,9 @@ public class EditorPanelViewModelTests
     public void ShouldCloseEditor_WhenRuleDeleted()
     {
         EditorPanelViewModel sut = new();
-        RuleDetailsViewModel testModel = new(new(), null, new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())), new());
+        RuleDetailsViewModel testModel = new RuleDetailsViewModel(new()
+            , new(new Services.ItemTypeService())
+            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
         sut.AddRule(testModel);
 
         WeakReferenceMessenger.Default.Send(new RuleDeleteEvent(testModel));

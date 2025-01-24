@@ -12,7 +12,9 @@ public class RulePropertiesDecoratorViewModelTests
     [Test]
     public void OnSortRules_ShouldRaiseSortRulesRequest()
     {
-        RuleDetailsViewModel rule = new(new(), null, new RuleTemplateManager(new RuleTemplateService(new RuleTemplateRepository())), new());
+        RuleDetailsViewModel rule = new RuleDetailsViewModel(new()
+            , new(new Services.ItemTypeService())
+            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
         RulePropertiesDecoratorViewModel sut = rule.Properties;
         EventListener<SortRulesRequest, RuleDetailsViewModel> listener = new();
         sut.OnSortRules();

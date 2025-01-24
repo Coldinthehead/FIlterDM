@@ -12,7 +12,7 @@ public class FilterViewModelTests
 
     public static FilterViewModel Build()
     {
-        return new FilterViewModel(new ItemTypeService(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()));
+        return new(new(), new(new BlockTemplateRepository()), new(new RuleTemplateRepository()), new(), new());
     }
 
     [Test]

@@ -13,7 +13,9 @@ public class RuleTemplateManagerTests
     public void SetTemplate_ShouldRaiseResetRuleTemplateRequest()
     {
         RuleTemplateManager sut = new(new RuleTemplateService(new RuleTemplateRepository()));
-        RuleDetailsViewModel testRule = new(new RuleParentManager(), new Managers.TypeScopeManager(new ItemTypeService()), sut, new());
+        RuleDetailsViewModel testRule = new RuleDetailsViewModel(new()
+            , new(new Services.ItemTypeService())
+            , new(new RuleTemplateService(new RuleTemplateRepository())), new(), new(), new());
         EventListener<ResetRuleTemplateRequest, ResetRuleTemplateDetails> listener = new();
         RuleModel template = new RuleTemplateRepository().GetEmpty();
 
