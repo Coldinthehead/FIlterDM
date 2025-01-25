@@ -10,12 +10,11 @@ public partial class ErrorWindow : Window
     public ErrorWindow()
     {
         InitializeComponent();
-        DataContextChanged += (_, _) =>
-        {
-            if (DataContext is ConfirmDialogViewModel vm)
-            {
-                vm.CloseDialogAction = result => Close(result); // Закриваємо з результатом
-            }
-        };
+        OKButton.Click += OKButton_Click;
+    }
+
+    private void OKButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        Close();
     }
 }

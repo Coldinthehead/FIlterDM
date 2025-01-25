@@ -50,7 +50,7 @@ public class DialogService
         return result;
     }
 
-    internal async Task<bool> ShowError(string message)
+    public Window ShowError(string message)
     {
         var viewModel = new OkDialogViewModel()
         {
@@ -58,14 +58,11 @@ public class DialogService
         };
 
         // Ініціалізація діалогу
-        var dialog = new ErrorWindow
+        var window = new ErrorWindow
         {
-            DataContext = viewModel // Прив'язуємо ViewModel до вікна
+            DataContext = viewModel 
         };
 
-        // Показуємо діалогове вікно і чекаємо результат
-        var result = await dialog.ShowDialog<bool>(_target);
-        return result;
-
+        return window;
     }
 }

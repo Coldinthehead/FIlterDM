@@ -8,7 +8,7 @@
     Title="ErrorWindow"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    x:DataType="vm:ConfirmDialogViewModel"
+    x:DataType="vm:ErrorViewModel"
     mc:Ignorable="d">
     <Border
         Background="{DynamicResource MaterialToolBarBackgroundBrush}"
@@ -16,19 +16,20 @@
         BorderThickness="3"
         CornerRadius="12">
         <StackPanel Margin="10" VerticalAlignment="Center">
-            <TextBlock
+            <TextBox
                 Margin="0,0,0,10"
+                Padding="100,100,100,25"
                 HorizontalAlignment="Center"
-                Classes="body1"
                 Text="{Binding Message}"
+                TextAlignment="Left"
                 TextWrapping="Wrap" />
             <StackPanel
                 HorizontalAlignment="Center"
                 Orientation="Horizontal"
                 Spacing="10">
                 <Button
+                    Name="OKButton"
                     Classes="light"
-                    Command="{Binding YesCommand}"
                     Content="OK"
                     Theme="{StaticResource MaterialOutlineButton}" />
             </StackPanel>
