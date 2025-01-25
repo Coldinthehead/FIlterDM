@@ -1,0 +1,1 @@
+dotnet publish .\FilterDM\FilterDM.csproj  -c Release -o ./Build/ -f net9.0 -r win-x64 /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true --self-contained false
