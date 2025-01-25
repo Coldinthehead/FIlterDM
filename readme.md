@@ -7,9 +7,9 @@
 ## Instalation :
 - ### Default Version:
     1. Download [.net 9.0 desktop runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) for windows
-    2. Download Default build.
+    2. Download Default build from [releases](https://github.com/Coldinthehead/FIlterDM/releases)
 - ### Self Contained Version:
-    1. Download Self Contained Version.
+    1. Download Self Contained Version from [releases](https://github.com/Coldinthehead/FIlterDM/releases)
 
 ## Feedback, Bug Report, Suggestions : 
 [Discord](https://discord.gg/eNpwSm52Ke)
