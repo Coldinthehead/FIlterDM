@@ -46,15 +46,7 @@ public class RuleTemplateRepository : IRuleTemplateRepository
             {
                 using var ws = File.Create(path);
                 Dictionary<string, RuleModel> defaultTempaltes = [];
-                defaultTempaltes.Add("Empty", new()
-                {
-                    Title = "Empty",
-                    Enabled = true,
-                    Show = true,
-                    TemplateName = "Empty",
-                    Priority = 2000,
-
-                });
+                defaultTempaltes.Add("Empty", _empty);
                 await JsonSerializer.SerializeAsync<Dictionary<string, RuleModel>>(ws, defaultTempaltes);
                 ws.Close();
             }
