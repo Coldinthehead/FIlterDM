@@ -1,5 +1,5 @@
 ﻿
-using FilterCore.PoeData;
+using FilterCore;
 using FilterDM.ViewModels.EditPage.Decorators;
 using System.Collections.Generic;
 using System.IO;

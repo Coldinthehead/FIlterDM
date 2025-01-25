@@ -1,5 +1,5 @@
 ﻿
-using FilterCore.PoeData;
+using FilterCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

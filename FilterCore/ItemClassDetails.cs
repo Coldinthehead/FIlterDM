@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FilterCore.PoeData;
+namespace FilterCore;
 public class ItemClassDetails
 {
     public string Name { get; set; }
 
-    
-   
+
+
 }
 
 public class ItemTypeDetails
@@ -37,6 +37,6 @@ public class ItemTypeDetails
 
     public ItemTypeDetails()
     {
-            
+
     }
 }

@@ -61,7 +61,7 @@ public static class HelperFactory
         return new ProjectEditViewModel(new ItemTypeService()
             , new ProjectService(new ProjectRepository(new FileService(new DialogService(null)), new PersistentDataService())
             , new DialogService(null))
-            , new FileSelectionService(null)
+            , new FileSelectionService(null, new PersistentDataService())
             , new FileService(new DialogService(null))
             , new FilterExportService()
             , GetFactoryInstance());

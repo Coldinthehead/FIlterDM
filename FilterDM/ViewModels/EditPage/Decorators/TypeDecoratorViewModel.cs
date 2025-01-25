@@ -1,20 +1,14 @@
-﻿using Avalonia.Styling;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using FilterCore.PoeData;
 using FilterDM.Models;
-using FilterDM.Services;
 using FilterDM.ViewModels.Base;
 using FilterDM.ViewModels.EditPage.Events;
 using FilterDM.ViewModels.EditPage.ModifierEditors;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using System.Reflection;
 
 namespace FilterDM.ViewModels.EditPage.Decorators;
 
@@ -267,5 +261,4 @@ public partial class TypeDecoratorViewModel : ModifierViewModelBase
     }
 
     public override ModifierEditorViewModel GetEditor() => new TypeEditorViewModel(Rule, this);
-  
 }

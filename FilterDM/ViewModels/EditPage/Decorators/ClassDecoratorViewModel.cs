@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using FilterCore.PoeData;
+using FilterCore;
 using FilterDM.Models;
 using FilterDM.Services;
 using FilterDM.ViewModels.Base;
