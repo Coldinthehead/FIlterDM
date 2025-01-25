@@ -2,7 +2,7 @@
 
 ## Features :
 1. Create/Edit new filter
-2. Import existing (not all features supported)
+2. Import existing .filter files(not all features supported)
 
 ## Instalation :
 - ### Default Version:
