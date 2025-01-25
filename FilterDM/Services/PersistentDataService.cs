@@ -18,11 +18,19 @@ public class PersistentDataService : IPersistentDataService
     public string FiltersPath { get; private set; }
     public string TemplatesPath { get; private set; }
 
+    public string RuleTemaplatesPath { get; private set; }
+    public string BlockTemaplatesPath { get; private set; }
+    public string FilterTemaplatesPath { get; private set; }
+
     public string TempaltesFolderName { get; private set; } = "templates";
     public string FiltersFolderName { get; private set; } = "filters";
     public string PreferenceFolderName { get; private set; } = "preferences";
     public string PreferenceFileName { get; private set; } = "preferences.json";
     public string StorageFolderName { get; private set; } = "FilterDM";
+
+    private const string RULE_TEMPLATES_FOLDER_NAME = "rule_templates";
+    private const string BLOCK_TEMPLATES_FOLDER_NAME = "block_templates";
+    private const string FILTER_TEMPLATES_FOLDER_NAME = "filter_templates";
     public string? GetPreference(string key)
     {
         if (_prefs.Preferences.TryGetValue(key, out string? value))
@@ -47,7 +55,15 @@ public class PersistentDataService : IPersistentDataService
         {
             DirectoryInfo info = Directory.CreateDirectory(BaseReporsitoryPath);
             info.CreateSubdirectory(FiltersFolderName);
-            info.CreateSubdirectory(TempaltesFolderName);
+
+            DirectoryInfo templatesFolder = info.CreateSubdirectory(TempaltesFolderName);
+            RuleTemaplatesPath = Path.Combine(templatesFolder.FullName, RULE_TEMPLATES_FOLDER_NAME);
+            templatesFolder.CreateSubdirectory(RULE_TEMPLATES_FOLDER_NAME);
+            BlockTemaplatesPath = Path.Combine(templatesFolder.FullName, BLOCK_TEMPLATES_FOLDER_NAME);
+            templatesFolder.CreateSubdirectory(BLOCK_TEMPLATES_FOLDER_NAME);
+            FilterTemaplatesPath = Path.Combine(templatesFolder.FullName, FILTER_TEMPLATES_FOLDER_NAME);
+            templatesFolder.CreateSubdirectory(FILTER_TEMPLATES_FOLDER_NAME);
+
             info.CreateSubdirectory(PreferenceFolderName);
             UserPrefrences empty = new();
             using var fs = File.Create(Path.Combine(info.FullName, PreferenceFolderName, PreferenceFileName));
