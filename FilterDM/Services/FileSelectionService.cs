@@ -10,6 +10,7 @@ namespace FilterDM.Services;
 public class FileSelectionService 
 {
     private readonly Window _target;
+    private readonly IPersistentDataService _dataService;
 
     private static FilePickerFileType JsonFileChoice { get; } = new FilePickerFileType("JSON File")
     {
@@ -26,14 +27,15 @@ public class FileSelectionService
     };
 
 
-    public FileSelectionService(Window target)
+    public FileSelectionService(Window target, IPersistentDataService dataService)
     {
         _target = target;
+        _dataService = dataService;
     }
 
     public async Task<IStorageFile?> OpenProjectFile()
     {
-        IStorageFolder? storageFolder = await _target.StorageProvider.TryGetFolderFromPathAsync("./data/filters");
+        IStorageFolder? storageFolder = await _target.StorageProvider.TryGetFolderFromPathAsync(_dataService.FiltersPath);
         var files = await _target.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
         {
             Title = "Open Filter File",
@@ -47,7 +49,7 @@ public class FileSelectionService
 
     public async Task<IStorageFile?> SaveProjectFile(string projectName)
     {
-        IStorageFolder? storageFolder = await _target.StorageProvider.TryGetFolderFromPathAsync("./data/filters");
+        IStorageFolder? storageFolder = await _target.StorageProvider.TryGetFolderFromPathAsync(_dataService.FiltersPath);
         return await _target.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
         {
             

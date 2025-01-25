@@ -51,7 +51,7 @@ public partial class App : Application
             container.AddSingleton<Window>(desktop.MainWindow);
             container.BindService<ItemClassesService>();
             container.BindService<ItemTypeService>();
-            container.AddSingleton<FileSelectionService>(new FileSelectionService(desktop.MainWindow));
+            container.BindService<FileSelectionService>();
             container.BindService<ProjectRepository>();
             container.BindService<RuleTemplateRepository>();
             container.BindService<DialogService>();
