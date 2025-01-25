@@ -10,21 +10,22 @@ namespace FilterDM.Repositories;
 
 public class ProjectRepository : IInit
 {
-    private const string RepositoryPath = "./data/filters";
-
     private Dictionary<string, FilterModel> _models;
 
     private readonly FileService _fileService;
 
-    public ProjectRepository(FileService fileService)
+    private readonly IPersistentDataService _dataService;
+
+    public ProjectRepository(FileService fileService, IPersistentDataService dataService)
     {
         _fileService = fileService;
         _models = [];
+        _dataService = dataService;
     }
 
     public async Task Init()
     {
-        var filters = Directory.GetFiles(RepositoryPath);
+        var filters = Directory.GetFiles(Path.Combine(_dataService.FiltersPath));
         _models = new(filters.Length);
         var tasks = filters.Select(async fname =>
         {
@@ -44,34 +45,6 @@ public class ProjectRepository : IInit
         _models.Add(model.Name, model);
         Task.Run(() => SaveFilter(model));
     }
-
-    public async Task SaveFilter(FilterModel model)
-    {
-        model.LastSaveDate = DateTime.Now;
-        _models[model.Name] = model;
-        await _fileService.Save(model, GetJsonAbsolutePath(model.Name));
-    }
-
-    private async Task<FilterModel?> LoadModelFromFileAsync(string filePath)
-    {
-        return await _fileService.LoadProject(filePath);
-    }
-
-    internal void DeleteByName(string title)
-    {
-        if (_models.ContainsKey(title))
-        {
-            _fileService.DeleteFile(GetJsonAbsolutePath(title));
-        }
-    }
-
-    private string GetJsonAbsolutePath(string filterName)
-    {
-        var filename = Path.Combine(RepositoryPath, filterName);
-        filename = Path.ChangeExtension(filename, "json");
-        return filename;
-    }
-
     internal FilterModel? GetProjectModel(string filterName)
     {
         if (_models.ContainsKey(filterName))
@@ -82,6 +55,25 @@ public class ProjectRepository : IInit
         {
             return null;
         }
+    }
+
+    public async Task SaveFilter(FilterModel model)
+    {
+        model.LastSaveDate = DateTime.Now;
+        _models[model.Name] = model;
+        await _fileService.Save(model, GetJsonAbsolutePath(model.Name));
+    }
+    internal void DeleteByName(string title)
+    {
+        if (_models.ContainsKey(title))
+        {
+            _fileService.DeleteFile(GetJsonAbsolutePath(title));
+        }
+    }
+
+    private async Task<FilterModel?> LoadModelFromFileAsync(string filePath)
+    {
+        return await _fileService.LoadProject(filePath);
     }
 
     public bool Has(string name)
@@ -98,5 +90,11 @@ public class ProjectRepository : IInit
             title = $"{name}({i++})";
         }
         return title;
+    }
+    private string GetJsonAbsolutePath(string filterName)
+    {
+        var filename = Path.Combine(_dataService.FiltersPath, filterName);
+        filename = Path.ChangeExtension(filename, "json");
+        return filename;
     }
 }

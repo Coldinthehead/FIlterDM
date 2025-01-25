@@ -40,6 +40,9 @@ public class PersistentDataService : IPersistentDataService
     public async Task InitFolders()
     {
         BaseReporsitoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), StorageFolderName);
+        FiltersPath = Path.Combine(BaseReporsitoryPath, FiltersFolderName);
+        TemplatesPath = Path.Combine(BaseReporsitoryPath, TempaltesFolderName);
+        
         if (!Directory.Exists(BaseReporsitoryPath))
         {
             DirectoryInfo info = Directory.CreateDirectory(BaseReporsitoryPath);
