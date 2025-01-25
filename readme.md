@@ -13,3 +13,5 @@
 
 ## Feedback, Bug Report, Suggestions : 
 [Discord](https://discord.gg/eNpwSm52Ke)
+
+### This software is not related to  GGG  by any mean. All in game assets claimed by GGG.
