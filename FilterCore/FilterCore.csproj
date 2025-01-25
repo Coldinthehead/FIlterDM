@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Resource Include="data\poe\classes.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <None Update="data\poe\classes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\poe\types.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

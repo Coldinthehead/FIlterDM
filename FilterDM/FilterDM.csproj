@@ -51,16 +51,4 @@
   <ItemGroup>
     <ProjectReference Include="..\FilterCore\FilterCore.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="data\poe\classes.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="data\poe\types.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>
