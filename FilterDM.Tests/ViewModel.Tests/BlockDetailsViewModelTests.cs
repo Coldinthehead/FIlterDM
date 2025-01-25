@@ -1,5 +1,6 @@
 ﻿using FilterDM.Models;
 using FilterDM.Repositories;
+using FilterDM.Services;
 using FilterDM.Tests.Helpers;
 using FilterDM.ViewModels.EditPage;
 using FilterDM.ViewModels.EditPage.Events;
@@ -35,7 +36,7 @@ public class BlockDetailsViewModelTests
     public void SetModel_ShouldChangeBlockCorrect()
     {
         BlockDetailsViewModel sut = HelperFactory.GetBlock();
-        BlockModel empty = new BlockTemplateRepository().GetEmpty();
+        BlockModel empty = new BlockTemplateRepository( new PersistentDataService()).GetEmpty();
 
         sut.SetModel(empty);
 

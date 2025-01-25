@@ -135,7 +135,7 @@ public class EditorPanelViewModelTests
         {
             sut.AddRule(rule);
         }
-        BlockModel empty = new BlockTemplateRepository().GetEmpty();
+        BlockModel empty = new BlockTemplateRepository(new PersistentDataService()).GetEmpty();
 
         vm.ResetBlockTemplate(testBlock, empty);
 

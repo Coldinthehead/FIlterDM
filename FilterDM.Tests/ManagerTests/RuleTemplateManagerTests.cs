@@ -13,10 +13,10 @@ public class RuleTemplateManagerTests
     [Test]
     public void SetTemplate_ShouldRaiseResetRuleTemplateRequest()
     {
-        RuleTemplateManager sut = new(new RuleTemplateService(new RuleTemplateRepository()));
+        RuleTemplateManager sut = new(new RuleTemplateService(new RuleTemplateRepository(new PersistentDataService())));
         RuleDetailsViewModel testRule = HelperFactory.GetRule(HelperFactory.GetBlock());
         EventListener<ResetRuleTemplateRequest, ResetRuleTemplateDetails> listener = new();
-        RuleModel template = new RuleTemplateRepository().GetEmpty();
+        RuleModel template = new RuleTemplateRepository(new PersistentDataService()).GetEmpty();
 
         sut.SetTemplate(testRule, template);
 

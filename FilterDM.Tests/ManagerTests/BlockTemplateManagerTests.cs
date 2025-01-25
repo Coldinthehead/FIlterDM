@@ -5,6 +5,7 @@ using FilterDM.ViewModels.EditPage;
 using FilterDM.Managers;
 using FilterDM.Models;
 using FilterDM.Tests.Helpers;
+using FilterDM.Services;
 
 namespace FilterDM.Tests.ManagerTests;
 public class BlockTemplateManagerTests
@@ -12,11 +13,11 @@ public class BlockTemplateManagerTests
     [Test]
     public void SetTemplate_ShouldRaiseEvent()
     {
-        BlockTemplateManager sut = new(new Services.BlockTemplateService(new BlockTemplateRepository()));
+        BlockTemplateManager sut = new(new Services.BlockTemplateService(new BlockTemplateRepository(new PersistentDataService())));
         EventListener<ResetTemplateRequest, TemplateChangeDetils> listener = new();
         BlockDetailsViewModel testBlock = HelperFactory.GetBlock();
         testBlock.AddRule(HelperFactory.GetRule(testBlock));
-        BlockModel template = new BlockTemplateRepository().GetEmpty();
+        BlockModel template = new BlockTemplateRepository(new PersistentDataService()).GetEmpty();
 
         sut.SetTempalte(testBlock, template);
 

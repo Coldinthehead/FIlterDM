@@ -30,7 +30,7 @@ public class FilterViewModelTests
     [Test]
     public void NewBlock_ShouldApplyEmptyTemplateToNewBlock()
     {
-        BlockTemplateRepository templateService = new();
+        BlockTemplateRepository templateService = new(new PersistentDataService());
         BlockModel empty = templateService.GetEmpty();
         FilterViewModel sut = Build();
         sut.NewBlock();
@@ -187,7 +187,7 @@ public class FilterViewModelTests
     [Test]
     public void NewRule_ShouldSetEmptyTemplate()
     {
-        RuleTemplateRepository service = new();
+        RuleTemplateRepository service = new(new PersistentDataService());
         FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.GetBlocks().First();
@@ -204,7 +204,7 @@ public class FilterViewModelTests
     [Test]
     public void NewRule_ShouldRaiseRuleCreatedEvent()
     {
-        RuleTemplateRepository service = new();
+        RuleTemplateRepository service = new(new PersistentDataService());
         FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel block = sut.GetBlocks().First();
@@ -220,7 +220,7 @@ public class FilterViewModelTests
     [Test]
     public void ShouldSortBlocks_OnSortBlockRequestEvent()
     {
-        RuleTemplateRepository service = new();
+        RuleTemplateRepository service = new(new PersistentDataService());
         FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
@@ -235,7 +235,7 @@ public class FilterViewModelTests
     [Test]
     public void SortBlocks_ShouldRaiseBlocksChanged()
     {
-        RuleTemplateRepository service = new();
+        RuleTemplateRepository service = new(new PersistentDataService());
         FilterViewModel sut = Build();
         sut.NewBlock();
         sut.NewBlock();
@@ -263,7 +263,7 @@ public class FilterViewModelTests
     [Test]
     public void ShouldChangeBlockTemplate_OnChangeTemplateRequest()
     {
-        BlockModel empty = new BlockTemplateRepository().GetEmpty();
+        BlockModel empty = new BlockTemplateRepository(new PersistentDataService()).GetEmpty();
         var messenger = new WeakReferenceMessenger();
         FilterViewModel sut = HelperFactory.GetFilter(messenger);
         sut.NewBlock();
@@ -283,7 +283,7 @@ public class FilterViewModelTests
     [Test]
     public void AddRule_ShouldCreateRuleFromModel()
     {
-        RuleModel empty = new RuleTemplateRepository().GetEmpty();
+        RuleModel empty = new RuleTemplateRepository(new PersistentDataService()).GetEmpty();
         FilterViewModel sut = Build();
         sut.NewBlock();
         BlockDetailsViewModel testBlock = sut.GetBlocks().First();
@@ -308,7 +308,7 @@ public class FilterViewModelTests
         sut.NewRule(vm);
         sut.NewRule(vm);
         EventListener<MultipleRulesDeleted, MultipleRuleDeletedDetails> listener = new();
-        sut.ResetBlockTemplate(vm, new BlockTemplateRepository().GetEmpty());
+        sut.ResetBlockTemplate(vm, new BlockTemplateRepository(new PersistentDataService()).GetEmpty());
 
         Assert.That(listener.Received, Is.True);
         Assert.That(listener.Playload.Block, Is.EqualTo(vm));
