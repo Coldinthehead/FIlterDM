@@ -14,4 +14,4 @@
 ## Feedback, Bug Report, Suggestions : 
 [Discord](https://discord.gg/eNpwSm52Ke)
 
-### This software is not related to  GGG  by any mean. All in game assets claimed by GGG.
+### This software is not related to GGG by any mean. All assets from Path of Exile 2 claimed by GGG.
