@@ -34,21 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\ColorSelectorView.axaml.cs">
-      <DependentUpon>ColorSelectorView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\EditPage\Decorators\ItemStateDecoratorView.axaml.cs">
-      <DependentUpon>ItemStateDecoratorView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\EditPage\Decorators\TextSizeDecoratorView.axaml.cs">
-      <DependentUpon>TextSizeDecoratorView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\EditPage\ModifierEditors\TypeEditorVIew.axaml.cs">
-      <DependentUpon>TypeEditorView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FilterCore\FilterCore.csproj" />
   </ItemGroup>
 </Project>
