@@ -25,7 +25,7 @@ public class ProjectRepository : IInit
 
     public async Task Init()
     {
-        var filters = Directory.GetFiles(Path.Combine(_dataService.FiltersPath));
+        var filters = Directory.GetFiles(_dataService.FiltersPath);
         _models = new(filters.Length);
         var tasks = filters.Select(async fname =>
         {

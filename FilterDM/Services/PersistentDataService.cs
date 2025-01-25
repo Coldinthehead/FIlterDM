@@ -22,11 +22,11 @@ public class PersistentDataService : IPersistentDataService
     public string BlockTemaplatesPath { get; private set; }
     public string FilterTemaplatesPath { get; private set; }
 
-    public string TempaltesFolderName { get; private set; } = "templates";
-    public string FiltersFolderName { get; private set; } = "filters";
-    public string PreferenceFolderName { get; private set; } = "preferences";
-    public string PreferenceFileName { get; private set; } = "preferences.json";
-    public string StorageFolderName { get; private set; } = "FilterDM";
+    public const string TEMPLATES_FOLDER_NAME  = "templates";
+    public const string FILTERS_FOLDER_NAME  = "filters";
+    public const string PREFERENCES_FOLDER_NAME  = "preferences";
+    public const string PREFERENCES_FILE_NAME = "preferences.json";
+    public const string STORAGE_FOLDER_NAME  = "FilterDM";
 
     private const string RULE_TEMPLATES_FOLDER_NAME = "rule_templates";
     private const string BLOCK_TEMPLATES_FOLDER_NAME = "block_templates";
@@ -47,29 +47,31 @@ public class PersistentDataService : IPersistentDataService
 
     public async Task InitFolders()
     {
-        BaseReporsitoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), StorageFolderName);
-        FiltersPath = Path.Combine(BaseReporsitoryPath, FiltersFolderName);
-        TemplatesPath = Path.Combine(BaseReporsitoryPath, TempaltesFolderName);
-        
+        BaseReporsitoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), STORAGE_FOLDER_NAME);
+        FiltersPath = Path.Combine(BaseReporsitoryPath, FILTERS_FOLDER_NAME);
+        TemplatesPath = Path.Combine(BaseReporsitoryPath, TEMPLATES_FOLDER_NAME);
+        RuleTemaplatesPath = Path.Combine(TemplatesPath, RULE_TEMPLATES_FOLDER_NAME);
+        BlockTemaplatesPath = Path.Combine(TemplatesPath, BLOCK_TEMPLATES_FOLDER_NAME);
+        FilterTemaplatesPath = Path.Combine(TemplatesPath, FILTER_TEMPLATES_FOLDER_NAME);
+
         if (!Directory.Exists(BaseReporsitoryPath))
         {
             DirectoryInfo info = Directory.CreateDirectory(BaseReporsitoryPath);
-            info.CreateSubdirectory(FiltersFolderName);
+            info.CreateSubdirectory(FILTERS_FOLDER_NAME);
 
-            DirectoryInfo templatesFolder = info.CreateSubdirectory(TempaltesFolderName);
-            RuleTemaplatesPath = Path.Combine(templatesFolder.FullName, RULE_TEMPLATES_FOLDER_NAME);
+            DirectoryInfo templatesFolder = info.CreateSubdirectory(TEMPLATES_FOLDER_NAME);
+           
             templatesFolder.CreateSubdirectory(RULE_TEMPLATES_FOLDER_NAME);
-            BlockTemaplatesPath = Path.Combine(templatesFolder.FullName, BLOCK_TEMPLATES_FOLDER_NAME);
+          
             templatesFolder.CreateSubdirectory(BLOCK_TEMPLATES_FOLDER_NAME);
-            FilterTemaplatesPath = Path.Combine(templatesFolder.FullName, FILTER_TEMPLATES_FOLDER_NAME);
             templatesFolder.CreateSubdirectory(FILTER_TEMPLATES_FOLDER_NAME);
 
-            info.CreateSubdirectory(PreferenceFolderName);
+            info.CreateSubdirectory(PREFERENCES_FOLDER_NAME);
             UserPrefrences empty = new();
-            using var fs = File.Create(Path.Combine(info.FullName, PreferenceFolderName, PreferenceFileName));
+            using var fs = File.Create(Path.Combine(info.FullName, PREFERENCES_FOLDER_NAME, PREFERENCES_FILE_NAME));
             await JsonSerializer.SerializeAsync(fs, empty);
         }
-        string prefsPath = Path.Combine(BaseReporsitoryPath, PreferenceFolderName, PreferenceFileName);
+        string prefsPath = Path.Combine(BaseReporsitoryPath, PREFERENCES_FOLDER_NAME, PREFERENCES_FILE_NAME);
         using var readStream = File.Open(prefsPath, FileMode.Open);
         _prefs = await JsonSerializer.DeserializeAsync<UserPrefrences>(readStream);
         if (_prefs == null)

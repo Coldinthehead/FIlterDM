@@ -1,7 +1,7 @@
 ﻿using FilterDM.Models;
+using FilterDM.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -11,10 +11,12 @@ namespace FilterDM.Repositories;
 public class RuleTemplateRepository : IRuleTemplateRepository
 {
     public Dictionary<string, RuleModel> _templates;
-    const string REPOS_PATH = "./data/templates/rules.json";
     private RuleModel _empty;
+    private readonly IPersistentDataService _dataService;
 
-    public RuleTemplateRepository()
+    private const string DEFAULT_TEMPLATES_FILENAME = "defaults.json";
+
+    public RuleTemplateRepository(IPersistentDataService dataService)
     {
         _templates = new Dictionary<string, RuleModel>();
         _empty = new()
@@ -27,6 +29,7 @@ public class RuleTemplateRepository : IRuleTemplateRepository
 
         };
         _templates["Empty"] = _empty;
+        _dataService = dataService;
     }
 
     public RuleModel GetEmpty()
@@ -36,10 +39,27 @@ public class RuleTemplateRepository : IRuleTemplateRepository
 
     public async Task Init()
     {
-        _templates = new();
         try
         {
-            using var fs = File.OpenRead(REPOS_PATH);
+            string path = Path.Combine(_dataService.RuleTemaplatesPath, DEFAULT_TEMPLATES_FILENAME);
+            if (!File.Exists(path))
+            {
+                using var ws = File.Create(path);
+                Dictionary<string, RuleModel> defaultTempaltes = [];
+                defaultTempaltes.Add("Empty", new()
+                {
+                    Title = "Empty",
+                    Enabled = true,
+                    Show = true,
+                    TemplateName = "Empty",
+                    Priority = 2000,
+
+                });
+                await JsonSerializer.SerializeAsync<Dictionary<string, RuleModel>>(ws, defaultTempaltes);
+                ws.Close();
+            }
+
+            using var fs = File.OpenRead(path);
             var items = await JsonSerializer.DeserializeAsync<Dictionary<string, RuleModel>>(fs);
             if (items != null)
             {
@@ -51,24 +71,7 @@ public class RuleTemplateRepository : IRuleTemplateRepository
         {
 
         }
-
-        if (_templates.ContainsKey("Empty"))
-        {
-            _empty = _templates["Empty"];
-        }
-        else
-        {
-            _empty = new()
-            {
-                Title = "Empty",
-                Enabled = true,
-                Show = true,
-                TemplateName = "Empty",
-                Priority = 2000,
-
-            };
-            _templates["Empty"] = _empty;
-        }
+        _empty = _templates["Empty"];
     }
     public IEnumerable<RuleModel> GetAll() => [.. _templates.Values];
     public RuleModel Get(string templateName) => _templates[templateName].Clone();
