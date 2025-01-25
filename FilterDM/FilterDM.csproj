@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
-	  <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
-    <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-	  <PublishSingleFile>true</PublishSingleFile>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0</TargetFramework>
+		<TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
+		<Nullable>enable</Nullable>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
 
-  <ItemGroup>
+	</PropertyGroup>
+	
+	<ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
