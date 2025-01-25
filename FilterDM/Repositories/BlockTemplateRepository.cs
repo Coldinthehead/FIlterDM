@@ -2,7 +2,6 @@
 using FilterDM.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -12,10 +11,12 @@ namespace FilterDM.Repositories;
 public class BlockTemplateRepository : IBlockTemplateRepository
 {
     private Dictionary<string, BlockModel> _templates;
-    const string REPOS_PATH = "./data/templates/templates.json";
     private BlockModel _empty;
+    private readonly PersistentDataService _dataService;
 
-    public BlockTemplateRepository()
+    private const string DEFAULTS_FILENAME = "defaults.json";
+
+    public BlockTemplateRepository(PersistentDataService dataService)
     {
         _templates = new();
         _empty = new()
@@ -26,13 +27,24 @@ public class BlockTemplateRepository : IBlockTemplateRepository
             Title = "Empty",
         };
         _templates["Empty"] = _empty;
+        _dataService = dataService;
     }
     public async Task Init()
     {
-        _templates = new();
         try
         {
-            using var fs = File.OpenRead(REPOS_PATH);
+            string path = Path.Combine(_dataService.BlockTemaplatesPath, DEFAULTS_FILENAME);
+            if (!File.Exists(path))
+            {
+                using var ws = File.Create(path);
+                Dictionary<string, BlockModel> defaults = new()
+                {
+                    { "Empty", _empty }
+                };
+                await JsonSerializer.SerializeAsync<Dictionary<string, BlockModel>>(ws, defaults);
+                ws.Close();
+            }
+            using var fs = File.OpenRead(path);
             var items = await JsonSerializer.DeserializeAsync<Dictionary<string, BlockModel>>(fs);
             if (items != null)
             {
@@ -44,22 +56,7 @@ public class BlockTemplateRepository : IBlockTemplateRepository
         {
 
         }
-
-        if (_templates.ContainsKey("Empty"))
-        {
-            _empty = _templates["Empty"];
-        }
-        else
-        {
-            _empty = new()
-            {
-                Enabled = true,
-                Priority = 2000,
-                TemplateName = "Empty",
-                Title = "Empty",
-            };
-            _templates["Empty"] = _empty;
-        }
+        _empty = _templates["Empty"];
     }
 
     public BlockModel GetEmpty() => _empty.Clone();
